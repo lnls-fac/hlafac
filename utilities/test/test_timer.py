@@ -1,11 +1,12 @@
-"""Tests for self.timer module."""
+"""Tests for timer module."""
 
 import threading
 import unittest
 import utils.timer
 
 
-class TestTimer(unittest.TestCase):
+class TestTimerFunction(unittest.TestCase):
+    
     def setUp(self):
         self.counter = 0
         self.list = []
@@ -21,7 +22,7 @@ class TestTimer(unittest.TestCase):
         self._start_wait_and_stop_timer(0.06)
         self._start_wait_and_stop_timer(0.11)
         self.assertEqual(self.counter, 3,
-                         'function was not called right number of times')
+                         '')
     
     def test_call_function_twice(self):
         self.timer = utils.timer.Timer(interval=0.05, function=self._function)
@@ -63,3 +64,65 @@ class TestTimer(unittest.TestCase):
         self.timer.start()
         self.event.wait(timeout)
         self.timer.stop()
+
+
+class TestTimerExceptions(unittest.TestCase):
+    
+    def setUp(self):
+        self.timer = utils.timer.Timer(interval=0.05, function=self._function)
+        self.timer.start()
+    
+    def tearDown(self):
+        self.timer.stop()
+    
+    def test_change_interval_with_timer_running(self):
+        self.assertRaises(utils.timer.TimerError, self._change_timer_interval)
+    
+    def test_change_args_with_timer_running(self):
+        self.assertRaises(utils.timer.TimerError, self._change_timer_args)
+    
+    def test_change_kwargs_with_timer_running(self):
+        self.assertRaises(utils.timer.TimerError, self._change_timer_kwargs)
+    
+    def test_change_is_running(self):
+        self.assertRaises(AttributeError, self._change_timer_is_running)
+    
+    def test_start_timer_twice(self):
+        self.assertRaises(utils.timer.TimerError, self.timer.start)
+    
+    def test_stop_timer_twice(self):
+        self.timer.stop()
+        self.assertRaises(utils.timer.TimerError, self.timer.stop)
+        self.timer.start() # tearDown calls stop()
+    
+    def _function(self, a=None):
+        pass
+
+    def _change_timer_interval(self):
+        self.timer.interval = 0.06
+    
+    def _change_timer_args(self):
+        self.timer.args = (1.0,)
+    
+    def _change_timer_kwargs(self):
+        self.timer.kwargs = {'a': 2.0}
+    
+    def _change_timer_is_running(self):
+        self.timer.is_running = False
+
+
+def timer_function_suite():
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestTimerFunction)
+    return suite
+
+
+def timer_exceptions_suite():
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestTimerExceptions)
+    return suite
+
+
+def suite():
+    suite_list = []
+    suite_list.append(timer_function_suite())
+    suite_list.append(timer_exceptions_suite())
+    return unittest.TestSuite(suite_list)

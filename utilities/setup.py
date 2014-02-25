@@ -4,7 +4,7 @@ from distutils.core import setup
 
 
 setup(name='Utils',
-      version='1.0',
+      version='1.1',
       description='Utilities',
       author='Afonso Haruo Carnielli Mukai',
       author_email='afonso.mukai@lnls.br',
