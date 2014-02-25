@@ -1,4 +1,4 @@
-"""Tests for utils package"""
+"""Tests for utils package."""
 
 import unittest
 import test_timer

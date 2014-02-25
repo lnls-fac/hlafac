@@ -1,7 +1,7 @@
-"""Repeating timer"""
+"""Repeating timer."""
 
-import threading
-import time
+import threading as _threading
+import time as _time
 
 
 class TimerError(Exception):
@@ -86,7 +86,7 @@ class Timer(object):
         self._worker.start()
 
 
-class _Worker(threading.Thread):
+class _Worker(_threading.Thread):
     
     def __init__(self, interval, function, args=[], kwargs={}):
         super(_Worker, self).__init__()        
@@ -94,15 +94,15 @@ class _Worker(threading.Thread):
         self._function = function
         self._args = args
         self._kwargs = kwargs
-        self._event = threading.Event()
+        self._event = _threading.Event()
         
     def cancel(self):
         self._event.set()
     
     def run(self):
-        self._next_call = time.time()
+        self._next_call = _time.time()
         while not self._event.is_set():
             self._next_call += self._interval
-            self._event.wait(self._next_call-time.time())            
+            self._event.wait(self._next_call-_time.time())            
             if not self._event.is_set():
                 self._function(*self._args, **self._kwargs)
