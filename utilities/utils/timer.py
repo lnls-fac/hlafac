@@ -13,7 +13,7 @@ class Timer(object):
     time interval is elapsed.
     """
     
-    def __init__(self, interval, function, args=[], kwargs={}):
+    def __init__(self, interval, function, args=(), kwargs={}):
         """interval -- interval between function calls, in seconds
         function -- function to be called
         args -- tuple of arguments to be passed to function
