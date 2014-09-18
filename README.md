@@ -1,4 +1,4 @@
-sirius_hla
-==========
+hla
+===
 
-High Level Applications for Sirius
+High Level Applications
