@@ -28,12 +28,35 @@ class TestCalcEmit(unittest.TestCase):
             quadrupole_idx=self.q_idx,
             k=self.k)
 
-    def test_calc_emit(self):
+    def test_calc_emit_without_error(self):
         calculated_emit, emit_error = calcemit.calc_emit(
             model=self.m,
             quadrupole_idx=self.q_idx,
             k=self.k,
             measured_beam_size=self.measured_beam_size)
+        self.assertAlmostEqual(calculated_emit, self.emit, places=11,
+                               msg="wrong value for calculated emittance")
+        
+    def test_calc_emit_with_error_and_sum(self):
+        calculated_emit, emit_error = calcemit.calc_emit(
+            model=self.m,
+            quadrupole_idx=self.q_idx,
+            k=self.k,
+            measured_beam_size=self.measured_beam_size,
+            size_error=0.01*max(self.measured_beam_size),
+            num_samples=100)
+        self.assertAlmostEqual(calculated_emit, self.emit, places=11,
+                               msg="wrong value for calculated emittance")
+
+    def test_calc_emit_with_error_without_sum(self):
+        calculated_emit, emit_error = calcemit.calc_emit(
+            model=self.m,
+            quadrupole_idx=self.q_idx,
+            k=self.k,
+            measured_beam_size=self.measured_beam_size,
+            size_error=0.01*max(self.measured_beam_size),
+            num_samples=100,
+            short=False)
         self.assertAlmostEqual(calculated_emit, self.emit, places=11,
                                msg="wrong value for calculated emittance")
 
