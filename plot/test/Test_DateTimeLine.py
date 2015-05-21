@@ -10,7 +10,7 @@ Afonso Haruo Carnielli Mukai (FAC - LNLS)
 import datetime
 import unittest
 import numpy
-import matplotlib.backends.backend_qt4agg as backend
+import matplotlib.backends.backend_qt5agg as backend
 import matplotlib.figure
 import DateTimeLine
 
