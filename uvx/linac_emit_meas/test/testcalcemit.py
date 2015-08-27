@@ -54,9 +54,9 @@ class TestCalcEmit(unittest.TestCase):
             quadrupole_idx=self.q_idx,
             k=self.k,
             measured_beam_size=self.measured_beam_size,
+            short=False,
             size_error=0.01*max(self.measured_beam_size),
-            num_samples=100,
-            short=False)
+            num_samples=100)
         self.assertAlmostEqual(calculated_emit, self.emit, places=11,
                                msg="wrong value for calculated emittance")
 

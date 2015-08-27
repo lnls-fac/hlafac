@@ -7,20 +7,26 @@ import numpy as _numpy
 _DEFAULT_NUM_SAMPLES = 100
 
 
-def calc_emit(model, quadrupole_idx, k, measured_beam_size, size_error=None,
-              num_samples=_DEFAULT_NUM_SAMPLES, short=True):
+def calc_emit(model, quadrupole_idx, k, measured_beam_size, short=True, 
+        size_error=None, num_samples=_DEFAULT_NUM_SAMPLES):
     """Calculate beam emittance and rms error estimate from quadrupole and
     measured beam size values.
     
-    The required input parameters are the model, quadrupole index in model,
-    vector of quadrupole values and measured beam sizes. If the measured beam
-    size error is not supplied, the error estimate returns None; if given a
-    value, then a number of sample experiments will be simulated adding normal
-    errors to the beam size propagated by the model and the returned estimate
-    will be the standard deviation of the calculated emittances.
-
-    If short is set to False, the model matrix elements are not summed in the
-    calculation of the initial beam matrix elements.
+    Arguments:
+    model -- line model as list of elements
+    quadrupole_idx -- index of quadrupole used in measurement in model
+    k -- vector of quadrupole values
+    measured_beam_size -- vector of beam sizes for each value of k
+    short -- if True, model matrix elements are summed in calculation of
+        initial beam matrix (default True)
+    size_error -- error in beam_size (optional)
+    num_samples -- number of sample experiments to simulate for estimating the
+        calculated emittance error if size_error is given (default 100)
+    
+    Return values:
+    emit -- calculated beam emittance
+    emit_error -- None, if no size_error is supplied; standard deviation of
+        simulated experiment emittances otherwise
     """
 
     emit, sigma_0 = _calc_emit_from_beam_size(model, quadrupole_idx, k,
@@ -52,8 +58,13 @@ def _calc_emit_error(model, quadrupole_idx, k, size_error, sigma_0,
 
 
 def propagate_beam_size(sigma_0, model, quadrupole_idx, k, size_error=0.0):
-    """
-    Propagate the beam matrix by model for different values of quadrupole.
+    """Propagate beam matrix by model for different values of quadrupole.
+    
+    Arguments:
+    sigma_0 -- initial beam matrix
+    model -- line model as list of elements
+    quadrupole_idx -- index of quadrupole used in measurement in model
+
     """
     new_model = _copy.deepcopy(model)
     beam_size = []
