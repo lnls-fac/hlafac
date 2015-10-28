@@ -19,7 +19,7 @@
     <min_height>-1</min_height>
   </auto_scale_widgets>
   <background_color>
-    <color red="249" green="210" blue="202" />
+    <color name="TS" red="249" green="210" blue="202" />
   </background_color>
   <width>240</width>
   <x>1130</x>
@@ -69,7 +69,7 @@
     </foreground_color>
     <actions hook="false" hook_all="false" />
     <font>
-      <opifont.name fontName="Droid Sans" height="19" style="1">Header 1</opifont.name>
+      <opifont.name fontName="Ubuntu" height="19" style="1">Header 1</opifont.name>
     </font>
   </widget>
 </display>

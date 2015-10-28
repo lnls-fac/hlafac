@@ -14,12 +14,12 @@
   <show_edit_range>true</show_edit_range>
   <widget_type>Display</widget_type>
   <auto_scale_widgets>
-    <auto_scale_widgets>false</auto_scale_widgets>
-    <min_width>-1</min_width>
-    <min_height>-1</min_height>
+    <auto_scale_widgets>true</auto_scale_widgets>
+    <min_width>500</min_width>
+    <min_height>600</min_height>
   </auto_scale_widgets>
   <background_color>
-    <color red="240" green="240" blue="240" />
+    <color name="Gray Background" red="240" green="240" blue="240" />
   </background_color>
   <width>800</width>
   <x>-1</x>
@@ -57,7 +57,7 @@
     </border_color>
     <widget_type>Grouping Container</widget_type>
     <background_color>
-      <color red="240" green="240" blue="240" />
+      <color name="Gray Background" red="240" green="240" blue="240" />
     </background_color>
     <width>340</width>
     <x>40</x>
@@ -394,7 +394,7 @@ $(pv_value)</tooltip>
     </border_color>
     <widget_type>Grouping Container</widget_type>
     <background_color>
-      <color red="240" green="240" blue="240" />
+      <color name="Gray Background" red="240" green="240" blue="240" />
     </background_color>
     <width>340</width>
     <x>420</x>
@@ -634,11 +634,11 @@ $(pv_value)</tooltip>
       <width>100</width>
       <x>190</x>
       <y>70</y>
-      <maximum>Infinity</maximum>
+      <maximum>1.7976931348623157E308</maximum>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
-      <minimum>-Infinity</minimum>
+      <minimum>-1.7976931348623157E308</minimum>
       <font>
         <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
       </font>
@@ -662,7 +662,7 @@ $(pv_value)</tooltip>
     <enabled>true</enabled>
     <wuid>10365c03:150ae5b8b6b:-7d09</wuid>
     <tab_1_background_color>
-      <color red="255" green="255" blue="255" />
+      <color name="Gray Background" red="240" green="240" blue="240" />
     </tab_1_background_color>
     <tab_1_icon_path></tab_1_icon_path>
     <tab_2_foreground_color>
@@ -673,7 +673,7 @@ $(pv_value)</tooltip>
     </tab_1_font>
     <tab_2_enabled>true</tab_2_enabled>
     <background_color>
-      <color red="240" green="240" blue="240" />
+      <color name="SI" red="173" green="216" blue="230" />
     </background_color>
     <width>720</width>
     <x>40</x>
@@ -685,7 +685,7 @@ $(pv_value)</tooltip>
     </macros>
     <visible>true</visible>
     <tab_0_background_color>
-      <color red="255" green="255" blue="255" />
+      <color name="Gray Background" red="240" green="240" blue="240" />
     </tab_0_background_color>
     <widget_type>Tabbed Container</widget_type>
     <tab_2_font>
@@ -698,7 +698,7 @@ $(pv_value)</tooltip>
       <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
     </tab_0_font>
     <tab_2_background_color>
-      <color red="255" green="255" blue="255" />
+      <color name="Gray Background" red="240" green="240" blue="240" />
     </tab_2_background_color>
     <tab_0_title>Filling Patern</tab_0_title>
     <tab_1_foreground_color>
@@ -736,7 +736,7 @@ $(pv_value)</tooltip>
       <macros>
         <include_parent_macros>true</include_parent_macros>
       </macros>
-      <visible>false</visible>
+      <visible>true</visible>
       <border_color>
         <color red="0" green="128" blue="255" />
       </border_color>
@@ -763,7 +763,7 @@ $(pv_value)</tooltip>
         <tooltip>$(trace_0_y_pv)
 $(trace_0_y_pv_value)</tooltip>
         <trace_0_concatenate_data>false</trace_0_concatenate_data>
-        <trace_0_trace_type>0</trace_0_trace_type>
+        <trace_0_trace_type>3</trace_0_trace_type>
         <border_width>1</border_width>
         <border_style>0</border_style>
         <axis_0_grid_color>
@@ -897,7 +897,7 @@ $(trace_0_y_pv_value)</tooltip>
       <macros>
         <include_parent_macros>true</include_parent_macros>
       </macros>
-      <visible>true</visible>
+      <visible>false</visible>
       <border_color>
         <color red="0" green="128" blue="255" />
       </border_color>
