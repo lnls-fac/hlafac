@@ -17,8 +17,17 @@ class MyWindow(QtWidgets.QWidget):
         self.button = QtWidgets.QPushButton("Click here!")
 
         layout = QtWidgets.QVBoxLayout()
-        layout.addWidget(self.label)
-        layout.addWidget(self.timerlabel)
+
+        hlayout1 = QtWidgets.QHBoxLayout()
+        hlayout1.addWidget(QtWidgets.QLabel("SI Beam Current"))
+        hlayout1.addWidget(self.label)
+
+        hlayout2 = QtWidgets.QHBoxLayout()
+        hlayout2.addWidget(QtWidgets.QLabel("SI Beam Lifetime"))
+        hlayout2.addWidget(self.timerlabel)
+
+        layout.addLayout(hlayout1)
+        layout.addLayout(hlayout2)
         layout.addWidget(self.button)
 
         self.setLayout(layout)
