@@ -38,7 +38,7 @@
     <tooltip>$(trace_0_y_pv)
 $(trace_0_y_pv_value)</tooltip>
     <trace_0_concatenate_data>true</trace_0_concatenate_data>
-    <trace_0_trace_type>0</trace_0_trace_type>
+    <trace_0_trace_type>4</trace_0_trace_type>
     <border_width>1</border_width>
     <border_style>0</border_style>
     <axis_0_grid_color>
@@ -59,7 +59,7 @@ $(trace_0_y_pv_value)</tooltip>
     <trace_0_x_axis_index>0</trace_0_x_axis_index>
     <axis_count>2</axis_count>
     <pv_value />
-    <trace_0_buffer_size>144000</trace_0_buffer_size>
+    <trace_0_buffer_size>72000</trace_0_buffer_size>
     <axis_1_maximum>100.0</axis_1_maximum>
     <axis_0_scale_font>
       <opifont.name fontName="Droid Sans" height="16" style="0">Monitor Graph Scale</opifont.name>
@@ -220,7 +220,7 @@ $(trace_0_y_pv_value)</tooltip>
       <color red="240" green="240" blue="240" />
     </background_color>
     <width>500</width>
-    <x>660</x>
+    <x>738</x>
     <name>Grouping Container</name>
     <y>780</y>
     <foreground_color>
@@ -325,7 +325,7 @@ $(pv_value)</tooltip>
       <wuid>68417a5e:150eda3e644:-7fc0</wuid>
       <transparent>true</transparent>
       <pv_value />
-      <auto_size>true</auto_size>
+      <auto_size>false</auto_size>
       <text>######</text>
       <rotation_angle>0.0</rotation_angle>
       <scripts />
@@ -417,7 +417,7 @@ $(pv_value)</tooltip>
       <wuid>68417a5e:150eda3e644:-7fbe</wuid>
       <transparent>true</transparent>
       <pv_value />
-      <auto_size>true</auto_size>
+      <auto_size>false</auto_size>
       <text>######</text>
       <rotation_angle>0.0</rotation_angle>
       <scripts />
@@ -509,7 +509,7 @@ $(pv_value)</tooltip>
       <wuid>68417a5e:150eda3e644:-7fbc</wuid>
       <transparent>true</transparent>
       <pv_value />
-      <auto_size>true</auto_size>
+      <auto_size>false</auto_size>
       <text>######</text>
       <rotation_angle>0.0</rotation_angle>
       <scripts />
@@ -577,7 +577,7 @@ $(pv_value)</tooltip>
       <color red="240" green="240" blue="240" />
     </background_color>
     <width>500</width>
-    <x>1325</x>
+    <x>1368</x>
     <name>Grouping Container_1</name>
     <y>780</y>
     <foreground_color>
@@ -682,7 +682,7 @@ $(pv_value)</tooltip>
       <wuid>63357fc9:150d8883885:-7c6c</wuid>
       <transparent>true</transparent>
       <pv_value />
-      <auto_size>true</auto_size>
+      <auto_size>false</auto_size>
       <text>######</text>
       <rotation_angle>0.0</rotation_angle>
       <scripts />
@@ -774,7 +774,7 @@ $(pv_value)</tooltip>
       <wuid>63357fc9:150d8883885:-7c6a</wuid>
       <transparent>true</transparent>
       <pv_value />
-      <auto_size>true</auto_size>
+      <auto_size>false</auto_size>
       <text>######</text>
       <rotation_angle>0.0</rotation_angle>
       <scripts />
@@ -866,7 +866,7 @@ $(pv_value)</tooltip>
       <wuid>63357fc9:150d8883885:-7c68</wuid>
       <transparent>true</transparent>
       <pv_value />
-      <auto_size>true</auto_size>
+      <auto_size>false</auto_size>
       <text>######</text>
       <rotation_angle>0.0</rotation_angle>
       <scripts />
@@ -913,9 +913,9 @@ $(pv_value)</tooltip>
     <enabled>true</enabled>
     <wuid>-7b008daf:150ecd2d5f6:-7fa6</wuid>
     <transparent>false</transparent>
-    <lock_children>true</lock_children>
+    <lock_children>false</lock_children>
     <scripts />
-    <height>499</height>
+    <height>379</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -933,10 +933,10 @@ $(pv_value)</tooltip>
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
-    <width>391</width>
-    <x>48</x>
+    <width>313</width>
+    <x>90</x>
     <name>Grouping Container_2</name>
-    <y>204</y>
+    <y>264</y>
     <foreground_color>
       <color red="192" green="192" blue="192" />
     </foreground_color>
@@ -986,98 +986,6 @@ $(pv_value)</tooltip>
       <font>
         <opifont.name fontName="Droid Sans" height="11" style="0">Default</opifont.name>
       </font>
-      <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
-        <border_style>0</border_style>
-        <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
-        <alarm_pulsing>false</alarm_pulsing>
-        <precision>4</precision>
-        <tooltip>$(pv_name)
-$(pv_value)</tooltip>
-        <horizontal_alignment>0</horizontal_alignment>
-        <rules />
-        <enabled>true</enabled>
-        <wuid>-4df3999a:150ed132634:-7e55</wuid>
-        <transparent>true</transparent>
-        <pv_value />
-        <auto_size>true</auto_size>
-        <text>######</text>
-        <rotation_angle>0.0</rotation_angle>
-        <scripts />
-        <border_alarm_sensitive>true</border_alarm_sensitive>
-        <show_units>true</show_units>
-        <height>52</height>
-        <border_width>1</border_width>
-        <scale_options>
-          <width_scalable>true</width_scalable>
-          <height_scalable>true</height_scalable>
-          <keep_wh_ratio>false</keep_wh_ratio>
-        </scale_options>
-        <visible>true</visible>
-        <pv_name>loc://SHIFT-TYPE("User")</pv_name>
-        <vertical_alignment>1</vertical_alignment>
-        <border_color>
-          <color red="0" green="128" blue="255" />
-        </border_color>
-        <precision_from_pv>false</precision_from_pv>
-        <widget_type>Text Update</widget_type>
-        <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
-        <wrap_words>false</wrap_words>
-        <format_type>1</format_type>
-        <background_color>
-          <color red="240" green="240" blue="240" />
-        </background_color>
-        <width>160</width>
-        <x>40</x>
-        <name>Text Update</name>
-        <y>69</y>
-        <foreground_color>
-          <color red="0" green="0" blue="0" />
-        </foreground_color>
-        <actions hook="false" hook_all="false" />
-        <font>
-          <opifont.name fontName="Droid Sans" height="30" style="0">Monitor Large Data</opifont.name>
-        </font>
-      </widget>
-      <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
-        <border_style>0</border_style>
-        <tooltip></tooltip>
-        <horizontal_alignment>0</horizontal_alignment>
-        <rules />
-        <enabled>true</enabled>
-        <wuid>-3ccb018a:150ed85c828:-7f52</wuid>
-        <transparent>true</transparent>
-        <auto_size>true</auto_size>
-        <text>Shift:</text>
-        <scripts />
-        <height>48</height>
-        <border_width>1</border_width>
-        <scale_options>
-          <width_scalable>true</width_scalable>
-          <height_scalable>true</height_scalable>
-          <keep_wh_ratio>false</keep_wh_ratio>
-        </scale_options>
-        <visible>true</visible>
-        <vertical_alignment>1</vertical_alignment>
-        <border_color>
-          <color red="0" green="128" blue="255" />
-        </border_color>
-        <widget_type>Label</widget_type>
-        <wrap_words>false</wrap_words>
-        <background_color>
-          <color red="240" green="240" blue="240" />
-        </background_color>
-        <width>93</width>
-        <x>0</x>
-        <name>Label_1</name>
-        <y>0</y>
-        <foreground_color>
-          <color red="0" green="0" blue="0" />
-        </foreground_color>
-        <actions hook="false" hook_all="false" />
-        <font>
-          <opifont.name fontName="Droid Sans" height="30" style="0">Monitor Large Data</opifont.name>
-        </font>
-      </widget>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.groupingContainer" version="1.0.0">
       <border_style>0</border_style>
@@ -1086,7 +994,7 @@ $(pv_value)</tooltip>
       <enabled>true</enabled>
       <wuid>-3ccb018a:150ed85c828:-7e3b</wuid>
       <transparent>false</transparent>
-      <lock_children>false</lock_children>
+      <lock_children>true</lock_children>
       <scripts />
       <height>130</height>
       <border_width>1</border_width>
@@ -1106,10 +1014,10 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <width>332</width>
+      <width>279</width>
       <x>10</x>
       <name>Grouping Container_1</name>
-      <y>179</y>
+      <y>9</y>
       <foreground_color>
         <color red="192" green="192" blue="192" />
       </foreground_color>
@@ -1217,11 +1125,11 @@ $(pv_value)</tooltip>
       <tooltip></tooltip>
       <rules />
       <enabled>true</enabled>
-      <wuid>-3ccb018a:150ed85c828:-7e36</wuid>
+      <wuid>68417a5e:150eda3e644:-7ae0</wuid>
       <transparent>false</transparent>
-      <lock_children>false</lock_children>
+      <lock_children>true</lock_children>
       <scripts />
-      <height>130</height>
+      <height>121</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -1239,10 +1147,10 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <width>343</width>
+      <width>259</width>
       <x>10</x>
-      <name>Grouping Container_2</name>
-      <y>349</y>
+      <name>Grouping Container</name>
+      <y>240</y>
       <foreground_color>
         <color red="192" green="192" blue="192" />
       </foreground_color>
@@ -1344,6 +1252,363 @@ $(pv_value)</tooltip>
           <opifont.name fontName="Droid Sans" height="30" style="0">Monitor Large Data</opifont.name>
         </font>
       </widget>
+    </widget>
+  </widget>
+  <widget typeId="org.csstudio.opibuilder.widgets.groupingContainer" version="1.0.0">
+    <border_style>0</border_style>
+    <tooltip></tooltip>
+    <rules />
+    <enabled>true</enabled>
+    <wuid>6ad77206:150f1dce539:-7f9c</wuid>
+    <transparent>false</transparent>
+    <lock_children>true</lock_children>
+    <scripts />
+    <height>247</height>
+    <border_width>1</border_width>
+    <scale_options>
+      <width_scalable>true</width_scalable>
+      <height_scalable>true</height_scalable>
+      <keep_wh_ratio>false</keep_wh_ratio>
+    </scale_options>
+    <macros>
+      <include_parent_macros>true</include_parent_macros>
+    </macros>
+    <visible>true</visible>
+    <border_color>
+      <color red="0" green="128" blue="255" />
+    </border_color>
+    <widget_type>Grouping Container</widget_type>
+    <background_color>
+      <color red="240" green="240" blue="240" />
+    </background_color>
+    <width>500</width>
+    <x>66</x>
+    <name>Grouping Container_4</name>
+    <y>780</y>
+    <foreground_color>
+      <color red="192" green="192" blue="192" />
+    </foreground_color>
+    <actions hook="false" hook_all="false" />
+    <fc>false</fc>
+    <show_scrollbar>true</show_scrollbar>
+    <font>
+      <opifont.name fontName="Droid Sans" height="11" style="0">Default</opifont.name>
+    </font>
+    <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
+      <border_style>0</border_style>
+      <tooltip></tooltip>
+      <horizontal_alignment>1</horizontal_alignment>
+      <rules />
+      <enabled>true</enabled>
+      <wuid>6ad77206:150f1dce539:-7f9b</wuid>
+      <transparent>true</transparent>
+      <auto_size>true</auto_size>
+      <text>Shift</text>
+      <scripts />
+      <height>48</height>
+      <border_width>1</border_width>
+      <scale_options>
+        <width_scalable>true</width_scalable>
+        <height_scalable>true</height_scalable>
+        <keep_wh_ratio>false</keep_wh_ratio>
+      </scale_options>
+      <visible>true</visible>
+      <vertical_alignment>1</vertical_alignment>
+      <border_color>
+        <color red="0" green="128" blue="255" />
+      </border_color>
+      <widget_type>Label</widget_type>
+      <wrap_words>false</wrap_words>
+      <background_color>
+        <color red="255" green="255" blue="255" />
+      </background_color>
+      <width>90</width>
+      <x>205</x>
+      <name>Label</name>
+      <y>0</y>
+      <foreground_color>
+        <color red="0" green="0" blue="0" />
+      </foreground_color>
+      <actions hook="false" hook_all="false" />
+      <font>
+        <opifont.name fontName="Droid Sans" height="30" style="1">Monitor Header</opifont.name>
+      </font>
+    </widget>
+    <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
+      <border_style>0</border_style>
+      <tooltip></tooltip>
+      <horizontal_alignment>2</horizontal_alignment>
+      <rules />
+      <enabled>true</enabled>
+      <wuid>6ad77206:150f1dce539:-7f9a</wuid>
+      <transparent>true</transparent>
+      <auto_size>true</auto_size>
+      <text>Start:</text>
+      <scripts />
+      <height>38</height>
+      <border_width>1</border_width>
+      <scale_options>
+        <width_scalable>true</width_scalable>
+        <height_scalable>true</height_scalable>
+        <keep_wh_ratio>false</keep_wh_ratio>
+      </scale_options>
+      <visible>true</visible>
+      <vertical_alignment>1</vertical_alignment>
+      <border_color>
+        <color red="0" green="128" blue="255" />
+      </border_color>
+      <widget_type>Label</widget_type>
+      <wrap_words>false</wrap_words>
+      <background_color>
+        <color red="255" green="255" blue="255" />
+      </background_color>
+      <width>78</width>
+      <x>36</x>
+      <name>Label_3</name>
+      <y>134</y>
+      <foreground_color>
+        <color red="0" green="0" blue="0" />
+      </foreground_color>
+      <actions hook="false" hook_all="false" />
+      <font>
+        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+      </font>
+    </widget>
+    <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
+      <border_style>0</border_style>
+      <tooltip></tooltip>
+      <horizontal_alignment>2</horizontal_alignment>
+      <rules />
+      <enabled>true</enabled>
+      <wuid>6ad77206:150f1dce539:-7f98</wuid>
+      <transparent>true</transparent>
+      <auto_size>true</auto_size>
+      <text>End:</text>
+      <scripts />
+      <height>38</height>
+      <border_width>1</border_width>
+      <scale_options>
+        <width_scalable>true</width_scalable>
+        <height_scalable>true</height_scalable>
+        <keep_wh_ratio>false</keep_wh_ratio>
+      </scale_options>
+      <visible>true</visible>
+      <vertical_alignment>1</vertical_alignment>
+      <border_color>
+        <color red="0" green="128" blue="255" />
+      </border_color>
+      <widget_type>Label</widget_type>
+      <wrap_words>false</wrap_words>
+      <background_color>
+        <color red="255" green="255" blue="255" />
+      </background_color>
+      <width>64</width>
+      <x>50</x>
+      <name>Label_4</name>
+      <y>194</y>
+      <foreground_color>
+        <color red="0" green="0" blue="0" />
+      </foreground_color>
+      <actions hook="false" hook_all="false" />
+      <font>
+        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+      </font>
+    </widget>
+    <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
+      <border_style>0</border_style>
+      <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
+      <alarm_pulsing>false</alarm_pulsing>
+      <precision>0</precision>
+      <tooltip>$(pv_name)
+$(pv_value)</tooltip>
+      <horizontal_alignment>0</horizontal_alignment>
+      <rules />
+      <enabled>true</enabled>
+      <wuid>6ad77206:150f1dce539:-7f99</wuid>
+      <transparent>true</transparent>
+      <pv_value />
+      <auto_size>false</auto_size>
+      <text>######</text>
+      <rotation_angle>0.0</rotation_angle>
+      <scripts />
+      <border_alarm_sensitive>true</border_alarm_sensitive>
+      <show_units>true</show_units>
+      <height>42</height>
+      <border_width>1</border_width>
+      <scale_options>
+        <width_scalable>true</width_scalable>
+        <height_scalable>true</height_scalable>
+        <keep_wh_ratio>false</keep_wh_ratio>
+      </scale_options>
+      <visible>true</visible>
+      <pv_name>loc://SHIFT-START("2015-11-09 08:00")</pv_name>
+      <vertical_alignment>1</vertical_alignment>
+      <border_color>
+        <color red="0" green="128" blue="255" />
+      </border_color>
+      <precision_from_pv>true</precision_from_pv>
+      <widget_type>Text Update</widget_type>
+      <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
+      <wrap_words>false</wrap_words>
+      <format_type>0</format_type>
+      <background_color>
+        <color red="255" green="255" blue="255" />
+      </background_color>
+      <width>325</width>
+      <x>144</x>
+      <name>Text Update_2</name>
+      <y>132</y>
+      <foreground_color>
+        <color red="0" green="0" blue="0" />
+      </foreground_color>
+      <actions hook="false" hook_all="false" />
+      <font>
+        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+      </font>
+    </widget>
+    <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
+      <border_style>0</border_style>
+      <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
+      <alarm_pulsing>false</alarm_pulsing>
+      <precision>0</precision>
+      <tooltip>$(pv_name)
+$(pv_value)</tooltip>
+      <horizontal_alignment>0</horizontal_alignment>
+      <rules />
+      <enabled>true</enabled>
+      <wuid>6ad77206:150f1dce539:-7f97</wuid>
+      <transparent>true</transparent>
+      <pv_value />
+      <auto_size>false</auto_size>
+      <text>######</text>
+      <rotation_angle>0.0</rotation_angle>
+      <scripts />
+      <border_alarm_sensitive>true</border_alarm_sensitive>
+      <show_units>true</show_units>
+      <height>42</height>
+      <border_width>1</border_width>
+      <scale_options>
+        <width_scalable>true</width_scalable>
+        <height_scalable>true</height_scalable>
+        <keep_wh_ratio>false</keep_wh_ratio>
+      </scale_options>
+      <visible>true</visible>
+      <pv_name>loc://SHIFT-END("2015-11-13 08:00")</pv_name>
+      <vertical_alignment>1</vertical_alignment>
+      <border_color>
+        <color red="0" green="128" blue="255" />
+      </border_color>
+      <precision_from_pv>true</precision_from_pv>
+      <widget_type>Text Update</widget_type>
+      <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
+      <wrap_words>false</wrap_words>
+      <format_type>0</format_type>
+      <background_color>
+        <color red="255" green="255" blue="255" />
+      </background_color>
+      <width>325</width>
+      <x>144</x>
+      <name>Text Update_1</name>
+      <y>192</y>
+      <foreground_color>
+        <color red="0" green="0" blue="0" />
+      </foreground_color>
+      <actions hook="false" hook_all="false" />
+      <font>
+        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+      </font>
+    </widget>
+    <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
+      <border_style>0</border_style>
+      <tooltip></tooltip>
+      <horizontal_alignment>2</horizontal_alignment>
+      <rules />
+      <enabled>true</enabled>
+      <wuid>6ad77206:150f1dce539:-7f96</wuid>
+      <transparent>true</transparent>
+      <auto_size>true</auto_size>
+      <text>Type:</text>
+      <scripts />
+      <height>38</height>
+      <border_width>1</border_width>
+      <scale_options>
+        <width_scalable>true</width_scalable>
+        <height_scalable>true</height_scalable>
+        <keep_wh_ratio>false</keep_wh_ratio>
+      </scale_options>
+      <visible>true</visible>
+      <vertical_alignment>1</vertical_alignment>
+      <border_color>
+        <color red="0" green="128" blue="255" />
+      </border_color>
+      <widget_type>Label</widget_type>
+      <wrap_words>false</wrap_words>
+      <background_color>
+        <color red="255" green="255" blue="255" />
+      </background_color>
+      <width>77</width>
+      <x>37</x>
+      <name>Label_5</name>
+      <y>74</y>
+      <foreground_color>
+        <color red="0" green="0" blue="0" />
+      </foreground_color>
+      <actions hook="false" hook_all="false" />
+      <font>
+        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+      </font>
+    </widget>
+    <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
+      <border_style>0</border_style>
+      <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
+      <alarm_pulsing>false</alarm_pulsing>
+      <precision>0</precision>
+      <tooltip>$(pv_name)
+$(pv_value)</tooltip>
+      <horizontal_alignment>0</horizontal_alignment>
+      <rules />
+      <enabled>true</enabled>
+      <wuid>6ad77206:150f1dce539:-7f95</wuid>
+      <transparent>true</transparent>
+      <pv_value />
+      <auto_size>false</auto_size>
+      <text>######</text>
+      <rotation_angle>0.0</rotation_angle>
+      <scripts />
+      <border_alarm_sensitive>true</border_alarm_sensitive>
+      <show_units>true</show_units>
+      <height>42</height>
+      <border_width>1</border_width>
+      <scale_options>
+        <width_scalable>true</width_scalable>
+        <height_scalable>true</height_scalable>
+        <keep_wh_ratio>false</keep_wh_ratio>
+      </scale_options>
+      <visible>true</visible>
+      <pv_name>loc://SHIFT-TYPE("User")</pv_name>
+      <vertical_alignment>1</vertical_alignment>
+      <border_color>
+        <color red="0" green="128" blue="255" />
+      </border_color>
+      <precision_from_pv>true</precision_from_pv>
+      <widget_type>Text Update</widget_type>
+      <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
+      <wrap_words>false</wrap_words>
+      <format_type>0</format_type>
+      <background_color>
+        <color red="255" green="255" blue="255" />
+      </background_color>
+      <width>325</width>
+      <x>144</x>
+      <name>Text Update</name>
+      <y>72</y>
+      <foreground_color>
+        <color red="0" green="0" blue="0" />
+      </foreground_color>
+      <actions hook="false" hook_all="false" />
+      <font>
+        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+      </font>
     </widget>
   </widget>
 </display>
