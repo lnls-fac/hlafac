@@ -2,12 +2,8 @@
 # -*- coding: utf-8 -*-
 
 """
-SimpleGUI
-    Show CustomPlot.
-
-Afonso Haruo Carnielli Mukai (FAC - LNLS)
-
-2013-11-21: v0.1
+simple_gui
+    Show custom_plot.
 """
 
 import sys
@@ -15,10 +11,10 @@ import datetime
 import collections
 import numpy
 from PyQt5 import QtWidgets, QtCore
-import CustomPlot
-import DateTimePlot
-import PositionPlot
-import CustomToolbar
+import hlaplot.custom_plot as custom_plot
+import hlaplot.datetime_plot as datetime_plot
+import hlaplot.position_plot as position_plot
+import hlaplot.custom_toolbar as custom_toolbar
 
 
 class Window(QtWidgets.QWidget):
@@ -37,14 +33,14 @@ class Window(QtWidgets.QWidget):
         args['axis_background_color'] = (155, 155, 255, 255) # light blue
         args['axis_elements_color'] = (100, 0, 0, 255) # dark red
 
-        self.plot = CustomPlot.CustomPlot(**args)
-        self.plot_datetime = DateTimePlot.DateTimePlot(**args)
+        self.plot = custom_plot.CustomPlot(**args)
+        self.plot_datetime = datetime_plot.DateTimePlot(**args)
 
         args['interval_min'] = -1
         args['interval_max'] = 10
-        self.plot_position = PositionPlot.PositionPlot(**args)
+        self.plot_position = position_plot.PositionPlot(**args)
 
-        self.toolbar = CustomToolbar.CustomToolbar(self.plot_datetime, self)
+        self.toolbar = custom_toolbar.CustomToolbar(self.plot_datetime, self)
 
         self.plot.show_x_grid('green', line_style='-', line_width=1.5)
         self.plot.show_y_grid('yellow', line_style='-', line_width=1.0)
