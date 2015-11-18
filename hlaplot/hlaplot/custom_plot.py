@@ -7,16 +7,16 @@ Afonso Haruo Carnielli Mukai (FAC - LNLS)
 2013-11-21: v0.1
 """
 
-import sys
-import matplotlib.backends.backend_qt5agg
-import matplotlib.figure
-import ColorConversion
-import CustomLine
+import sys as _sys
+import matplotlib.backends.backend_qt5agg as _backend_qt5agg
+import matplotlib.figure as _figure
+from . import color_conversion as _color_conversion
+from . import custom_line as _custom_line
 
 
-DEFAULT_BACKGROUND_COLOR = ColorConversion.DEFAULT_BACKGROUND_COLOR
-DEFAULT_AXIS_BACKGROUND_COLOR = ColorConversion.DEFAULT_AXIS_BACKGROUND_COLOR
-DEFAULT_AXIS_ELEMENTS_COLOR = ColorConversion.DEFAULT_AXIS_ELEMENTS_COLOR
+DEFAULT_BACKGROUND_COLOR = _color_conversion.DEFAULT_BACKGROUND_COLOR
+DEFAULT_AXIS_BACKGROUND_COLOR = _color_conversion.DEFAULT_AXIS_BACKGROUND_COLOR
+DEFAULT_AXIS_ELEMENTS_COLOR = _color_conversion.DEFAULT_AXIS_ELEMENTS_COLOR
 
 
 class LineNameException(Exception):
@@ -27,19 +27,19 @@ class AxisNameError(Exception):
     pass
 
 
-class XY:
+class _XY:
     def __init__(self, x=0, y=0):
         self.x = x
         self.y = y
 
 
-class MinMax:
+class _MinMax:
     def __init__(self, minimum=0, maximum=0):
         self.min = minimum
         self.max = maximum
 
 
-class CustomPlot(matplotlib.backends.backend_qt5agg.FigureCanvasQTAgg):
+class CustomPlot(_backend_qt5agg.FigureCanvasQTAgg):
 
     """Embed a plot in PyQt."""
 
@@ -50,16 +50,16 @@ class CustomPlot(matplotlib.backends.backend_qt5agg.FigureCanvasQTAgg):
                  autoscale=True,
                  axes_extra_spacing=0.0):
 
-        if sys.version_info.major == 2:
+        if _sys.version_info.major == 2:
             self._return_unicode_string = self._return_unicode_string_python2
         else:
             self._return_unicode_string = self._return_unicode_string_python3
 
-        self._autoscale = XY()
-        self._axes_extra_spacing = XY(MinMax(), MinMax())
+        self._autoscale = _XY()
+        self._axes_extra_spacing = _XY(_MinMax(), _MinMax())
 
         self._lines = {}
-        self._figure = matplotlib.figure.Figure()
+        self._figure = _figure.Figure()
         super(CustomPlot, self).__init__(self._figure)
 
         self.set_spacing()
@@ -85,31 +85,31 @@ class CustomPlot(matplotlib.backends.backend_qt5agg.FigureCanvasQTAgg):
     @property
     def background_color(self):
         normalized_color = self.figure.get_facecolor()
-        return ColorConversion.denormalize_color(normalized_color)
+        return _color_conversion.denormalize_color(normalized_color)
 
     @background_color.setter
     def background_color(self, color):
-        normalized_color = ColorConversion.normalize_color(color)
+        normalized_color = _color_conversion.normalize_color(color)
         self.figure.set_facecolor(normalized_color)
 
     @property
     def axis_background_color(self):
         normalized_color = self._axes.get_axis_bgcolor()
-        return ColorConversion.denormalize_color(normalized_color)
+        return _color_conversion.denormalize_color(normalized_color)
 
     @axis_background_color.setter
     def axis_background_color(self, color):
-        normalized_color = ColorConversion.normalize_color(color)
+        normalized_color = _color_conversion.normalize_color(color)
         self._axes.set_axis_bgcolor(normalized_color)
 
     @property
     def axis_elements_color(self):
         normalized_color = self._axis_elements_color
-        return ColorConversion.denormalize_color(normalized_color)
+        return _color_conversion.denormalize_color(normalized_color)
 
     @axis_elements_color.setter
     def axis_elements_color(self, color):
-        normalized_color = ColorConversion.normalize_color(color)
+        normalized_color = _color_conversion.normalize_color(color)
 
         for pos in ['top', 'bottom', 'left', 'right']:
             self._axes.spines[pos].set_color(normalized_color)
@@ -264,7 +264,7 @@ class CustomPlot(matplotlib.backends.backend_qt5agg.FigureCanvasQTAgg):
     def add_line(self, name):
         """Add new line for presenting (x,y) data"""
         line, = self._axes.plot([])
-        self._lines[name] = CustomLine.CustomLine(line)
+        self._lines[name] = _custom_line.CustomLine(line)
 
     def remove_line(self, name):
         self._check_lines_has_key(name)

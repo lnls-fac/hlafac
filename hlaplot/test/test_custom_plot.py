@@ -1,45 +1,37 @@
-"""
-Test_CustomPlot
-    Test CustomPlot module. 
-
-Afonso Haruo Carnielli Mukai (FAC - LNLS)
-
-2013-11-21: v0.1
-"""
 
 import unittest
-import CustomPlot
+import hlaplot.custom_plot as custom_plot
 
 
 class TestDefaults(unittest.TestCase):
-    
+
     def setUp(self):
-        self.plot = CustomPlot.CustomPlot()
-        
+        self.plot = custom_plot.CustomPlot()
+
     def test_default_background_color(self):
-        color = CustomPlot.DEFAULT_BACKGROUND_COLOR        
+        color = custom_plot.DEFAULT_BACKGROUND_COLOR
         self.assertEqual(self.plot.background_color, color,
                          'background color not set to default')
-    
-    def test_default_axis_background_color(self):        
-        color = CustomPlot.DEFAULT_AXIS_BACKGROUND_COLOR
+
+    def test_default_axis_background_color(self):
+        color = custom_plot.DEFAULT_AXIS_BACKGROUND_COLOR
         self.assertEqual(self.plot.axis_background_color, color,
                          'axis background color not set to default')
-    
+
     def test_default_axis_elements_color(self):
-        color = CustomPlot.DEFAULT_AXIS_ELEMENTS_COLOR
+        color = custom_plot.DEFAULT_AXIS_ELEMENTS_COLOR
         self.assertEqual(self.plot.axis_elements_color, color,
                          'axis elements color not set to default')
-    
-    
+
+
 class TestScaleBounds(unittest.TestCase):
-    
+
     def setUp(self):
-        self.plot = CustomPlot.CustomPlot()
+        self.plot = custom_plot.CustomPlot()
         self.plot.add_line('line')
         self.plot.line('line').x = [-1, 4]
         self.plot.line('line').y = [-2, 3]
-        
+
 
     def test_scale_x_bounds_min(self):
         self.plot.x_axis_extra_spacing = (0.5, 1.5)
@@ -47,21 +39,21 @@ class TestScaleBounds(unittest.TestCase):
         axis_min, _ = self.plot.x_axis
         self.assertAlmostEqual(axis_min, -3.5, 2,
                          'wrong value for new axis bound')
-        
+
     def test_scale_x_bounds_max(self):
         self.plot.x_axis_extra_spacing = (0.5, 1.5)
         self.plot.update_plot()
         _, axis_max = self.plot.x_axis
         self.assertAlmostEqual(axis_max, 11.5, 2,
-                         'wrong value for new axis bound')    
-    
+                         'wrong value for new axis bound')
+
     def test_scale_y_bounds_min(self):
         self.plot.y_axis_extra_spacing = (0.5, 1.5)
         self.plot.update_plot()
         axis_min, _ = self.plot.y_axis
         self.assertAlmostEqual(axis_min, -4.5, 2,
                          'wrong value for new axis bound')
-        
+
     def test_scale_y_bounds_max(self):
         self.plot.y_axis_extra_spacing = (0.5, 1.5)
         self.plot.update_plot()
@@ -71,17 +63,17 @@ class TestScaleBounds(unittest.TestCase):
 
 
 class TestScaleBoundsEmpty(unittest.TestCase):
-    
+
     def setUp(self):
-        self.plot = CustomPlot.CustomPlot()
+        self.plot = custom_plot.CustomPlot()
         self.plot.add_line('line')
-        
+
     def test_scale_x_bounds_empty(self):
         self.plot.update_plot()
         axis_bounds = self.plot.x_axis
         self.assertEqual(axis_bounds, (0.0, 1.0),
                          'default bounds not set for empty axis data')
-    
+
     def test_scale_y_bounds_empty(self):
         self.plot.update_plot()
         axis_bounds = self.plot.y_axis
