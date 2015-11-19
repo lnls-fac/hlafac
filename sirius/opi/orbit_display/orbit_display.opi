@@ -111,7 +111,7 @@ else:
     <transparent>false</transparent>
     <lock_children>false</lock_children>
     <scripts />
-    <height>450</height>
+    <height>410</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -132,7 +132,7 @@ else:
     <width>820</width>
     <x>50</x>
     <name>Grouping Container</name>
-    <y>540</y>
+    <y>565</y>
     <foreground_color>
       <color red="192" green="192" blue="192" />
     </foreground_color>
@@ -165,7 +165,7 @@ $(trace_0_y_pv_value)</tooltip>
         <color red="240" green="240" blue="240" />
       </background_color>
       <x>9</x>
-      <y>45</y>
+      <y>41</y>
       <trace_0_x_axis_index>0</trace_0_x_axis_index>
       <axis_count>2</axis_count>
       <pv_value />
@@ -206,7 +206,7 @@ $(trace_0_y_pv_value)</tooltip>
       </scale_options>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <axis_0_maximum>120.0</axis_0_maximum>
-      <height>189</height>
+      <height>171</height>
       <trigger_pv_value />
       <axis_1_grid_color>
         <color red="200" green="200" blue="200" />
@@ -397,9 +397,9 @@ $(trace_0_y_pv_value)</tooltip>
       <wuid>-1dadc357:1511b89cdbe:-7d62</wuid>
       <transparent>true</transparent>
       <auto_size>false</auto_size>
-      <text> Slow Correction </text>
+      <text> Slow Orbit Correction </text>
       <scripts />
-      <height>36</height>
+      <height>34</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -451,7 +451,7 @@ $(trace_0_y_pv_value)</tooltip>
         <color red="240" green="240" blue="240" />
       </background_color>
       <x>9</x>
-      <y>247</y>
+      <y>225</y>
       <trace_0_x_axis_index>0</trace_0_x_axis_index>
       <axis_count>2</axis_count>
       <pv_value />
@@ -492,7 +492,7 @@ $(trace_0_y_pv_value)</tooltip>
       </scale_options>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <axis_0_maximum>160.0</axis_0_maximum>
-      <height>189</height>
+      <height>171</height>
       <trigger_pv_value />
       <axis_1_grid_color>
         <color red="200" green="200" blue="200" />
@@ -722,7 +722,7 @@ $(pv_value)</tooltip>
       <effect_3d>true</effect_3d>
       <bit>-1</bit>
       <pv_value />
-      <height>23</height>
+      <height>20</height>
       <border_width>1</border_width>
       <visible>true</visible>
       <pv_name></pv_name>
@@ -756,10 +756,10 @@ $(pv_value)</tooltip>
         <color red="240" green="240" blue="240" />
       </background_color>
       <square_led>false</square_led>
-      <width>23</width>
+      <width>20</width>
       <x>755</x>
       <data_type>0</data_type>
-      <y>15</y>
+      <y>13</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -779,7 +779,7 @@ $(pv_value)</tooltip>
       <auto_size>false</auto_size>
       <text>Status:</text>
       <scripts />
-      <height>33</height>
+      <height>29</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -799,7 +799,7 @@ $(pv_value)</tooltip>
       <width>100</width>
       <x>650</x>
       <name>Label</name>
-      <y>9</y>
+      <y>7</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -816,9 +816,9 @@ $(pv_value)</tooltip>
     <enabled>true</enabled>
     <wuid>-1dadc357:1511b89cdbe:-76fb</wuid>
     <transparent>false</transparent>
-    <lock_children>false</lock_children>
+    <lock_children>true</lock_children>
     <scripts />
-    <height>450</height>
+    <height>410</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -839,7 +839,7 @@ $(pv_value)</tooltip>
     <width>820</width>
     <x>930</x>
     <name>Grouping Container_1</name>
-    <y>540</y>
+    <y>565</y>
     <foreground_color>
       <color red="192" green="192" blue="192" />
     </foreground_color>
@@ -858,9 +858,9 @@ $(pv_value)</tooltip>
       <wuid>-1dadc357:1511b89cdbe:-7d5a</wuid>
       <transparent>true</transparent>
       <auto_size>false</auto_size>
-      <text>Fast Correction</text>
+      <text>Fast Orbit Correction</text>
       <scripts />
-      <height>38</height>
+      <height>34</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -912,7 +912,7 @@ $(trace_0_y_pv_value)</tooltip>
         <color red="240" green="240" blue="240" />
       </background_color>
       <x>10</x>
-      <y>47</y>
+      <y>42</y>
       <trace_0_x_axis_index>0</trace_0_x_axis_index>
       <axis_count>2</axis_count>
       <pv_value />
@@ -953,7 +953,7 @@ $(trace_0_y_pv_value)</tooltip>
       </scale_options>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <axis_0_maximum>80.0</axis_0_maximum>
-      <height>191</height>
+      <height>174</height>
       <trigger_pv_value />
       <axis_1_grid_color>
         <color red="200" green="200" blue="200" />
@@ -1118,7 +1118,7 @@ $(trace_0_y_pv_value)</tooltip>
         <color red="240" green="240" blue="240" />
       </background_color>
       <x>10</x>
-      <y>248</y>
+      <y>225</y>
       <trace_0_x_axis_index>0</trace_0_x_axis_index>
       <axis_count>2</axis_count>
       <pv_value />
@@ -1159,7 +1159,7 @@ $(trace_0_y_pv_value)</tooltip>
       </scale_options>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <axis_0_maximum>80.0</axis_0_maximum>
-      <height>191</height>
+      <height>174</height>
       <trigger_pv_value />
       <axis_1_grid_color>
         <color red="200" green="200" blue="200" />
@@ -1309,7 +1309,7 @@ $(pv_value)</tooltip>
       <effect_3d>true</effect_3d>
       <bit>-1</bit>
       <pv_value />
-      <height>23</height>
+      <height>20</height>
       <border_width>1</border_width>
       <visible>true</visible>
       <pv_name></pv_name>
@@ -1343,10 +1343,10 @@ $(pv_value)</tooltip>
         <color red="240" green="240" blue="240" />
       </background_color>
       <square_led>false</square_led>
-      <width>23</width>
+      <width>20</width>
       <x>755</x>
       <data_type>0</data_type>
-      <y>14</y>
+      <y>13</y>
       <foreground_color>
         <color red="192" green="192" blue="192" />
       </foreground_color>
@@ -1366,7 +1366,7 @@ $(pv_value)</tooltip>
       <auto_size>false</auto_size>
       <text>Status:</text>
       <scripts />
-      <height>33</height>
+      <height>29</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -1386,7 +1386,7 @@ $(pv_value)</tooltip>
       <width>100</width>
       <x>650</x>
       <name>Label</name>
-      <y>9</y>
+      <y>7</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -1405,7 +1405,7 @@ $(pv_value)</tooltip>
     <transparent>false</transparent>
     <lock_children>false</lock_children>
     <scripts />
-    <height>450</height>
+    <height>460</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -1426,7 +1426,7 @@ $(pv_value)</tooltip>
     <width>1700</width>
     <x>50</x>
     <name>Grouping Container_2</name>
-    <y>75</y>
+    <y>80</y>
     <foreground_color>
       <color red="192" green="192" blue="192" />
     </foreground_color>
@@ -1459,7 +1459,7 @@ $(trace_0_y_pv_value)</tooltip>
         <color red="240" green="240" blue="240" />
       </background_color>
       <x>10</x>
-      <y>10</y>
+      <y>5</y>
       <trace_0_x_axis_index>0</trace_0_x_axis_index>
       <axis_count>2</axis_count>
       <pv_value />
@@ -1500,7 +1500,7 @@ $(trace_0_y_pv_value)</tooltip>
       </scale_options>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <axis_0_maximum>160.0</axis_0_maximum>
-      <height>200</height>
+      <height>220</height>
       <trigger_pv_value />
       <axis_1_grid_color>
         <color red="200" green="200" blue="200" />
@@ -1516,7 +1516,7 @@ $(trace_0_y_pv_value)</tooltip>
       <name>XY Graph_1</name>
       <axis_0_auto_scale>false</axis_0_auto_scale>
       <axis_0_minimum>1.0</axis_0_minimum>
-      <axis_1_axis_title>x (μm)</axis_1_axis_title>
+      <axis_1_axis_title>Horizontal Orbit (μm)</axis_1_axis_title>
       <axis_1_auto_scale>false</axis_1_auto_scale>
       <border_color>
         <color red="0" green="128" blue="255" />
@@ -1541,7 +1541,7 @@ $(trace_0_y_pv_value)</tooltip>
         <color red="255" green="255" blue="255" />
       </plot_area_background_color>
       <axis_1_title_font>
-        <opifont.name fontName="Ubuntu" height="15" style="1">Header 2</opifont.name>
+        <opifont.name fontName="Ubuntu" height="13" style="1">Header 3</opifont.name>
       </axis_1_title_font>
       <visible>true</visible>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
@@ -1790,7 +1790,7 @@ $(trace_0_y_pv_value)</tooltip>
       </scale_options>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <axis_0_maximum>160.0</axis_0_maximum>
-      <height>200</height>
+      <height>220</height>
       <trigger_pv_value />
       <axis_1_grid_color>
         <color red="200" green="200" blue="200" />
@@ -1806,7 +1806,7 @@ $(trace_0_y_pv_value)</tooltip>
       <name>XY Graph_1</name>
       <axis_0_auto_scale>false</axis_0_auto_scale>
       <axis_0_minimum>1.0</axis_0_minimum>
-      <axis_1_axis_title>y (μm)</axis_1_axis_title>
+      <axis_1_axis_title>Vertical Orbit (μm)</axis_1_axis_title>
       <axis_1_auto_scale>false</axis_1_auto_scale>
       <border_color>
         <color red="0" green="128" blue="255" />
@@ -1831,7 +1831,7 @@ $(trace_0_y_pv_value)</tooltip>
         <color red="255" green="255" blue="255" />
       </plot_area_background_color>
       <axis_1_title_font>
-        <opifont.name fontName="Ubuntu" height="15" style="1">Header 2</opifont.name>
+        <opifont.name fontName="Ubuntu" height="13" style="1">Header 3</opifont.name>
       </axis_1_title_font>
       <visible>true</visible>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>

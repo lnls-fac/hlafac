@@ -13,4 +13,3 @@ if maximum < default:
 else:
 	widget.setPropertyValue("axis_1_maximum",  maximum)
 	widget.setPropertyValue("axis_1_minimum", -maximum)
-	
