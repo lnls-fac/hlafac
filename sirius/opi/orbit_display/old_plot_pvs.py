@@ -19,8 +19,3 @@ pvArray[-3].setValue(xArray)
 pvArray[-2].setValue(yArray)
 
 
-
-
-
-
-

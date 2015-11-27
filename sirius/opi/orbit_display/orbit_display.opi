@@ -12,7 +12,7 @@
 import time
 
 if PVUtil.getDouble(pvs[0]):
-	time.sleep(3)
+	time.sleep(5)
 	pvs[0].setValue(0)
 
 pvs[1].setValue(1)
@@ -24,8 +24,8 @@ if PVUtil.getDouble(pvs[2]) == 0:
 else:
 	pvs[2].setValue(0)]]></scriptText>
       <pv trig="false">loc://orbit_display_init(1)</pv>
-      <pv trig="false">loc://orbit_display_trigger(0)</pv>
-      <pv trig="true">loc://orbit_display_trigger2(0)</pv>
+      <pv trig="false">loc://orbit_display_trigger</pv>
+      <pv trig="true">loc://orbit_display_trigger2</pv>
     </path>
   </scripts>
   <height>1000</height>
@@ -111,7 +111,7 @@ else:
     <transparent>false</transparent>
     <lock_children>false</lock_children>
     <scripts />
-    <height>410</height>
+    <height>390</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -143,7 +143,7 @@ else:
       <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
     </font>
     <widget typeId="org.csstudio.opibuilder.widgets.xyGraph" version="1.0.0">
-      <axis_1_scale_format></axis_1_scale_format>
+      <axis_1_scale_format>#</axis_1_scale_format>
       <alarm_pulsing>false</alarm_pulsing>
       <tooltip>$(trace_0_y_pv)
 $(trace_0_y_pv_value)</tooltip>
@@ -165,11 +165,11 @@ $(trace_0_y_pv_value)</tooltip>
         <color red="240" green="240" blue="240" />
       </background_color>
       <x>9</x>
-      <y>41</y>
+      <y>39</y>
       <trace_0_x_axis_index>0</trace_0_x_axis_index>
       <axis_count>2</axis_count>
       <pv_value />
-      <trace_0_buffer_size>2000</trace_0_buffer_size>
+      <trace_0_buffer_size>200</trace_0_buffer_size>
       <axis_1_maximum>10.0</axis_1_maximum>
       <axis_0_scale_font>
         <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
@@ -179,7 +179,7 @@ $(trace_0_y_pv_value)</tooltip>
       <axis_1_axis_color>
         <color red="0" green="0" blue="0" />
       </axis_1_axis_color>
-      <axis_0_scale_format></axis_0_scale_format>
+      <axis_0_scale_format>#</axis_0_scale_format>
       <axis_1_log_scale>false</axis_1_log_scale>
       <title></title>
       <trace_0_visible>true</trace_0_visible>
@@ -205,8 +205,8 @@ $(trace_0_y_pv_value)</tooltip>
         <keep_wh_ratio>false</keep_wh_ratio>
       </scale_options>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
-      <axis_0_maximum>120.0</axis_0_maximum>
-      <height>171</height>
+      <axis_0_maximum>518.0</axis_0_maximum>
+      <height>162</height>
       <trigger_pv_value />
       <axis_1_grid_color>
         <color red="200" green="200" blue="200" />
@@ -221,7 +221,7 @@ $(trace_0_y_pv_value)</tooltip>
       <pv_name></pv_name>
       <name>XY Graph_3</name>
       <axis_0_auto_scale>false</axis_0_auto_scale>
-      <axis_0_minimum>1.0</axis_0_minimum>
+      <axis_0_minimum>0.0</axis_0_minimum>
       <axis_1_axis_title>Current (A)</axis_1_axis_title>
       <axis_1_auto_scale>false</axis_1_auto_scale>
       <border_color>
@@ -230,7 +230,7 @@ $(trace_0_y_pv_value)</tooltip>
       <trace_0_y_pv>loc://ch_current</trace_0_y_pv>
       <trace_0_plot_mode>0</trace_0_plot_mode>
       <enabled>true</enabled>
-      <trace_0_x_pv>loc://ch</trace_0_x_pv>
+      <trace_0_x_pv>VA-SIFK-CH-POS</trace_0_x_pv>
       <axis_1_scale_font>
         <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
       </axis_1_scale_font>
@@ -252,7 +252,7 @@ $(trace_0_y_pv_value)</tooltip>
       <visible>true</visible>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <scripts>
-        <path pathString="plot_pvs.py" checkConnect="false" sfe="false" seoe="false">
+        <path pathString="plot_ps.py" checkConnect="false" sfe="true" seoe="false">
           <pv trig="false">SIPS-CH-01M2-SP</pv>
           <pv trig="false">SIPS-CH-01C1-SP</pv>
           <pv trig="false">SIPS-CH-01C2-SP</pv>
@@ -373,7 +373,7 @@ $(trace_0_y_pv_value)</tooltip>
           <pv trig="false">SIPS-CH-20C3-SP</pv>
           <pv trig="false">SIPS-CH-20C4-SP</pv>
           <pv trig="false">SIPS-CH-01M1-SP</pv>
-          <pv trig="false">loc://ch</pv>
+          <pv trig="false">VA-SIFK-CH-POS</pv>
           <pv trig="false">loc://ch_current</pv>
           <pv trig="true">loc://orbit_display_trigger</pv>
         </path>
@@ -399,7 +399,7 @@ $(trace_0_y_pv_value)</tooltip>
       <auto_size>false</auto_size>
       <text> Slow Orbit Correction </text>
       <scripts />
-      <height>34</height>
+      <height>32</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -429,7 +429,7 @@ $(trace_0_y_pv_value)</tooltip>
       </font>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.xyGraph" version="1.0.0">
-      <axis_1_scale_format></axis_1_scale_format>
+      <axis_1_scale_format>#</axis_1_scale_format>
       <alarm_pulsing>false</alarm_pulsing>
       <tooltip>$(trace_0_y_pv)
 $(trace_0_y_pv_value)</tooltip>
@@ -451,11 +451,11 @@ $(trace_0_y_pv_value)</tooltip>
         <color red="240" green="240" blue="240" />
       </background_color>
       <x>9</x>
-      <y>225</y>
+      <y>214</y>
       <trace_0_x_axis_index>0</trace_0_x_axis_index>
       <axis_count>2</axis_count>
       <pv_value />
-      <trace_0_buffer_size>2000</trace_0_buffer_size>
+      <trace_0_buffer_size>200</trace_0_buffer_size>
       <axis_1_maximum>10.0</axis_1_maximum>
       <axis_0_scale_font>
         <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
@@ -465,7 +465,7 @@ $(trace_0_y_pv_value)</tooltip>
       <axis_1_axis_color>
         <color red="0" green="0" blue="0" />
       </axis_1_axis_color>
-      <axis_0_scale_format></axis_0_scale_format>
+      <axis_0_scale_format>#</axis_0_scale_format>
       <axis_1_log_scale>false</axis_1_log_scale>
       <title></title>
       <trace_0_visible>true</trace_0_visible>
@@ -491,8 +491,8 @@ $(trace_0_y_pv_value)</tooltip>
         <keep_wh_ratio>false</keep_wh_ratio>
       </scale_options>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
-      <axis_0_maximum>160.0</axis_0_maximum>
-      <height>171</height>
+      <axis_0_maximum>518.0</axis_0_maximum>
+      <height>162</height>
       <trigger_pv_value />
       <axis_1_grid_color>
         <color red="200" green="200" blue="200" />
@@ -507,7 +507,7 @@ $(trace_0_y_pv_value)</tooltip>
       <pv_name></pv_name>
       <name>XY Graph_2</name>
       <axis_0_auto_scale>false</axis_0_auto_scale>
-      <axis_0_minimum>1.0</axis_0_minimum>
+      <axis_0_minimum>0.0</axis_0_minimum>
       <axis_1_axis_title>Current (A)</axis_1_axis_title>
       <axis_1_auto_scale>false</axis_1_auto_scale>
       <border_color>
@@ -516,7 +516,7 @@ $(trace_0_y_pv_value)</tooltip>
       <trace_0_y_pv>loc://cv_current</trace_0_y_pv>
       <trace_0_plot_mode>0</trace_0_plot_mode>
       <enabled>true</enabled>
-      <trace_0_x_pv>loc://cv</trace_0_x_pv>
+      <trace_0_x_pv>VA-SIFK-CV-POS</trace_0_x_pv>
       <axis_1_scale_font>
         <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
       </axis_1_scale_font>
@@ -538,7 +538,7 @@ $(trace_0_y_pv_value)</tooltip>
       <visible>true</visible>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <scripts>
-        <path pathString="plot_pvs.py" checkConnect="false" sfe="false" seoe="false">
+        <path pathString="plot_ps.py" checkConnect="false" sfe="true" seoe="false">
           <pv trig="false">SIPS-CV-01M2-SP</pv>
           <pv trig="false">SIPS-CV-01C1-SP</pv>
           <pv trig="false">SIPS-CV-01C2-A-SP</pv>
@@ -699,7 +699,7 @@ $(trace_0_y_pv_value)</tooltip>
           <pv trig="false">SIPS-CV-20C3-B-SP</pv>
           <pv trig="false">SIPS-CV-20C4-SP</pv>
           <pv trig="false">SIPS-CV-01M1-SP</pv>
-          <pv trig="false">loc://cv</pv>
+          <pv trig="false">VA-SIFK-CV-POS</pv>
           <pv trig="false">loc://cv_current</pv>
           <pv trig="true">loc://orbit_display_trigger</pv>
         </path>
@@ -722,7 +722,7 @@ $(pv_value)</tooltip>
       <effect_3d>true</effect_3d>
       <bit>-1</bit>
       <pv_value />
-      <height>20</height>
+      <height>19</height>
       <border_width>1</border_width>
       <visible>true</visible>
       <pv_name></pv_name>
@@ -756,10 +756,10 @@ $(pv_value)</tooltip>
         <color red="240" green="240" blue="240" />
       </background_color>
       <square_led>false</square_led>
-      <width>20</width>
+      <width>19</width>
       <x>755</x>
       <data_type>0</data_type>
-      <y>13</y>
+      <y>12</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -779,7 +779,7 @@ $(pv_value)</tooltip>
       <auto_size>false</auto_size>
       <text>Status:</text>
       <scripts />
-      <height>29</height>
+      <height>27</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -799,7 +799,7 @@ $(pv_value)</tooltip>
       <width>100</width>
       <x>650</x>
       <name>Label</name>
-      <y>7</y>
+      <y>6</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -816,9 +816,9 @@ $(pv_value)</tooltip>
     <enabled>true</enabled>
     <wuid>-1dadc357:1511b89cdbe:-76fb</wuid>
     <transparent>false</transparent>
-    <lock_children>true</lock_children>
+    <lock_children>false</lock_children>
     <scripts />
-    <height>410</height>
+    <height>390</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -860,7 +860,7 @@ $(pv_value)</tooltip>
       <auto_size>false</auto_size>
       <text>Fast Orbit Correction</text>
       <scripts />
-      <height>34</height>
+      <height>32</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -890,7 +890,7 @@ $(pv_value)</tooltip>
       </font>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.xyGraph" version="1.0.0">
-      <axis_1_scale_format></axis_1_scale_format>
+      <axis_1_scale_format>#</axis_1_scale_format>
       <alarm_pulsing>false</alarm_pulsing>
       <tooltip>$(trace_0_y_pv)
 $(trace_0_y_pv_value)</tooltip>
@@ -912,11 +912,11 @@ $(trace_0_y_pv_value)</tooltip>
         <color red="240" green="240" blue="240" />
       </background_color>
       <x>10</x>
-      <y>42</y>
+      <y>39</y>
       <trace_0_x_axis_index>0</trace_0_x_axis_index>
       <axis_count>2</axis_count>
       <pv_value />
-      <trace_0_buffer_size>2000</trace_0_buffer_size>
+      <trace_0_buffer_size>200</trace_0_buffer_size>
       <axis_1_maximum>10.0</axis_1_maximum>
       <axis_0_scale_font>
         <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
@@ -926,7 +926,7 @@ $(trace_0_y_pv_value)</tooltip>
       <axis_1_axis_color>
         <color red="0" green="0" blue="0" />
       </axis_1_axis_color>
-      <axis_0_scale_format></axis_0_scale_format>
+      <axis_0_scale_format>#</axis_0_scale_format>
       <axis_1_log_scale>false</axis_1_log_scale>
       <title></title>
       <trace_0_visible>true</trace_0_visible>
@@ -952,8 +952,8 @@ $(trace_0_y_pv_value)</tooltip>
         <keep_wh_ratio>false</keep_wh_ratio>
       </scale_options>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
-      <axis_0_maximum>80.0</axis_0_maximum>
-      <height>174</height>
+      <axis_0_maximum>518.0</axis_0_maximum>
+      <height>165</height>
       <trigger_pv_value />
       <axis_1_grid_color>
         <color red="200" green="200" blue="200" />
@@ -968,7 +968,7 @@ $(trace_0_y_pv_value)</tooltip>
       <pv_name></pv_name>
       <name>XY Graph_4</name>
       <axis_0_auto_scale>false</axis_0_auto_scale>
-      <axis_0_minimum>1.0</axis_0_minimum>
+      <axis_0_minimum>0.0</axis_0_minimum>
       <axis_1_axis_title>Current (A)</axis_1_axis_title>
       <axis_1_auto_scale>false</axis_1_auto_scale>
       <border_color>
@@ -977,7 +977,7 @@ $(trace_0_y_pv_value)</tooltip>
       <trace_0_y_pv>loc://fch_current</trace_0_y_pv>
       <trace_0_plot_mode>0</trace_0_plot_mode>
       <enabled>true</enabled>
-      <trace_0_x_pv>loc://fch</trace_0_x_pv>
+      <trace_0_x_pv>VA-SIFK-FCH-POS</trace_0_x_pv>
       <axis_1_scale_font>
         <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
       </axis_1_scale_font>
@@ -999,7 +999,7 @@ $(trace_0_y_pv_value)</tooltip>
       <visible>true</visible>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <scripts>
-        <path pathString="plot_pvs.py" checkConnect="false" sfe="false" seoe="false">
+        <path pathString="plot_ps.py" checkConnect="false" sfe="true" seoe="false">
           <pv trig="false">SIPS-FCH-01M2-SP</pv>
           <pv trig="false">SIPS-FCH-01C2-SP</pv>
           <pv trig="false">SIPS-FCH-01C3-SP</pv>
@@ -1080,7 +1080,7 @@ $(trace_0_y_pv_value)</tooltip>
           <pv trig="false">SIPS-FCH-20C2-SP</pv>
           <pv trig="false">SIPS-FCH-20C3-SP</pv>
           <pv trig="false">SIPS-FCH-01M1-SP</pv>
-          <pv trig="false">loc://fch</pv>
+          <pv trig="false">VA-SIFK-FCH-POS</pv>
           <pv trig="false">loc://fch_current</pv>
           <pv trig="true">loc://orbit_display_trigger</pv>
         </path>
@@ -1096,7 +1096,7 @@ $(trace_0_y_pv_value)</tooltip>
       </foreground_color>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.xyGraph" version="1.0.0">
-      <axis_1_scale_format></axis_1_scale_format>
+      <axis_1_scale_format>#</axis_1_scale_format>
       <alarm_pulsing>false</alarm_pulsing>
       <tooltip>$(trace_0_y_pv)
 $(trace_0_y_pv_value)</tooltip>
@@ -1118,11 +1118,11 @@ $(trace_0_y_pv_value)</tooltip>
         <color red="240" green="240" blue="240" />
       </background_color>
       <x>10</x>
-      <y>225</y>
+      <y>214</y>
       <trace_0_x_axis_index>0</trace_0_x_axis_index>
       <axis_count>2</axis_count>
       <pv_value />
-      <trace_0_buffer_size>2000</trace_0_buffer_size>
+      <trace_0_buffer_size>200</trace_0_buffer_size>
       <axis_1_maximum>10.0</axis_1_maximum>
       <axis_0_scale_font>
         <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
@@ -1132,7 +1132,7 @@ $(trace_0_y_pv_value)</tooltip>
       <axis_1_axis_color>
         <color red="0" green="0" blue="0" />
       </axis_1_axis_color>
-      <axis_0_scale_format></axis_0_scale_format>
+      <axis_0_scale_format>#</axis_0_scale_format>
       <axis_1_log_scale>false</axis_1_log_scale>
       <title></title>
       <trace_0_visible>true</trace_0_visible>
@@ -1158,8 +1158,8 @@ $(trace_0_y_pv_value)</tooltip>
         <keep_wh_ratio>false</keep_wh_ratio>
       </scale_options>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
-      <axis_0_maximum>80.0</axis_0_maximum>
-      <height>174</height>
+      <axis_0_maximum>518.0</axis_0_maximum>
+      <height>165</height>
       <trigger_pv_value />
       <axis_1_grid_color>
         <color red="200" green="200" blue="200" />
@@ -1174,7 +1174,7 @@ $(trace_0_y_pv_value)</tooltip>
       <pv_name></pv_name>
       <name>XY Graph_5</name>
       <axis_0_auto_scale>false</axis_0_auto_scale>
-      <axis_0_minimum>1.0</axis_0_minimum>
+      <axis_0_minimum>0.0</axis_0_minimum>
       <axis_1_axis_title>Current (A)</axis_1_axis_title>
       <axis_1_auto_scale>false</axis_1_auto_scale>
       <border_color>
@@ -1183,7 +1183,7 @@ $(trace_0_y_pv_value)</tooltip>
       <trace_0_y_pv>loc://fcv_current</trace_0_y_pv>
       <trace_0_plot_mode>0</trace_0_plot_mode>
       <enabled>true</enabled>
-      <trace_0_x_pv>loc://fcv</trace_0_x_pv>
+      <trace_0_x_pv>VA-SIFK-FCV-POS</trace_0_x_pv>
       <axis_1_scale_font>
         <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
       </axis_1_scale_font>
@@ -1205,7 +1205,7 @@ $(trace_0_y_pv_value)</tooltip>
       <visible>true</visible>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <scripts>
-        <path pathString="plot_pvs.py" checkConnect="false" sfe="false" seoe="false">
+        <path pathString="plot_ps.py" checkConnect="false" sfe="true" seoe="false">
           <pv trig="false">SIPS-FCV-01M2-SP</pv>
           <pv trig="false">SIPS-FCV-01C2-SP</pv>
           <pv trig="false">SIPS-FCV-01C3-SP</pv>
@@ -1286,7 +1286,7 @@ $(trace_0_y_pv_value)</tooltip>
           <pv trig="false">SIPS-FCV-20C2-SP</pv>
           <pv trig="false">SIPS-FCV-20C3-SP</pv>
           <pv trig="false">SIPS-FCV-01M1-SP</pv>
-          <pv trig="false">loc://fcv</pv>
+          <pv trig="false">VA-SIFK-FCV-POS</pv>
           <pv trig="false">loc://fcv_current</pv>
           <pv trig="true">loc://orbit_display_trigger</pv>
         </path>
@@ -1309,7 +1309,7 @@ $(pv_value)</tooltip>
       <effect_3d>true</effect_3d>
       <bit>-1</bit>
       <pv_value />
-      <height>20</height>
+      <height>19</height>
       <border_width>1</border_width>
       <visible>true</visible>
       <pv_name></pv_name>
@@ -1343,10 +1343,10 @@ $(pv_value)</tooltip>
         <color red="240" green="240" blue="240" />
       </background_color>
       <square_led>false</square_led>
-      <width>20</width>
+      <width>19</width>
       <x>755</x>
       <data_type>0</data_type>
-      <y>13</y>
+      <y>12</y>
       <foreground_color>
         <color red="192" green="192" blue="192" />
       </foreground_color>
@@ -1366,7 +1366,7 @@ $(pv_value)</tooltip>
       <auto_size>false</auto_size>
       <text>Status:</text>
       <scripts />
-      <height>29</height>
+      <height>27</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -1386,7 +1386,7 @@ $(pv_value)</tooltip>
       <width>100</width>
       <x>650</x>
       <name>Label</name>
-      <y>7</y>
+      <y>6</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -1405,7 +1405,7 @@ $(pv_value)</tooltip>
     <transparent>false</transparent>
     <lock_children>false</lock_children>
     <scripts />
-    <height>460</height>
+    <height>440</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -1437,10 +1437,9 @@ $(pv_value)</tooltip>
       <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
     </font>
     <widget typeId="org.csstudio.opibuilder.widgets.xyGraph" version="1.0.0">
-      <axis_1_scale_format></axis_1_scale_format>
+      <axis_1_scale_format>#</axis_1_scale_format>
       <alarm_pulsing>false</alarm_pulsing>
-      <tooltip>$(trace_0_y_pv)
-$(trace_0_y_pv_value)</tooltip>
+      <tooltip></tooltip>
       <trace_0_concatenate_data>false</trace_0_concatenate_data>
       <trace_0_trace_type>0</trace_0_trace_type>
       <border_width>1</border_width>
@@ -1458,12 +1457,12 @@ $(trace_0_y_pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <x>10</x>
-      <y>5</y>
+      <x>9</x>
+      <y>4</y>
       <trace_0_x_axis_index>0</trace_0_x_axis_index>
       <axis_count>2</axis_count>
       <pv_value />
-      <trace_0_buffer_size>2000</trace_0_buffer_size>
+      <trace_0_buffer_size>200</trace_0_buffer_size>
       <axis_1_maximum>10.0</axis_1_maximum>
       <axis_0_scale_font>
         <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
@@ -1473,7 +1472,7 @@ $(trace_0_y_pv_value)</tooltip>
       <axis_1_axis_color>
         <color red="0" green="0" blue="0" />
       </axis_1_axis_color>
-      <axis_0_scale_format></axis_0_scale_format>
+      <axis_0_scale_format>#</axis_0_scale_format>
       <axis_1_log_scale>false</axis_1_log_scale>
       <title></title>
       <trace_0_visible>true</trace_0_visible>
@@ -1499,8 +1498,8 @@ $(trace_0_y_pv_value)</tooltip>
         <keep_wh_ratio>false</keep_wh_ratio>
       </scale_options>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
-      <axis_0_maximum>160.0</axis_0_maximum>
-      <height>220</height>
+      <axis_0_maximum>518.0</axis_0_maximum>
+      <height>210</height>
       <trigger_pv_value />
       <axis_1_grid_color>
         <color red="200" green="200" blue="200" />
@@ -1515,8 +1514,8 @@ $(trace_0_y_pv_value)</tooltip>
       <pv_name></pv_name>
       <name>XY Graph_1</name>
       <axis_0_auto_scale>false</axis_0_auto_scale>
-      <axis_0_minimum>1.0</axis_0_minimum>
-      <axis_1_axis_title>Horizontal Orbit (μm)</axis_1_axis_title>
+      <axis_0_minimum>0.0</axis_0_minimum>
+      <axis_1_axis_title>Horizontal (μm)</axis_1_axis_title>
       <axis_1_auto_scale>false</axis_1_auto_scale>
       <border_color>
         <color red="0" green="128" blue="255" />
@@ -1524,14 +1523,14 @@ $(trace_0_y_pv_value)</tooltip>
       <trace_0_y_pv>loc://orbit_h</trace_0_y_pv>
       <trace_0_plot_mode>0</trace_0_plot_mode>
       <enabled>true</enabled>
-      <trace_0_x_pv>loc://bpm_h</trace_0_x_pv>
+      <trace_0_x_pv>VA-SIFK-BPM-POS</trace_0_x_pv>
       <axis_1_scale_font>
         <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
       </axis_1_scale_font>
       <axis_1_time_format>0</axis_1_time_format>
       <border_alarm_sensitive>false</border_alarm_sensitive>
       <show_plot_area_border>false</show_plot_area_border>
-      <width>1680</width>
+      <width>1679</width>
       <axis_1_minimum>-10.0</axis_1_minimum>
       <title_font>
         <opifont.name fontName="Ubuntu" height="11" style="1">Default Bold</opifont.name>
@@ -1541,12 +1540,12 @@ $(trace_0_y_pv_value)</tooltip>
         <color red="255" green="255" blue="255" />
       </plot_area_background_color>
       <axis_1_title_font>
-        <opifont.name fontName="Ubuntu" height="13" style="1">Header 3</opifont.name>
+        <opifont.name fontName="Ubuntu" height="15" style="1">Header 2</opifont.name>
       </axis_1_title_font>
       <visible>true</visible>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <scripts>
-        <path pathString="plot_pvs.py" checkConnect="false" sfe="true" seoe="false">
+        <path pathString="plot_orbit.py" checkConnect="false" sfe="true" seoe="false">
           <pv trig="false">SIDI-BPM-01M2-X</pv>
           <pv trig="false">SIDI-BPM-01C1-A-X</pv>
           <pv trig="false">SIDI-BPM-01C1-B-X</pv>
@@ -1707,11 +1706,8 @@ $(trace_0_y_pv_value)</tooltip>
           <pv trig="false">SIDI-BPM-20C3-B-X</pv>
           <pv trig="false">SIDI-BPM-20C4-X</pv>
           <pv trig="false">SIDI-BPM-01M1-X</pv>
-          <pv trig="false">loc://bpm_h</pv>
-          <pv trig="false">loc://orbit_h</pv>
-          <pv trig="true">loc://orbit_display_trigger(0)</pv>
-        </path>
-        <path pathString="axis_limits.py" checkConnect="true" sfe="false" seoe="false">
+          <pv trig="false">VA-SIFK-BPM-POS</pv>
+          <pv trig="false">SIPA-REFERENCE-ORBIT-X</pv>
           <pv trig="false">loc://orbit_h</pv>
           <pv trig="true">loc://orbit_display_trigger</pv>
         </path>
@@ -1727,7 +1723,7 @@ $(trace_0_y_pv_value)</tooltip>
       </foreground_color>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.xyGraph" version="1.0.0">
-      <axis_1_scale_format></axis_1_scale_format>
+      <axis_1_scale_format>#</axis_1_scale_format>
       <alarm_pulsing>false</alarm_pulsing>
       <tooltip>$(trace_0_y_pv)
 $(trace_0_y_pv_value)</tooltip>
@@ -1748,12 +1744,12 @@ $(trace_0_y_pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <x>10</x>
-      <y>230</y>
+      <x>9</x>
+      <y>220</y>
       <trace_0_x_axis_index>0</trace_0_x_axis_index>
       <axis_count>2</axis_count>
       <pv_value />
-      <trace_0_buffer_size>2000</trace_0_buffer_size>
+      <trace_0_buffer_size>200</trace_0_buffer_size>
       <axis_1_maximum>10.0</axis_1_maximum>
       <axis_0_scale_font>
         <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
@@ -1763,7 +1759,7 @@ $(trace_0_y_pv_value)</tooltip>
       <axis_1_axis_color>
         <color red="0" green="0" blue="0" />
       </axis_1_axis_color>
-      <axis_0_scale_format></axis_0_scale_format>
+      <axis_0_scale_format>#</axis_0_scale_format>
       <axis_1_log_scale>false</axis_1_log_scale>
       <title></title>
       <trace_0_visible>true</trace_0_visible>
@@ -1781,7 +1777,7 @@ $(trace_0_y_pv_value)</tooltip>
       <axis_1_dash_grid_line>true</axis_1_dash_grid_line>
       <show_toolbar>false</show_toolbar>
       <axis_0_visible>true</axis_0_visible>
-      <axis_0_show_grid>true</axis_0_show_grid>
+      <axis_0_show_grid>false</axis_0_show_grid>
       <trace_0_y_axis_index>1</trace_0_y_axis_index>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -1789,8 +1785,8 @@ $(trace_0_y_pv_value)</tooltip>
         <keep_wh_ratio>false</keep_wh_ratio>
       </scale_options>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
-      <axis_0_maximum>160.0</axis_0_maximum>
-      <height>220</height>
+      <axis_0_maximum>518.0</axis_0_maximum>
+      <height>210</height>
       <trigger_pv_value />
       <axis_1_grid_color>
         <color red="200" green="200" blue="200" />
@@ -1805,8 +1801,8 @@ $(trace_0_y_pv_value)</tooltip>
       <pv_name></pv_name>
       <name>XY Graph_1</name>
       <axis_0_auto_scale>false</axis_0_auto_scale>
-      <axis_0_minimum>1.0</axis_0_minimum>
-      <axis_1_axis_title>Vertical Orbit (μm)</axis_1_axis_title>
+      <axis_0_minimum>0.0</axis_0_minimum>
+      <axis_1_axis_title>Vertical (μm)</axis_1_axis_title>
       <axis_1_auto_scale>false</axis_1_auto_scale>
       <border_color>
         <color red="0" green="128" blue="255" />
@@ -1814,14 +1810,14 @@ $(trace_0_y_pv_value)</tooltip>
       <trace_0_y_pv>loc://orbit_v</trace_0_y_pv>
       <trace_0_plot_mode>0</trace_0_plot_mode>
       <enabled>true</enabled>
-      <trace_0_x_pv>loc://bpm_v</trace_0_x_pv>
+      <trace_0_x_pv>VA-SIFK-BPM-POS</trace_0_x_pv>
       <axis_1_scale_font>
         <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
       </axis_1_scale_font>
       <axis_1_time_format>0</axis_1_time_format>
       <border_alarm_sensitive>false</border_alarm_sensitive>
       <show_plot_area_border>false</show_plot_area_border>
-      <width>1680</width>
+      <width>1679</width>
       <axis_1_minimum>-10.0</axis_1_minimum>
       <title_font>
         <opifont.name fontName="Ubuntu" height="11" style="1">Default Bold</opifont.name>
@@ -1831,12 +1827,12 @@ $(trace_0_y_pv_value)</tooltip>
         <color red="255" green="255" blue="255" />
       </plot_area_background_color>
       <axis_1_title_font>
-        <opifont.name fontName="Ubuntu" height="13" style="1">Header 3</opifont.name>
+        <opifont.name fontName="Ubuntu" height="15" style="1">Header 2</opifont.name>
       </axis_1_title_font>
       <visible>true</visible>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <scripts>
-        <path pathString="plot_pvs.py" checkConnect="false" sfe="true" seoe="false">
+        <path pathString="plot_orbit.py" checkConnect="false" sfe="true" seoe="false">
           <pv trig="false">SIDI-BPM-01M2-Y</pv>
           <pv trig="false">SIDI-BPM-01C1-A-Y</pv>
           <pv trig="false">SIDI-BPM-01C1-B-Y</pv>
@@ -1997,11 +1993,8 @@ $(trace_0_y_pv_value)</tooltip>
           <pv trig="false">SIDI-BPM-20C3-B-Y</pv>
           <pv trig="false">SIDI-BPM-20C4-Y</pv>
           <pv trig="false">SIDI-BPM-01M1-Y</pv>
-          <pv trig="false">loc://bpm_v</pv>
-          <pv trig="false">loc://orbit_v</pv>
-          <pv trig="true">loc://orbit_display_trigger</pv>
-        </path>
-        <path pathString="axis_limits.py" checkConnect="true" sfe="false" seoe="false">
+          <pv trig="false">VA-SIFK-BPM-POS</pv>
+          <pv trig="false">SIPA-REFERENCE-ORBIT-Y</pv>
           <pv trig="false">loc://orbit_v</pv>
           <pv trig="true">loc://orbit_display_trigger</pv>
         </path>
