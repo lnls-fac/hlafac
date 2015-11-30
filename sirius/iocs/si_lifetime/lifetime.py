@@ -77,9 +77,9 @@ class CalcLifetimeThread(threading.Thread):
     def measure_current(self):
         current, timestamp = 1e-3*self.current_pv.get(), self.current_pv.timestamp
         self.current_noise = 1e-6*self.current_noise_pv.get()
-        if current_noise == 0: current_noise = 10e-6
+        if self.current_noise == 0: self.current_noise = 10e-6
         if len(self.measures)!=0:
-            if math.fabs(current - self.measures[-1]) > 100*current_noise:
+            if math.fabs(current - self.measures[-1]) > 100*self.current_noise:
                 self.idx = 1
                 self.nr_points = self.intervals[self.idx]
                 self.measures.clear()
@@ -105,10 +105,8 @@ class CalcLifetimeThread(threading.Thread):
                 self.calc_interval(current)
 
     def calc_interval(self, current):
-        current_noise = 1e-6*self.current_noise_pv.get()
-        if current_noise == 0: current_noise = 10e-6
-        dtmin = (self.lifetime*(current_noise/current)*math.sqrt(2*self.sample_interval)/(1e-2*self.precision + 0.01))**(2/3)
-        dtmax = (self.lifetime*(current_noise/current)*math.sqrt(2*self.sample_interval)/(1e-2*self.precision - 0.01))**(2/3)
+        dtmin = (self.lifetime*(self.current_noise/current)*math.sqrt(2*self.sample_interval)/(1e-2*self.precision + 0.01))**(2/3)
+        dtmax = (self.lifetime*(self.current_noise/current)*math.sqrt(2*self.sample_interval)/(1e-2*self.precision - 0.01))**(2/3)
         if dtmin > (2*self.nr_points*self.sample_interval):
             self.count_time += 1
             if self.idx < (self.len_intervals-1) and (2*self.nr_points)<=self.count_time and len(self.measures)>(2*self.intervals[self.idx+1]):
@@ -150,14 +148,9 @@ def run(prefix):
     pv_database = {'SIPA-LIFETIME-SEC'      : {'type' : 'float', 'count': 1, 'value': 0.0},
                    'SIPA-LIFETIME-MIN'      : {'type' : 'float', 'count': 1, 'value': 0.0},
                    'SIPA-LIFETIME-HOUR'     : {'type' : 'float', 'count': 1, 'value': 0.0},
-                   'SIPA-LIFETIME-SEC.EGU'  : {'type' : 'string', 'value': 'sec'},
-                   'SIPA-LIFETIME-MIN.EGU'  : {'type' : 'string', 'value': 'min'},
-                   'SIPA-LIFETIME-HOUR.EGU' : {'type' : 'string', 'value': 'hour'},
-                   'SIPA-LIFETIME-NRPOINTS' : {'type' : 'int', 'count': 1, 'value': 0},
                    'SIPA-LIFETIME-DT'       : {'type' : 'float', 'count': 1, 'value': 0.0},
-                   'SIPA-LIFETIME-DT.EGU'   : {'type' : 'string', 'value': 'sec'},
                    'SIPA-LIFETIME-PREC'     : {'type' : 'float', 'count': 1, 'value': 0.0},
-                   'SIPA-LIFETIME-PREC.EGU' : {'type' : 'string', 'value': '%'},}
+                   'SIPA-LIFETIME-NRPOINTS' : {'type' : 'int',   'count': 1, 'value': 0},}
 
     pvs = [key for key in pv_database.keys()]
     server = pcaspy.SimpleServer()

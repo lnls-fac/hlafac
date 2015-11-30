@@ -11,21 +11,12 @@
       <scriptText><![CDATA[from org.csstudio.opibuilder.scriptUtil import PVUtil
 import time
 
-if PVUtil.getDouble(pvs[0]):
+if not PVUtil.getDouble(pvs[0]):
 	time.sleep(1)
 	pvs[0].setValue(1)
-
-pvs[1].setValue(1)
-time.sleep(0.1)
-pvs[1].setValue(0)
-
-if PVUtil.getDouble(pvs[2]) == 0:
-	pvs[2].setValue(1)
-else:
-	pvs[2].setValue(0)]]></scriptText>
-      <pv trig="false">loc://orbit_display_init(1)</pv>
-      <pv trig="false">loc://orbit_display_trigger</pv>
-      <pv trig="true">loc://orbit_display_trigger2(0)</pv>
+]]></scriptText>
+      <pv trig="false">loc://orbit_display_init</pv>
+      <pv trig="true">sim://flipflop</pv>
     </path>
   </scripts>
   <height>1000</height>
@@ -53,15 +44,7 @@ else:
   <foreground_color>
     <color red="192" green="192" blue="192" />
   </foreground_color>
-  <actions hook="false" hook_all="false">
-    <action type="WRITE_PV">
-      <pv_name>loc://orbit_display_trigger2</pv_name>
-      <value>1</value>
-      <timeout>10</timeout>
-      <confirm_message></confirm_message>
-      <description></description>
-    </action>
-  </actions>
+  <actions hook="false" hook_all="false" />
   <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
     <border_style>0</border_style>
     <tooltip></tooltip>
@@ -197,7 +180,7 @@ $(trace_0_y_pv_value)</tooltip>
       <axis_1_dash_grid_line>true</axis_1_dash_grid_line>
       <show_toolbar>false</show_toolbar>
       <axis_0_visible>true</axis_0_visible>
-      <axis_0_show_grid>false</axis_0_show_grid>
+      <axis_0_show_grid>true</axis_0_show_grid>
       <trace_0_y_axis_index>1</trace_0_y_axis_index>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -375,7 +358,7 @@ $(trace_0_y_pv_value)</tooltip>
           <pv trig="false">SIPS-CH-01M1-SP</pv>
           <pv trig="false">VA-SIFK-CH-POS</pv>
           <pv trig="false">loc://ch_current</pv>
-          <pv trig="true">loc://orbit_display_trigger</pv>
+          <pv trig="true">sim://flipflop(0.1)</pv>
         </path>
         <path pathString="config_axis.py" checkConnect="true" sfe="false" seoe="false">
           <pv trig="true">loc://orbit_display_init</pv>
@@ -486,7 +469,7 @@ $(trace_0_y_pv_value)</tooltip>
       <axis_1_dash_grid_line>true</axis_1_dash_grid_line>
       <show_toolbar>false</show_toolbar>
       <axis_0_visible>true</axis_0_visible>
-      <axis_0_show_grid>false</axis_0_show_grid>
+      <axis_0_show_grid>true</axis_0_show_grid>
       <trace_0_y_axis_index>1</trace_0_y_axis_index>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -704,7 +687,7 @@ $(trace_0_y_pv_value)</tooltip>
           <pv trig="false">SIPS-CV-01M1-SP</pv>
           <pv trig="false">VA-SIFK-CV-POS</pv>
           <pv trig="false">loc://cv_current</pv>
-          <pv trig="true">loc://orbit_display_trigger</pv>
+          <pv trig="true">sim://flipflop(0.1)</pv>
         </path>
         <path pathString="config_axis.py" checkConnect="true" sfe="false" seoe="false">
           <pv trig="true">loc://orbit_display_init</pv>
@@ -950,7 +933,7 @@ $(trace_0_y_pv_value)</tooltip>
       <axis_1_dash_grid_line>true</axis_1_dash_grid_line>
       <show_toolbar>false</show_toolbar>
       <axis_0_visible>true</axis_0_visible>
-      <axis_0_show_grid>false</axis_0_show_grid>
+      <axis_0_show_grid>true</axis_0_show_grid>
       <trace_0_y_axis_index>1</trace_0_y_axis_index>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -1088,7 +1071,7 @@ $(trace_0_y_pv_value)</tooltip>
           <pv trig="false">SIPS-FCH-01M1-SP</pv>
           <pv trig="false">VA-SIFK-FCH-POS</pv>
           <pv trig="false">loc://fch_current</pv>
-          <pv trig="true">loc://orbit_display_trigger</pv>
+          <pv trig="true">sim://flipflop(0.1)</pv>
         </path>
         <path pathString="config_axis.py" checkConnect="true" sfe="false" seoe="false">
           <pv trig="true">loc://orbit_display_init</pv>
@@ -1159,7 +1142,7 @@ $(trace_0_y_pv_value)</tooltip>
       <axis_1_dash_grid_line>true</axis_1_dash_grid_line>
       <show_toolbar>false</show_toolbar>
       <axis_0_visible>true</axis_0_visible>
-      <axis_0_show_grid>false</axis_0_show_grid>
+      <axis_0_show_grid>true</axis_0_show_grid>
       <trace_0_y_axis_index>1</trace_0_y_axis_index>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -1297,7 +1280,7 @@ $(trace_0_y_pv_value)</tooltip>
           <pv trig="false">SIPS-FCV-01M1-SP</pv>
           <pv trig="false">VA-SIFK-FCV-POS</pv>
           <pv trig="false">loc://fcv_current</pv>
-          <pv trig="true">loc://orbit_display_trigger</pv>
+          <pv trig="true">sim://flipflop(0.1)</pv>
         </path>
         <path pathString="config_axis.py" checkConnect="true" sfe="false" seoe="false">
           <pv trig="true">loc://orbit_display_init</pv>
@@ -1502,7 +1485,7 @@ $(pv_value)</tooltip>
       <axis_1_dash_grid_line>true</axis_1_dash_grid_line>
       <show_toolbar>false</show_toolbar>
       <axis_0_visible>true</axis_0_visible>
-      <axis_0_show_grid>false</axis_0_show_grid>
+      <axis_0_show_grid>true</axis_0_show_grid>
       <trace_0_y_axis_index>1</trace_0_y_axis_index>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -1721,7 +1704,7 @@ $(pv_value)</tooltip>
           <pv trig="false">SIPA-REFERENCE-ORBIT-X</pv>
           <pv trig="false">VA-SIFK-BPM-POS</pv>
           <pv trig="false">loc://orbit_h</pv>
-          <pv trig="true">loc://orbit_display_trigger</pv>
+          <pv trig="true">sim://flipflop(0.1)</pv>
         </path>
         <path pathString="config_axis.py" checkConnect="true" sfe="false" seoe="false">
           <pv trig="true">loc://orbit_display_init</pv>
@@ -1792,7 +1775,7 @@ $(trace_0_y_pv_value)</tooltip>
       <axis_1_dash_grid_line>true</axis_1_dash_grid_line>
       <show_toolbar>false</show_toolbar>
       <axis_0_visible>true</axis_0_visible>
-      <axis_0_show_grid>false</axis_0_show_grid>
+      <axis_0_show_grid>true</axis_0_show_grid>
       <trace_0_y_axis_index>1</trace_0_y_axis_index>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -2011,7 +1994,7 @@ $(trace_0_y_pv_value)</tooltip>
           <pv trig="false">SIPA-REFERENCE-ORBIT-Y</pv>
           <pv trig="false">VA-SIFK-BPM-POS</pv>
           <pv trig="false">loc://orbit_v</pv>
-          <pv trig="true">loc://orbit_display_trigger</pv>
+          <pv trig="true">sim://flipflop(0.1)</pv>
         </path>
         <path pathString="config_axis.py" checkConnect="true" sfe="false" seoe="false">
           <pv trig="true">loc://orbit_display_init</pv>
