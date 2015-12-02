@@ -6,7 +6,7 @@
   <show_grid>true</show_grid>
   <auto_zoom_to_fit_all>false</auto_zoom_to_fit_all>
   <scripts />
-  <height>1050</height>
+  <height>1120</height>
   <macros>
     <include_parent_macros>true</include_parent_macros>
   </macros>
@@ -21,7 +21,7 @@
   <background_color>
     <color red="240" green="240" blue="240" />
   </background_color>
-  <width>1900</width>
+  <width>940</width>
   <x>-1</x>
   <name></name>
   <grid_space>6</grid_space>
@@ -49,20 +49,20 @@ $(trace_0_y_pv_value)</tooltip>
     <wuid>63357fc9:150d8883885:-7a85</wuid>
     <transparent>false</transparent>
     <axis_0_title_font>
-      <opifont.name fontName="Droid Sans" height="20" style="1">Monitor Graph Axis</opifont.name>
+      <opifont.name fontName="Ubuntu" height="16" style="1">Monitor Graph Axis</opifont.name>
     </axis_0_title_font>
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
-    <x>456</x>
-    <y>190</y>
+    <x>306</x>
+    <y>72</y>
     <trace_0_x_axis_index>0</trace_0_x_axis_index>
     <axis_count>2</axis_count>
     <pv_value />
     <trace_0_buffer_size>72000</trace_0_buffer_size>
     <axis_1_maximum>100.0</axis_1_maximum>
     <axis_0_scale_font>
-      <opifont.name fontName="Droid Sans" height="16" style="0">Monitor Graph Scale</opifont.name>
+      <opifont.name fontName="Ubuntu" height="12" style="0">Monitor Graph Scale</opifont.name>
     </axis_0_scale_font>
     <trigger_pv></trigger_pv>
     <widget_type>XY Graph</widget_type>
@@ -96,7 +96,7 @@ $(trace_0_y_pv_value)</tooltip>
     </scale_options>
     <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
     <axis_0_maximum>100.0</axis_0_maximum>
-    <height>575</height>
+    <height>416</height>
     <trigger_pv_value />
     <axis_1_grid_color>
       <color red="200" green="200" blue="200" />
@@ -122,22 +122,22 @@ $(trace_0_y_pv_value)</tooltip>
     <enabled>true</enabled>
     <trace_0_x_pv></trace_0_x_pv>
     <axis_1_scale_font>
-      <opifont.name fontName="Droid Sans" height="16" style="0">Monitor Graph Scale</opifont.name>
+      <opifont.name fontName="Ubuntu" height="12" style="0">Monitor Graph Scale</opifont.name>
     </axis_1_scale_font>
     <axis_1_time_format>0</axis_1_time_format>
     <border_alarm_sensitive>true</border_alarm_sensitive>
     <show_plot_area_border>false</show_plot_area_border>
-    <width>1369</width>
+    <width>625</width>
     <axis_1_minimum>0.0</axis_1_minimum>
     <title_font>
-      <opifont.name fontName="Droid Sans" height="11" style="1">Default Bold</opifont.name>
+      <opifont.name fontName="Ubuntu" height="11" style="1">Default Bold</opifont.name>
     </title_font>
     <trace_0_y_pv_value />
     <plot_area_background_color>
       <color red="255" green="255" blue="255" />
     </plot_area_background_color>
     <axis_1_title_font>
-      <opifont.name fontName="Droid Sans" height="20" style="1">Monitor Graph Axis</opifont.name>
+      <opifont.name fontName="Ubuntu" height="16" style="1">Monitor Graph Axis</opifont.name>
     </axis_1_title_font>
     <visible>true</visible>
     <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
@@ -161,9 +161,9 @@ $(trace_0_y_pv_value)</tooltip>
     <wuid>63357fc9:150d8883885:-7fce</wuid>
     <transparent>true</transparent>
     <auto_size>false</auto_size>
-    <text>Sirius Storage Ring Status</text>
+    <text>Storage Ring Status</text>
     <scripts />
-    <height>94</height>
+    <height>50</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -180,20 +180,20 @@ $(trace_0_y_pv_value)</tooltip>
     <background_color>
       <color red="255" green="255" blue="255" />
     </background_color>
-    <width>1900</width>
+    <width>940</width>
     <x>0</x>
     <name>Label</name>
-    <y>20</y>
+    <y>0</y>
     <foreground_color>
       <color red="0" green="0" blue="0" />
     </foreground_color>
     <actions hook="false" hook_all="false" />
     <font>
-      <opifont.name fontName="Droid Sans" height="60" style="1">Monitor Title</opifont.name>
+      <opifont.name fontName="Ubuntu" height="30" style="1">Monitor Title</opifont.name>
     </font>
   </widget>
   <widget typeId="org.csstudio.opibuilder.widgets.groupingContainer" version="1.0.0">
-    <border_style>0</border_style>
+    <border_style>5</border_style>
     <tooltip></tooltip>
     <rules />
     <enabled>true</enabled>
@@ -201,7 +201,7 @@ $(trace_0_y_pv_value)</tooltip>
     <transparent>false</transparent>
     <lock_children>false</lock_children>
     <scripts />
-    <height>247</height>
+    <height>187</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -219,10 +219,10 @@ $(trace_0_y_pv_value)</tooltip>
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
-    <width>500</width>
-    <x>738</x>
+    <width>313</width>
+    <x>10</x>
     <name>Grouping Container</name>
-    <y>780</y>
+    <y>504</y>
     <foreground_color>
       <color red="192" green="192" blue="192" />
     </foreground_color>
@@ -230,7 +230,7 @@ $(trace_0_y_pv_value)</tooltip>
     <fc>false</fc>
     <show_scrollbar>true</show_scrollbar>
     <font>
-      <opifont.name fontName="Droid Sans" height="11" style="0">Default</opifont.name>
+      <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
     </font>
     <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
       <border_style>0</border_style>
@@ -243,7 +243,7 @@ $(trace_0_y_pv_value)</tooltip>
       <auto_size>true</auto_size>
       <text>Beam sizes</text>
       <scripts />
-      <height>48</height>
+      <height>31</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -260,8 +260,8 @@ $(trace_0_y_pv_value)</tooltip>
       <background_color>
         <color red="255" green="255" blue="255" />
       </background_color>
-      <width>211</width>
-      <x>122</x>
+      <width>141</width>
+      <x>10</x>
       <name>Label</name>
       <y>0</y>
       <foreground_color>
@@ -269,7 +269,7 @@ $(trace_0_y_pv_value)</tooltip>
       </foreground_color>
       <actions hook="false" hook_all="false" />
       <font>
-        <opifont.name fontName="Droid Sans" height="30" style="1">Monitor Header</opifont.name>
+        <opifont.name fontName="Ubuntu" height="20" style="1">Monitor Header</opifont.name>
       </font>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
@@ -283,7 +283,7 @@ $(trace_0_y_pv_value)</tooltip>
       <auto_size>true</auto_size>
       <text>Vertical:</text>
       <scripts />
-      <height>38</height>
+      <height>28</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -300,16 +300,16 @@ $(trace_0_y_pv_value)</tooltip>
       <background_color>
         <color red="255" green="255" blue="255" />
       </background_color>
-      <width>115</width>
-      <x>117</x>
+      <width>90</width>
+      <x>72</x>
       <name>Label_3</name>
-      <y>135</y>
+      <y>100</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
       <actions hook="false" hook_all="false" />
       <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+        <opifont.name fontName="Ubuntu" height="18" style="0">Monitor Data</opifont.name>
       </font>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
@@ -331,7 +331,7 @@ $(pv_value)</tooltip>
       <scripts />
       <border_alarm_sensitive>true</border_alarm_sensitive>
       <show_units>true</show_units>
-      <height>42</height>
+      <height>32</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -352,16 +352,16 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="255" green="255" blue="255" />
       </background_color>
-      <width>130</width>
-      <x>252</x>
+      <width>100</width>
+      <x>185</x>
       <name>Text Update_2</name>
-      <y>133</y>
+      <y>98</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
       <actions hook="false" hook_all="false" />
       <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+        <opifont.name fontName="Ubuntu" height="18" style="0">Monitor Data</opifont.name>
       </font>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
@@ -375,7 +375,7 @@ $(pv_value)</tooltip>
       <auto_size>true</auto_size>
       <text>Longitudinal:</text>
       <scripts />
-      <height>38</height>
+      <height>28</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -392,16 +392,16 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="255" green="255" blue="255" />
       </background_color>
-      <width>188</width>
-      <x>44</x>
+      <width>144</width>
+      <x>18</x>
       <name>Label_4</name>
-      <y>195</y>
+      <y>144</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
       <actions hook="false" hook_all="false" />
       <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+        <opifont.name fontName="Ubuntu" height="18" style="0">Monitor Data</opifont.name>
       </font>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
@@ -423,7 +423,7 @@ $(pv_value)</tooltip>
       <scripts />
       <border_alarm_sensitive>true</border_alarm_sensitive>
       <show_units>true</show_units>
-      <height>42</height>
+      <height>32</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -444,16 +444,16 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="255" green="255" blue="255" />
       </background_color>
-      <width>130</width>
-      <x>252</x>
+      <width>100</width>
+      <x>185</x>
       <name>Text Update_1</name>
-      <y>193</y>
+      <y>142</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
       <actions hook="false" hook_all="false" />
       <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+        <opifont.name fontName="Ubuntu" height="18" style="0">Monitor Data</opifont.name>
       </font>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
@@ -467,7 +467,7 @@ $(pv_value)</tooltip>
       <auto_size>true</auto_size>
       <text>Horizontal:</text>
       <scripts />
-      <height>38</height>
+      <height>28</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -484,16 +484,16 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="255" green="255" blue="255" />
       </background_color>
-      <width>157</width>
-      <x>75</x>
+      <width>121</width>
+      <x>41</x>
       <name>Label_5</name>
-      <y>75</y>
+      <y>56</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
       <actions hook="false" hook_all="false" />
       <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+        <opifont.name fontName="Ubuntu" height="18" style="0">Monitor Data</opifont.name>
       </font>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
@@ -515,7 +515,7 @@ $(pv_value)</tooltip>
       <scripts />
       <border_alarm_sensitive>true</border_alarm_sensitive>
       <show_units>true</show_units>
-      <height>42</height>
+      <height>32</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -536,29 +536,29 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="255" green="255" blue="255" />
       </background_color>
-      <width>130</width>
-      <x>252</x>
+      <width>100</width>
+      <x>185</x>
       <name>Text Update</name>
-      <y>73</y>
+      <y>54</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
       <actions hook="false" hook_all="false" />
       <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+        <opifont.name fontName="Ubuntu" height="18" style="0">Monitor Data</opifont.name>
       </font>
     </widget>
   </widget>
   <widget typeId="org.csstudio.opibuilder.widgets.groupingContainer" version="1.0.0">
-    <border_style>0</border_style>
+    <border_style>5</border_style>
     <tooltip></tooltip>
     <rules />
     <enabled>true</enabled>
     <wuid>63357fc9:150d8883885:-7c6f</wuid>
     <transparent>false</transparent>
-    <lock_children>true</lock_children>
+    <lock_children>false</lock_children>
     <scripts />
-    <height>247</height>
+    <height>187</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -576,10 +576,10 @@ $(pv_value)</tooltip>
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
-    <width>500</width>
-    <x>1368</x>
+    <width>313</width>
+    <x>618</x>
     <name>Grouping Container_1</name>
-    <y>780</y>
+    <y>504</y>
     <foreground_color>
       <color red="192" green="192" blue="192" />
     </foreground_color>
@@ -587,7 +587,7 @@ $(pv_value)</tooltip>
     <fc>false</fc>
     <show_scrollbar>true</show_scrollbar>
     <font>
-      <opifont.name fontName="Droid Sans" height="11" style="0">Default</opifont.name>
+      <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
     </font>
     <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
       <border_style>0</border_style>
@@ -600,7 +600,7 @@ $(pv_value)</tooltip>
       <auto_size>true</auto_size>
       <text>Tunes</text>
       <scripts />
-      <height>48</height>
+      <height>31</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -617,8 +617,8 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <width>112</width>
-      <x>194</x>
+      <width>75</width>
+      <x>10</x>
       <name>Label</name>
       <y>0</y>
       <foreground_color>
@@ -626,7 +626,7 @@ $(pv_value)</tooltip>
       </foreground_color>
       <actions hook="false" hook_all="false" />
       <font>
-        <opifont.name fontName="Droid Sans" height="30" style="1">Monitor Header</opifont.name>
+        <opifont.name fontName="Ubuntu" height="20" style="1">Monitor Header</opifont.name>
       </font>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
@@ -640,7 +640,7 @@ $(pv_value)</tooltip>
       <auto_size>true</auto_size>
       <text>Vertical:</text>
       <scripts />
-      <height>38</height>
+      <height>28</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -657,16 +657,16 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <width>115</width>
-      <x>117</x>
+      <width>90</width>
+      <x>72</x>
       <name>Label_3</name>
-      <y>135</y>
+      <y>100</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
       <actions hook="false" hook_all="false" />
       <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+        <opifont.name fontName="Ubuntu" height="18" style="0">Monitor Data</opifont.name>
       </font>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
@@ -682,13 +682,13 @@ $(pv_value)</tooltip>
       <wuid>63357fc9:150d8883885:-7c6c</wuid>
       <transparent>true</transparent>
       <pv_value />
-      <auto_size>false</auto_size>
+      <auto_size>true</auto_size>
       <text>######</text>
       <rotation_angle>0.0</rotation_angle>
       <scripts />
       <border_alarm_sensitive>true</border_alarm_sensitive>
       <show_units>true</show_units>
-      <height>42</height>
+      <height>32</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -709,16 +709,16 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <width>130</width>
-      <x>252</x>
+      <width>100</width>
+      <x>185</x>
       <name>Text Update_2</name>
-      <y>133</y>
+      <y>98</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
       <actions hook="false" hook_all="false" />
       <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+        <opifont.name fontName="Ubuntu" height="18" style="0">Monitor Data</opifont.name>
       </font>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
@@ -732,7 +732,7 @@ $(pv_value)</tooltip>
       <auto_size>true</auto_size>
       <text>Longitudinal:</text>
       <scripts />
-      <height>38</height>
+      <height>28</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -749,16 +749,16 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <width>188</width>
-      <x>44</x>
+      <width>144</width>
+      <x>18</x>
       <name>Label_3</name>
-      <y>195</y>
+      <y>144</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
       <actions hook="false" hook_all="false" />
       <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+        <opifont.name fontName="Ubuntu" height="18" style="0">Monitor Data</opifont.name>
       </font>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
@@ -774,13 +774,13 @@ $(pv_value)</tooltip>
       <wuid>63357fc9:150d8883885:-7c6a</wuid>
       <transparent>true</transparent>
       <pv_value />
-      <auto_size>false</auto_size>
+      <auto_size>true</auto_size>
       <text>######</text>
       <rotation_angle>0.0</rotation_angle>
       <scripts />
       <border_alarm_sensitive>true</border_alarm_sensitive>
       <show_units>true</show_units>
-      <height>42</height>
+      <height>32</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -801,16 +801,16 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <width>130</width>
-      <x>252</x>
+      <width>100</width>
+      <x>185</x>
       <name>Text Update_2</name>
-      <y>193</y>
+      <y>142</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
       <actions hook="false" hook_all="false" />
       <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+        <opifont.name fontName="Ubuntu" height="18" style="0">Monitor Data</opifont.name>
       </font>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
@@ -824,7 +824,7 @@ $(pv_value)</tooltip>
       <auto_size>true</auto_size>
       <text>Horizontal:</text>
       <scripts />
-      <height>38</height>
+      <height>28</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -841,16 +841,16 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <width>157</width>
-      <x>75</x>
+      <width>121</width>
+      <x>41</x>
       <name>Label_3</name>
-      <y>75</y>
+      <y>56</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
       <actions hook="false" hook_all="false" />
       <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+        <opifont.name fontName="Ubuntu" height="18" style="0">Monitor Data</opifont.name>
       </font>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
@@ -866,13 +866,13 @@ $(pv_value)</tooltip>
       <wuid>63357fc9:150d8883885:-7c68</wuid>
       <transparent>true</transparent>
       <pv_value />
-      <auto_size>false</auto_size>
+      <auto_size>true</auto_size>
       <text>######</text>
       <rotation_angle>0.0</rotation_angle>
       <scripts />
       <border_alarm_sensitive>true</border_alarm_sensitive>
       <show_units>true</show_units>
-      <height>42</height>
+      <height>32</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -893,21 +893,21 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <width>130</width>
-      <x>252</x>
+      <width>100</width>
+      <x>185</x>
       <name>Text Update</name>
-      <y>73</y>
+      <y>54</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
       <actions hook="false" hook_all="false" />
       <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+        <opifont.name fontName="Ubuntu" height="18" style="0">Monitor Data</opifont.name>
       </font>
     </widget>
   </widget>
   <widget typeId="org.csstudio.opibuilder.widgets.groupingContainer" version="1.0.0">
-    <border_style>0</border_style>
+    <border_style>5</border_style>
     <tooltip></tooltip>
     <rules />
     <enabled>true</enabled>
@@ -915,7 +915,7 @@ $(pv_value)</tooltip>
     <transparent>false</transparent>
     <lock_children>false</lock_children>
     <scripts />
-    <height>379</height>
+    <height>416</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -933,10 +933,10 @@ $(pv_value)</tooltip>
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
-    <width>313</width>
-    <x>90</x>
+    <width>283</width>
+    <x>10</x>
     <name>Grouping Container_2</name>
-    <y>264</y>
+    <y>72</y>
     <foreground_color>
       <color red="192" green="192" blue="192" />
     </foreground_color>
@@ -944,7 +944,7 @@ $(pv_value)</tooltip>
     <fc>false</fc>
     <show_scrollbar>true</show_scrollbar>
     <font>
-      <opifont.name fontName="Droid Sans" height="11" style="0">Default</opifont.name>
+      <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
     </font>
     <widget typeId="org.csstudio.opibuilder.widgets.groupingContainer" version="1.0.0">
       <border_style>0</border_style>
@@ -984,7 +984,7 @@ $(pv_value)</tooltip>
       <fc>false</fc>
       <show_scrollbar>false</show_scrollbar>
       <font>
-        <opifont.name fontName="Droid Sans" height="11" style="0">Default</opifont.name>
+        <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
       </font>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.groupingContainer" version="1.0.0">
@@ -994,9 +994,9 @@ $(pv_value)</tooltip>
       <enabled>true</enabled>
       <wuid>-3ccb018a:150ed85c828:-7e3b</wuid>
       <transparent>false</transparent>
-      <lock_children>true</lock_children>
+      <lock_children>false</lock_children>
       <scripts />
-      <height>130</height>
+      <height>110</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -1014,7 +1014,7 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <width>279</width>
+      <width>260</width>
       <x>10</x>
       <name>Grouping Container_1</name>
       <y>9</y>
@@ -1025,7 +1025,7 @@ $(pv_value)</tooltip>
       <fc>false</fc>
       <show_scrollbar>false</show_scrollbar>
       <font>
-        <opifont.name fontName="Droid Sans" height="11" style="0">Default</opifont.name>
+        <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
       </font>
       <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
         <border_style>0</border_style>
@@ -1038,7 +1038,7 @@ $(pv_value)</tooltip>
         <auto_size>true</auto_size>
         <text>Beam current:</text>
         <scripts />
-        <height>48</height>
+        <height>31</height>
         <border_width>1</border_width>
         <scale_options>
           <width_scalable>true</width_scalable>
@@ -1055,7 +1055,7 @@ $(pv_value)</tooltip>
         <background_color>
           <color red="255" green="255" blue="255" />
         </background_color>
-        <width>258</width>
+        <width>180</width>
         <x>0</x>
         <name>Label_1</name>
         <y>0</y>
@@ -1064,7 +1064,7 @@ $(pv_value)</tooltip>
         </foreground_color>
         <actions hook="false" hook_all="false" />
         <font>
-          <opifont.name fontName="Droid Sans" height="30" style="0">Monitor Large Data</opifont.name>
+          <opifont.name fontName="Ubuntu" height="20" style="1">Monitor Header</opifont.name>
         </font>
       </widget>
       <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
@@ -1107,16 +1107,16 @@ $(pv_value)</tooltip>
         <background_color>
           <color red="255" green="255" blue="255" />
         </background_color>
-        <width>218</width>
+        <width>200</width>
         <x>40</x>
         <name>Text Update_1</name>
-        <y>69</y>
+        <y>50</y>
         <foreground_color>
           <color red="0" green="0" blue="0" />
         </foreground_color>
         <actions hook="false" hook_all="false" />
         <font>
-          <opifont.name fontName="Droid Sans" height="30" style="0">Monitor Large Data</opifont.name>
+          <opifont.name fontName="Ubuntu" height="18" style="0">Monitor Data</opifont.name>
         </font>
       </widget>
     </widget>
@@ -1127,9 +1127,9 @@ $(pv_value)</tooltip>
       <enabled>true</enabled>
       <wuid>68417a5e:150eda3e644:-7ae0</wuid>
       <transparent>false</transparent>
-      <lock_children>true</lock_children>
+      <lock_children>false</lock_children>
       <scripts />
-      <height>121</height>
+      <height>110</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -1147,10 +1147,10 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <width>259</width>
+      <width>260</width>
       <x>10</x>
       <name>Grouping Container</name>
-      <y>240</y>
+      <y>138</y>
       <foreground_color>
         <color red="192" green="192" blue="192" />
       </foreground_color>
@@ -1158,7 +1158,7 @@ $(pv_value)</tooltip>
       <fc>false</fc>
       <show_scrollbar>false</show_scrollbar>
       <font>
-        <opifont.name fontName="Droid Sans" height="11" style="0">Default</opifont.name>
+        <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
       </font>
       <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
         <border_style>0</border_style>
@@ -1171,7 +1171,7 @@ $(pv_value)</tooltip>
         <auto_size>true</auto_size>
         <text>Beam lifetime:</text>
         <scripts />
-        <height>48</height>
+        <height>31</height>
         <border_width>1</border_width>
         <scale_options>
           <width_scalable>true</width_scalable>
@@ -1188,7 +1188,7 @@ $(pv_value)</tooltip>
         <background_color>
           <color red="255" green="255" blue="255" />
         </background_color>
-        <width>259</width>
+        <width>187</width>
         <x>0</x>
         <name>Label_2</name>
         <y>0</y>
@@ -1197,7 +1197,7 @@ $(pv_value)</tooltip>
         </foreground_color>
         <actions hook="false" hook_all="false" />
         <font>
-          <opifont.name fontName="Droid Sans" height="30" style="0">Monitor Large Data</opifont.name>
+          <opifont.name fontName="Ubuntu" height="20" style="1">Monitor Header</opifont.name>
         </font>
       </widget>
       <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
@@ -1240,16 +1240,149 @@ $(pv_value)</tooltip>
         <background_color>
           <color red="255" green="255" blue="255" />
         </background_color>
-        <width>219</width>
+        <width>200</width>
         <x>40</x>
         <name>Text Update_2</name>
-        <y>69</y>
+        <y>50</y>
         <foreground_color>
           <color red="0" green="0" blue="0" />
         </foreground_color>
         <actions hook="false" hook_all="false" />
         <font>
-          <opifont.name fontName="Droid Sans" height="30" style="0">Monitor Large Data</opifont.name>
+          <opifont.name fontName="Ubuntu" height="18" style="0">Monitor Data</opifont.name>
+        </font>
+      </widget>
+    </widget>
+    <widget typeId="org.csstudio.opibuilder.widgets.groupingContainer" version="1.0.0">
+      <border_style>0</border_style>
+      <tooltip></tooltip>
+      <rules />
+      <enabled>true</enabled>
+      <wuid>-7929fdfe:1516388bb16:-7fd0</wuid>
+      <transparent>false</transparent>
+      <lock_children>false</lock_children>
+      <scripts />
+      <height>110</height>
+      <border_width>1</border_width>
+      <scale_options>
+        <width_scalable>true</width_scalable>
+        <height_scalable>true</height_scalable>
+        <keep_wh_ratio>false</keep_wh_ratio>
+      </scale_options>
+      <macros>
+        <include_parent_macros>true</include_parent_macros>
+      </macros>
+      <visible>true</visible>
+      <border_color>
+        <color red="0" green="128" blue="255" />
+      </border_color>
+      <widget_type>Grouping Container</widget_type>
+      <background_color>
+        <color red="240" green="240" blue="240" />
+      </background_color>
+      <width>260</width>
+      <x>10</x>
+      <name>Grouping Container_3</name>
+      <y>267</y>
+      <foreground_color>
+        <color red="192" green="192" blue="192" />
+      </foreground_color>
+      <actions hook="false" hook_all="false" />
+      <fc>false</fc>
+      <show_scrollbar>false</show_scrollbar>
+      <font>
+        <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
+      </font>
+      <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
+        <border_style>0</border_style>
+        <tooltip></tooltip>
+        <horizontal_alignment>0</horizontal_alignment>
+        <rules />
+        <enabled>true</enabled>
+        <wuid>-7929fdfe:1516388bb16:-7fcf</wuid>
+        <transparent>true</transparent>
+        <auto_size>true</auto_size>
+        <text>Shift type:</text>
+        <scripts />
+        <height>31</height>
+        <border_width>1</border_width>
+        <scale_options>
+          <width_scalable>true</width_scalable>
+          <height_scalable>true</height_scalable>
+          <keep_wh_ratio>false</keep_wh_ratio>
+        </scale_options>
+        <visible>true</visible>
+        <vertical_alignment>1</vertical_alignment>
+        <border_color>
+          <color red="0" green="128" blue="255" />
+        </border_color>
+        <widget_type>Label</widget_type>
+        <wrap_words>false</wrap_words>
+        <background_color>
+          <color red="255" green="255" blue="255" />
+        </background_color>
+        <width>135</width>
+        <x>0</x>
+        <name>Label_2</name>
+        <y>0</y>
+        <foreground_color>
+          <color red="0" green="0" blue="0" />
+        </foreground_color>
+        <actions hook="false" hook_all="false" />
+        <font>
+          <opifont.name fontName="Ubuntu" height="20" style="1">Monitor Header</opifont.name>
+        </font>
+      </widget>
+      <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
+        <border_style>0</border_style>
+        <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
+        <alarm_pulsing>false</alarm_pulsing>
+        <precision>1</precision>
+        <tooltip>$(pv_name)
+$(pv_value)</tooltip>
+        <horizontal_alignment>0</horizontal_alignment>
+        <rules />
+        <enabled>true</enabled>
+        <wuid>-7929fdfe:1516388bb16:-7fce</wuid>
+        <transparent>true</transparent>
+        <pv_value />
+        <auto_size>false</auto_size>
+        <text>######</text>
+        <rotation_angle>0.0</rotation_angle>
+        <scripts />
+        <border_alarm_sensitive>true</border_alarm_sensitive>
+        <show_units>true</show_units>
+        <height>52</height>
+        <border_width>1</border_width>
+        <scale_options>
+          <width_scalable>true</width_scalable>
+          <height_scalable>true</height_scalable>
+          <keep_wh_ratio>false</keep_wh_ratio>
+        </scale_options>
+        <visible>true</visible>
+        <pv_name>loc://SHIFT-TYPE("User")</pv_name>
+        <vertical_alignment>1</vertical_alignment>
+        <border_color>
+          <color red="0" green="128" blue="255" />
+        </border_color>
+        <precision_from_pv>false</precision_from_pv>
+        <widget_type>Text Update</widget_type>
+        <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
+        <wrap_words>false</wrap_words>
+        <format_type>1</format_type>
+        <background_color>
+          <color red="255" green="255" blue="255" />
+        </background_color>
+        <width>200</width>
+        <x>40</x>
+        <name>Text Update_2</name>
+        <y>50</y>
+        <foreground_color>
+          <color red="0" green="0" blue="0" />
+        </foreground_color>
+        <actions hook="false" hook_all="false" />
+        <font>
+          <opifont.name fontName="Ubuntu" height="18" style="0">Monitor Data</opifont.name>
         </font>
       </widget>
     </widget>
@@ -1259,11 +1392,11 @@ $(pv_value)</tooltip>
     <tooltip></tooltip>
     <rules />
     <enabled>true</enabled>
-    <wuid>6ad77206:150f1dce539:-7f9c</wuid>
+    <wuid>-6d63860a:1516390418e:-7ded</wuid>
     <transparent>false</transparent>
     <lock_children>true</lock_children>
     <scripts />
-    <height>247</height>
+    <height>187</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -1281,31 +1414,39 @@ $(pv_value)</tooltip>
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
-    <width>500</width>
-    <x>66</x>
-    <name>Grouping Container_4</name>
-    <y>780</y>
+    <width>259</width>
+    <x>342</x>
+    <name>Grouping Container_3</name>
+    <y>504</y>
     <foreground_color>
       <color red="192" green="192" blue="192" />
     </foreground_color>
     <actions hook="false" hook_all="false" />
     <fc>false</fc>
-    <show_scrollbar>true</show_scrollbar>
+    <show_scrollbar>false</show_scrollbar>
     <font>
-      <opifont.name fontName="Droid Sans" height="11" style="0">Default</opifont.name>
+      <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
     </font>
-    <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
+    <widget typeId="org.csstudio.opibuilder.widgets.Rectangle" version="1.0.0">
       <border_style>0</border_style>
-      <tooltip></tooltip>
-      <horizontal_alignment>1</horizontal_alignment>
+      <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
+      <line_width>0</line_width>
+      <horizontal_fill>true</horizontal_fill>
+      <alarm_pulsing>false</alarm_pulsing>
+      <tooltip>$(pv_name)
+$(pv_value)</tooltip>
       <rules />
       <enabled>true</enabled>
-      <wuid>6ad77206:150f1dce539:-7f9b</wuid>
-      <transparent>true</transparent>
-      <auto_size>true</auto_size>
-      <text>Shift</text>
+      <wuid>-6d63860a:1516390418e:-7e80</wuid>
+      <transparent>false</transparent>
+      <pv_value />
+      <alpha>255</alpha>
+      <bg_gradient_color>
+        <color red="255" green="255" blue="255" />
+      </bg_gradient_color>
       <scripts />
-      <height>48</height>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+      <height>187</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
@@ -1313,302 +1454,94 @@ $(pv_value)</tooltip>
         <keep_wh_ratio>false</keep_wh_ratio>
       </scale_options>
       <visible>true</visible>
-      <vertical_alignment>1</vertical_alignment>
+      <pv_name></pv_name>
+      <gradient>false</gradient>
       <border_color>
         <color red="0" green="128" blue="255" />
       </border_color>
-      <widget_type>Label</widget_type>
-      <wrap_words>false</wrap_words>
-      <background_color>
+      <anti_alias>true</anti_alias>
+      <line_style>0</line_style>
+      <widget_type>Rectangle</widget_type>
+      <fg_gradient_color>
         <color red="255" green="255" blue="255" />
+      </fg_gradient_color>
+      <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
+      <background_color>
+        <color red="30" green="144" blue="255" />
       </background_color>
-      <width>90</width>
-      <x>205</x>
-      <name>Label</name>
+      <width>259</width>
+      <x>0</x>
+      <name>Rectangle</name>
       <y>0</y>
+      <fill_level>0.0</fill_level>
       <foreground_color>
-        <color red="0" green="0" blue="0" />
+        <color red="255" green="0" blue="0" />
       </foreground_color>
       <actions hook="false" hook_all="false" />
       <font>
-        <opifont.name fontName="Droid Sans" height="30" style="1">Monitor Header</opifont.name>
+        <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
       </font>
+      <line_color>
+        <color red="128" green="0" blue="255" />
+      </line_color>
     </widget>
-    <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
-      <border_style>0</border_style>
-      <tooltip></tooltip>
-      <horizontal_alignment>2</horizontal_alignment>
-      <rules />
-      <enabled>true</enabled>
-      <wuid>6ad77206:150f1dce539:-7f9a</wuid>
-      <transparent>true</transparent>
-      <auto_size>true</auto_size>
-      <text>Start:</text>
-      <scripts />
-      <height>38</height>
-      <border_width>1</border_width>
-      <scale_options>
-        <width_scalable>true</width_scalable>
-        <height_scalable>true</height_scalable>
-        <keep_wh_ratio>false</keep_wh_ratio>
-      </scale_options>
-      <visible>true</visible>
-      <vertical_alignment>1</vertical_alignment>
-      <border_color>
-        <color red="0" green="128" blue="255" />
-      </border_color>
-      <widget_type>Label</widget_type>
-      <wrap_words>false</wrap_words>
-      <background_color>
-        <color red="255" green="255" blue="255" />
-      </background_color>
-      <width>78</width>
-      <x>36</x>
-      <name>Label_3</name>
-      <y>134</y>
-      <foreground_color>
-        <color red="0" green="0" blue="0" />
-      </foreground_color>
-      <actions hook="false" hook_all="false" />
-      <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
-      </font>
-    </widget>
-    <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
-      <border_style>0</border_style>
-      <tooltip></tooltip>
-      <horizontal_alignment>2</horizontal_alignment>
-      <rules />
-      <enabled>true</enabled>
-      <wuid>6ad77206:150f1dce539:-7f98</wuid>
-      <transparent>true</transparent>
-      <auto_size>true</auto_size>
-      <text>End:</text>
-      <scripts />
-      <height>38</height>
-      <border_width>1</border_width>
-      <scale_options>
-        <width_scalable>true</width_scalable>
-        <height_scalable>true</height_scalable>
-        <keep_wh_ratio>false</keep_wh_ratio>
-      </scale_options>
-      <visible>true</visible>
-      <vertical_alignment>1</vertical_alignment>
-      <border_color>
-        <color red="0" green="128" blue="255" />
-      </border_color>
-      <widget_type>Label</widget_type>
-      <wrap_words>false</wrap_words>
-      <background_color>
-        <color red="255" green="255" blue="255" />
-      </background_color>
-      <width>64</width>
-      <x>50</x>
-      <name>Label_4</name>
-      <y>194</y>
-      <foreground_color>
-        <color red="0" green="0" blue="0" />
-      </foreground_color>
-      <actions hook="false" hook_all="false" />
-      <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
-      </font>
-    </widget>
-    <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
+    <widget typeId="org.csstudio.opibuilder.widgets.Ellipse" version="1.0.0">
       <border_style>0</border_style>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
+      <line_width>0</line_width>
+      <horizontal_fill>true</horizontal_fill>
       <alarm_pulsing>false</alarm_pulsing>
-      <precision>0</precision>
       <tooltip>$(pv_name)
 $(pv_value)</tooltip>
-      <horizontal_alignment>0</horizontal_alignment>
       <rules />
       <enabled>true</enabled>
-      <wuid>6ad77206:150f1dce539:-7f99</wuid>
-      <transparent>true</transparent>
+      <wuid>-6d63860a:1516390418e:-7def</wuid>
+      <transparent>false</transparent>
       <pv_value />
-      <auto_size>false</auto_size>
-      <text>######</text>
-      <rotation_angle>0.0</rotation_angle>
+      <alpha>255</alpha>
+      <bg_gradient_color>
+        <color red="255" green="255" blue="255" />
+      </bg_gradient_color>
       <scripts />
-      <border_alarm_sensitive>true</border_alarm_sensitive>
-      <show_units>true</show_units>
-      <height>42</height>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+      <height>24</height>
       <border_width>1</border_width>
       <scale_options>
         <width_scalable>true</width_scalable>
         <height_scalable>true</height_scalable>
-        <keep_wh_ratio>false</keep_wh_ratio>
+        <keep_wh_ratio>true</keep_wh_ratio>
       </scale_options>
       <visible>true</visible>
-      <pv_name>loc://SHIFT-START("2015-11-09 08:00")</pv_name>
-      <vertical_alignment>1</vertical_alignment>
+      <pv_name></pv_name>
+      <gradient>false</gradient>
       <border_color>
         <color red="0" green="128" blue="255" />
       </border_color>
-      <precision_from_pv>true</precision_from_pv>
-      <widget_type>Text Update</widget_type>
+      <anti_alias>true</anti_alias>
+      <line_style>0</line_style>
+      <widget_type>Ellipse</widget_type>
+      <fg_gradient_color>
+        <color red="255" green="255" blue="255" />
+      </fg_gradient_color>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
-      <wrap_words>false</wrap_words>
-      <format_type>0</format_type>
       <background_color>
-        <color red="255" green="255" blue="255" />
+        <color name="Header MainColor" red="255" green="255" blue="255" />
       </background_color>
-      <width>325</width>
-      <x>144</x>
-      <name>Text Update_2</name>
-      <y>132</y>
+      <width>150</width>
+      <x>55</x>
+      <name>Ellipse</name>
+      <y>91</y>
+      <fill_level>0.0</fill_level>
       <foreground_color>
-        <color red="0" green="0" blue="0" />
+        <color red="255" green="0" blue="0" />
       </foreground_color>
       <actions hook="false" hook_all="false" />
       <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
+        <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
       </font>
-    </widget>
-    <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
-      <border_style>0</border_style>
-      <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
-      <alarm_pulsing>false</alarm_pulsing>
-      <precision>0</precision>
-      <tooltip>$(pv_name)
-$(pv_value)</tooltip>
-      <horizontal_alignment>0</horizontal_alignment>
-      <rules />
-      <enabled>true</enabled>
-      <wuid>6ad77206:150f1dce539:-7f97</wuid>
-      <transparent>true</transparent>
-      <pv_value />
-      <auto_size>false</auto_size>
-      <text>######</text>
-      <rotation_angle>0.0</rotation_angle>
-      <scripts />
-      <border_alarm_sensitive>true</border_alarm_sensitive>
-      <show_units>true</show_units>
-      <height>42</height>
-      <border_width>1</border_width>
-      <scale_options>
-        <width_scalable>true</width_scalable>
-        <height_scalable>true</height_scalable>
-        <keep_wh_ratio>false</keep_wh_ratio>
-      </scale_options>
-      <visible>true</visible>
-      <pv_name>loc://SHIFT-END("2015-11-13 08:00")</pv_name>
-      <vertical_alignment>1</vertical_alignment>
-      <border_color>
-        <color red="0" green="128" blue="255" />
-      </border_color>
-      <precision_from_pv>true</precision_from_pv>
-      <widget_type>Text Update</widget_type>
-      <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
-      <wrap_words>false</wrap_words>
-      <format_type>0</format_type>
-      <background_color>
-        <color red="255" green="255" blue="255" />
-      </background_color>
-      <width>325</width>
-      <x>144</x>
-      <name>Text Update_1</name>
-      <y>192</y>
-      <foreground_color>
-        <color red="0" green="0" blue="0" />
-      </foreground_color>
-      <actions hook="false" hook_all="false" />
-      <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
-      </font>
-    </widget>
-    <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
-      <border_style>0</border_style>
-      <tooltip></tooltip>
-      <horizontal_alignment>2</horizontal_alignment>
-      <rules />
-      <enabled>true</enabled>
-      <wuid>6ad77206:150f1dce539:-7f96</wuid>
-      <transparent>true</transparent>
-      <auto_size>true</auto_size>
-      <text>Type:</text>
-      <scripts />
-      <height>38</height>
-      <border_width>1</border_width>
-      <scale_options>
-        <width_scalable>true</width_scalable>
-        <height_scalable>true</height_scalable>
-        <keep_wh_ratio>false</keep_wh_ratio>
-      </scale_options>
-      <visible>true</visible>
-      <vertical_alignment>1</vertical_alignment>
-      <border_color>
-        <color red="0" green="128" blue="255" />
-      </border_color>
-      <widget_type>Label</widget_type>
-      <wrap_words>false</wrap_words>
-      <background_color>
-        <color red="255" green="255" blue="255" />
-      </background_color>
-      <width>77</width>
-      <x>37</x>
-      <name>Label_5</name>
-      <y>74</y>
-      <foreground_color>
-        <color red="0" green="0" blue="0" />
-      </foreground_color>
-      <actions hook="false" hook_all="false" />
-      <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
-      </font>
-    </widget>
-    <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
-      <border_style>0</border_style>
-      <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
-      <alarm_pulsing>false</alarm_pulsing>
-      <precision>0</precision>
-      <tooltip>$(pv_name)
-$(pv_value)</tooltip>
-      <horizontal_alignment>0</horizontal_alignment>
-      <rules />
-      <enabled>true</enabled>
-      <wuid>6ad77206:150f1dce539:-7f95</wuid>
-      <transparent>true</transparent>
-      <pv_value />
-      <auto_size>false</auto_size>
-      <text>######</text>
-      <rotation_angle>0.0</rotation_angle>
-      <scripts />
-      <border_alarm_sensitive>true</border_alarm_sensitive>
-      <show_units>true</show_units>
-      <height>42</height>
-      <border_width>1</border_width>
-      <scale_options>
-        <width_scalable>true</width_scalable>
-        <height_scalable>true</height_scalable>
-        <keep_wh_ratio>false</keep_wh_ratio>
-      </scale_options>
-      <visible>true</visible>
-      <pv_name>loc://SHIFT-TYPE("User")</pv_name>
-      <vertical_alignment>1</vertical_alignment>
-      <border_color>
-        <color red="0" green="128" blue="255" />
-      </border_color>
-      <precision_from_pv>true</precision_from_pv>
-      <widget_type>Text Update</widget_type>
-      <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
-      <wrap_words>false</wrap_words>
-      <format_type>0</format_type>
-      <background_color>
-        <color red="255" green="255" blue="255" />
-      </background_color>
-      <width>325</width>
-      <x>144</x>
-      <name>Text Update</name>
-      <y>72</y>
-      <foreground_color>
-        <color red="0" green="0" blue="0" />
-      </foreground_color>
-      <actions hook="false" hook_all="false" />
-      <font>
-        <opifont.name fontName="Droid Sans" height="24" style="0">Monitor Data</opifont.name>
-      </font>
+      <line_color>
+        <color red="128" green="0" blue="255" />
+      </line_color>
     </widget>
   </widget>
 </display>

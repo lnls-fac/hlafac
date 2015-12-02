@@ -12,10 +12,10 @@
 //Example LinkText = SystemDefault-italic-10
 
 // Monitoring screen fonts (larger)
-Monitor Title = SystemDefault-bold-60
-Monitor Header = SystemDefault-bold-30
-Monitor Large Data = SystemDefault-regular-30
-Monitor Data = SystemDefault-regular-24
-Monitor Graph Axis = SystemDefault-bold-20
-Monitor Graph Scale = SystemDefault-regular-16
-Template Title = SystemDefault-bold-40
+Monitor Title = SystemDefault-bold-30
+Monitor Header = SystemDefault-bold-20
+Monitor Large Data = SystemDefault-regular-20
+Monitor Data = SystemDefault-regular-18
+Monitor Graph Axis = SystemDefault-bold-16
+Monitor Graph Scale = SystemDefault-regular-12
+Template Title = SystemDefault-bold-24
