@@ -6,7 +6,7 @@
   <show_grid>true</show_grid>
   <auto_zoom_to_fit_all>false</auto_zoom_to_fit_all>
   <scripts />
-  <height>1120</height>
+  <height>1000</height>
   <macros>
     <include_parent_macros>true</include_parent_macros>
   </macros>
@@ -32,12 +32,52 @@
     <color red="192" green="192" blue="192" />
   </foreground_color>
   <actions hook="false" hook_all="false" />
+  <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
+    <border_style>0</border_style>
+    <tooltip></tooltip>
+    <horizontal_alignment>1</horizontal_alignment>
+    <rules />
+    <enabled>true</enabled>
+    <wuid>63357fc9:150d8883885:-7fce</wuid>
+    <transparent>true</transparent>
+    <auto_size>false</auto_size>
+    <text>Light Source Status</text>
+    <scripts />
+    <height>50</height>
+    <border_width>1</border_width>
+    <scale_options>
+      <width_scalable>true</width_scalable>
+      <height_scalable>true</height_scalable>
+      <keep_wh_ratio>false</keep_wh_ratio>
+    </scale_options>
+    <visible>true</visible>
+    <vertical_alignment>1</vertical_alignment>
+    <border_color>
+      <color red="0" green="128" blue="255" />
+    </border_color>
+    <widget_type>Label</widget_type>
+    <wrap_words>false</wrap_words>
+    <background_color>
+      <color red="255" green="255" blue="255" />
+    </background_color>
+    <width>940</width>
+    <x>0</x>
+    <name>Label</name>
+    <y>0</y>
+    <foreground_color>
+      <color red="0" green="0" blue="0" />
+    </foreground_color>
+    <actions hook="false" hook_all="false" />
+    <font>
+      <opifont.name fontName="Ubuntu" height="30" style="1">Monitor Title</opifont.name>
+    </font>
+  </widget>
   <widget typeId="org.csstudio.opibuilder.widgets.xyGraph" version="1.0.0">
     <axis_1_scale_format>#.##</axis_1_scale_format>
     <alarm_pulsing>false</alarm_pulsing>
     <tooltip>$(trace_0_y_pv)
 $(trace_0_y_pv_value)</tooltip>
-    <trace_0_concatenate_data>true</trace_0_concatenate_data>
+    <trace_0_concatenate_data>false</trace_0_concatenate_data>
     <trace_0_trace_type>3</trace_0_trace_type>
     <border_width>1</border_width>
     <border_style>0</border_style>
@@ -54,12 +94,12 @@ $(trace_0_y_pv_value)</tooltip>
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
-    <x>15</x>
-    <y>627</y>
+    <x>10</x>
+    <y>600</y>
     <trace_0_x_axis_index>0</trace_0_x_axis_index>
     <axis_count>2</axis_count>
     <pv_value />
-    <trace_0_buffer_size>72000</trace_0_buffer_size>
+    <trace_0_buffer_size>864</trace_0_buffer_size>
     <axis_1_maximum>100.0</axis_1_maximum>
     <axis_0_scale_font>
       <opifont.name fontName="Ubuntu" height="12" style="0">Monitor Graph Scale</opifont.name>
@@ -96,7 +136,7 @@ $(trace_0_y_pv_value)</tooltip>
     </scale_options>
     <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
     <axis_0_maximum>100.0</axis_0_maximum>
-    <height>237</height>
+    <height>225</height>
     <trigger_pv_value />
     <axis_1_grid_color>
       <color red="200" green="200" blue="200" />
@@ -127,7 +167,7 @@ $(trace_0_y_pv_value)</tooltip>
     <axis_1_time_format>0</axis_1_time_format>
     <border_alarm_sensitive>true</border_alarm_sensitive>
     <show_plot_area_border>false</show_plot_area_border>
-    <width>910</width>
+    <width>920</width>
     <axis_1_minimum>0.0</axis_1_minimum>
     <title_font>
       <opifont.name fontName="Ubuntu" height="11" style="1">Default Bold</opifont.name>
@@ -152,46 +192,6 @@ $(trace_0_y_pv_value)</tooltip>
       <color red="0" green="0" blue="255" />
     </foreground_color>
   </widget>
-  <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
-    <border_style>0</border_style>
-    <tooltip></tooltip>
-    <horizontal_alignment>1</horizontal_alignment>
-    <rules />
-    <enabled>true</enabled>
-    <wuid>63357fc9:150d8883885:-7fce</wuid>
-    <transparent>true</transparent>
-    <auto_size>false</auto_size>
-    <text>Storage Ring Status</text>
-    <scripts />
-    <height>50</height>
-    <border_width>1</border_width>
-    <scale_options>
-      <width_scalable>true</width_scalable>
-      <height_scalable>true</height_scalable>
-      <keep_wh_ratio>false</keep_wh_ratio>
-    </scale_options>
-    <visible>true</visible>
-    <vertical_alignment>1</vertical_alignment>
-    <border_color>
-      <color red="0" green="128" blue="255" />
-    </border_color>
-    <widget_type>Label</widget_type>
-    <wrap_words>false</wrap_words>
-    <background_color>
-      <color red="255" green="255" blue="255" />
-    </background_color>
-    <width>940</width>
-    <x>0</x>
-    <name>Label</name>
-    <y>0</y>
-    <foreground_color>
-      <color red="0" green="0" blue="0" />
-    </foreground_color>
-    <actions hook="false" hook_all="false" />
-    <font>
-      <opifont.name fontName="Ubuntu" height="30" style="1">Monitor Title</opifont.name>
-    </font>
-  </widget>
   <widget typeId="org.csstudio.opibuilder.widgets.groupingContainer" version="1.0.0">
     <border_style>5</border_style>
     <tooltip></tooltip>
@@ -201,7 +201,7 @@ $(trace_0_y_pv_value)</tooltip>
     <transparent>false</transparent>
     <lock_children>false</lock_children>
     <scripts />
-    <height>186</height>
+    <height>183</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -219,8 +219,8 @@ $(trace_0_y_pv_value)</tooltip>
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
-    <width>602</width>
-    <x>323</x>
+    <width>610</width>
+    <x>320</x>
     <name>Grouping Container</name>
     <y>70</y>
     <foreground_color>
@@ -303,7 +303,7 @@ $(trace_0_y_pv_value)</tooltip>
       <width>90</width>
       <x>72</x>
       <name>Label_3</name>
-      <y>99</y>
+      <y>100</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -355,7 +355,7 @@ $(pv_value)</tooltip>
       <width>100</width>
       <x>182</x>
       <name>Text Update_2</name>
-      <y>97</y>
+      <y>98</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -395,7 +395,7 @@ $(pv_value)</tooltip>
       <width>144</width>
       <x>18</x>
       <name>Label_4</name>
-      <y>143</y>
+      <y>145</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -447,7 +447,7 @@ $(pv_value)</tooltip>
       <width>100</width>
       <x>182</x>
       <name>Text Update_1</name>
-      <y>141</y>
+      <y>143</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -575,7 +575,7 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <width>222</width>
+      <width>235</width>
       <x>354</x>
       <name>Grouping Container_3</name>
       <y>15</y>
@@ -630,7 +630,7 @@ $(pv_value)</tooltip>
         <background_color>
           <color red="30" green="144" blue="255" />
         </background_color>
-        <width>221</width>
+        <width>233</width>
         <x>0</x>
         <name>Rectangle</name>
         <y>0</y>
@@ -688,8 +688,8 @@ $(pv_value)</tooltip>
         <background_color>
           <color name="Header MainColor" red="255" green="255" blue="255" />
         </background_color>
-        <width>126</width>
-        <x>45</x>
+        <width>133</width>
+        <x>47</x>
         <name>Ellipse</name>
         <y>73</y>
         <fill_level>0.0</fill_level>
@@ -715,7 +715,7 @@ $(pv_value)</tooltip>
     <transparent>false</transparent>
     <lock_children>false</lock_children>
     <scripts />
-    <height>186</height>
+    <height>183</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -733,8 +733,8 @@ $(pv_value)</tooltip>
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
-    <width>293</width>
-    <x>15</x>
+    <width>300</width>
+    <x>10</x>
     <name>Grouping Container_1</name>
     <y>70</y>
     <foreground_color>
@@ -817,7 +817,7 @@ $(pv_value)</tooltip>
       <width>90</width>
       <x>72</x>
       <name>Label_3</name>
-      <y>99</y>
+      <y>100</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -869,7 +869,7 @@ $(pv_value)</tooltip>
       <width>100</width>
       <x>182</x>
       <name>Text Update_2</name>
-      <y>97</y>
+      <y>98</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -909,7 +909,7 @@ $(pv_value)</tooltip>
       <width>144</width>
       <x>18</x>
       <name>Label_3</name>
-      <y>143</y>
+      <y>145</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -961,7 +961,7 @@ $(pv_value)</tooltip>
       <width>100</width>
       <x>182</x>
       <name>Text Update_2</name>
-      <y>141</y>
+      <y>143</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -1104,10 +1104,10 @@ $(pv_value)</tooltip>
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
-    <width>910</width>
-    <x>15</x>
+    <width>920</width>
+    <x>10</x>
     <name>Grouping Container_2</name>
-    <y>271</y>
+    <y>263</y>
     <foreground_color>
       <color red="192" green="192" blue="192" />
     </foreground_color>
@@ -1157,7 +1157,7 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="255" green="255" blue="255" />
       </background_color>
-      <width>906</width>
+      <width>916</width>
       <x>0</x>
       <name>Text Update_2</name>
       <y>8</y>
@@ -1179,7 +1179,7 @@ $(pv_value)</tooltip>
     <transparent>false</transparent>
     <lock_children>false</lock_children>
     <scripts />
-    <height>187</height>
+    <height>125</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -1197,10 +1197,10 @@ $(pv_value)</tooltip>
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
-    <width>910</width>
-    <x>15</x>
+    <width>920</width>
+    <x>10</x>
     <name>Grouping Container_3</name>
-    <y>879</y>
+    <y>835</y>
     <foreground_color>
       <color red="192" green="192" blue="192" />
     </foreground_color>
@@ -1282,7 +1282,7 @@ $(pv_value)</tooltip>
     <width>940</width>
     <x>0</x>
     <name>Label_3</name>
-    <y>1081</y>
+    <y>970</y>
     <foreground_color>
       <color red="0" green="0" blue="0" />
     </foreground_color>
@@ -1318,10 +1318,10 @@ $(pv_value)</tooltip>
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
-    <width>910</width>
-    <x>15</x>
+    <width>920</width>
+    <x>10</x>
     <name>Grouping Container_4</name>
-    <y>323</y>
+    <y>315</y>
     <foreground_color>
       <color red="192" green="192" blue="192" />
     </foreground_color>
@@ -1471,7 +1471,7 @@ $(pv_value)</tooltip>
       <enabled>true</enabled>
       <wuid>-46414065:15163db5833:-7d69</wuid>
       <transparent>false</transparent>
-      <lock_children>false</lock_children>
+      <lock_children>true</lock_children>
       <scripts />
       <height>32</height>
       <border_width>1</border_width>
@@ -1492,7 +1492,7 @@ $(pv_value)</tooltip>
         <color red="240" green="240" blue="240" />
       </background_color>
       <width>279</width>
-      <x>531</x>
+      <x>536</x>
       <name>Grouping Container</name>
       <y>8</y>
       <foreground_color>
@@ -1599,32 +1599,42 @@ $(pv_value)</tooltip>
     </widget>
   </widget>
   <widget typeId="org.csstudio.opibuilder.widgets.xyGraph" version="1.0.0">
-    <axis_1_scale_format>#.##</axis_1_scale_format>
+    <axis_1_scale_format>#.#</axis_1_scale_format>
     <alarm_pulsing>false</alarm_pulsing>
     <tooltip>$(trace_0_y_pv)
 $(trace_0_y_pv_value)</tooltip>
     <trace_0_concatenate_data>true</trace_0_concatenate_data>
     <trace_0_trace_type>4</trace_0_trace_type>
     <border_width>1</border_width>
+    <trace_1_x_axis_index>0</trace_1_x_axis_index>
     <border_style>0</border_style>
     <axis_0_grid_color>
       <color red="200" green="200" blue="200" />
     </axis_0_grid_color>
+    <axis_2_visible>true</axis_2_visible>
     <trace_0_name>$(trace_0_y_pv)</trace_0_name>
+    <axis_2_minimum>0.0</axis_2_minimum>
     <trace_0_update_mode>0</trace_0_update_mode>
+    <trace_1_x_pv></trace_1_x_pv>
     <wuid>-46414065:15163db5833:-7cb1</wuid>
     <transparent>false</transparent>
+    <trace_1_update_mode>0</trace_1_update_mode>
     <axis_0_title_font>
       <opifont.name fontName="Ubuntu" height="16" style="1">Monitor Graph Axis</opifont.name>
     </axis_0_title_font>
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
-    <x>15</x>
-    <y>391</y>
+    <x>10</x>
+    <y>378</y>
     <trace_0_x_axis_index>0</trace_0_x_axis_index>
-    <axis_count>2</axis_count>
+    <axis_count>3</axis_count>
+    <trace_1_point_size>4</trace_1_point_size>
+    <trace_1_anti_alias>true</trace_1_anti_alias>
     <pv_value />
+    <axis_2_grid_color>
+      <color red="200" green="200" blue="200" />
+    </axis_2_grid_color>
     <trace_0_buffer_size>72000</trace_0_buffer_size>
     <axis_1_maximum>100.0</axis_1_maximum>
     <axis_0_scale_font>
@@ -1639,16 +1649,24 @@ $(trace_0_y_pv_value)</tooltip>
     <axis_1_log_scale>false</axis_1_log_scale>
     <title></title>
     <trace_0_visible>true</trace_0_visible>
+    <trace_1_name>$(trace_1_y_pv)</trace_1_name>
+    <trace_1_y_pv_value />
+    <axis_2_auto_scale>true</axis_2_auto_scale>
     <show_legend>false</show_legend>
     <axis_0_axis_title>Time</axis_0_axis_title>
     <axis_0_axis_color>
       <color red="0" green="0" blue="0" />
     </axis_0_axis_color>
+    <axis_2_scale_font>
+      <opifont.name fontName="Ubuntu" height="12" style="0">Monitor Graph Scale</opifont.name>
+    </axis_2_scale_font>
     <axis_0_dash_grid_line>true</axis_0_dash_grid_line>
     <trace_0_point_style>0</trace_0_point_style>
+    <trace_1_point_style>1</trace_1_point_style>
     <trace_0_line_width>1</trace_0_line_width>
+    <axis_2_y_axis>true</axis_2_y_axis>
     <axis_0_time_format>8</axis_0_time_format>
-    <trace_count>1</trace_count>
+    <trace_count>2</trace_count>
     <axis_1_show_grid>false</axis_1_show_grid>
     <axis_1_dash_grid_line>true</axis_1_dash_grid_line>
     <show_toolbar>false</show_toolbar>
@@ -1660,29 +1678,49 @@ $(trace_0_y_pv_value)</tooltip>
       <height_scalable>true</height_scalable>
       <keep_wh_ratio>false</keep_wh_ratio>
     </scale_options>
+    <trace_1_y_pv>SIPA-LIFETIME-HOUR</trace_1_y_pv>
     <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
     <axis_0_maximum>100.0</axis_0_maximum>
-    <height>237</height>
+    <trace_1_y_axis_index>2</trace_1_y_axis_index>
+    <height>225</height>
     <trigger_pv_value />
     <axis_1_grid_color>
       <color red="200" green="200" blue="200" />
     </axis_1_grid_color>
     <actions hook="false" hook_all="false" />
+    <axis_2_axis_color>
+      <color red="0" green="0" blue="0" />
+    </axis_2_axis_color>
     <axis_0_log_scale>false</axis_0_log_scale>
     <trace_0_x_pv_value />
     <axis_0_auto_scale_threshold>0.0</axis_0_auto_scale_threshold>
     <rules />
     <axis_1_visible>true</axis_1_visible>
+    <axis_2_show_grid>true</axis_2_show_grid>
     <trace_0_update_delay>1000</trace_0_update_delay>
+    <trace_1_concatenate_data>true</trace_1_concatenate_data>
+    <trace_1_trace_color>
+      <color red="242" green="26" blue="26" />
+    </trace_1_trace_color>
     <pv_name>SIDI-CURRENT</pv_name>
+    <axis_2_log_scale>false</axis_2_log_scale>
+    <axis_2_auto_scale_threshold>0.0</axis_2_auto_scale_threshold>
     <name>XY Graph_1</name>
+    <trace_1_trace_type>2</trace_1_trace_type>
     <axis_0_auto_scale>true</axis_0_auto_scale>
     <axis_0_minimum>0.0</axis_0_minimum>
+    <trace_1_update_delay>100</trace_1_update_delay>
+    <axis_2_dash_grid_line>true</axis_2_dash_grid_line>
     <axis_1_axis_title>Current [mA]</axis_1_axis_title>
     <axis_1_auto_scale>true</axis_1_auto_scale>
+    <trace_1_line_width>1</trace_1_line_width>
+    <trace_1_plot_mode>0</trace_1_plot_mode>
     <border_color>
       <color red="0" green="128" blue="255" />
     </border_color>
+    <axis_2_title_font>
+      <opifont.name fontName="Ubuntu" height="16" style="1">Monitor Graph Axis</opifont.name>
+    </axis_2_title_font>
     <trace_0_y_pv>$(pv_name)</trace_0_y_pv>
     <trace_0_plot_mode>0</trace_0_plot_mode>
     <enabled>true</enabled>
@@ -1691,14 +1729,19 @@ $(trace_0_y_pv_value)</tooltip>
       <opifont.name fontName="Ubuntu" height="12" style="0">Monitor Graph Scale</opifont.name>
     </axis_1_scale_font>
     <axis_1_time_format>0</axis_1_time_format>
+    <axis_2_time_format>0</axis_2_time_format>
+    <axis_2_left_bottom_side>true</axis_2_left_bottom_side>
     <border_alarm_sensitive>true</border_alarm_sensitive>
+    <axis_2_maximum>100.0</axis_2_maximum>
     <show_plot_area_border>false</show_plot_area_border>
-    <width>910</width>
+    <width>920</width>
+    <trace_1_x_pv_value />
     <axis_1_minimum>0.0</axis_1_minimum>
     <title_font>
       <opifont.name fontName="Ubuntu" height="11" style="1">Default Bold</opifont.name>
     </title_font>
     <trace_0_y_pv_value />
+    <trace_1_visible>true</trace_1_visible>
     <plot_area_background_color>
       <color red="255" green="255" blue="255" />
     </plot_area_background_color>
@@ -1706,7 +1749,10 @@ $(trace_0_y_pv_value)</tooltip>
       <opifont.name fontName="Ubuntu" height="16" style="1">Monitor Graph Axis</opifont.name>
     </axis_1_title_font>
     <visible>true</visible>
+    <axis_2_axis_title>Lifetime [h]</axis_2_axis_title>
+    <trace_1_buffer_size>100</trace_1_buffer_size>
     <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
+    <axis_2_scale_format>#.#</axis_2_scale_format>
     <scripts />
     <trace_0_point_size>4</trace_0_point_size>
     <trace_0_trace_color>
