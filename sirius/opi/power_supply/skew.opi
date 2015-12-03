@@ -6,7 +6,7 @@
   <show_grid>true</show_grid>
   <auto_zoom_to_fit_all>false</auto_zoom_to_fit_all>
   <scripts />
-  <height>630</height>
+  <height>890</height>
   <macros>
     <include_parent_macros>true</include_parent_macros>
   </macros>
@@ -21,7 +21,7 @@
   <background_color>
     <color red="240" green="240" blue="240" />
   </background_color>
-  <width>760</width>
+  <width>1620</width>
   <x>-1</x>
   <name></name>
   <grid_space>6</grid_space>
@@ -60,7 +60,7 @@
     <background_color>
       <color name="sextupole" red="138" green="153" blue="119" />
     </background_color>
-    <width>760</width>
+    <width>1620</width>
     <x>0</x>
     <name>Label</name>
     <y>0</y>
