@@ -13,7 +13,7 @@
 
 // Monitoring screen fonts (larger)
 Monitor Title = SystemDefault-bold-30
-Monitor Header = SystemDefault-bold-20
+Monitor Header = SystemDefault-regular-24
 Monitor Large Data = SystemDefault-regular-20
 Monitor Data = SystemDefault-regular-18
 Monitor Graph Axis = SystemDefault-bold-16
