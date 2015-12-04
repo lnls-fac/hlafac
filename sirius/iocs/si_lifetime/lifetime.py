@@ -145,9 +145,9 @@ def run(prefix):
     stop_event = threading.Event()
     signal.signal(signal.SIGINT, handle_signal)
 
-    pv_database = {'SIPA-LIFETIME-SEC'      : {'type' : 'float', 'count': 1, 'value': 0.0},
-                   'SIPA-LIFETIME-MIN'      : {'type' : 'float', 'count': 1, 'value': 0.0},
-                   'SIPA-LIFETIME-HOUR'     : {'type' : 'float', 'count': 1, 'value': 0.0},
+    pv_database = {'SIPA-LIFETIME-SEC'      : {'type' : 'float', 'count': 1, 'value': 0.0, 'unit': 's'},
+                   'SIPA-LIFETIME-MIN'      : {'type' : 'float', 'count': 1, 'value': 0.0, 'unit': 'min'},
+                   'SIPA-LIFETIME-HOUR'     : {'type' : 'float', 'count': 1, 'value': 0.0, 'unit': 'h'},
                    'SIPA-LIFETIME-DT'       : {'type' : 'float', 'count': 1, 'value': 0.0},
                    'SIPA-LIFETIME-PREC'     : {'type' : 'float', 'count': 1, 'value': 0.0},
                    'SIPA-LIFETIME-NRPOINTS' : {'type' : 'int',   'count': 1, 'value': 0},}
