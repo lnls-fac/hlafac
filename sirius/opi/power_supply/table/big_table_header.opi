@@ -33,7 +33,7 @@
   </foreground_color>
   <actions hook="false" hook_all="false" />
   <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
-    <border_style>0</border_style>
+    <border_style>5</border_style>
     <tooltip></tooltip>
     <horizontal_alignment>1</horizontal_alignment>
     <rules />
@@ -43,7 +43,7 @@
     <auto_size>false</auto_size>
     <text>Setpoint (A)</text>
     <scripts />
-    <height>30</height>
+    <height>35</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -60,8 +60,8 @@
     <background_color>
       <color red="255" green="255" blue="255" />
     </background_color>
-    <width>100</width>
-    <x>100</x>
+    <width>120</width>
+    <x>120</x>
     <name>Label_2</name>
     <y>0</y>
     <foreground_color>
@@ -73,7 +73,7 @@
     </font>
   </widget>
   <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
-    <border_style>0</border_style>
+    <border_style>5</border_style>
     <tooltip></tooltip>
     <horizontal_alignment>1</horizontal_alignment>
     <rules />
@@ -83,7 +83,7 @@
     <auto_size>false</auto_size>
     <text>Readback (A)</text>
     <scripts />
-    <height>30</height>
+    <height>35</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -100,8 +100,8 @@
     <background_color>
       <color red="255" green="255" blue="255" />
     </background_color>
-    <width>100</width>
-    <x>200</x>
+    <width>120</width>
+    <x>240</x>
     <name>Label_3</name>
     <y>0</y>
     <foreground_color>
@@ -113,7 +113,7 @@
     </font>
   </widget>
   <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
-    <border_style>0</border_style>
+    <border_style>5</border_style>
     <tooltip></tooltip>
     <horizontal_alignment>1</horizontal_alignment>
     <rules />
@@ -123,7 +123,7 @@
     <auto_size>false</auto_size>
     <text>Status</text>
     <scripts />
-    <height>30</height>
+    <height>35</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -140,8 +140,8 @@
     <background_color>
       <color red="255" green="255" blue="255" />
     </background_color>
-    <width>100</width>
-    <x>300</x>
+    <width>60</width>
+    <x>360</x>
     <name>Label_4</name>
     <y>0</y>
     <foreground_color>
@@ -161,7 +161,7 @@
     <transparent>false</transparent>
     <lock_children>false</lock_children>
     <scripts />
-    <height>30</height>
+    <height>35</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -179,7 +179,7 @@
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
-    <width>100</width>
+    <width>120</width>
     <x>0</x>
     <name>Grouping Container</name>
     <y>0</y>

@@ -6,7 +6,7 @@
   <show_grid>true</show_grid>
   <auto_zoom_to_fit_all>false</auto_zoom_to_fit_all>
   <scripts>
-    <path pathString="write_quad_table.py" checkConnect="true" sfe="false" seoe="false">
+    <path pathString="table/write_quad_table.py" checkConnect="true" sfe="false" seoe="false">
       <pv trig="true">$(quad_family)</pv>
     </path>
   </scripts>
@@ -74,7 +74,7 @@
     </foreground_color>
     <actions hook="false" hook_all="false" />
     <font>
-      <opifont.name fontName="Ubuntu" height="30" style="1">Monitor Header</opifont.name>
+      <opifont.name fontName="Ubuntu" height="24" style="0">Monitor Header</opifont.name>
     </font>
   </widget>
   <widget typeId="org.csstudio.opibuilder.widgets.sashContainer" version="1.0.0">
@@ -169,7 +169,7 @@
         <transparent>false</transparent>
         <lock_children>false</lock_children>
         <scripts />
-        <height>547</height>
+        <height>840</height>
         <border_width>1</border_width>
         <scale_options>
           <width_scalable>true</width_scalable>
@@ -215,7 +215,7 @@ $(pv_value)</tooltip>
           <text>QFA</text>
           <scripts />
           <border_alarm_sensitive>false</border_alarm_sensitive>
-          <height>40</height>
+          <height>60</height>
           <border_width>1</border_width>
           <scale_options>
             <width_scalable>true</width_scalable>
@@ -236,7 +236,7 @@ $(pv_value)</tooltip>
           <width>109</width>
           <x>15</x>
           <name>Action Button</name>
-          <y>10</y>
+          <y>20</y>
           <style>0</style>
           <foreground_color>
             <color red="0" green="0" blue="0" />
@@ -269,7 +269,7 @@ $(pv_value)</tooltip>
           <text>QDA</text>
           <scripts />
           <border_alarm_sensitive>false</border_alarm_sensitive>
-          <height>40</height>
+          <height>60</height>
           <border_width>1</border_width>
           <scale_options>
             <width_scalable>true</width_scalable>
@@ -290,7 +290,7 @@ $(pv_value)</tooltip>
           <width>109</width>
           <x>15</x>
           <name>Action Button</name>
-          <y>70</y>
+          <y>110</y>
           <style>0</style>
           <foreground_color>
             <color red="0" green="0" blue="0" />
@@ -323,7 +323,7 @@ $(pv_value)</tooltip>
           <text>QF1</text>
           <scripts />
           <border_alarm_sensitive>false</border_alarm_sensitive>
-          <height>40</height>
+          <height>60</height>
           <border_width>1</border_width>
           <scale_options>
             <width_scalable>true</width_scalable>
@@ -344,7 +344,7 @@ $(pv_value)</tooltip>
           <width>109</width>
           <x>15</x>
           <name>Action Button</name>
-          <y>130</y>
+          <y>200</y>
           <style>0</style>
           <foreground_color>
             <color red="0" green="0" blue="0" />
@@ -377,7 +377,7 @@ $(pv_value)</tooltip>
           <text>QF2</text>
           <scripts />
           <border_alarm_sensitive>false</border_alarm_sensitive>
-          <height>40</height>
+          <height>60</height>
           <border_width>1</border_width>
           <scale_options>
             <width_scalable>true</width_scalable>
@@ -398,7 +398,7 @@ $(pv_value)</tooltip>
           <width>109</width>
           <x>15</x>
           <name>Action Button_1</name>
-          <y>190</y>
+          <y>290</y>
           <style>0</style>
           <foreground_color>
             <color red="0" green="0" blue="0" />
@@ -431,7 +431,7 @@ $(pv_value)</tooltip>
           <text>QF3</text>
           <scripts />
           <border_alarm_sensitive>false</border_alarm_sensitive>
-          <height>40</height>
+          <height>60</height>
           <border_width>1</border_width>
           <scale_options>
             <width_scalable>true</width_scalable>
@@ -452,7 +452,7 @@ $(pv_value)</tooltip>
           <width>109</width>
           <x>15</x>
           <name>Action Button_4</name>
-          <y>250</y>
+          <y>380</y>
           <style>0</style>
           <foreground_color>
             <color red="0" green="0" blue="0" />
@@ -485,7 +485,7 @@ $(pv_value)</tooltip>
           <text>QF4</text>
           <scripts />
           <border_alarm_sensitive>false</border_alarm_sensitive>
-          <height>40</height>
+          <height>60</height>
           <border_width>1</border_width>
           <scale_options>
             <width_scalable>true</width_scalable>
@@ -506,7 +506,7 @@ $(pv_value)</tooltip>
           <width>109</width>
           <x>15</x>
           <name>Action Button_5</name>
-          <y>310</y>
+          <y>470</y>
           <style>0</style>
           <foreground_color>
             <color red="0" green="0" blue="0" />
@@ -539,7 +539,7 @@ $(pv_value)</tooltip>
           <text>QDB1</text>
           <scripts />
           <border_alarm_sensitive>false</border_alarm_sensitive>
-          <height>40</height>
+          <height>60</height>
           <border_width>1</border_width>
           <scale_options>
             <width_scalable>true</width_scalable>
@@ -560,7 +560,7 @@ $(pv_value)</tooltip>
           <width>109</width>
           <x>15</x>
           <name>Action Button_6</name>
-          <y>370</y>
+          <y>560</y>
           <style>0</style>
           <foreground_color>
             <color red="0" green="0" blue="0" />
@@ -593,7 +593,7 @@ $(pv_value)</tooltip>
           <text>QFB</text>
           <scripts />
           <border_alarm_sensitive>false</border_alarm_sensitive>
-          <height>40</height>
+          <height>60</height>
           <border_width>1</border_width>
           <scale_options>
             <width_scalable>true</width_scalable>
@@ -614,7 +614,7 @@ $(pv_value)</tooltip>
           <width>109</width>
           <x>15</x>
           <name>Action Button_11</name>
-          <y>430</y>
+          <y>650</y>
           <style>0</style>
           <foreground_color>
             <color red="0" green="0" blue="0" />
@@ -647,7 +647,7 @@ $(pv_value)</tooltip>
           <text>QDB2</text>
           <scripts />
           <border_alarm_sensitive>false</border_alarm_sensitive>
-          <height>40</height>
+          <height>60</height>
           <border_width>1</border_width>
           <scale_options>
             <width_scalable>true</width_scalable>
@@ -668,7 +668,7 @@ $(pv_value)</tooltip>
           <width>109</width>
           <x>15</x>
           <name>Action Button_12</name>
-          <y>490</y>
+          <y>740</y>
           <style>0</style>
           <foreground_color>
             <color red="0" green="0" blue="0" />
@@ -735,7 +735,7 @@ $(pv_value)</tooltip>
         <enabled>true</enabled>
         <wuid>-7e06b2cc:15167d0cf92:-5539</wuid>
         <transparent>false</transparent>
-        <lock_children>true</lock_children>
+        <lock_children>false</lock_children>
         <scripts />
         <height>840</height>
         <border_width>1</border_width>
@@ -777,7 +777,7 @@ $(pv_value)</tooltip>
           <transparent>false</transparent>
           <lock_children>false</lock_children>
           <scripts />
-          <height>80</height>
+          <height>65</height>
           <border_width>1</border_width>
           <scale_options>
             <width_scalable>true</width_scalable>
@@ -798,7 +798,7 @@ $(pv_value)</tooltip>
           <width>400</width>
           <x>20</x>
           <name>fam_table</name>
-          <y>30</y>
+          <y>40</y>
           <foreground_color>
             <color red="192" green="192" blue="192" />
           </foreground_color>
@@ -898,7 +898,7 @@ $(pv_value)</tooltip>
           <transparent>false</transparent>
           <lock_children>false</lock_children>
           <scripts />
-          <height>685</height>
+          <height>660</height>
           <border_width>1</border_width>
           <scale_options>
             <width_scalable>true</width_scalable>
@@ -916,10 +916,10 @@ $(pv_value)</tooltip>
           <background_color>
             <color red="240" green="240" blue="240" />
           </background_color>
-          <width>400</width>
+          <width>360</width>
           <x>20</x>
           <name>shunt_table_1</name>
-          <y>144</y>
+          <y>160</y>
           <foreground_color>
             <color red="192" green="192" blue="192" />
           </foreground_color>
@@ -939,7 +939,7 @@ $(pv_value)</tooltip>
           <transparent>false</transparent>
           <lock_children>false</lock_children>
           <scripts />
-          <height>685</height>
+          <height>660</height>
           <border_width>1</border_width>
           <scale_options>
             <width_scalable>true</width_scalable>
@@ -957,10 +957,10 @@ $(pv_value)</tooltip>
           <background_color>
             <color red="240" green="240" blue="240" />
           </background_color>
-          <width>400</width>
-          <x>450</x>
+          <width>360</width>
+          <x>400</x>
           <name>shunt_table_2</name>
-          <y>144</y>
+          <y>160</y>
           <foreground_color>
             <color red="192" green="192" blue="192" />
           </foreground_color>

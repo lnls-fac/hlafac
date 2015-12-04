@@ -67,26 +67,26 @@ def get_power_supply_list(family):
         
     elif family == 'QDB1':
         power_supplies = [
-            "QDB1-02M1", "QDB1-03M1", "QDB1-04M1", "QDB1-05M1", "QDB1-06M1", 
-            "QDB1-07M1", "QDB1-08M1", "QDB1-09M1", "QDB1-10M1", "QDB1-11M1", 
-            "QDB1-12M1", "QDB1-13M1", "QDB1-14M1", "QDB1-15M1", "QDB1-16M1", 
-            "QDB1-17M1", "QDB1-18M1", "QDB1-19M1", "QDB1-20M1", "QDB1-01M1",               
+            "QDB1-01M1", "QDB1-02M1", "QDB1-03M1", "QDB1-04M1", "QDB1-05M1", 
+            "QDB1-06M1", "QDB1-07M1", "QDB1-08M1", "QDB1-09M1", "QDB1-10M1", 
+            "QDB1-11M1", "QDB1-12M1", "QDB1-13M1", "QDB1-14M1", "QDB1-15M1", 
+            "QDB1-16M1", "QDB1-17M1", "QDB1-18M1", "QDB1-19M1", "QDB1-20M1",                
             ]
         
     elif family == 'QFB':
         power_supplies = [
-            "QFB-02M1", "QFB-03M1", "QFB-04M1", "QFB-05M1", "QFB-06M1", 
-            "QFB-07M1", "QFB-08M1", "QFB-09M1", "QFB-10M1", "QFB-11M1", 
-            "QFB-12M1", "QFB-13M1", "QFB-14M1", "QFB-15M1", "QFB-16M1", 
-            "QFB-17M1", "QFB-18M1", "QFB-19M1", "QFB-20M1", "QFB-01M1",               
+            "QFB-01M1", "QFB-02M1", "QFB-03M1", "QFB-04M1", "QFB-05M1", 
+            "QFB-06M1", "QFB-07M1", "QFB-08M1", "QFB-09M1", "QFB-10M1", 
+            "QFB-11M1", "QFB-12M1", "QFB-13M1", "QFB-14M1", "QFB-15M1", 
+            "QFB-16M1", "QFB-17M1", "QFB-18M1", "QFB-19M1", "QFB-20M1",               
             ]
         
     elif family == 'QDB2':
         power_supplies = [
-            "QDB2-02M1", "QDB2-03M1", "QDB2-04M1", "QDB2-05M1", "QDB2-06M1", 
-            "QDB2-07M1", "QDB2-08M1", "QDB2-09M1", "QDB2-10M1", "QDB2-11M1", 
-            "QDB2-12M1", "QDB2-13M1", "QDB2-14M1", "QDB2-15M1", "QDB2-16M1", 
-            "QDB2-17M1", "QDB2-18M1", "QDB2-19M1", "QDB2-20M1", "QDB2-01M1",               
+            "QDB2-01M1", "QDB2-02M1", "QDB2-03M1", "QDB2-04M1", "QDB2-05M1", 
+            "QDB2-06M1", "QDB2-07M1", "QDB2-08M1", "QDB2-09M1", "QDB2-10M1", 
+            "QDB2-11M1", "QDB2-12M1", "QDB2-13M1", "QDB2-14M1", "QDB2-15M1", 
+            "QDB2-16M1", "QDB2-17M1", "QDB2-18M1", "QDB2-19M1", "QDB2-20M1",             
             ]
     else:
         power_supplies = None
@@ -94,17 +94,17 @@ def get_power_supply_list(family):
     return power_supplies
 
 
-def add_header(table):
+def add_header(table, header_opi):
     linkingContainer = WidgetUtil.createWidgetModel("org.csstudio.opibuilder.widgets.linkingContainer")   
-    linkingContainer.setPropertyValue("opi_file", "table_header.opi")
+    linkingContainer.setPropertyValue("opi_file", header_opi)
     linkingContainer.setPropertyValue("resize_behaviour", 1)
     linkingContainer.setPropertyValue("border_style", 0)
     table.addChildToBottom(linkingContainer)
 
 
-def add_line(table, power_supply):
+def add_line(table, line_opi, power_supply):
     linkingContainer = WidgetUtil.createWidgetModel("org.csstudio.opibuilder.widgets.linkingContainer")   
-    linkingContainer.setPropertyValue("opi_file", "table_line.opi")
+    linkingContainer.setPropertyValue("opi_file", line_opi)
     linkingContainer.setPropertyValue("resize_behaviour", 1)
     linkingContainer.setPropertyValue("border_style", 0)
     table.addChildToBottom(linkingContainer)
@@ -140,9 +140,11 @@ def add_line(table, power_supply):
     led.setPropertyValue("name", led_name)
     
 
-subsystem = "SIPS-"
-family = PVUtil.getString(pvs[0]).upper()
+subsystem      = "SIPS-"
+family         = PVUtil.getString(pvs[0]).upper()
 power_supplies = get_power_supply_list(family)
+header_opi     = "table/table_header.opi"
+line_opi       = "table/table_line.opi"
 
 table_container  = display.getWidget("table_container")
 fam_table   = display.getWidget("fam_table")
@@ -158,20 +160,21 @@ if power_supplies is None:
     
 else: 
     # create table for family power supply
-    add_header(fam_table)
+    add_header(fam_table, header_opi)
     power_supply = family.upper() + '-FAM'
-    add_line(fam_table, power_supply)
+    add_line(fam_table, line_opi, power_supply)
     
     # create table for shunt power supply
-    length = len(power_supplies)
-    shunt_table = shunt_table_1
-    add_header(shunt_table)    
+    length    = len(power_supplies)
+    table_len = 20
+    table     = shunt_table_1
+    add_header(table, header_opi)    
     for i in range(1,length+1):
         power_supply = power_supplies[i-1]
-        add_line(shunt_table, power_supply)       
-        if i == 20 and length > 20: 
-            shunt_table = shunt_table_2
-            add_header(shunt_table) 
+        add_line(table, line_opi, power_supply)       
+        if i == table_len and length > table_len: 
+            table = shunt_table_2
+            add_header(table, header_opi) 
 
     fam_table.performAutosize()        
     shunt_table_1.performAutosize()
