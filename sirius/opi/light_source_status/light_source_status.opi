@@ -95,7 +95,7 @@ $(trace_0_y_pv_value)</tooltip>
       <color red="240" green="240" blue="240" />
     </background_color>
     <x>10</x>
-    <y>600</y>
+    <y>599</y>
     <trace_0_x_axis_index>0</trace_0_x_axis_index>
     <axis_count>2</axis_count>
     <pv_value />
@@ -121,13 +121,13 @@ $(trace_0_y_pv_value)</tooltip>
     <axis_0_dash_grid_line>true</axis_0_dash_grid_line>
     <trace_0_point_style>0</trace_0_point_style>
     <trace_0_line_width>1</trace_0_line_width>
-    <axis_0_time_format>8</axis_0_time_format>
+    <axis_0_time_format>0</axis_0_time_format>
     <trace_count>1</trace_count>
     <axis_1_show_grid>false</axis_1_show_grid>
     <axis_1_dash_grid_line>true</axis_1_dash_grid_line>
     <show_toolbar>false</show_toolbar>
     <axis_0_visible>true</axis_0_visible>
-    <axis_0_show_grid>true</axis_0_show_grid>
+    <axis_0_show_grid>false</axis_0_show_grid>
     <trace_0_y_axis_index>1</trace_0_y_axis_index>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -147,7 +147,7 @@ $(trace_0_y_pv_value)</tooltip>
     <axis_0_auto_scale_threshold>0.0</axis_0_auto_scale_threshold>
     <rules />
     <axis_1_visible>true</axis_1_visible>
-    <trace_0_update_delay>1000</trace_0_update_delay>
+    <trace_0_update_delay>500</trace_0_update_delay>
     <pv_name>SIDI-BCURRENT</pv_name>
     <name>XY Graph</name>
     <axis_0_auto_scale>true</axis_0_auto_scale>
@@ -555,7 +555,7 @@ $(pv_value)</tooltip>
       <enabled>true</enabled>
       <wuid>-6d63860a:1516390418e:-7ded</wuid>
       <transparent>false</transparent>
-      <lock_children>true</lock_children>
+      <lock_children>false</lock_children>
       <scripts />
       <height>151</height>
       <border_width>1</border_width>
@@ -588,8 +588,49 @@ $(pv_value)</tooltip>
       <font>
         <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
       </font>
+    </widget>
+    <widget typeId="org.csstudio.opibuilder.widgets.groupingContainer" version="1.0.0">
+      <border_style>0</border_style>
+      <tooltip></tooltip>
+      <rules />
+      <enabled>true</enabled>
+      <wuid>-3d62646f:1517d2b1fd9:-7f93</wuid>
+      <transparent>false</transparent>
+      <lock_children>true</lock_children>
+      <scripts />
+      <height>151</height>
+      <border_width>1</border_width>
+      <scale_options>
+        <width_scalable>true</width_scalable>
+        <height_scalable>true</height_scalable>
+        <keep_wh_ratio>false</keep_wh_ratio>
+      </scale_options>
+      <macros>
+        <include_parent_macros>true</include_parent_macros>
+      </macros>
+      <visible>true</visible>
+      <border_color>
+        <color red="0" green="128" blue="255" />
+      </border_color>
+      <widget_type>Grouping Container</widget_type>
+      <background_color>
+        <color red="240" green="240" blue="240" />
+      </background_color>
+      <width>233</width>
+      <x>360</x>
+      <name>Grouping Container</name>
+      <y>14</y>
+      <foreground_color>
+        <color red="192" green="192" blue="192" />
+      </foreground_color>
+      <actions hook="false" hook_all="false" />
+      <fc>false</fc>
+      <show_scrollbar>false</show_scrollbar>
+      <font>
+        <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
+      </font>
       <widget typeId="org.csstudio.opibuilder.widgets.Rectangle" version="1.0.0">
-        <border_style>0</border_style>
+        <border_style>5</border_style>
         <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
         <line_width>0</line_width>
         <horizontal_fill>true</horizontal_fill>
@@ -628,7 +669,7 @@ $(pv_value)</tooltip>
         </fg_gradient_color>
         <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
         <background_color>
-          <color red="30" green="144" blue="255" />
+          <color red="26" green="26" blue="26" />
         </background_color>
         <width>233</width>
         <x>0</x>
@@ -1067,18 +1108,28 @@ $(pv_value)</tooltip>
     <border_style>5</border_style>
     <tooltip></tooltip>
     <rules>
-      <rule name="Background colour" prop_id="background_color" out_exp="false">
-        <exp bool_exp="pv0==&quot;User Shift&quot;">
+      <rule name="Shift background colour" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0==0">
           <value>
-            <color name="Nice Color" red="125" green="233" blue="23" />
+            <color name="User Shift" red="80" green="160" blue="240" />
           </value>
         </exp>
-        <exp bool_exp="pv0==&quot;Accelerator Shift&quot;">
+        <exp bool_exp="pv0==1">
           <value>
-            <color name="Purple" red="128" green="0" blue="255" />
+            <color name="Accelerator Shift" red="30" green="200" blue="30" />
           </value>
         </exp>
-        <pv trig="true">loc://SHIFT-TYPE</pv>
+        <exp bool_exp="pv0==2">
+          <value>
+            <color name="Maintenance Shift" red="240" green="255" blue="60" />
+          </value>
+        </exp>
+        <exp bool_exp="pv0==3">
+          <value>
+            <color name="Conditioning Shift" red="230" green="100" blue="230" />
+          </value>
+        </exp>
+        <pv trig="true">UTOP-SHIFT-TYPE</pv>
       </rule>
     </rules>
     <enabled>true</enabled>
@@ -1135,7 +1186,7 @@ $(pv_value)</tooltip>
       <rotation_angle>0.0</rotation_angle>
       <scripts />
       <border_alarm_sensitive>true</border_alarm_sensitive>
-      <show_units>true</show_units>
+      <show_units>false</show_units>
       <height>32</height>
       <border_width>1</border_width>
       <scale_options>
@@ -1144,7 +1195,7 @@ $(pv_value)</tooltip>
         <keep_wh_ratio>false</keep_wh_ratio>
       </scale_options>
       <visible>true</visible>
-      <pv_name>loc://SHIFT-TYPE("User Shift")</pv_name>
+      <pv_name>UTOP-SHIFT-TYPE</pv_name>
       <vertical_alignment>1</vertical_alignment>
       <border_color>
         <color red="0" green="128" blue="255" />
@@ -1153,7 +1204,7 @@ $(pv_value)</tooltip>
       <widget_type>Text Update</widget_type>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <wrap_words>false</wrap_words>
-      <format_type>1</format_type>
+      <format_type>0</format_type>
       <background_color>
         <color red="255" green="255" blue="255" />
       </background_color>
@@ -1200,7 +1251,7 @@ $(pv_value)</tooltip>
     <width>920</width>
     <x>10</x>
     <name>Grouping Container_3</name>
-    <y>835</y>
+    <y>834</y>
     <foreground_color>
       <color red="192" green="192" blue="192" />
     </foreground_color>
@@ -1219,7 +1270,7 @@ $(pv_value)</tooltip>
       <wuid>-46414065:15163db5833:-7f2c</wuid>
       <transparent>true</transparent>
       <auto_size>true</auto_size>
-      <text>Operator message</text>
+      <text>Message from operations</text>
       <scripts />
       <height>37</height>
       <border_width>1</border_width>
@@ -1238,7 +1289,7 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="255" green="255" blue="255" />
       </background_color>
-      <width>270</width>
+      <width>370</width>
       <x>10</x>
       <name>Label</name>
       <y>0</y>
@@ -1248,6 +1299,58 @@ $(pv_value)</tooltip>
       <actions hook="false" hook_all="false" />
       <font>
         <opifont.name fontName="Ubuntu" height="24" style="0">Monitor Header</opifont.name>
+      </font>
+    </widget>
+    <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
+      <border_style>0</border_style>
+      <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
+      <alarm_pulsing>false</alarm_pulsing>
+      <precision>1</precision>
+      <tooltip>$(pv_name)
+$(pv_value)</tooltip>
+      <horizontal_alignment>1</horizontal_alignment>
+      <rules />
+      <enabled>false</enabled>
+      <wuid>25a44fc5:1516c82f143:-7db7</wuid>
+      <transparent>true</transparent>
+      <pv_value />
+      <auto_size>false</auto_size>
+      <text>######</text>
+      <rotation_angle>0.0</rotation_angle>
+      <scripts />
+      <border_alarm_sensitive>true</border_alarm_sensitive>
+      <show_units>true</show_units>
+      <height>32</height>
+      <border_width>1</border_width>
+      <scale_options>
+        <width_scalable>true</width_scalable>
+        <height_scalable>true</height_scalable>
+        <keep_wh_ratio>false</keep_wh_ratio>
+      </scale_options>
+      <visible>true</visible>
+      <pv_name>UTOP-MESSAGE</pv_name>
+      <vertical_alignment>1</vertical_alignment>
+      <border_color>
+        <color red="0" green="128" blue="255" />
+      </border_color>
+      <precision_from_pv>false</precision_from_pv>
+      <widget_type>Text Update</widget_type>
+      <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
+      <wrap_words>false</wrap_words>
+      <format_type>1</format_type>
+      <background_color>
+        <color red="255" green="255" blue="255" />
+      </background_color>
+      <width>916</width>
+      <x>0</x>
+      <name>Text Update_2</name>
+      <y>55</y>
+      <foreground_color>
+        <color red="0" green="0" blue="0" />
+      </foreground_color>
+      <actions hook="false" hook_all="false" />
+      <font>
+        <opifont.name fontName="Ubuntu" height="18" style="0">Monitor Data</opifont.name>
       </font>
     </widget>
   </widget>
@@ -1282,7 +1385,7 @@ $(pv_value)</tooltip>
     <width>940</width>
     <x>0</x>
     <name>Label_3</name>
-    <y>970</y>
+    <y>969</y>
     <foreground_color>
       <color red="0" green="0" blue="0" />
     </foreground_color>
@@ -1321,7 +1424,7 @@ $(pv_value)</tooltip>
     <width>920</width>
     <x>10</x>
     <name>Grouping Container_4</name>
-    <y>315</y>
+    <y>314</y>
     <foreground_color>
       <color red="192" green="192" blue="192" />
     </foreground_color>
@@ -1338,7 +1441,7 @@ $(pv_value)</tooltip>
       <enabled>true</enabled>
       <wuid>-46414065:15163db5833:-7d6c</wuid>
       <transparent>false</transparent>
-      <lock_children>true</lock_children>
+      <lock_children>false</lock_children>
       <scripts />
       <height>32</height>
       <border_width>1</border_width>
@@ -1358,7 +1461,7 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <width>274</width>
+      <width>350</width>
       <x>100</x>
       <name>Grouping Container_1</name>
       <y>8</y>
@@ -1424,7 +1527,7 @@ $(pv_value)</tooltip>
         <wuid>-46414065:15163db5833:-7d6a</wuid>
         <transparent>true</transparent>
         <pv_value />
-        <auto_size>true</auto_size>
+        <auto_size>false</auto_size>
         <text>######</text>
         <rotation_angle>0.0</rotation_angle>
         <scripts />
@@ -1451,7 +1554,7 @@ $(pv_value)</tooltip>
         <background_color>
           <color red="255" green="255" blue="255" />
         </background_color>
-        <width>100</width>
+        <width>150</width>
         <x>174</x>
         <name>Text Update_1</name>
         <y>0</y>
@@ -1471,7 +1574,7 @@ $(pv_value)</tooltip>
       <enabled>true</enabled>
       <wuid>-46414065:15163db5833:-7d69</wuid>
       <transparent>false</transparent>
-      <lock_children>true</lock_children>
+      <lock_children>false</lock_children>
       <scripts />
       <height>32</height>
       <border_width>1</border_width>
@@ -1491,7 +1594,7 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <width>279</width>
+      <width>350</width>
       <x>536</x>
       <name>Grouping Container</name>
       <y>8</y>
@@ -1557,7 +1660,7 @@ $(pv_value)</tooltip>
         <wuid>-46414065:15163db5833:-7d67</wuid>
         <transparent>true</transparent>
         <pv_value />
-        <auto_size>true</auto_size>
+        <auto_size>false</auto_size>
         <text>######</text>
         <rotation_angle>0.0</rotation_angle>
         <scripts />
@@ -1584,7 +1687,7 @@ $(pv_value)</tooltip>
         <background_color>
           <color red="255" green="255" blue="255" />
         </background_color>
-        <width>100</width>
+        <width>150</width>
         <x>179</x>
         <name>Text Update_2</name>
         <y>0</y>
@@ -1626,7 +1729,7 @@ $(trace_0_y_pv_value)</tooltip>
       <color red="240" green="240" blue="240" />
     </background_color>
     <x>10</x>
-    <y>378</y>
+    <y>377</y>
     <trace_0_x_axis_index>0</trace_0_x_axis_index>
     <axis_count>3</axis_count>
     <trace_1_point_size>4</trace_1_point_size>
@@ -1643,7 +1746,7 @@ $(trace_0_y_pv_value)</tooltip>
     <trigger_pv></trigger_pv>
     <widget_type>XY Graph</widget_type>
     <axis_1_axis_color>
-      <color red="0" green="0" blue="0" />
+      <color red="21" green="21" blue="196" />
     </axis_1_axis_color>
     <axis_0_scale_format></axis_0_scale_format>
     <axis_1_log_scale>false</axis_1_log_scale>
@@ -1689,7 +1792,7 @@ $(trace_0_y_pv_value)</tooltip>
     </axis_1_grid_color>
     <actions hook="false" hook_all="false" />
     <axis_2_axis_color>
-      <color red="0" green="0" blue="0" />
+      <color red="242" green="26" blue="26" />
     </axis_2_axis_color>
     <axis_0_log_scale>false</axis_0_log_scale>
     <trace_0_x_pv_value />
@@ -1697,7 +1800,7 @@ $(trace_0_y_pv_value)</tooltip>
     <rules />
     <axis_1_visible>true</axis_1_visible>
     <axis_2_show_grid>true</axis_2_show_grid>
-    <trace_0_update_delay>1000</trace_0_update_delay>
+    <trace_0_update_delay>500</trace_0_update_delay>
     <trace_1_concatenate_data>true</trace_1_concatenate_data>
     <trace_1_trace_color>
       <color red="242" green="26" blue="26" />
@@ -1709,7 +1812,7 @@ $(trace_0_y_pv_value)</tooltip>
     <trace_1_trace_type>2</trace_1_trace_type>
     <axis_0_auto_scale>true</axis_0_auto_scale>
     <axis_0_minimum>0.0</axis_0_minimum>
-    <trace_1_update_delay>100</trace_1_update_delay>
+    <trace_1_update_delay>500</trace_1_update_delay>
     <axis_2_dash_grid_line>true</axis_2_dash_grid_line>
     <axis_1_axis_title>Current [mA]</axis_1_axis_title>
     <axis_1_auto_scale>true</axis_1_auto_scale>
@@ -1730,7 +1833,7 @@ $(trace_0_y_pv_value)</tooltip>
     </axis_1_scale_font>
     <axis_1_time_format>0</axis_1_time_format>
     <axis_2_time_format>0</axis_2_time_format>
-    <axis_2_left_bottom_side>true</axis_2_left_bottom_side>
+    <axis_2_left_bottom_side>false</axis_2_left_bottom_side>
     <border_alarm_sensitive>true</border_alarm_sensitive>
     <axis_2_maximum>100.0</axis_2_maximum>
     <show_plot_area_border>false</show_plot_area_border>
@@ -1750,7 +1853,7 @@ $(trace_0_y_pv_value)</tooltip>
     </axis_1_title_font>
     <visible>true</visible>
     <axis_2_axis_title>Lifetime [h]</axis_2_axis_title>
-    <trace_1_buffer_size>100</trace_1_buffer_size>
+    <trace_1_buffer_size>72000</trace_1_buffer_size>
     <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
     <axis_2_scale_format>#.#</axis_2_scale_format>
     <scripts />

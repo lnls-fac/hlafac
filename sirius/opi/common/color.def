@@ -26,3 +26,7 @@ quadrupole = 237, 107, 33
 sextupole = 138, 153, 119
 corrector = 187, 187, 187
 
+User Shift = 90, 170, 250
+Accelerator Shift = 30, 200, 30
+Maintenance Shift = 240, 220, 0
+Conditioning Shift = 230, 100, 230
