@@ -30,3 +30,5 @@ User Shift = 90, 170, 250
 Accelerator Shift = 30, 200, 30
 Maintenance Shift = 240, 220, 0
 Conditioning Shift = 230, 100, 230
+
+button = 225, 225, 225

@@ -2,11 +2,11 @@
 <display typeId="org.csstudio.opibuilder.Display" version="1.0.0">
   <show_close_button>true</show_close_button>
   <rules />
-  <wuid>180da399:1515d0a9d3f:-74e6</wuid>
+  <wuid>-6618f604:151598574fb:-580d</wuid>
   <show_grid>true</show_grid>
   <auto_zoom_to_fit_all>false</auto_zoom_to_fit_all>
   <scripts />
-  <height>630</height>
+  <height>890</height>
   <macros>
     <include_parent_macros>true</include_parent_macros>
   </macros>
@@ -21,7 +21,7 @@
   <background_color>
     <color red="240" green="240" blue="240" />
   </background_color>
-  <width>760</width>
+  <width>1620</width>
   <x>-1</x>
   <name></name>
   <grid_space>6</grid_space>
@@ -38,10 +38,10 @@
     <horizontal_alignment>1</horizontal_alignment>
     <rules />
     <enabled>true</enabled>
-    <wuid>-4233dbb8:1515e2ed44c:1840</wuid>
+    <wuid>-4233dbb8:1515df49ce5:-77a2</wuid>
     <transparent>false</transparent>
     <auto_size>false</auto_size>
-    <text>Quadrupoles</text>
+    <text>Dipoles</text>
     <scripts />
     <height>50</height>
     <border_width>1</border_width>
@@ -58,9 +58,9 @@
     <widget_type>Label</widget_type>
     <wrap_words>false</wrap_words>
     <background_color>
-      <color name="quadrupole" red="237" green="107" blue="33" />
+      <color name="dipole" red="0" green="137" blue="182" />
     </background_color>
-    <width>760</width>
+    <width>1620</width>
     <x>0</x>
     <name>Label</name>
     <y>0</y>
