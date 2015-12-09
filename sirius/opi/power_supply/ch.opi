@@ -146,7 +146,7 @@
       <width>310</width>
       <x>40</x>
       <name>table_1</name>
-      <y>70</y>
+      <y>50</y>
       <foreground_color>
         <color red="192" green="192" blue="192" />
       </foreground_color>
@@ -187,7 +187,7 @@
       <width>310</width>
       <x>450</x>
       <name>table_2</name>
-      <y>70</y>
+      <y>50</y>
       <foreground_color>
         <color red="192" green="192" blue="192" />
       </foreground_color>
@@ -228,7 +228,7 @@
       <width>310</width>
       <x>1270</x>
       <name>table_4</name>
-      <y>70</y>
+      <y>50</y>
       <foreground_color>
         <color red="192" green="192" blue="192" />
       </foreground_color>
@@ -269,7 +269,7 @@
       <width>310</width>
       <x>860</x>
       <name>table_3</name>
-      <y>70</y>
+      <y>50</y>
       <foreground_color>
         <color red="192" green="192" blue="192" />
       </foreground_color>
@@ -311,7 +311,7 @@
       <width>310</width>
       <x>40</x>
       <name>Label_1</name>
-      <y>26</y>
+      <y>10</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -351,7 +351,7 @@
       <width>310</width>
       <x>450</x>
       <name>Label_2</name>
-      <y>26</y>
+      <y>10</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -391,7 +391,7 @@
       <width>310</width>
       <x>860</x>
       <name>Label_3</name>
-      <y>26</y>
+      <y>10</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
@@ -431,7 +431,7 @@
       <width>310</width>
       <x>1270</x>
       <name>Label_4</name>
-      <y>26</y>
+      <y>10</y>
       <foreground_color>
         <color red="0" green="0" blue="0" />
       </foreground_color>
