@@ -4,7 +4,7 @@
   <rules />
   <wuid>-6618f604:151598574fb:-580d</wuid>
   <show_grid>true</show_grid>
-  <auto_zoom_to_fit_all>false</auto_zoom_to_fit_all>
+  <auto_zoom_to_fit_all>true</auto_zoom_to_fit_all>
   <scripts />
   <height>890</height>
   <macros>
@@ -69,7 +69,7 @@
     </foreground_color>
     <actions hook="false" hook_all="false" />
     <font>
-      <opifont.name fontName="Ubuntu" height="30" style="1">Monitor Header</opifont.name>
+      <opifont.name fontName="Ubuntu" height="24" style="0">Monitor Header</opifont.name>
     </font>
   </widget>
 </display>

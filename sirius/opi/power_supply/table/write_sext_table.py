@@ -1,4 +1,4 @@
-from org.csstudio.opibuilder.scriptUtil import PVUtil, WidgetUtil
+from org.csstudio.opibuilder.scriptUtil import PVUtil, WidgetUtil, DataUtil
 
 def get_power_supply_list():
     power_supplies = [
@@ -56,6 +56,11 @@ def add_line(table, line_opi, power_supply):
     led_name = "st_" + ps_name
     led.setPropertyValue("name", led_name)
     
+    macro_inputs = DataUtil.createMacrosInput(True)
+    macro_inputs.put("power_supply_sp", setpoint)
+    macro_inputs.put("power_supply_rb", readback)
+    macro_inputs.put("power_supply_start", 'sim://const("sextupole")')
+    linkingContainer.setPropertyValue("macros", macro_inputs)
 
 subsystem      = "SIPS-"
 header_opi     = "table/big_table_header.opi"

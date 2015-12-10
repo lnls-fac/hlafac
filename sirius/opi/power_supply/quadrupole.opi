@@ -4,7 +4,7 @@
   <rules />
   <wuid>180da399:1515d0a9d3f:-74e6</wuid>
   <show_grid>true</show_grid>
-  <auto_zoom_to_fit_all>false</auto_zoom_to_fit_all>
+  <auto_zoom_to_fit_all>true</auto_zoom_to_fit_all>
   <scripts>
     <path pathString="table/write_quad_table.py" checkConnect="true" sfe="false" seoe="false">
       <pv trig="true">$(quad_family)</pv>

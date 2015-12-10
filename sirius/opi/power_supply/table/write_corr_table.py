@@ -1,4 +1,4 @@
-from org.csstudio.opibuilder.scriptUtil import PVUtil, WidgetUtil
+from org.csstudio.opibuilder.scriptUtil import PVUtil, WidgetUtil, DataUtil
 import math
 
 def get_power_supply_list(family):
@@ -180,7 +180,12 @@ def add_line(table, line_opi, power_supply):
     led_name = "st_" + ps_name
     led.setPropertyValue("name", led_name)
     
-
+    macro_inputs = DataUtil.createMacrosInput(True)
+    macro_inputs.put("power_supply_sp", setpoint)
+    macro_inputs.put("power_supply_rb", readback)
+    macro_inputs.put("power_supply_start", 'sim://const("corrector")')
+    linkingContainer.setPropertyValue("macros", macro_inputs)
+    
 subsystem  = "SIPS-"
 family     = PVUtil.getString(pvs[0]).upper()
 if family == 'CV':

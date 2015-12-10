@@ -1,4 +1,4 @@
-from org.csstudio.opibuilder.scriptUtil import PVUtil, WidgetUtil
+from org.csstudio.opibuilder.scriptUtil import PVUtil, WidgetUtil, DataUtil
 
 def get_power_supply_list(family):
     if family == 'QFA':
@@ -135,9 +135,15 @@ def add_line(table, line_opi, power_supply):
     text_update_name = "rb_" + ps_name
     text_update.setPropertyValue("name", text_update_name)
     text_update.setPropertyValue("pv_name", readback)
-
+    
     led_name = "st_" + ps_name
     led.setPropertyValue("name", led_name)
+        
+    macro_inputs = DataUtil.createMacrosInput(True)
+    macro_inputs.put("power_supply_sp", setpoint)
+    macro_inputs.put("power_supply_rb", readback)
+    macro_inputs.put("power_supply_start", 'sim://const("quadrupole")')
+    linkingContainer.setPropertyValue("macros", macro_inputs)
     
 
 subsystem      = "SIPS-"
