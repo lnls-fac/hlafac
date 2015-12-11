@@ -5,3 +5,4 @@ magnet_type = PVUtil.getString(pvs[0]).capitalize()
 title = magnet_type + ' Power Supply'
 window = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
 window.getShell().setText(title)
+

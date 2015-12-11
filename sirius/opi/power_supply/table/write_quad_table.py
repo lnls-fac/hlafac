@@ -120,26 +120,17 @@ def add_line(table, line_opi, power_supply):
         elif w.getPropertyValue("widget_type") == "Grouping Container":
             container = w
             led = container.getChildren()[0]  
-        
-    ps_name = power_supply.replace("-", "_").lower() 
-    button_name = "b_" + ps_name
-    button.setPropertyValue("name", button_name)
-    button.setPropertyValue("text", power_supply)
-    
-    setpoint = subsystem + power_supply.upper() + '-SP'
-    spinner_name = "sp_" + ps_name
-    spinner.setPropertyValue("name", spinner_name)
-    spinner.setPropertyValue("pv_name", setpoint)
 
-    readback = subsystem + power_supply.upper() + '-RB' 
-    text_update_name = "rb_" + ps_name
-    text_update.setPropertyValue("name", text_update_name)
+    setpoint = subsystem + power_supply.upper() + '-SP'
+    readback = subsystem + power_supply.upper() + '-RB'
+            
+    button.setPropertyValue("text", power_supply)
+    spinner.setPropertyValue("pv_name", setpoint)
     text_update.setPropertyValue("pv_name", readback)
-    
-    led_name = "st_" + ps_name
-    led.setPropertyValue("name", led_name)
-        
+    led.setPropertyValue("pv_name", '$(power_supply_status)')
+           
     macro_inputs = DataUtil.createMacrosInput(True)
+    macro_inputs.put("power_supply", power_supply)
     macro_inputs.put("power_supply_sp", setpoint)
     macro_inputs.put("power_supply_rb", readback)
     macro_inputs.put("power_supply_start", 'sim://const("quadrupole")')

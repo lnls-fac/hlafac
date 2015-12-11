@@ -148,8 +148,8 @@ def run(prefix):
     pv_database = {'SIPA-LIFETIME-SEC'      : {'type' : 'float', 'count': 1, 'value': 0.0, 'unit': 's'},
                    'SIPA-LIFETIME-MIN'      : {'type' : 'float', 'count': 1, 'value': 0.0, 'unit': 'min'},
                    'SIPA-LIFETIME-HOUR'     : {'type' : 'float', 'count': 1, 'value': 0.0, 'unit': 'h'},
-                   'SIPA-LIFETIME-DT'       : {'type' : 'float', 'count': 1, 'value': 0.0},
-                   'SIPA-LIFETIME-PREC'     : {'type' : 'float', 'count': 1, 'value': 0.0},
+                   'SIPA-LIFETIME-DT'       : {'type' : 'float', 'count': 1, 'value': 0.0, 'unit': 's'},
+                   'SIPA-LIFETIME-PREC'     : {'type' : 'float', 'count': 1, 'value': 0.0, 'unit': '%'},
                    'SIPA-LIFETIME-NRPOINTS' : {'type' : 'int',   'count': 1, 'value': 0},}
 
     pvs = [key for key in pv_database.keys()]

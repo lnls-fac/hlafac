@@ -9,4 +9,7 @@ if linking_container is not None:
     opi_container.removeAllChildren()
     GUIUtil.compactMode()
     ScriptUtil.openOPI(widget, str(opi_file), 2, None)
+    widget.getPV().setValue(1)
 
+
+    
