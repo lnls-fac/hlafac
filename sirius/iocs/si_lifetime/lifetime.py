@@ -58,14 +58,14 @@ class PCASDriver(pcaspy.Driver):
 class CalcLifetimeThread(threading.Thread):
 
     def __init__(self, stop_event):
-        self.stop_event       = stop_event
+        self.stop_event      = stop_event
         self.sample_interval = 0.1
         self.precision       = 1.0
         self.lifetime        = 0.0
         self.intervals       = [10,11,12,13,14,15,16,17,18,19,20,22,24,26,28,30,34,
                                 38,42,48,54,60,68,76,86,98,110,124,140,160,182,200]
         self.count_time      = 0
-        self.idx             = 1
+        self.idx             = 20
         self.len_intervals   = len(self.intervals)
         self.nr_points       = self.intervals[self.idx]
         self.buffer_size     = 2*self.intervals[-1]
@@ -81,7 +81,7 @@ class CalcLifetimeThread(threading.Thread):
         if self.current_noise == 0: self.current_noise = 10e-6
         if len(self.measures)!=0:
             if math.fabs(current - self.measures[-1]) > 100*self.current_noise:
-                self.idx = 1
+                self.idx = 20
                 self.nr_points = self.intervals[self.idx]
                 self.measures.clear()
                 self.timestamp.clear()
@@ -106,8 +106,8 @@ class CalcLifetimeThread(threading.Thread):
                 self.calc_interval(current)
 
     def calc_interval(self, current):
-        dtmin = (self.lifetime*(self.current_noise/current)*math.sqrt(2*self.sample_interval)/(1e-2*self.precision + 0.005))**(2/3)
-        dtmax = (self.lifetime*(self.current_noise/current)*math.sqrt(2*self.sample_interval)/(1e-2*self.precision - 0.005))**(2/3)
+        dtmin = ((self.lifetime*(self.current_noise/current)*math.sqrt(2*self.sample_interval))/(1e-2*self.precision + 0.005))**(2/3)
+        dtmax = ((self.lifetime*(self.current_noise/current)*math.sqrt(2*self.sample_interval))/(1e-2*self.precision - 0.005))**(2/3)
         if dtmin > (2*self.nr_points*self.sample_interval):
             self.count_time += 1
             if self.idx < (self.len_intervals-1) and (2*self.nr_points)<=self.count_time and len(self.measures)>(2*self.intervals[self.idx+1]):
