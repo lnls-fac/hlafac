@@ -7,13 +7,13 @@ Afonso Haruo Carnielli Mukai (FAC - LNLS)
 2013-12-11: v0.1
 """
 
-import matplotlib.backends.backend_qt4agg as _backend
+import matplotlib.backends.backend_qt5agg as _backend
 
 
 ACTIONS_TO_DISABLE = ['back', 'forward', 'subplots', 'customize']
 
 
-class CustomToolbar(_backend.NavigationToolbar2QTAgg):
+class CustomToolbar(_backend.NavigationToolbar2QT):
     def __init__(self, figure, parent):
         super(CustomToolbar, self).__init__(figure, parent)
         self._disable_actions()
