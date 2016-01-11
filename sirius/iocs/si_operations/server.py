@@ -4,7 +4,7 @@ import pvs
 import driver
 
 
-PREFIX = 'UTOP-'
+PREFIX = 'SIPA-'
 INTERVAL = 0.1
 
 
