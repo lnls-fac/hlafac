@@ -812,7 +812,7 @@ $(pv_value)</tooltip>
     <pv_value />
     <alpha>255</alpha>
     <bg_gradient_color>
-      <color name="SI" red="173" green="216" blue="230" />
+      <color name="Gray Background" red="240" green="240" blue="240" />
     </bg_gradient_color>
     <scripts />
     <border_alarm_sensitive>false</border_alarm_sensitive>
@@ -837,7 +837,7 @@ $(pv_value)</tooltip>
     </fg_gradient_color>
     <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
     <background_color>
-      <color red="220" green="255" blue="255" />
+      <color name="Gray Background" red="240" green="240" blue="240" />
     </background_color>
     <width>320</width>
     <x>0</x>

@@ -151,7 +151,7 @@ $(pv_value)</tooltip>
       <wuid>64b0547:1515ec0235a:-78dd</wuid>
       <transparent>true</transparent>
       <auto_size>false</auto_size>
-      <text>Si - Magnets and Power Supplies</text>
+      <text>SI - Magnets and Power Supplies</text>
       <scripts />
       <height>90</height>
       <border_width>1</border_width>
