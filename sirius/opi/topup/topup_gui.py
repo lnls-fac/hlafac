@@ -8,7 +8,6 @@ import collections
 import numpy
 import lnls
 import os
-# import DateTimePlot
 import hlaplot.datetime_plot
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -34,10 +33,11 @@ class IPWindow(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
-        label = QtWidgets.QLabel("Virtual Accelerator IP Address")
-        self.ip = QtWidgets.QLineEdit("10.0.7.51")
+        label = QtWidgets.QLabel("Virtual Accelerator IP Address:")
+        self.ip = QtWidgets.QLineEdit(" ")
         self.button = QtWidgets.QPushButton('Start')
         self.button.setFixedSize(80,80)
+        self.button.setAutoDefault(True)
 
         hlayout = QtWidgets.QHBoxLayout()
         vlayout1 = QtWidgets.QVBoxLayout()
@@ -49,26 +49,20 @@ class IPWindow(QtWidgets.QWidget):
         hlayout.addSpacing(20)
         hlayout.addLayout(vlayout2)
         self.setLayout(hlayout)
-
+        self.setTabOrder(self.ip, self.button)
 
 class MyWindow(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
         self.resize(600, 600)
 
-        # Top-up default parameters
-        self.max_c = 300 # [mA]
-        self.max_d = 0.5 # [%]
-        self.f     = 2.0 # [Hz]
-        self.time_interval = 2.0 # [s]
-        self.is_injecting  = False
-        self.stop          = False
+        self.set_default_values()
 
         # Widgets
         title = QtWidgets.QLabel("Top-up Injection")
         title.setAlignment(QtCore.Qt.AlignCenter)
         title.setStyleSheet("font: bold 15pt")
-        parameters_label = QtWidgets.QLabel("Top-up Parameters:")
+        parameters_label = QtWidgets.QLabel("Top-up Parameters")
         parameters_label.setStyleSheet("font: bold")
         current_label = QtWidgets.QLabel("Storage Ring Current:")
         current_label.setStyleSheet("font: bold 12pt")
@@ -88,9 +82,12 @@ class MyWindow(QtWidgets.QWidget):
         mlayout.addWidget(title)
         mlayout.addSpacing(30)
         vlayout1.addWidget(parameters_label)
-        self.max_current = self.add_parameter("Maximum Current", "%s"%self.max_c, "mA", vlayout1)
-        self.max_decay   = self.add_parameter("Maximum Current Decay", "%s"%self.max_d, " %", vlayout1)
-        self.freq        = self.add_parameter("Frequency", "%s"%self.f, "Hz", vlayout1)
+        self.max_current = self.add_parameter("Maximum Current:", "%s"%self.max_c, vlayout1,  "mA")
+        self.max_decay   = self.add_parameter("Maximum Current Decay:", "%s"%self.max_d, vlayout1, " %")
+        self.freq        = self.add_parameter("Frequency:", "%s"%self.f, vlayout1, "Hz")
+
+        self.add_operation_mode_buttons(vlayout1)
+
         vlayout2.addWidget(self.button)
         hlayout1.addLayout(vlayout1)
         hlayout1.addSpacing(50)
@@ -106,16 +103,19 @@ class MyWindow(QtWidgets.QWidget):
         # PVs
         self.cycle_pv    = epics.PV('VA-LITI-CYCLE')
         self.current_pv  = epics.PV('SIDI-CURRENT')
+        self.mode_pv     = epics.PV('VA-LIFK-MODE')
+        self.mode_pv.connect(0.1)
         self.update_label()
+
 
         # Timer threads
         self.topup_timer = lnls.Timer(self.time_interval, self.check_inject)
         self.plot_timer = QtCore.QTimer()
         self.plot_timer.timeout.connect(self.update_plot_datetime)
-        self.timer = QtCore.QTimer()
-        self.timer.timeout.connect(self.update_label)
-        self.timer.setInterval(1000.0)
-        self.timer.start()
+        self.current_timer = QtCore.QTimer()
+        self.current_timer.timeout.connect(self.update_label)
+        self.current_timer.setInterval(1000.0)
+        self.current_timer.start()
 
         # DateTimePlot
         self.plot_datetime = hlaplot.datetime_plot.DateTimePlot()
@@ -148,6 +148,41 @@ class MyWindow(QtWidgets.QWidget):
         self.last_update = datetime.datetime.now()
         self.plot_timer.start(100)
 
+    def set_default_values(self):
+        # Top-up default parameters
+        self.max_c = 350 # [mA]
+        self.max_d = 0.5 # [%]
+        self.f     = 2.0 # [Hz]
+        self.time_interval = 2.0 # [s]
+        self.is_injecting  = False
+        self.stop          = False
+
+    def add_operation_mode_buttons(self, layout):
+        mode_label = QtWidgets.QLabel("Operation Mode:")
+        self.mode_group = QtWidgets.QButtonGroup()
+        self.single_bunch_mode = QtWidgets.QRadioButton("Single-bunch")
+        self.multi_bunch_mode = QtWidgets.QRadioButton("Multi-bunch")
+        self.single_bunch_mode.clicked.connect(self.single_bunch_button_clicked)
+        self.multi_bunch_mode.clicked.connect(self.multi_bunch_button_clicked)
+        self.mode_group.addButton(self.single_bunch_mode)
+        self.mode_group.addButton(self.multi_bunch_mode)
+        hlayout = QtWidgets.QHBoxLayout()
+        vlayout = QtWidgets.QVBoxLayout()
+        hlayout.addWidget(mode_label)
+        vlayout.addWidget(self.single_bunch_mode)
+        vlayout.addWidget(self.multi_bunch_mode)
+        hlayout.addLayout(vlayout)
+        hlayout.addSpacing(50)
+        layout.addLayout(hlayout)
+
+    def single_bunch_button_clicked(self):
+        if self.mode_pv.connected:
+            self.mode_pv.put(1)
+
+    def multi_bunch_button_clicked(self):
+        if self.mode_pv.connected:
+            self.mode_pv.put(0)
+
     def update_plot_datetime(self):
         t = datetime.datetime.now()
         if self.current_pv.connected:
@@ -166,14 +201,15 @@ class MyWindow(QtWidgets.QWidget):
         self.last_update = datetime.datetime.now()
 
 
-    def add_parameter(self, label, text, units, layout):
+    def add_parameter(self, label, text, layout, units=None):
         label = QtWidgets.QLabel(label)
         wid = QtWidgets.QLineEdit(text)
-        units = QtWidgets.QLabel(units)
         hlayout = QtWidgets.QHBoxLayout()
         hlayout.addWidget(label)
         hlayout.addWidget(wid)
-        hlayout.addWidget(units)
+        if units is not None:
+            units_label = QtWidgets.QLabel(units)
+            hlayout.addWidget(units_label)
         layout.addLayout(hlayout)
         return wid
 
@@ -188,7 +224,7 @@ class MyWindow(QtWidgets.QWidget):
             self.max_current.setReadOnly(True)
             self.max_decay.setReadOnly(True)
             self.freq.setReadOnly(True)
-            if self.cycle_pv.connected:
+            if self.cycle_pv.connected and self.current_pv.connected:
                 self.topup_timer.start()
                 self.button.setText("Stop Top-up Injection")
             else:
@@ -198,18 +234,32 @@ class MyWindow(QtWidgets.QWidget):
             self.max_current.setReadOnly(False)
             self.max_decay.setReadOnly(False)
             self.freq.setReadOnly(False)
+
             if self.topup_timer.is_running:
                 self.topup_timer.stop()
             self.button.setText("Start Top-up Injection")
 
     def update_label(self):
+        if self.mode_pv.connected:
+            self.single_bunch_mode.setEnabled(1)
+            self.multi_bunch_mode.setEnabled(1)
+            value = self.mode_pv.get()
+            if value == 1:
+                self.single_bunch_mode.setChecked(1)
+            else:
+                self.multi_bunch_mode.setChecked(1)
+        else:
+            self.single_bunch_mode.setDisabled(1)
+            self.multi_bunch_mode.setDisabled(1)
         if self.current_pv.connected:
             value = self.current_pv.get()
             self.current_value.setText("%3.5f mA"%value)
+        else:
+            self.current_value.setText("PV Disconnected")
 
     def check_inject(self):
         if self.is_injecting: return
-        if not self.current_pv.connected: return
+        if not self.current_pv.connected:return
         while self.current_pv.get() < self.min_c and not self.stop:
             self.is_injecting = True
             while self.current_pv.get() < self.max_c and not self.stop:
