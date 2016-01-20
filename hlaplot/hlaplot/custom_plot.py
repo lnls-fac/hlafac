@@ -288,6 +288,22 @@ class CustomPlot(_backend_qt5agg.FigureCanvasQTAgg):
                                      right=right,
                                      top=top)
 
+    def fill(self, name, color=None):
+        self.remove_fill()
+        self._check_lines_has_key(name)
+        line = self._lines[name]
+        x = self._get_line_data_from_axis(line, 'x')
+        y = self._get_line_data_from_axis(line, 'y')
+        if color is None:
+            color = line.color
+        else:
+            color = _color_conversion.normalize_color(color)
+        self._axes.fill_between(x, y, color=color)
+
+    def remove_fill(self):
+        for collection in (self._axes.collections):
+            self._axes.collections.remove(collection)
+
     def _check_lines_has_key(self, key):
         if not key in self._lines:
             raise LineNameException
