@@ -627,7 +627,7 @@ $(trace_0_y_pv_value)</tooltip>
     <transparent>false</transparent>
     <lock_children>false</lock_children>
     <scripts />
-    <height>163</height>
+    <height>235</height>
     <border_width>1</border_width>
     <scale_options>
       <width_scalable>true</width_scalable>
@@ -732,7 +732,7 @@ $(pv_value)</tooltip>
       </scale_options>
       <image></image>
       <visible>true</visible>
-      <pv_name>loc://texto1</pv_name>
+      <pv_name>loc://fofb</pv_name>
       <border_color>
         <color red="0" green="128" blue="255" />
       </border_color>
@@ -742,9 +742,9 @@ $(pv_value)</tooltip>
         <color name="Gray Background" red="240" green="240" blue="240" />
       </background_color>
       <width>80</width>
-      <x>39</x>
+      <x>45</x>
       <name>Action Button</name>
-      <y>36</y>
+      <y>86</y>
       <style>0</style>
       <foreground_color>
         <color red="0" green="0" blue="0" />
@@ -803,7 +803,7 @@ $(pv_value)</tooltip>
       </scale_options>
       <image></image>
       <visible>true</visible>
-      <pv_name>loc://texto2</pv_name>
+      <pv_name>loc://sofb</pv_name>
       <border_color>
         <color red="0" green="128" blue="255" />
       </border_color>
@@ -813,9 +813,9 @@ $(pv_value)</tooltip>
         <color name="Gray Background" red="240" green="240" blue="240" />
       </background_color>
       <width>80</width>
-      <x>39</x>
+      <x>45</x>
       <name>Action Button</name>
-      <y>102</y>
+      <y>36</y>
       <style>0</style>
       <foreground_color>
         <color red="0" green="0" blue="0" />
@@ -852,7 +852,7 @@ $(pv_value)</tooltip>
       <enabled>true</enabled>
       <wuid>67e30957:15318865f63:-5c5e</wuid>
       <pv_value />
-      <text>Parameters</text>
+      <text>Edit Parameters</text>
       <scripts />
       <border_alarm_sensitive>false</border_alarm_sensitive>
       <height>40</height>
@@ -873,10 +873,10 @@ $(pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <width>97</width>
-      <x>150</x>
+      <width>127</width>
+      <x>163</x>
       <name>Action Button</name>
-      <y>63</y>
+      <y>60</y>
       <style>0</style>
       <foreground_color>
         <color red="0" green="0" blue="0" />
@@ -1863,6 +1863,52 @@ $(pv_value)</tooltip>
         <x>78</x>
         <name>Text Update</name>
         <y>3</y>
+        <foreground_color>
+          <color red="0" green="0" blue="0" />
+        </foreground_color>
+        <actions hook="false" hook_all="false" />
+        <font>
+          <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
+        </font>
+      </widget>
+      <widget typeId="org.csstudio.opibuilder.widgets.ActionButton" version="2.0.0">
+        <toggle_button>false</toggle_button>
+        <border_style>0</border_style>
+        <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
+        <alarm_pulsing>false</alarm_pulsing>
+        <tooltip>$(pv_name)
+$(pv_value)</tooltip>
+        <push_action_index>0</push_action_index>
+        <rules />
+        <enabled>true</enabled>
+        <wuid>-600c7a01:1531ea6de81:-7f80</wuid>
+        <pv_value />
+        <text>Save Orbit</text>
+        <scripts />
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+        <height>25</height>
+        <border_width>1</border_width>
+        <scale_options>
+          <width_scalable>true</width_scalable>
+          <height_scalable>true</height_scalable>
+          <keep_wh_ratio>false</keep_wh_ratio>
+        </scale_options>
+        <image></image>
+        <visible>true</visible>
+        <pv_name></pv_name>
+        <border_color>
+          <color red="0" green="128" blue="255" />
+        </border_color>
+        <widget_type>Action Button</widget_type>
+        <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
+        <background_color>
+          <color red="240" green="240" blue="240" />
+        </background_color>
+        <width>80</width>
+        <x>186</x>
+        <name>Action Button</name>
+        <y>3</y>
+        <style>0</style>
         <foreground_color>
           <color red="0" green="0" blue="0" />
         </foreground_color>
