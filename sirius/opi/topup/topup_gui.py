@@ -216,7 +216,8 @@ class MyWindow(QtWidgets.QWidget):
         self.bunch_pv.connect(0.1)
 
     def set_uniform_filling_patern(self, single_bunch=0):
-        idx = int(self.bunch_pv.get())
+        bunch = self.bunch_pv.get()
+        idx = int(bunch) if bunch is not None else 0
         if single_bunch:
             self.bunches_indices = [(idx+i)%self.harmonic_number for i in range(0,self.harmonic_number)]
         else:

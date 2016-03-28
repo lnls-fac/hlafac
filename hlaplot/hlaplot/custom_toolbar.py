@@ -22,19 +22,19 @@ class CustomToolbar(_backend.NavigationToolbar2QT):
 
     def home(self, *args):
         self._restore_status()
-        result =  _backend.NavigationToolbar2QTAgg.home(self, *args)
+        result =  _backend.NavigationToolbar2QT.home(self, *args)
         self._figure.update_plot()
         return result
 
     def press_pan(self, event):
         self._save_status()
         self._figure.xy_autoscale = False
-        return _backend.NavigationToolbar2QTAgg.press_pan(self, event)
+        return _backend.NavigationToolbar2QT.press_pan(self, event)
 
     def press_zoom(self, event):
         self._save_status()
         self._figure.xy_autoscale = False
-        return _backend.NavigationToolbar2QTAgg.press_zoom(self, event)
+        return _backend.NavigationToolbar2QT.press_zoom(self, event)
 
     def _save_status(self):
         if not self._status_changed:
