@@ -39,7 +39,7 @@ class IPWindow(QtWidgets.QWidget):
         super().__init__()
 
         label = QtWidgets.QLabel("Virtual Accelerator IP Address:")
-        self.ip = QtWidgets.QLineEdit(" ")
+        self.ip = QtWidgets.QLineEdit("10.0.21.255")
         self.button = QtWidgets.QPushButton('Start')
         self.button.setFixedSize(80, 80)
         self.button.setAutoDefault(True)
