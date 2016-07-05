@@ -93,7 +93,7 @@ $(pv_value)</tooltip>
     <wuid>-2ed756cb:1518c8dc293:-6a3b</wuid>
     <transparent>true</transparent>
     <auto_size>false</auto_size>
-    <text>$(power_supply_sp)</text>
+    <text>$(power_supply) - Setpoint</text>
     <scripts />
     <height>37</height>
     <border_width>1</border_width>
@@ -133,7 +133,7 @@ $(pv_value)</tooltip>
     <wuid>3081c266:1518ca5ee68:-491c</wuid>
     <transparent>true</transparent>
     <auto_size>false</auto_size>
-    <text>$(power_supply_rb)</text>
+    <text>$(power_supply) - Readback</text>
     <scripts />
     <height>37</height>
     <border_width>1</border_width>
@@ -225,14 +225,14 @@ $(pv_value)</tooltip>
 $(pv_value)</tooltip>
     <horizontal_alignment>1</horizontal_alignment>
     <rules>
-      <rule name="enabled_setpoint" prop_id="enabled" out_exp="false">
+      <rule name="EnabledSetpoint" prop_id="enabled" out_exp="false">
         <exp bool_exp="pvStr0==&quot;Off&quot;">
           <value>false</value>
         </exp>
         <exp bool_exp="pvStr0==&quot;On&quot;">
           <value>true</value>
         </exp>
-        <pv trig="true">$(power_supply_status)</pv>
+        <pv trig="true">$(power_supply_on_off)</pv>
       </rule>
     </rules>
     <enabled>true</enabled>
@@ -411,7 +411,7 @@ $(pv_value)</tooltip>
     <height>27</height>
     <border_width>1</border_width>
     <visible>true</visible>
-    <pv_name>$(power_supply_status)</pv_name>
+    <pv_name>$(power_supply_on_off)</pv_name>
     <border_color>
       <color red="0" green="128" blue="255" />
     </border_color>
@@ -508,7 +508,7 @@ $(pv_value)</tooltip>
     <height>27</height>
     <border_width>1</border_width>
     <visible>true</visible>
-    <pv_name>$(power_supply_control)</pv_name>
+    <pv_name>$(power_supply_command_mode)</pv_name>
     <border_color>
       <color red="0" green="128" blue="255" />
     </border_color>
@@ -624,18 +624,18 @@ $(pv_value)</tooltip>
     <enabled>true</enabled>
     <wuid>5f3829d2:1559cff911c:-7bfd</wuid>
     <on_color>
-      <color red="0" green="255" blue="0" />
+      <color name="Red" red="255" green="0" blue="0" />
     </on_color>
     <scripts />
     <border_alarm_sensitive>true</border_alarm_sensitive>
-    <on_label>ON</on_label>
+    <on_label>Failure</on_label>
     <scale_options>
       <width_scalable>true</width_scalable>
       <height_scalable>true</height_scalable>
       <keep_wh_ratio>true</keep_wh_ratio>
     </scale_options>
     <off_color>
-      <color name="Red" red="255" green="0" blue="0" />
+      <color name="Green" red="0" green="255" blue="0" />
     </off_color>
     <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
     <background_color>
@@ -652,7 +652,7 @@ $(pv_value)</tooltip>
     <font>
       <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
     </font>
-    <off_label>OFF</off_label>
+    <off_label>Ok</off_label>
   </widget>
   <widget typeId="org.csstudio.opibuilder.widgets.ActionButton" version="2.0.0">
     <toggle_button>true</toggle_button>
@@ -670,7 +670,7 @@ $(pv_value)</tooltip>
         <exp bool_exp="pvStr0==&quot;On&quot;">
           <value>ON</value>
         </exp>
-        <pv trig="true">$(power_supply_status)</pv>
+        <pv trig="true">$(power_supply_on_off)</pv>
       </rule>
     </rules>
     <enabled>true</enabled>
@@ -689,7 +689,7 @@ $(pv_value)</tooltip>
     </scale_options>
     <image></image>
     <visible>true</visible>
-    <pv_name>$(power_supply_status)</pv_name>
+    <pv_name>$(power_supply_on_off)</pv_name>
     <border_color>
       <color red="0" green="128" blue="255" />
     </border_color>
@@ -699,9 +699,9 @@ $(pv_value)</tooltip>
       <color red="240" green="240" blue="240" />
     </background_color>
     <width>80</width>
-    <x>12</x>
+    <x>10</x>
     <name>Action Button</name>
-    <y>306</y>
+    <y>305</y>
     <style>0</style>
     <foreground_color>
       <color red="0" green="0" blue="0" />
@@ -745,7 +745,7 @@ $(pv_value)</tooltip>
         <exp bool_exp="pvStr0==&quot;PCHost&quot;">
           <value>LOCAL</value>
         </exp>
-        <pv trig="true">$(power_supply_control)</pv>
+        <pv trig="true">$(power_supply_command_mode)</pv>
       </rule>
     </rules>
     <enabled>false</enabled>
@@ -773,9 +773,9 @@ $(pv_value)</tooltip>
       <color red="240" green="240" blue="240" />
     </background_color>
     <width>80</width>
-    <x>114</x>
+    <x>110</x>
     <name>Action Button_1</name>
-    <y>306</y>
+    <y>305</y>
     <style>0</style>
     <foreground_color>
       <color red="0" green="0" blue="0" />
@@ -821,7 +821,7 @@ $(pv_value)</tooltip>
     <width>80</width>
     <x>210</x>
     <name>Action Button_2</name>
-    <y>306</y>
+    <y>305</y>
     <style>0</style>
     <foreground_color>
       <color red="0" green="0" blue="0" />

@@ -19,13 +19,13 @@
   <widget_type>Display</widget_type>
   <auto_scale_widgets>
     <auto_scale_widgets>true</auto_scale_widgets>
-    <min_width>470</min_width>
-    <min_height>550</min_height>
+    <min_width>500</min_width>
+    <min_height>500</min_height>
   </auto_scale_widgets>
   <background_color>
     <color red="240" green="240" blue="240" />
   </background_color>
-  <width>470</width>
+  <width>500</width>
   <x>0</x>
   <name></name>
   <grid_space>6</grid_space>
@@ -64,7 +64,7 @@
     <background_color>
       <color name="dipole" red="0" green="137" blue="182" />
     </background_color>
-    <width>470</width>
+    <width>500</width>
     <x>0</x>
     <name>Label</name>
     <y>0</y>
@@ -103,8 +103,8 @@
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
-    <width>420</width>
-    <x>25</x>
+    <width>480</width>
+    <x>10</x>
     <name>Table</name>
     <y>100</y>
     <foreground_color>

@@ -23,6 +23,23 @@ def add_line(table, line_opi, power_supply):
     linkingContainer.setPropertyValue("resize_behaviour", 1)
     linkingContainer.setPropertyValue("border_style", 0)
     table.addChildToBottom(linkingContainer)
+
+    setpoint = subsystem + power_supply.upper() + ':SlowReferenceCurrent'
+    readback = subsystem + power_supply.upper() + ':OutputCurrent'
+    on_off = subsystem + power_supply.upper() + ':OnOff'
+    command_mode = subsystem + power_supply.upper() + ':CommandMode'
+    command = subsystem + power_supply.upper() + ':Command'
+    interlock = subsystem + power_supply.upper() + ':HardInterlocks'
+    
+    macro_inputs = DataUtil.createMacrosInput(True)
+    macro_inputs.put("power_supply", power_supply)
+    macro_inputs.put("power_supply_sp", setpoint)
+    macro_inputs.put("power_supply_rb", readback)
+    macro_inputs.put("power_supply_on_off", on_off)
+    macro_inputs.put("power_supply_command_mode", command_mode)
+    macro_inputs.put("power_supply_command", command)
+    macro_inputs.put("power_supply_interlock", interlock)
+    linkingContainer.setPropertyValue("macros", macro_inputs)
     
     children = linkingContainer.getChildren()
     for w in children:
@@ -32,31 +49,18 @@ def add_line(table, line_opi, power_supply):
             spinner = w
         elif w.getPropertyValue("widget_type") == "Text Update":
             text_update = w
-        elif w.getPropertyValue("widget_type") == "Grouping Container":
+        elif w.getPropertyValue("name") == "Grouping Container_OnOff":
             container = w
-            led = container.getChildren()[0]  
-        
-    setpoint = subsystem + power_supply.upper() + ':SlowReferenceCurrent'
-    readback = subsystem + power_supply.upper() + ':OutputCurrent'
-    status = subsystem + power_supply.upper() + ':OnOff'
-    control = subsystem + power_supply.upper() + ':CommandMode'
-    interlock = subsystem + power_supply.upper() + ':HardInterlocks'
-    command = subsystem + power_supply.upper() + ':Command'
-
-    macro_inputs = DataUtil.createMacrosInput(True)
-    macro_inputs.put("power_supply", power_supply)
-    macro_inputs.put("power_supply_sp", setpoint)
-    macro_inputs.put("power_supply_rb", readback)
-    macro_inputs.put("power_supply_status", status)
-    macro_inputs.put("power_supply_control", control)
-    macro_inputs.put("power_supply_interlock", interlock)
-    macro_inputs.put("power_supply_command", command)
-    linkingContainer.setPropertyValue("macros", macro_inputs)
-  
+            led_on_off = container.getChildren()[0]  
+        elif w.getPropertyValue("name") == "Grouping Container_Failure":
+            container = w
+            led_interlock = container.getChildren()[0]          
+ 
     button.setPropertyValue("text", power_supply)
     spinner.setPropertyValue("pv_name", setpoint)
     text_update.setPropertyValue("pv_name", readback)
-    led.setPropertyValue("pv_name", status)
+    led_on_off.setPropertyValue("pv_name", on_off)
+    led_interlock.setPropertyValue("pv_name", interlock)
 
     
 subsystem      = "UVX:LINAC:"
@@ -67,7 +71,6 @@ table          = display.getWidget("Table")
     
 if power_supplies is None:
     table.setPropertyValue("visible", False)
-    
 else:
     add_header(table, header_opi)    
     for ps in power_supplies:
