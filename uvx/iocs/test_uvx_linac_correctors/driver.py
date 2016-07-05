@@ -1,11 +1,12 @@
 
-import pcaspy
+from pcaspy import Driver, Alarm, Severity
+import pvs
 
-
-class PCASDriver(pcaspy.Driver):
+class PCASDriver(Driver):
 
     def __init__(self):
         super().__init__()
+        for pv in pvs.pvdb: self.setParamStatus(pv, Alarm.NO_ALARM, Severity.NO_ALARM)
 
     def read(self, reason):
         return super().read(reason)
