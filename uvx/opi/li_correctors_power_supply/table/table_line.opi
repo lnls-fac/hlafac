@@ -278,12 +278,12 @@ $(pv_value)</tooltip>
     <x>120</x>
     <name>Spinner</name>
     <y>0</y>
-    <maximum>1.7976931348623157E308</maximum>
+    <maximum>10.0</maximum>
     <foreground_color>
       <color red="0" green="0" blue="0" />
     </foreground_color>
     <actions hook="false" hook_all="false" />
-    <minimum>-1.7976931348623157E308</minimum>
+    <minimum>-10.0</minimum>
     <font>
       <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
     </font>

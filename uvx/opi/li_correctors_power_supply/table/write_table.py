@@ -36,22 +36,13 @@ def add_line(table, line_opi, power_supply):
             container = w
             led = container.getChildren()[0]  
         
-
-    #setpoint = subsystem + power_supply.upper() + '-SP'
-    #readback = subsystem + power_supply.upper() + '-SP'
     setpoint = subsystem + power_supply.upper() + ':SlowReferenceCurrent'
     readback = subsystem + power_supply.upper() + ':OutputCurrent'
     status = subsystem + power_supply.upper() + ':OnOff'
     control = subsystem + power_supply.upper() + ':CommandMode'
     interlock = subsystem + power_supply.upper() + ':HardInterlocks'
     command = subsystem + power_supply.upper() + ':Command'
-    
-    button.setPropertyValue("text", power_supply.replace("-FAM", ""))
-    spinner.setPropertyValue("pv_name", setpoint)
-    text_update.setPropertyValue("pv_name", readback)
-    led.setPropertyValue("pv_name", status)
-    #led.setPropertyValue("pv_name", '$(power_supply_status)')
-    
+
     macro_inputs = DataUtil.createMacrosInput(True)
     macro_inputs.put("power_supply", power_supply)
     macro_inputs.put("power_supply_sp", setpoint)
@@ -60,35 +51,26 @@ def add_line(table, line_opi, power_supply):
     macro_inputs.put("power_supply_control", control)
     macro_inputs.put("power_supply_interlock", interlock)
     macro_inputs.put("power_supply_command", command)
-    #macro_inputs.put("power_supply_start", 'sim://const("corrector")')
     linkingContainer.setPropertyValue("macros", macro_inputs)
+  
+    button.setPropertyValue("text", power_supply)
+    spinner.setPropertyValue("pv_name", setpoint)
+    text_update.setPropertyValue("pv_name", readback)
+    led.setPropertyValue("pv_name", status)
 
-#subsystem = "SIPS-"
+    
 subsystem      = "UVX:LINAC:"
-header_opi     = "table/big_table_header.opi"
-line_opi       = "table/big_table_line.opi"
-
-power_supplies   = get_power_supply_list()
-len_ps           = len(power_supplies)
-nr_tables        = 1
-table_container  = display.getWidget("table_container")
-tables = []
-for i in range(nr_tables):
-    table = display.getWidget("table_%i"%(i+1))
-    table.removeAllChildren()
-    tables.append(table)
+header_opi     = "table/table_header.opi"
+line_opi       = "table/table_line.opi"
+power_supplies = get_power_supply_list()
+table          = display.getWidget("Table")
     
 if power_supplies is None:
-    table_container.setPropertyValue("visible", False)
+    table.setPropertyValue("visible", False)
     
 else:
-    j = 0
-    for table in tables:
-        add_header(table, header_opi)    
-        for i in range(1,len_ps+1):
-            power_supply = power_supplies[j]
-            add_line(table, line_opi, power_supply)   
-            j += 1
-        table.performAutosize()
-                
-    table_container.setPropertyValue("visible", True)
+    add_header(table, header_opi)    
+    for ps in power_supplies:
+        add_line(table, line_opi, ps)   
+    table.performAutosize()            
+    table.setPropertyValue("visible", True)

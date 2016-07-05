@@ -4,12 +4,8 @@
   <rules />
   <wuid>7e5ad4fd:15187647c15:-6b57</wuid>
   <show_grid>true</show_grid>
-  <auto_zoom_to_fit_all>false</auto_zoom_to_fit_all>
-  <scripts>
-    <path pathString="change_window_name.py" checkConnect="true" sfe="false" seoe="false">
-      <pv trig="true">$(power_supply_start)</pv>
-    </path>
-  </scripts>
+  <auto_zoom_to_fit_all>true</auto_zoom_to_fit_all>
+  <scripts />
   <height>370</height>
   <macros>
     <include_parent_macros>true</include_parent_macros>
@@ -20,18 +16,18 @@
   <auto_scale_widgets>
     <auto_scale_widgets>true</auto_scale_widgets>
     <min_width>300</min_width>
-    <min_height>400</min_height>
+    <min_height>370</min_height>
   </auto_scale_widgets>
   <background_color>
     <color red="240" green="240" blue="240" />
   </background_color>
   <width>300</width>
-  <x>-1</x>
+  <x>0</x>
   <name></name>
   <grid_space>6</grid_space>
   <show_ruler>true</show_ruler>
-  <y>-1</y>
-  <snap_to_geometry>true</snap_to_geometry>
+  <y>0</y>
+  <snap_to_geometry>false</snap_to_geometry>
   <foreground_color>
     <color red="192" green="192" blue="192" />
   </foreground_color>
@@ -209,7 +205,7 @@ $(pv_value)</tooltip>
       <color red="255" green="255" blue="255" />
     </background_color>
     <width>169</width>
-    <x>0</x>
+    <x>6</x>
     <name>Text Update_3</name>
     <y>18</y>
     <foreground_color>
@@ -228,7 +224,17 @@ $(pv_value)</tooltip>
     <tooltip>$(pv_name)
 $(pv_value)</tooltip>
     <horizontal_alignment>1</horizontal_alignment>
-    <rules />
+    <rules>
+      <rule name="enabled_setpoint" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pvStr0==&quot;Off&quot;">
+          <value>false</value>
+        </exp>
+        <exp bool_exp="pvStr0==&quot;On&quot;">
+          <value>true</value>
+        </exp>
+        <pv trig="true">$(power_supply_status)</pv>
+      </rule>
+    </rules>
     <enabled>true</enabled>
     <wuid>645623d9:15190ada482:7e60</wuid>
     <transparent>true</transparent>
@@ -364,7 +370,7 @@ $(pv_value)</tooltip>
     <push_action_index>0</push_action_index>
     <rules />
     <effect_3d>true</effect_3d>
-    <bit>-1</bit>
+    <bit>0</bit>
     <enabled>true</enabled>
     <wuid>1ff27c7c:15573142360:-1826</wuid>
     <on_color>
@@ -563,8 +569,11 @@ $(pv_value)</tooltip>
 $(pv_value)</tooltip>
     <rules />
     <effect_3d>true</effect_3d>
-    <bit>-1</bit>
+    <bit>0</bit>
+    <state_value_2>2.0</state_value_2>
+    <state_value_1>1.0</state_value_1>
     <pv_value />
+    <state_value_0>0.0</state_value_0>
     <height>27</height>
     <border_width>1</border_width>
     <visible>true</visible>
@@ -580,21 +589,31 @@ $(pv_value)</tooltip>
     <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
     <enabled>true</enabled>
     <wuid>5f3829d2:1559cff911c:-7c15</wuid>
-    <on_color>
-      <color red="0" green="255" blue="0" />
-    </on_color>
+    <state_color_0>
+      <color name="Green" red="0" green="255" blue="0" />
+    </state_color_0>
+    <state_color_1>
+      <color name="Red" red="255" green="0" blue="0" />
+    </state_color_1>
+    <state_color_2>
+      <color red="255" green="0" blue="0" />
+    </state_color_2>
     <scripts />
     <border_alarm_sensitive>true</border_alarm_sensitive>
-    <on_label>ON</on_label>
     <scale_options>
       <width_scalable>true</width_scalable>
       <height_scalable>true</height_scalable>
       <keep_wh_ratio>true</keep_wh_ratio>
     </scale_options>
-    <off_color>
-      <color name="Red" red="255" green="0" blue="0" />
-    </off_color>
+    <state_label_0>Remote</state_label_0>
+    <state_color_fallback>
+      <color red="100" green="100" blue="100" />
+    </state_color_fallback>
+    <state_label_fallback>ERR</state_label_fallback>
+    <state_label_1>Local</state_label_1>
+    <state_label_2>PCHost</state_label_2>
     <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
+    <state_count>3</state_count>
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
@@ -609,7 +628,6 @@ $(pv_value)</tooltip>
     <font>
       <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
     </font>
-    <off_label>OFF</off_label>
   </widget>
   <widget typeId="org.csstudio.opibuilder.widgets.Label" version="1.0.0">
     <border_style>0</border_style>
@@ -786,12 +804,13 @@ $(pv_value)</tooltip>
     <border_style>0</border_style>
     <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
     <alarm_pulsing>false</alarm_pulsing>
+    <on_state>Remote</on_state>
+    <off_state>Local</off_state>
     <tooltip>$(pv_name)
 $(pv_value)</tooltip>
     <push_action_index>0</push_action_index>
     <rules />
     <effect_3d>true</effect_3d>
-    <bit>-1</bit>
     <enabled>true</enabled>
     <wuid>-a336006:155a7a3688a:-7ce9</wuid>
     <on_color>
@@ -830,7 +849,7 @@ $(pv_value)</tooltip>
     <width>80</width>
     <x>114</x>
     <name>Boolean Button_4</name>
-    <data_type>0</data_type>
+    <data_type>1</data_type>
     <y>306</y>
     <foreground_color>
       <color red="0" green="0" blue="0" />
