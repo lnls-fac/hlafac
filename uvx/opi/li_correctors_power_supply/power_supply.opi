@@ -748,7 +748,7 @@ $(pv_value)</tooltip>
         <pv trig="true">$(power_supply_command_mode)</pv>
       </rule>
     </rules>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <wuid>2f8c7ffe:155bb084373:-6471</wuid>
     <pv_value />
     <text>LOCAL</text>
