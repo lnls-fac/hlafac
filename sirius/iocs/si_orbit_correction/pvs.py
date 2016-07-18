@@ -8,5 +8,5 @@ pvdb = {
     'SICO-SOFB-AVGORBIT-Y': {'type': 'float', 'count': numBPM},
     'SICO-SOFB-AVGORBIT-NUMSAMPLES': {'type': 'int', 'value': 1},
     'SICO-SOFB-ERROR': {'type': 'enum', 'enums': ['None', 'MeasRespmError', 'SetAvgOrbitNumSamplesError', 'ReadOrbitError', 'SetRespmError']},
-    'SICO-SOFB-RESPM': {'type': 'string', 'value': 'respm_hv_f_va.txt'},
+    'SICO-SOFB-RESPM': {'type': 'string', 'value': 'respm_hv_f_va'},
 }

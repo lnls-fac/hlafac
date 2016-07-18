@@ -7,6 +7,7 @@ from time import sleep
 
 
 respm_path = './respm/'
+respm_filetype = '.txt'
 
 _model = None
 _respm_hv = None
@@ -17,7 +18,7 @@ _inv_respm_hv = None
 _inv_respm_h = None
 _inv_respm_v = None
 _inv_respm_h_v = None
-_respm_hv_f = 'respm_hv_f_va.txt'
+_respm_hv_f = 'respm_hv_f_va'
 _respm_h_f = None
 _respm_v_f = None
 _respm_h_v_f = None
@@ -58,7 +59,7 @@ def set_respm(respm = None):
     if respm is None:
         _respm_hv_f = _api_pv.meas_respm('hv')
     else:
-        _respm_hv_f = _np.loadtxt(respm_path + respm)
+        _respm_hv_f = _np.loadtxt(respm_path + respm + respm_filetype)
     _respm_hv = _respm_hv_f[:,:-1]
     _respm_h = _respm_hv[:len(_api_pv._pvnames_bpm_x),:len(_api_pv._pvnames_ch)]
     _respm_v = _respm_hv[len(_api_pv._pvnames_bpm_x):,len(_api_pv._pvnames_ch):]
