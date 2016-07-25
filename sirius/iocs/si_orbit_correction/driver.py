@@ -70,6 +70,12 @@ class PCASDriver(Driver):
                         self._threads_dic['respm_measurement']._mode = 'OnV'
                     elif value == 'OnHV' or value == 3:
                         self._threads_dic['respm_measurement']._mode = 'OnHV'
+                    elif value == 'OnH_F' or value == 4:
+                        self._threads_dic['respm_measurement']._mode = 'OnH_F'
+                    elif value == 'OnV_F' or value == 5:
+                        self._threads_dic['respm_measurement']._mode = 'OnV_F'
+                    elif value == 'OnHV_F' or value == 6:
+                        self._threads_dic['respm_measurement']._mode = 'OnHV_F'
         elif reason == 'SICO-SOFB-RESPM':
             try:
                 _api_correction.set_respm(value)

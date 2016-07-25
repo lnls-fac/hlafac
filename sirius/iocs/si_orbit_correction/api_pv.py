@@ -79,15 +79,15 @@ def get_orbit(plane = ''):
 def get_kick(ctype = ''):
     kick = []
     if ctype.lower() == 'h' or ctype.lower() == 'h_f':
-        pvnames_c = _pvnames_ch
+        pvnames_c = _pvnames_ch[:]
         if ctype.lower() == 'h_f':
             pvnames_c.extend([PV_RF_FREQUENCY])
     elif ctype.lower() == 'v' or ctype.lower() == 'v_f':
-        pvnames_c = _pvnames_cv
+        pvnames_c = _pvnames_cv[:]
         if ctype.lower() == 'v_f':
             pvnames_c.extend([PV_RF_FREQUENCY])
     elif ctype.lower() == 'hv' or ctype.lower() == 'hv_f' or ctype.lower() == 'h_v' or ctype.lower() == 'h_v_f':
-        pvnames_c =[]
+        pvnames_c = []
         pvnames_c.extend(_pvnames_ch)
         pvnames_c.extend(_pvnames_cv)
         if ctype.lower() == 'hv_f' or ctype.lower() == 'h_v_f':
@@ -99,11 +99,11 @@ def get_kick(ctype = ''):
 
 def add_kick(delta_kick = None, ctype = ''):
     if ctype.lower() == 'h' or ctype.lower() == 'h_f':
-        pvnames_c = _pvnames_ch
+        pvnames_c = _pvnames_ch[:]
         if ctype.lower() == 'h_f':
             pvnames_c.extend([PV_RF_FREQUENCY])
     elif ctype.lower() == 'v' or ctype.lower() == 'v_f':
-        pvnames_c = _pvnames_cv
+        pvnames_c = _pvnames_cv[:]
         if ctype.lower() == 'v_f':
             pvnames_c.extend([PV_RF_FREQUENCY])
     elif ctype.lower() == 'hv' or ctype.lower() == 'hv_f' or ctype.lower() == 'h_v' or ctype.lower() == 'h_v_f':
@@ -131,15 +131,15 @@ def meas_respm(ctype = ''):
     sleep(6) #delay for waiting correction finalise
     delta_kick = -0.31833 #hardware units
     #delta_kick = 10e-06 #angle units
-    if ctype.lower() == 'h':
-        pvnames_bpm = _pvnames_bpm_x
-        pvnames_c = _pvnames_ch
+    if ctype.lower() == 'h' or ctype.lower() == 'h_f':
+        pvnames_bpm = _pvnames_bpm_x[:]
+        pvnames_c = _pvnames_ch[:]
         plane = 'x'
-    elif ctype.lower() == 'v':
-        pvnames_bpm = _pvnames_bpm_y
-        pvnames_c = _pvnames_cv
+    elif ctype.lower() == 'v' or ctype.lower() == 'v_f':
+        pvnames_bpm = _pvnames_bpm_y[:]
+        pvnames_c = _pvnames_cv[:]
         plane = 'y'
-    elif ctype.lower() == 'hv':
+    elif ctype.lower() == 'hv' or ctype.lower() == 'hv_f':
         pvnames_bpm = []
         pvnames_bpm.extend(_pvnames_bpm_x)
         pvnames_bpm.extend(_pvnames_bpm_y)
@@ -158,13 +158,16 @@ def meas_respm(ctype = ''):
         _pvs[pvname].value = kick0[i]
         old_orbit = _meas_new_orbit(n_orbit, plane)
         respm[:,i] = (p_orbit-n_orbit)/delta_kick
-    delta_freq = 100.0
-    freq0_RF = _pvs[PV_RF_FREQUENCY].value
-    _pvs[PV_RF_FREQUENCY].value = freq0_RF + delta_freq/2.0
-    p_orbit = _meas_new_orbit(old_orbit, plane)
-    _pvs[PV_RF_FREQUENCY].value = freq0_RF - delta_freq/2.0
-    n_orbit = _meas_new_orbit(p_orbit, plane)
-    _pvs[PV_RF_FREQUENCY].value = freq0_RF
-    old_orbit = _meas_new_orbit(n_orbit, plane)
-    respm[:,-1] = (p_orbit-n_orbit)/delta_freq
+    if ctype.lower() == 'h_f' or ctype.lower() == 'v_f' or ctype.lower() == 'hv_f':
+        delta_freq = 100.0
+        freq0_RF = _pvs[PV_RF_FREQUENCY].value
+        _pvs[PV_RF_FREQUENCY].value = freq0_RF + delta_freq/2.0
+        p_orbit = _meas_new_orbit(old_orbit, plane)
+        _pvs[PV_RF_FREQUENCY].value = freq0_RF - delta_freq/2.0
+        n_orbit = _meas_new_orbit(p_orbit, plane)
+        _pvs[PV_RF_FREQUENCY].value = freq0_RF
+        old_orbit = _meas_new_orbit(n_orbit, plane)
+        respm[:,-1] = (p_orbit-n_orbit)/delta_freq
+    else:
+        respm = _np.delete(respm, -1, axis=1)
     return respm
