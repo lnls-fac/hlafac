@@ -4,6 +4,7 @@ import lnls as _lnls
 import epics as _epics
 import numpy as _np
 from time import sleep
+from datetime import datetime
 
 _PREFIX = 'VA-'
 _SUFIX = ''
@@ -11,6 +12,9 @@ _SLEEPTIME = 0.1
 
 PV_RF_FREQUENCY = _PREFIX + 'SIRF-FREQUENCY' #virtual accelerator PV
 #PV_RF_FREQUENCY = 'DIG-RSSMX100A-0:GENERAL:Freq' #real RF generator PV
+
+respm_path = './respm/'
+respm_filetype = '.txt'
 
 _sidi_bpm_devicenames_fname = _os.path.join(_lnls.folder_root,
 'siriusdb', 'recordnames_flatlists', 'dname-bpm.txt')
@@ -170,4 +174,6 @@ def meas_respm(ctype = ''):
         respm[:,-1] = (p_orbit-n_orbit)/delta_freq
     else:
         respm = _np.delete(respm, -1, axis=1)
+    now = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
+    _np.savetxt(respm_path + 'respm_' + ctype.lower() + '_meas_' + now + respm_filetype, respm)
     return respm

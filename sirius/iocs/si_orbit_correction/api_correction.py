@@ -6,8 +6,8 @@ import api_pv as _api_pv
 from time import sleep
 
 
-respm_path = './respm/'
-respm_filetype = '.txt'
+respm_path = _api_pv.respm_path
+respm_filetype = _api_pv.respm_filetype
 
 reforbit_path = './reforbit/'
 reforbit_filetype = '.txt'
