@@ -9,6 +9,9 @@ from time import sleep
 respm_path = './respm/'
 respm_filetype = '.txt'
 
+reforbit_path = './reforbit/'
+reforbit_filetype = '.txt'
+
 _model = None
 _respm_hv = None
 _respm_h = None
@@ -18,7 +21,7 @@ _inv_respm_hv = None
 _inv_respm_h = None
 _inv_respm_v = None
 _inv_respm_h_v = None
-_respm_hv_f = 'respm_hv_f_va'
+_respm_hv_f = None
 _respm_h_f = None
 _respm_v_f = None
 _respm_h_v_f = None
@@ -26,32 +29,33 @@ _inv_respm_hv_f = None
 _inv_respm_h_f = None
 _inv_respm_v_f = None
 _inv_respm_h_v_f = None
-_reference_orbit_xy = _np.zeros(2*len(_api_pv._pvnames_bpm_x))
+_reference_orbit_xy = None
 _reference_orbit_x = None
 _reference_orbit_y = None
 
 
 def set_reference_orbit(reference_orbit = None, plane = ''):
     global _reference_orbit_xy, _reference_orbit_x, _reference_orbit_y
+    _reference_orbit_xy = _np.empty((len(_api_pv._pvnames_bpm_x)+len(_api_pv._pvnames_bpm_y)))
     if plane.lower() == 'x':
-        if reference_orbit is not None:
-            _reference_orbit_x = reference_orbit
+        if reference_orbit is None:
+            _reference_orbit_x = _np.loadtxt(reforbit_path + 'orbit_x_null' + reforbit_filetype)
         else:
-            _reference_orbit_x = _np.zeros(len(_api_pv._pvnames_bpm_x))
-        _reference_orbit_xy[:len(_reference_orbit_xy)/2] = _reference_orbit_x
+            _reference_orbit_x = _np.loadtxt(reforbit_path + reference_orbit + reforbit_filetype)
+        _reference_orbit_xy[:len(_reference_orbit_x)] = _reference_orbit_x
     elif plane.lower() == 'y':
-        if reference_orbit is not None:
-            _reference_orbit_y = reference_orbit
+        if reference_orbit is None:
+            _reference_orbit_y = _np.loadtxt(reforbit_path + 'orbit_y_null' + reforbit_filetype)
         else:
-            _reference_orbit_y= _np.zeros(2*len(_api_pv._pvnames_bpm_y))
-        _reference_orbit_xy[len(_reference_orbit_xy)/2:] = _reference_orbit_y
-    elif plane.lower() == 'xy':
-        if reference_orbit is not None:
-            _reference_orbit_xy = reference_orbit
-        else:
-            _reference_orbit_xy[:] = _np.zeros(len(_reference_orbit_xy))
-        _reference_orbit_x = _reference_orbit_xy[:len(_reference_orbit_xy)/2]
-        _reference_orbit_y = _reference_orbit_xy[len(_reference_orbit_xy)/2:]
+            _reference_orbit_y = _np.loadtxt(reforbit_path + reference_orbit + reforbit_filetype)
+        _reference_orbit_xy[-len(_reference_orbit_y):] = _reference_orbit_y
+    # elif plane.lower() == 'xy':
+    #     if reference_orbit is not None:
+    #         _reference_orbit_xy = reference_orbit
+    #     else:
+    #         _reference_orbit_xy = _np.loadtxt(reforbit_path + 'orbit_xy_null' + reforbit_filetype)
+    #     _reference_orbit_x = _reference_orbit_xy[:len(_reference_orbit_xy)/2]
+    #     _reference_orbit_y = _reference_orbit_xy[len(_reference_orbit_xy)/2:]
 
 
 def set_respm(respm = None):

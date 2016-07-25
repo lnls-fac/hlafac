@@ -26,7 +26,9 @@ class CODCorrectionThread(threading.Thread):
         self._interval = interval
         self._stop_event = stop_event
         self._mode = 'Off'
-        self._respm = _api_correction._respm_hv_f
+        self._respm = 'respm_hv_f_va'
+        self._reforbitx = 'orbit_x_null'
+        self._reforbity = 'orbit_y_null'
 
     def cod_correction(self, ctype = ''):
         if ctype.lower() == 'h' or ctype.lower() == 'h_f':
@@ -41,7 +43,8 @@ class CODCorrectionThread(threading.Thread):
         _api_pv.add_kick(delta_kick, ctype)
 
     def _main(self):
-        _api_correction.set_reference_orbit(None, 'xy')
+        _api_correction.set_reference_orbit(self._reforbitx, 'x')
+        _api_correction.set_reference_orbit(self._reforbity, 'y')
         _api_correction.set_respm(self._respm)
         while not self._stop_event.is_set():
             if self._mode == 'OnH':

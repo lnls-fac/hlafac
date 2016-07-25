@@ -89,4 +89,18 @@ class PCASDriver(Driver):
             except:
                 self.setParam('SICO-SOFB-ERROR', 4)
                 return
+        elif reason == 'SICO-SOFB-REFORBIT-X':
+            try:
+                _api_correction.set_reference_orbit(value, 'x')
+                self._threads_dic['orbit_correction']._reforbitx = value
+            except:
+                self.setParam('SICO-SOFB-ERROR', 5)
+                return
+        elif reason == 'SICO-SOFB-REFORBIT-Y':
+            try:
+                _api_correction.set_reference_orbit(value, 'y')
+                self._threads_dic['orbit_correction']._reforbity = value
+            except:
+                self.setParam('SICO-SOFB-ERROR', 5)
+                return
         return super().write(reason, value)

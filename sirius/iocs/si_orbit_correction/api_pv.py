@@ -148,7 +148,7 @@ def meas_respm(ctype = ''):
         pvnames_c.extend(_pvnames_cv)
         plane = 'xy'
     kick0 = get_kick(ctype)
-    respm = _np.ones((len(pvnames_bpm), len(pvnames_c)+1))
+    respm = _np.empty((len(pvnames_bpm), len(pvnames_c)+1))
     old_orbit = _np.array(get_orbit(plane))
     for i, pvname in enumerate(pvnames_c):
         _pvs[pvname].value = kick0[i] + delta_kick/2.0
