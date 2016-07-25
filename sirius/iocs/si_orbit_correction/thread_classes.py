@@ -130,27 +130,21 @@ class MEASRespmThread(threading.Thread):
     def _main(self):
         while not self._stop_event.is_set():
             if self._mode == 'OnH':
-                print('Measuring horizontal response matrix...')
                 _api_pv.meas_respm('h')
                 self._finalise_meas_respm()
             elif self._mode == 'OnV':
-                print('Measuring vertical response matrix...')
                 _api_pv.meas_respm('v')
                 self._finalise_meas_respm()
             elif self._mode == 'OnHV':
-                print('Measuring full response matrix...')
                 _api_pv.meas_respm('hv')
                 self._finalise_meas_respm()
             elif self._mode == 'OnH_F':
-                print('Measuring horizontal response matrix with RF frequency adjustment...')
                 _api_pv.meas_respm('h_f')
                 self._finalise_meas_respm()
             elif self._mode == 'OnV_F':
-                print('Measuring vertical response matrix with RF frequency adjustment...')
                 _api_pv.meas_respm('v_f')
                 self._finalise_meas_respm()
-            elif self._mode == 'OnHV':
-                print('Measuring full response matrix with RF frequency adjustment...')
+            elif self._mode == 'OnHV_F':
                 _api_pv.meas_respm('hv_f')
                 self._finalise_meas_respm()
             else:

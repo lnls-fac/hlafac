@@ -65,16 +65,22 @@ class PCASDriver(Driver):
                     return
                 else:
                     if value == 'OnH' or value == 1:
+                        print('Measuring horizontal response matrix...')
                         self._threads_dic['respm_measurement']._mode = 'OnH'
                     elif value == 'OnV' or value == 2:
+                        print('Measuring vertical response matrix...')
                         self._threads_dic['respm_measurement']._mode = 'OnV'
                     elif value == 'OnHV' or value == 3:
+                        print('Measuring full response matrix...')
                         self._threads_dic['respm_measurement']._mode = 'OnHV'
                     elif value == 'OnH_F' or value == 4:
+                        print('Measuring horizontal response matrix with RF frequency adjustment...')
                         self._threads_dic['respm_measurement']._mode = 'OnH_F'
                     elif value == 'OnV_F' or value == 5:
+                        print('Measuring vertical response matrix with RF frequency adjustment...')
                         self._threads_dic['respm_measurement']._mode = 'OnV_F'
                     elif value == 'OnHV_F' or value == 6:
+                        print('Measuring full response matrix with RF frequency adjustment...')
                         self._threads_dic['respm_measurement']._mode = 'OnHV_F'
         elif reason == 'SICO-SOFB-RESPM':
             try:
