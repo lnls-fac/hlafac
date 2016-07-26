@@ -5,7 +5,7 @@ import api_pv as _api_pv
 import api_correction as _api_correction
 from time import sleep
 from collections import deque
-from numpy import array, mean
+from numpy import array, mean, sqrt, square
 from pcaspy import Driver
 from epics import caput
 
@@ -100,8 +100,23 @@ class MEASOrbitThread(threading.Thread):
                 orbit = _api_pv.get_orbit('xy')
                 self._orbit_buffer.append(orbit)
                 avg_orbit = self.average_orbit()
-                self._driver.setParam('SICO-SOFB-AVGORBIT-X', avg_orbit[:len(_api_pv._pvnames_bpm_x)])
-                self._driver.setParam('SICO-SOFB-AVGORBIT-Y', avg_orbit[len(_api_pv._pvnames_bpm_x):])
+                orbit_x = avg_orbit[:len(_api_pv._pvnames_bpm_x)]
+                orbit_y = avg_orbit[len(_api_pv._pvnames_bpm_x):]
+                self._driver.setParam('SICO-SOFB-AVGORBIT-X', orbit_x)
+                self._driver.setParam('SICO-SOFB-AVGORBIT-Y', orbit_y)
+                try:
+                    delta_x = abs(orbit_x-_api_correction._reference_orbit_x)
+                    delta_y = abs(orbit_y-_api_correction._reference_orbit_y)
+                    self._driver.setParam('SICO-SOFB-ORBIT-X-MEAN', mean(delta_x))
+                    self._driver.setParam('SICO-SOFB-ORBIT-Y-MEAN', mean(delta_y))
+                    self._driver.setParam('SICO-SOFB-ORBIT-X-MAX', max(delta_x))
+                    self._driver.setParam('SICO-SOFB-ORBIT-Y-MAX', max(delta_y))
+                    self._driver.setParam('SICO-SOFB-ORBIT-X-MIN', min(delta_x))
+                    self._driver.setParam('SICO-SOFB-ORBIT-Y-MIN', min(delta_y))
+                    self._driver.setParam('SICO-SOFB-ORBIT-X-RMS', sqrt(mean(square(delta_x))))
+                    self._driver.setParam('SICO-SOFB-ORBIT-Y-RMS', sqrt(mean(square(delta_y))))
+                except:
+                    self._driver.setParam('SICO-SOFB-ERROR', 6)
             except:
                 self._driver.setParam('SICO-SOFB-ERROR', 3)
         else:
