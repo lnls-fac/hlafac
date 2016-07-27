@@ -25,7 +25,7 @@ class CODCorrectionThread(threading.Thread):
         super().__init__(name=self._name, target=self._main, daemon=True)
         self._interval = interval
         self._stop_event = stop_event
-        self._mode = 'Off'
+        self._mode = 0
         self._respm = 'respm_hv_f_va'
         self._reforbitx = 'orbit_x_null'
         self._reforbity = 'orbit_y_null'
@@ -47,21 +47,21 @@ class CODCorrectionThread(threading.Thread):
         _api_correction.set_reference_orbit(self._reforbity, 'y')
         _api_correction.set_respm(self._respm)
         while not self._stop_event.is_set():
-            if self._mode == 'OnH':
+            if self._mode == 1:
                 self.cod_correction('h')
-            elif self._mode == 'OnV':
+            elif self._mode == 2:
                 self.cod_correction('v')
-            elif self._mode == 'OnHOnV':
+            elif self._mode == 3:
                 self.cod_correction('h_v')
-            elif self._mode == 'OnHV':
+            elif self._mode == 4:
                 self.cod_correction('hv')
-            elif self._mode == 'OnH_F':
+            elif self._mode == 5:
                 self.cod_correction('h_f')
-            elif self._mode == 'OnV_F':
+            elif self._mode == 6:
                 self.cod_correction('v_f')
-            elif self._mode == 'OnHOnV_F':
+            elif self._mode == 7:
                 self.cod_correction('h_v_f')
-            elif self._mode == 'OnHV_F':
+            elif self._mode == 8:
                 self.cod_correction('hv_f')
             else:
                 sleep(self._interval)
@@ -138,7 +138,7 @@ class MEASRespmThread(threading.Thread):
         super().__init__(name=self._name, target=self._main, daemon = True)
         self._interval = interval
         self._stop_event = stop_event
-        self._mode = 'Off'
+        self._mode = 0
 
     def _finalise_meas_respm(self):
         self._mode = 'Off'
@@ -147,22 +147,22 @@ class MEASRespmThread(threading.Thread):
 
     def _main(self):
         while not self._stop_event.is_set():
-            if self._mode == 'OnH':
+            if self._mode == 1:
                 _api_pv.meas_respm('h')
                 self._finalise_meas_respm()
-            elif self._mode == 'OnV':
+            elif self._mode == 2:
                 _api_pv.meas_respm('v')
                 self._finalise_meas_respm()
-            elif self._mode == 'OnHV':
+            elif self._mode == 3:
                 _api_pv.meas_respm('hv')
                 self._finalise_meas_respm()
-            elif self._mode == 'OnH_F':
+            elif self._mode == 4:
                 _api_pv.meas_respm('h_f')
                 self._finalise_meas_respm()
-            elif self._mode == 'OnV_F':
+            elif self._mode == 5:
                 _api_pv.meas_respm('v_f')
                 self._finalise_meas_respm()
-            elif self._mode == 'OnHV_F':
+            elif self._mode == 6:
                 _api_pv.meas_respm('hv_f')
                 self._finalise_meas_respm()
             else:
