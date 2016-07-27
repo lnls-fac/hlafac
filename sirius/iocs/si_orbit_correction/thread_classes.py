@@ -26,9 +26,6 @@ class CODCorrectionThread(threading.Thread):
         self._interval = interval
         self._stop_event = stop_event
         self._mode = 0
-        self._respm = 'respm_hv_f_va'
-        self._reforbitx = 'orbit_x_null'
-        self._reforbity = 'orbit_y_null'
 
     def cod_correction(self, ctype = ''):
         if ctype.lower() == 'h' or ctype.lower() == 'h_f':
@@ -43,9 +40,9 @@ class CODCorrectionThread(threading.Thread):
         _api_pv.add_kick(delta_kick, ctype)
 
     def _main(self):
-        _api_correction.set_reference_orbit(self._reforbitx, 'x')
-        _api_correction.set_reference_orbit(self._reforbity, 'y')
-        _api_correction.set_respm(self._respm)
+        _api_correction.set_reforbit('x')
+        _api_correction.set_reforbit('y')
+        _api_correction.set_respm()
         while not self._stop_event.is_set():
             if self._mode == 1:
                 self.cod_correction('h')
@@ -105,8 +102,8 @@ class MEASOrbitThread(threading.Thread):
                 self._driver.setParam('SICO-SOFB-AVGORBIT-X', orbit_x)
                 self._driver.setParam('SICO-SOFB-AVGORBIT-Y', orbit_y)
                 try:
-                    delta_x = abs(orbit_x-_api_correction._reference_orbit_x)
-                    delta_y = abs(orbit_y-_api_correction._reference_orbit_y)
+                    delta_x = abs(orbit_x-_api_correction._reforbit_x)
+                    delta_y = abs(orbit_y-_api_correction._reforbit_y)
                     self._driver.setParam('SICO-SOFB-ORBIT-X-MEAN', mean(delta_x))
                     self._driver.setParam('SICO-SOFB-ORBIT-Y-MEAN', mean(delta_y))
                     self._driver.setParam('SICO-SOFB-ORBIT-X-MAX', max(delta_x))

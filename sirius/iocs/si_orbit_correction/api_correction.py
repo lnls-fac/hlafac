@@ -6,11 +6,15 @@ import api_pv as _api_pv
 from time import sleep
 
 
-respm_path = _api_pv.respm_path
-respm_filetype = _api_pv.respm_filetype
+_respm_path = './respm/'
+_respm_filetype = '.txt'
+_respm_sel = 0
 
-reforbit_path = './reforbit/'
-reforbit_filetype = '.txt'
+_reforbit_x_path = './reforbit_x/'
+_reforbit_y_path = './reforbit_y/'
+_reforbit_filetype = '.txt'
+_reforbit_x_sel = 0
+_reforbit_y_sel = 0
 
 _model = None
 _respm_hv = None
@@ -29,41 +33,47 @@ _inv_respm_hv_f = None
 _inv_respm_h_f = None
 _inv_respm_v_f = None
 _inv_respm_h_v_f = None
-_reference_orbit_xy = None
-_reference_orbit_x = None
-_reference_orbit_y = None
+_reforbit_xy = None
+_reforbit_x = None
+_reforbit_y = None
 
 
-def set_reference_orbit(reference_orbit = None, plane = ''):
-    global _reference_orbit_xy, _reference_orbit_x, _reference_orbit_y
-    _reference_orbit_xy = _np.empty((len(_api_pv._pvnames_bpm_x)+len(_api_pv._pvnames_bpm_y)))
+def set_reforbit(plane = ''):
+    global _reforbit_xy, _reforbit_x, _reforbit_y
+    _reforbit_xy = _np.empty((len(_api_pv._pvnames_bpm_x)+len(_api_pv._pvnames_bpm_y)))
     if plane.lower() == 'x':
-        if reference_orbit is None:
-            _reference_orbit_x = _np.loadtxt(reforbit_path + 'orbit_x_null' + reforbit_filetype)
-        else:
-            _reference_orbit_x = _np.loadtxt(reforbit_path + reference_orbit + reforbit_filetype)
-        _reference_orbit_xy[:len(_reference_orbit_x)] = _reference_orbit_x
+        _reforbit_x = _load(_reforbit_x_path + str(_reforbit_x_sel) + _reforbit_filetype)
+        _reforbit_xy[:len(_reforbit_x)] = _reforbit_x
     elif plane.lower() == 'y':
-        if reference_orbit is None:
-            _reference_orbit_y = _np.loadtxt(reforbit_path + 'orbit_y_null' + reforbit_filetype)
-        else:
-            _reference_orbit_y = _np.loadtxt(reforbit_path + reference_orbit + reforbit_filetype)
-        _reference_orbit_xy[-len(_reference_orbit_y):] = _reference_orbit_y
-    # elif plane.lower() == 'xy':
-    #     if reference_orbit is not None:
-    #         _reference_orbit_xy = reference_orbit
-    #     else:
-    #         _reference_orbit_xy = _np.loadtxt(reforbit_path + 'orbit_xy_null' + reforbit_filetype)
-    #     _reference_orbit_x = _reference_orbit_xy[:len(_reference_orbit_xy)/2]
-    #     _reference_orbit_y = _reference_orbit_xy[len(_reference_orbit_xy)/2:]
+        _reforbit_y = _load(_reforbit_y_path + str(_reforbit_y_sel) + _reforbit_filetype)
+        _reforbit_xy[-len(_reforbit_y):] = _reforbit_y
 
 
-def set_respm(respm = None):
+def set_reforbit_slot(slot = None, plane = ''):
+    global _reforbit_x_sel, _reforbit_y_sel
+    if plane.lower() == 'x':_reforbit_x_sel = slot
+    elif plane.lower() == 'y': _reforbit_y_sel = slot
+
+
+def update_reforbit_slot(reforbit = None, plane = ''):
+    if plane.lower() == 'x':
+        _save(_reforbit_x_path + str(_reforbit_x_sel) + _reforbit_filetype, reforbit)
+    elif plane.lower() == 'y':
+        _save(_reforbit_y_path + str(_reforbit_y_sel) + _reforbit_filetype, reforbit)
+
+
+def get_reforbit(plane = ''):
+    if plane.lower() == 'x':
+        reforbit = _reforbit_x
+    elif plane.lower() == 'y':
+        reforbit = _reforbit_y
+    return reforbit
+
+
+def set_respm():
     global _respm_h, _respm_v, _respm_hv, _respm_h_v, _inv_respm_h, _inv_respm_v, _inv_respm_hv, _inv_respm_h_v, _respm_h_f, _respm_v_f, _respm_hv_f, _respm_h_v_f, _inv_respm_h_f, _inv_respm_v_f, _inv_respm_hv_f, _inv_respm_h_v_f
-    if respm is None:
-        _respm_hv_f = _api_pv.meas_respm('hv')
-    else:
-        _respm_hv_f = _np.loadtxt(respm_path + respm + respm_filetype)
+
+    _respm_hv_f = _load(_respm_path + str(_respm_sel) + _respm_filetype)
     _respm_hv = _respm_hv_f[:,:-1]
     _respm_h = _respm_hv[:len(_api_pv._pvnames_bpm_x),:len(_api_pv._pvnames_ch)]
     _respm_v = _respm_hv[len(_api_pv._pvnames_bpm_x):,len(_api_pv._pvnames_ch):]
@@ -87,35 +97,58 @@ def set_respm(respm = None):
         _inv_respm_h_v_f = _calculate_inv_respm(_respm_h_v_f)
 
 
+def set_respm_slot(slot = None):
+    global _respm_sel
+    _respm_sel = slot
+
+
+def update_respm_slot(respm_array = None):
+    respm = _np.reshape(respm_array, (len(_api_pv._pvnames_bpm_x)+len(_api_pv._pvnames_bpm_y, len(_api_pv._pvnames_ch)+len(_api_pv._pvnames_cv)+1, order='F')))
+    _save(_respm_path + str(_respm_sel) + _respm_filetype, respm)
+
+
+def get_respm():
+    respm = _respm_h_v_f
+    return respm
+
+
 def calc_kick(orbit = None, ctype = ''):
     kick, reference_orbit, inv_respm = None, None, None
     if ctype.lower() == 'h':
-        reference_orbit = _reference_orbit_x
+        reference_orbit = _reforbit_x
         inv_respm = _inv_respm_h
     elif ctype.lower() == 'v':
-        reference_orbit = _reference_orbit_y
+        reference_orbit = _reforbit_y
         inv_respm = _inv_respm_v
     elif ctype.lower() == 'hv':
-        reference_orbit = _reference_orbit_xy
+        reference_orbit = _reforbit_xy
         inv_respm = _inv_respm_hv
     elif ctype.lower() == 'h_v':
-        reference_orbit = _reference_orbit_xy
+        reference_orbit = _reforbit_xy
         inv_respm = _inv_respm_h_v
     elif ctype.lower() == 'h_f':
-        reference_orbit = _reference_orbit_x
+        reference_orbit = _reforbit_x
         inv_respm = _inv_respm_h_f
     elif ctype.lower() == 'v_f':
-        reference_orbit = _reference_orbit_y
+        reference_orbit = _reforbit_y
         inv_respm = _inv_respm_v_f
     elif ctype.lower() == 'hv_f':
-        reference_orbit = _reference_orbit_xy
+        reference_orbit = _reforbit_xy
         inv_respm = _inv_respm_hv_f
     elif ctype.lower() == 'h_v_f':
-        reference_orbit = _reference_orbit_xy
+        reference_orbit = _reforbit_xy
         inv_respm = _inv_respm_h_v_f
     if reference_orbit is not None and inv_respm is not None:
         kick = _np.dot(inv_respm,(reference_orbit-orbit))
     return kick
+
+
+def _load(fname):
+    return _np.loadtxt(fname)
+
+
+def _save(fname, var):
+    _np.savetxt(fname, var, delimiter = ' ')
 
 
 def _calculate_inv_respm(respm = None):

@@ -46,24 +46,48 @@ class PCASDriver(Driver):
                     return
                 else:
                     self._threads_dic['respm_measurement']._mode = value
+        elif reason == 'SICO-SOFB-RESPM-SEL':
+            try:
+                _api_correction.set_respm_slot(value)
+                _api_correction.set_respm()
+                self.setParam('SICO-SOFB-RESPM', _api_correction.get_respm())
+            except:
+                self.setParam('SICO-SOFB-ERROR', 8)
+                return
+        elif reason == 'SICO-SOFB-REFORBIT-X-SEL':
+            try:
+                _api_correction.set_reforbit_slot(value, 'x')
+                _api_correction.set_reforbit('x')
+                self.setParam('SICO-SOFB-REFORBIT-X', _api_correction.get_reforbit('x'))
+            except:
+                self.setParam('SICO-SOFB-ERROR', 9)
+                return
+        elif reason == 'SICO-SOFB-REFORBIT-Y-SEL':
+            try:
+                _api_correction.set_reforbit_slot(value, 'y')
+                _api_correction.set_reforbit('y')
+                self.setParam('SICO-SOFB-REFORBIT-Y', _api_correction.get_reforbit('y'))
+            except:
+                self.setParam('SICO-SOFB-ERROR', 9)
+                return
         elif reason == 'SICO-SOFB-RESPM':
             try:
-                _api_correction.set_respm(value)
-                self._threads_dic['orbit_correction']._respm = value
+                _api_correction.update_respm_slot(value)
+                _api_correction.set_respm()
             except:
                 self.setParam('SICO-SOFB-ERROR', 4)
                 return
         elif reason == 'SICO-SOFB-REFORBIT-X':
             try:
-                _api_correction.set_reference_orbit(value, 'x')
-                self._threads_dic['orbit_correction']._reforbitx = value
+                _api_correction.update_reforbit_slot(value, 'x')
+                _api_correction.set_reforbit('x')
             except:
                 self.setParam('SICO-SOFB-ERROR', 5)
                 return
         elif reason == 'SICO-SOFB-REFORBIT-Y':
             try:
-                _api_correction.set_reference_orbit(value, 'y')
-                self._threads_dic['orbit_correction']._reforbity = value
+                _api_correction.update_reforbit_slot(value, 'y')
+                _api_correction.set_reforbit('y')
             except:
                 self.setParam('SICO-SOFB-ERROR', 5)
                 return
