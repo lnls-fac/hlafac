@@ -72,7 +72,7 @@ class PCASDriver(Driver):
                 return
         elif reason == 'SICO-SOFB-RESPM':
             try:
-                _api_correction.update_respm_slot(value)
+                _api_correction.update_respm_slot(value, reshape = True)
                 _api_correction.set_respm()
             except:
                 self.setParam('SICO-SOFB-ERROR', 4)

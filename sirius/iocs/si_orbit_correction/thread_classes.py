@@ -137,7 +137,8 @@ class MEASRespmThread(threading.Thread):
         self._stop_event = stop_event
         self._mode = 0
 
-    def _finalise_meas_respm(self):
+    def _finalise_meas_respm(self, respm):
+        _api_correction.update_respm_slot(respm, reshape = False)
         self._mode = 'Off'
         self._driver.setParam('SICO-SOFB-MEASRESPM', 0)
         print('Response matrix measurement OK.')
@@ -145,23 +146,23 @@ class MEASRespmThread(threading.Thread):
     def _main(self):
         while not self._stop_event.is_set():
             if self._mode == 1:
-                _api_pv.meas_respm('h')
-                self._finalise_meas_respm()
+                respm = _api_pv.meas_respm('h')
+                self._finalise_meas_respm(respm)
             elif self._mode == 2:
-                _api_pv.meas_respm('v')
-                self._finalise_meas_respm()
+                respm = _api_pv.meas_respm('v')
+                self._finalise_meas_respm(respm)
             elif self._mode == 3:
-                _api_pv.meas_respm('hv')
-                self._finalise_meas_respm()
+                respm = _api_pv.meas_respm('hv')
+                self._finalise_meas_respm(respm)
             elif self._mode == 4:
-                _api_pv.meas_respm('h_f')
-                self._finalise_meas_respm()
+                respm = _api_pv.meas_respm('h_f')
+                self._finalise_meas_respm(respm)
             elif self._mode == 5:
-                _api_pv.meas_respm('v_f')
-                self._finalise_meas_respm()
+                respm = _api_pv.meas_respm('v_f')
+                self._finalise_meas_respm(respm)
             elif self._mode == 6:
-                _api_pv.meas_respm('hv_f')
-                self._finalise_meas_respm()
+                respm = _api_pv.meas_respm('hv_f')
+                self._finalise_meas_respm(respm)
             else:
                 sleep(self._interval)
         else:

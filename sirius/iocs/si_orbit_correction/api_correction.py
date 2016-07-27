@@ -51,7 +51,7 @@ def set_reforbit(plane = ''):
 
 def set_reforbit_slot(slot = None, plane = ''):
     global _reforbit_x_sel, _reforbit_y_sel
-    if plane.lower() == 'x':_reforbit_x_sel = slot
+    if plane.lower() == 'x': _reforbit_x_sel = slot
     elif plane.lower() == 'y': _reforbit_y_sel = slot
 
 
@@ -102,8 +102,10 @@ def set_respm_slot(slot = None):
     _respm_sel = slot
 
 
-def update_respm_slot(respm_array = None):
-    respm = _np.reshape(respm_array, (len(_api_pv._pvnames_bpm_x)+len(_api_pv._pvnames_bpm_y, len(_api_pv._pvnames_ch)+len(_api_pv._pvnames_cv)+1, order='F')))
+def update_respm_slot(respm_array = None, reshape = False):
+    if reshape:
+        respm = _np.reshape(respm_array, (len(_api_pv._pvnames_bpm_x)+len(_api_pv._pvnames_bpm_y, len(_api_pv._pvnames_ch)+len(_api_pv._pvnames_cv)+1, order='F')))
+    else: respm = respm_array
     _save(_respm_path + str(_respm_sel) + _respm_filetype, respm)
 
 
