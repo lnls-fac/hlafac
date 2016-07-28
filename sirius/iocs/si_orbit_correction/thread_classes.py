@@ -19,6 +19,10 @@ class CODCorrectionThread(threading.Thread):
         name -- threading object's name
         interval -- processing interval [s]
         stop_event -- event to stop processing
+
+        Class main attribute: mode
+        Defines what type of correction should be done.
+        0-Off, 1-H, 2-V, 3-H_V, 4-HV, 5-H_F, 6-V_F, 7-H_V_F, 8-HV_F
         """
 
         self._name = name
@@ -40,6 +44,7 @@ class CODCorrectionThread(threading.Thread):
         _api_pv.add_kick(delta_kick, ctype)
 
     def _main(self):
+        _api_correction.initialize_slot(var_type = 'all')
         _api_correction.set_reforbit('x')
         self._driver.setParam('SICO-SOFB-REFORBIT-X', _api_correction.get_reforbit('x'))
         _api_correction.set_reforbit('y')
@@ -132,6 +137,10 @@ class MEASRespmThread(threading.Thread):
         name -- threading object's name
         interval -- processing interval [s]
         stop_event -- event to stop processing
+
+        Class main attribute: mode
+        Defines what type of respm should be measured.
+        0-Off, 1-H, 2-V, 3-HV, 4-H_F, 5-V_F, 6-HV_F
         """
 
         self._name = name
@@ -170,3 +179,35 @@ class MEASRespmThread(threading.Thread):
                 sleep(self._interval)
         else:
             log('exit', 'response matrix measurement thread')
+
+
+class UPDATEVariablesThread(threading.Thread):
+
+    def __init__(self, name, stop_event, interval):
+        """Variable Update Thread Object
+
+        Keyword arguments:
+        name -- threading object's name
+        interval -- processing interval [s]
+        stop_event -- event to stop processing
+
+        Class main attribute: mode
+        Defines what variable should be updated.
+        0-Off, 1-respm
+        """
+
+        self._name = name
+        super().__init__(name=self._name, target=self._main, daemon = True)
+        self._interval = interval
+        self._stop_event = stop_event
+        self._mode = 0
+
+    def _main(self):
+        while not self._stop_event.is_set():
+            if self._mode == 1:
+                _api_correction.set_inv_respm()
+                self._mode = 0
+            else:
+                sleep(self._interval)
+        else:
+            log('exit', 'update variables thread')

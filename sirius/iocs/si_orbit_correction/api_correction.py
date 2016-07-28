@@ -9,12 +9,17 @@ from time import sleep
 _respm_path = './respm/'
 _respm_filetype = '.txt'
 _respm_sel = 0
+_respm_nslots = 3
+_respm_data = None
 
 _reforbit_x_path = './reforbit_x/'
 _reforbit_y_path = './reforbit_y/'
 _reforbit_filetype = '.txt'
 _reforbit_x_sel = 0
 _reforbit_y_sel = 0
+_reforbit_nslots = 3
+_reforbit_x_data = None
+_reforbit_y_data = None
 
 _model = None
 _respm_hv = None
@@ -38,14 +43,42 @@ _reforbit_x = None
 _reforbit_y = None
 
 
+def initialize_slot(var_type = None, slot = None):
+    global _reforbit_x_data, _reforbit_y_data, _respm_data
+    if slot == None:
+        if var_type.lower() == 'reforbit_x':
+            _reforbit_x_data = _np.empty((len(_api_pv._pvnames_bpm_x), _reforbit_nslots))
+            for i in range(_reforbit_nslots):
+                _reforbit_x_data[:,i] = _load(_reforbit_x_path + str(i) + _reforbit_filetype)
+        elif var_type.lower() == 'reforbit_y':
+            _reforbit_y_data = _np.empty((len(_api_pv._pvnames_bpm_y), _reforbit_nslots))
+            for i in range(_reforbit_nslots):
+                _reforbit_y_data[:,i] = _load(_reforbit_y_path + str(i) + _reforbit_filetype)
+        elif var_type.lower() == 'respm':
+            _respm_data = _np.empty((len(_api_pv._pvnames_bpm_x)+len(_api_pv._pvnames_bpm_y), len(_api_pv._pvnames_ch)+len(_api_pv._pvnames_cv)+1, _respm_nslots))
+            for i in range(_respm_nslots):
+                _respm_data[:,:,i] = _load(_respm_path + str(i) + _respm_filetype)
+        elif var_type.lower() == 'all':
+            initialize_slot('reforbit_x')
+            initialize_slot('reforbit_y')
+            initialize_slot('respm')
+    else:
+        if var_type.lower() == 'reforbit_x':
+            _reforbit_x_data[:,slot] = _load(_reforbit_x_path + str(slot) + _reforbit_filetype)
+        elif var_type.lower() == 'reforbit_y':
+            _reforbit_y_data[:,slot] = _load(_reforbit_y_path + str(slot) + _reforbit_filetype)
+        elif var_type.lower() == 'respm':
+            _respm_data[:,:,slot] = _load(_respm_path + str(slot) + _respm_filetype)
+
+
 def set_reforbit(plane = ''):
     global _reforbit_xy, _reforbit_x, _reforbit_y
     _reforbit_xy = _np.empty((len(_api_pv._pvnames_bpm_x)+len(_api_pv._pvnames_bpm_y)))
     if plane.lower() == 'x':
-        _reforbit_x = _load(_reforbit_x_path + str(_reforbit_x_sel) + _reforbit_filetype)
+        _reforbit_x = _reforbit_x_data[:,_reforbit_x_sel]
         _reforbit_xy[:len(_reforbit_x)] = _reforbit_x
     elif plane.lower() == 'y':
-        _reforbit_y = _load(_reforbit_y_path + str(_reforbit_y_sel) + _reforbit_filetype)
+        _reforbit_y = _reforbit_y_data[:,_reforbit_y_sel]
         _reforbit_xy[-len(_reforbit_y):] = _reforbit_y
 
 
@@ -58,8 +91,10 @@ def set_reforbit_slot(slot = None, plane = ''):
 def update_reforbit_slot(reforbit = None, plane = ''):
     if plane.lower() == 'x':
         _save(_reforbit_x_path + str(_reforbit_x_sel) + _reforbit_filetype, reforbit)
+        initialize_slot('reforbit_x', _reforbit_x_sel)
     elif plane.lower() == 'y':
         _save(_reforbit_y_path + str(_reforbit_y_sel) + _reforbit_filetype, reforbit)
+        initialize_slot('reforbit_y', _reforbit_y_sel)
 
 
 def get_reforbit(plane = ''):
@@ -71,9 +106,9 @@ def get_reforbit(plane = ''):
 
 
 def set_respm():
-    global _respm_h, _respm_v, _respm_hv, _respm_h_v, _inv_respm_h, _inv_respm_v, _inv_respm_hv, _inv_respm_h_v, _respm_h_f, _respm_v_f, _respm_hv_f, _respm_h_v_f, _inv_respm_h_f, _inv_respm_v_f, _inv_respm_hv_f, _inv_respm_h_v_f
+    global _respm_h, _respm_v, _respm_hv, _respm_h_v, _respm_h_f, _respm_v_f, _respm_hv_f, _respm_h_v_f
 
-    _respm_hv_f = _load(_respm_path + str(_respm_sel) + _respm_filetype)
+    _respm_hv_f = _respm_data[:,:,_respm_sel]
     _respm_hv = _respm_hv_f[:,:-1]
     _respm_h = _respm_hv[:len(_api_pv._pvnames_bpm_x),:len(_api_pv._pvnames_ch)]
     _respm_v = _respm_hv[len(_api_pv._pvnames_bpm_x):,len(_api_pv._pvnames_ch):]
@@ -86,6 +121,9 @@ def set_respm():
     _respm_v_f = _respm_v[:]
     _np.c_[_respm_v_f,_respm_hv_f[len(_api_pv._pvnames_bpm_x):,-1]]
 
+
+def set_inv_respm():
+    global _inv_respm_h, _inv_respm_v, _inv_respm_hv, _inv_respm_h_v, _inv_respm_h_f, _inv_respm_v_f, _inv_respm_hv_f, _inv_respm_h_v_f
     if (_respm_hv_f != []) and (_respm_hv_f is not None):
         _inv_respm_hv = _calculate_inv_respm(_respm_hv)
         _inv_respm_h = _calculate_inv_respm(_respm_h)
@@ -105,12 +143,14 @@ def set_respm_slot(slot = None):
 def update_respm_slot(respm_array = None, reshape = False):
     if reshape:
         respm = _np.reshape(respm_array, (len(_api_pv._pvnames_bpm_x)+len(_api_pv._pvnames_bpm_y, len(_api_pv._pvnames_ch)+len(_api_pv._pvnames_cv)+1, order='F')))
-    else: respm = respm_array
+    else:
+        respm = respm_array
     _save(_respm_path + str(_respm_sel) + _respm_filetype, respm)
+    initialize_slot('respm', _respm_sel)
 
 
 def get_respm():
-    respm = _respm_h_v_f
+    respm = _respm_hv_f
     return respm
 
 

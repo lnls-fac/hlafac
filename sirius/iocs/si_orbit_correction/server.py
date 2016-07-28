@@ -32,7 +32,7 @@ def run(prefix):
     server = pcaspy.SimpleServer()
     server.createPV(prefix, pvs.pvdb)
 
-    thread_names = ('orbit_correction', 'orbit_measurement', 'respm_measurement')
+    thread_names = ('orbit_correction', 'orbit_measurement', 'respm_measurement', 'var_update')
     threads = create_threads(thread_names)
     pcas_driver = driver.PCASDriver(threads, start_event, stop_event, WAIT_TIMEOUT)
     start_threads(threads)
@@ -63,6 +63,8 @@ def create_threads(thread_names):
             thread = thread_classes.MEASOrbitThread(tn, stop_event, WAIT_TIMEOUT, 1)
         elif tn == 'respm_measurement':
             thread = thread_classes.MEASRespmThread(tn, stop_event, WAIT_TIMEOUT)
+        elif tn == 'var_update':
+            thread = thread_classes.UPDATEVariablesThread(tn, stop_event, WAIT_TIMEOUT)
         threads[tn] = thread
     return threads
 

@@ -26,7 +26,7 @@ class PCASDriver(Driver):
             if value == 0:
                 self._threads_dic['orbit_correction']._mode = value
             else:
-                if self._threads_dic['respm_measurement']._mode != 0:
+                if self._threads_dic['respm_measurement']._mode != 0 or self._threads_dic['var_update']._mode != 0:
                     self.setParam('SICO-SOFB-ERROR', 7)
                     return
                 else:
@@ -51,6 +51,7 @@ class PCASDriver(Driver):
                 _api_correction.set_respm_slot(value)
                 _api_correction.set_respm()
                 self.setParam('SICO-SOFB-RESPM', _api_correction.get_respm())
+                self._threads_dic['var_update']._mode = 1
             except:
                 self.setParam('SICO-SOFB-ERROR', 8)
                 return
@@ -74,6 +75,7 @@ class PCASDriver(Driver):
             try:
                 _api_correction.update_respm_slot(value, reshape = True)
                 _api_correction.set_respm()
+                self._threads_dic['var_update']._mode = 1
             except:
                 self.setParam('SICO-SOFB-ERROR', 4)
                 return
