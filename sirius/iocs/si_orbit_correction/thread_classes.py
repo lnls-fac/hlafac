@@ -8,6 +8,7 @@ from collections import deque
 from numpy import array, mean, sqrt, square
 from pcaspy import Driver
 from epics import caput
+from re import findall
 
 
 class CODCorrectionThread(threading.Thread):
@@ -151,10 +152,9 @@ class MEASRespmThread(threading.Thread):
         self._mode = 0
 
     def _finalise_meas_respm(self, respm):
-        _api_correction.update_respm_slot(respm, reshape = False)
         self._mode = 'Off'
+        self._driver._threads_dic['var_update']._mode = 1
         self._driver.setParam('SICO-SOFB-MEASRESPM', 0)
-        print('Response matrix measurement OK.')
 
     def _main(self):
         while not self._stop_event.is_set():
@@ -205,53 +205,58 @@ class UPDATEVariablesThread(threading.Thread):
 
     def _main(self):
         while not self._stop_event.is_set():
-            if self._mode == 1:
-                try:
-                    _api_correction.update_respm_slot(self._driver.getParam('SICO-SOFB-RESPM'), reshape = True)
-                    _api_correction.set_respm()
-                    _api_correction.set_inv_respm()
-                except:
-                    self._driver.setParam('SICO-SOFB-ERROR', 10)
-                self._mode = 0
-            elif self._mode == 2:
-                try:
-                    _api_correction.update_reforbit_slot(self._driver.getParam('SICO-SOFB-REFORBIT-X'), 'x')
-                    _api_correction.set_reforbit('x')
-                except:
-                    self._driver.setParam('SICO-SOFB-ERROR', 11)
-                self._mode = 0
-            elif self._mode == 3:
-                try:
-                    _api_correction.update_reforbit_slot(self._driver.getParam('SICO-SOFB-REFORBIT-Y'), 'y')
-                    _api_correction.set_reforbit('y')
-                except:
-                    self._driver.setParam('SICO-SOFB-ERROR', 11)
-                self._mode = 0
-            elif self._mode == 4:
-                try:
-                    _api_correction.set_respm_slot(self._driver.getParam('SICO-SOFB-RESPM-SEL'))
-                    _api_correction.set_respm()
-                    self._driver.setParam('SICO-SOFB-RESPM', _api_correction.get_respm())
-                    _api_correction.set_inv_respm()
-                except:
-                    self._driver.setParam('SICO-SOFB-ERROR', 10)
-                self._mode = 0
-            elif self._mode == 5:
-                try:
-                    _api_correction.set_reforbit_slot(self._driver.getParam('SICO-SOFB-REFORBIT-X-SEL'), 'x')
-                    _api_correction.set_reforbit('x')
-                    self.setParam('SICO-SOFB-REFORBIT-X', _api_correction.get_reforbit('x'))
-                except:
-                    self._driver.setParam('SICO-SOFB-ERROR', 11)
-                self._mode = 0
-            elif self._mode == 6:
-                try:
-                    _api_correction.set_reforbit_slot(self._driver.getParam('SICO-SOFB-REFORBIT-Y-SEL'), 'y')
-                    _api_correction.set_reforbit('y')
-                    self.setParam('SICO-SOFB-REFORBIT-Y', _api_correction.get_reforbit('y'))
-                except:
-                    self._driver.setParam('SICO-SOFB-ERROR', 11)
-                self._mode = 0
+            if self._mode != 0:
+                if self._mode == 1:
+                    try:
+                        _api_correction.update_respm_slot(self._driver.getParam('SICO-SOFB-RESPM'), reshape = True)
+                        _api_correction.set_respm()
+                        _api_correction.set_inv_respm()
+                    except:
+                        self._driver.setParam('SICO-SOFB-ERROR', 10)
+                    self._mode = 0
+                elif self._mode == 2:
+                    try:
+                        _api_correction.update_reforbit_slot(self._driver.getParam('SICO-SOFB-REFORBIT-X'), 'x')
+                        _api_correction.set_reforbit('x')
+                    except:
+                        self._driver.setParam('SICO-SOFB-ERROR', 11)
+                    self._mode = 0
+                elif self._mode == 3:
+                    try:
+                        _api_correction.update_reforbit_slot(self._driver.getParam('SICO-SOFB-REFORBIT-Y'), 'y')
+                        _api_correction.set_reforbit('y')
+                    except:
+                        self._driver.setParam('SICO-SOFB-ERROR', 11)
+                    self._mode = 0
+                elif self._mode == 4:
+                    try:
+                        _api_correction.set_respm_slot(self._driver.getParam('SICO-SOFB-RESPM-SEL'))
+                        _api_correction.set_respm()
+                        self._driver.setParam('SICO-SOFB-RESPM', _api_correction.get_respm())
+                        _api_correction.set_inv_respm()
+                    except:
+                        self._driver.setParam('SICO-SOFB-ERROR', 10)
+                    self._mode = 0
+                elif self._mode == 5:
+                    try:
+                        _api_correction.set_reforbit_slot(self._driver.getParam('SICO-SOFB-REFORBIT-X-SEL'), 'x')
+                        _api_correction.set_reforbit('x')
+                        self.setParam('SICO-SOFB-REFORBIT-X', _api_correction.get_reforbit('x'))
+                    except:
+                        self._driver.setParam('SICO-SOFB-ERROR', 11)
+                    self._mode = 0
+                elif self._mode == 6:
+                    try:
+                        _api_correction.set_reforbit_slot(self._driver.getParam('SICO-SOFB-REFORBIT-Y-SEL'), 'y')
+                        _api_correction.set_reforbit('y')
+                        self.setParam('SICO-SOFB-REFORBIT-Y', _api_correction.get_reforbit('y'))
+                    except:
+                        self._driver.setParam('SICO-SOFB-ERROR', 11)
+                    self._mode = 0
+                cor_onhold = str(self._driver._threads_dic['orbit_correction']._mode).split('_')
+                if cor_onhold[0] == 'W':
+                    self._driver._threads_dic['orbit_correction']._mode = int(cor_onhold[1])
+                    self._driver.setParam('SICO-SOFB-STATUS', self._driver._threads_dic['orbit_correction']._mode)
             else:
                 sleep(self._interval)
         else:
