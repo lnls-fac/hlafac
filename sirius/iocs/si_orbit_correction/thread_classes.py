@@ -51,6 +51,7 @@ class CODCorrectionThread(threading.Thread):
         self._driver.setParam('SICO-SOFB-REFORBIT-Y', _api_correction.get_reforbit('y'))
         _api_correction.set_respm()
         self._driver.setParam('SICO-SOFB-RESPM', _api_correction.get_respm())
+        _api_correction.set_inv_respm()
         while not self._stop_event.is_set():
             if self._mode == 1:
                 self.cod_correction('h')

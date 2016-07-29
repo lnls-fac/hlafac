@@ -155,33 +155,33 @@ def get_respm():
 
 
 def calc_kick(orbit = None, ctype = ''):
-    kick, reference_orbit, inv_respm = None, None, None
+    kick, reforbit, inv_respm = None, None, None
     if ctype.lower() == 'h':
-        reference_orbit = _reforbit_x
+        reforbit = _reforbit_x
         inv_respm = _inv_respm_h
     elif ctype.lower() == 'v':
-        reference_orbit = _reforbit_y
+        reforbit = _reforbit_y
         inv_respm = _inv_respm_v
     elif ctype.lower() == 'hv':
-        reference_orbit = _reforbit_xy
+        reforbit = _reforbit_xy
         inv_respm = _inv_respm_hv
     elif ctype.lower() == 'h_v':
-        reference_orbit = _reforbit_xy
+        reforbit = _reforbit_xy
         inv_respm = _inv_respm_h_v
     elif ctype.lower() == 'h_f':
-        reference_orbit = _reforbit_x
+        reforbit = _reforbit_x
         inv_respm = _inv_respm_h_f
     elif ctype.lower() == 'v_f':
-        reference_orbit = _reforbit_y
+        reforbit = _reforbit_y
         inv_respm = _inv_respm_v_f
     elif ctype.lower() == 'hv_f':
-        reference_orbit = _reforbit_xy
+        reforbit = _reforbit_xy
         inv_respm = _inv_respm_hv_f
     elif ctype.lower() == 'h_v_f':
-        reference_orbit = _reforbit_xy
+        reforbit = _reforbit_xy
         inv_respm = _inv_respm_h_v_f
-    if reference_orbit is not None and inv_respm is not None:
-        kick = _np.dot(inv_respm,(reference_orbit-orbit))
+    if reforbit is not None and inv_respm is not None:
+        kick = _np.dot(inv_respm,(reforbit-orbit))
     return kick
 
 
