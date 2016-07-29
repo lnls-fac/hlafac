@@ -22,10 +22,10 @@ class PCASDriver(Driver):
         return super().read(reason)
 
     def write(self, reason, value):
-        if reason == 'SICO-SOFB-STATUS':
+        if reason == 'SICO-SOFB-MODE':
             if value == 0:
                 self._threads_dic['orbit_correction']._mode = value
-            else:
+            elif value >= 1 and value <= 8:
                 if self._threads_dic['respm_measurement']._mode != 0:
                     self.setParam('SICO-SOFB-ERROR', 7)
                     return
@@ -35,21 +35,18 @@ class PCASDriver(Driver):
                         return
                     else:
                         self._threads_dic['orbit_correction']._mode = value
+            elif value >= 9 and value <= 14:
+                if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
+                    self.setParam('SICO-SOFB-ERROR', 1)
+                    return
+                else:
+                    self._threads_dic['respm_measurement']._mode = (value-8)
         elif reason == 'SICO-SOFB-AVGORBIT-NUMSAMPLES':
             if value > self._threads_dic['orbit_measurement']._max_length:
                 self.setParam('SICO-SOFB-ERROR', 2)
                 return
             else:
                 self._threads_dic['orbit_measurement']._n_samples = value
-        elif reason == 'SICO-SOFB-MEASRESPM':
-            if value == 0:
-                self._threads_dic['respm_measurement']._mode = value
-            else:
-                if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
-                    self.setParam('SICO-SOFB-ERROR', 1)
-                    return
-                else:
-                    self._threads_dic['respm_measurement']._mode = value
         elif reason == 'SICO-SOFB-RESPM-SEL':
             if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
                 self.setParam('SICO-SOFB-ERROR', 8)

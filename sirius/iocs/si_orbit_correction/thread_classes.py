@@ -153,7 +153,7 @@ class MEASRespmThread(threading.Thread):
 
     def _finalise_meas_respm(self, respm):
         self._mode = 'Off'
-        self._driver.setParam('SICO-SOFB-MEASRESPM', 0)
+        self._driver.setParam('SICO-SOFB-MODE', 0)
         self._driver.setParam('SICO-SOFB-RESPM', _np.transpose(respm))
         self._driver._threads_dic['var_update']._mode = 1
 
