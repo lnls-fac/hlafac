@@ -25,6 +25,7 @@ class PCASDriver(Driver):
         if reason == 'SICO-SOFB-MODE':
             if value == 0:
                 self._threads_dic['orbit_correction']._mode = value
+                self._threads_dic['respm_measurement']._mode = value
             elif value >= 1 and value <= 8:
                 if self._threads_dic['respm_measurement']._mode != 0:
                     self.setParam('SICO-SOFB-ERROR', 7)
@@ -40,7 +41,7 @@ class PCASDriver(Driver):
                     self.setParam('SICO-SOFB-ERROR', 1)
                     return
                 else:
-                    self._threads_dic['respm_measurement']._mode = (value-8)
+                    self._threads_dic['respm_measurement']._mode = value
         elif reason == 'SICO-SOFB-AVGORBIT-NUMSAMPLES':
             if value > self._threads_dic['orbit_measurement']._max_length:
                 self.setParam('SICO-SOFB-ERROR', 2)

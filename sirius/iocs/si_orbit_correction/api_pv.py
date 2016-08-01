@@ -5,6 +5,7 @@ import epics as _epics
 import numpy as _np
 from time import sleep
 from datetime import datetime
+from pcaspy import Driver
 
 _PREFIX = 'VA-'
 _SUFIX = ''
@@ -59,6 +60,7 @@ def _create_pv_names():
     _pvs[_PREFIX + 'SIDI-BPM-FAM:MONIT:X'] = _epics.PV(_PREFIX + 'SIDI-BPM-FAM:MONIT:X')
     _pvs[_PREFIX + 'SIDI-BPM-FAM:MONIT:Y'] = _epics.PV(_PREFIX + 'SIDI-BPM-FAM:MONIT:Y')
     _pvs[PV_RF_FREQUENCY] = _epics.PV(PV_RF_FREQUENCY)
+    _pvs['SICO-SOFB-MODE'] = _epics.PV('SICO-SOFB-MODE')
     return pvnames_bpm_x, pvnames_bpm_y, pvnames_ch, pvnames_cv
 
 
@@ -159,6 +161,8 @@ def meas_respm(ctype = ''):
         _pvs[pvname].value = kick0[i]
         old_orbit = _meas_new_orbit(n_orbit, plane)
         respm[:,i] = (p_orbit-n_orbit)/delta_kick
+        break
+        if _pvs['SICO-SOFB-MODE'].value == 0: return _np.array([])
     if ctype.lower() == 'h_f' or ctype.lower() == 'v_f' or ctype.lower() == 'hv_f':
         delta_freq = 100.0
         freq0_RF = _pvs[PV_RF_FREQUENCY].value

@@ -5,7 +5,7 @@ import api_pv as _api_pv
 import api_correction as _api_correction
 from time import sleep
 from collections import deque
-from numpy import array, mean, sqrt, square
+import numpy as _np
 from pcaspy import Driver
 from epics import caput
 from re import findall
@@ -97,8 +97,8 @@ class MEASOrbitThread(threading.Thread):
         self._orbit_buffer = deque(maxlen = self._max_length)
 
     def average_orbit(self):
-        orbit = array(self._orbit_buffer)[-self._n_samples:]
-        avg_orbit = mean(orbit, axis=0)
+        orbit = _np.array(self._orbit_buffer)[-self._n_samples:]
+        avg_orbit = _np.mean(orbit, axis=0)
         return avg_orbit
 
     def _main(self):
@@ -114,14 +114,14 @@ class MEASOrbitThread(threading.Thread):
                 try:
                     delta_x = abs(orbit_x-_api_correction._reforbit_x)
                     delta_y = abs(orbit_y-_api_correction._reforbit_y)
-                    self._driver.setParam('SICO-SOFB-ORBIT-X-MEAN', mean(delta_x))
-                    self._driver.setParam('SICO-SOFB-ORBIT-Y-MEAN', mean(delta_y))
+                    self._driver.setParam('SICO-SOFB-ORBIT-X-_NP.MEAN', _np.mean(delta_x))
+                    self._driver.setParam('SICO-SOFB-ORBIT-Y-_NP.MEAN', _np.mean(delta_y))
                     self._driver.setParam('SICO-SOFB-ORBIT-X-MAX', max(delta_x))
                     self._driver.setParam('SICO-SOFB-ORBIT-Y-MAX', max(delta_y))
                     self._driver.setParam('SICO-SOFB-ORBIT-X-MIN', min(delta_x))
                     self._driver.setParam('SICO-SOFB-ORBIT-Y-MIN', min(delta_y))
-                    self._driver.setParam('SICO-SOFB-ORBIT-X-RMS', sqrt(mean(square(delta_x))))
-                    self._driver.setParam('SICO-SOFB-ORBIT-Y-RMS', sqrt(mean(square(delta_y))))
+                    self._driver.setParam('SICO-SOFB-ORBIT-X-RMS', _np.sqrt(_np.mean(_np.square(delta_x))))
+                    self._driver.setParam('SICO-SOFB-ORBIT-Y-RMS', _np.sqrt(_np.mean(_np.square(delta_y))))
                 except:
                     self._driver.setParam('SICO-SOFB-ERROR', 6)
             except:
@@ -142,7 +142,7 @@ class MEASRespmThread(threading.Thread):
 
         Class main attribute: mode
         Defines what type of respm should be measured.
-        0-Off, 1-H, 2-V, 3-HV, 4-H_F, 5-V_F, 6-HV_F
+        0-Off, 9-H, 10-V, 11-HV, 12-H_F, 13-V_F, 14-HV_F
         """
 
         self._name = name
@@ -152,29 +152,45 @@ class MEASRespmThread(threading.Thread):
         self._mode = 0
 
     def _finalise_meas_respm(self, respm):
-        self._mode = 'Off'
+        if respm.shape != (0,):
+            _respm = _np.zeros((len(_api_pv._pvnames_bpm_x)+len(_api_pv._pvnames_bpm_y), len(_api_pv._pvnames_ch)+len(_api_pv._pvnames_cv)+1))
+            if self._mode == 9:
+                _respm[:len(_api_pv._pvnames_bpm_x),:len(_api_pv._pvnames_ch)] = respm
+            elif self._mode == 10:
+                _respm[len(_api_pv._pvnames_bpm_x):,len(_api_pv._pvnames_ch):-1] = respm
+            elif self._mode == 11:
+                _respm[:,:-1] = respm
+            elif self._mode == 12:
+                _respm[:len(_api_pv._pvnames_bpm_x),:len(_api_pv._pvnames_ch)] = respm[:,:-1]
+                _respm[:len(_api_pv._pvnames_bpm_x),-1] = respm[:,-1]
+            elif self._mode == 13:
+                _respm[len(_api_pv._pvnames_bpm_x):,len(_api_pv._pvnames_ch):-1] = respm[:,:-1]
+                _respm[len(_api_pv._pvnames_bpm_x):,-1] = respm[:,-1]
+            elif self._mode == 14:
+                _respm = respm
+            self._driver.setParam('SICO-SOFB-RESPM', _np.transpose(_respm))
+            self._driver._threads_dic['var_update']._mode = 1
+        self._mode = 0
         self._driver.setParam('SICO-SOFB-MODE', 0)
-        self._driver.setParam('SICO-SOFB-RESPM', _np.transpose(respm))
-        self._driver._threads_dic['var_update']._mode = 1
 
     def _main(self):
         while not self._stop_event.is_set():
-            if self._mode == 1:
+            if self._mode == 9:
                 respm = _api_pv.meas_respm('h')
                 self._finalise_meas_respm(respm)
-            elif self._mode == 2:
+            elif self._mode == 10:
                 respm = _api_pv.meas_respm('v')
                 self._finalise_meas_respm(respm)
-            elif self._mode == 3:
+            elif self._mode == 11:
                 respm = _api_pv.meas_respm('hv')
                 self._finalise_meas_respm(respm)
-            elif self._mode == 4:
+            elif self._mode == 12:
                 respm = _api_pv.meas_respm('h_f')
                 self._finalise_meas_respm(respm)
-            elif self._mode == 5:
+            elif self._mode == 13:
                 respm = _api_pv.meas_respm('v_f')
                 self._finalise_meas_respm(respm)
-            elif self._mode == 6:
+            elif self._mode == 14:
                 respm = _api_pv.meas_respm('hv_f')
                 self._finalise_meas_respm(respm)
             else:
