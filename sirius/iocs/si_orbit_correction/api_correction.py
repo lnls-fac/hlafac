@@ -142,7 +142,7 @@ def set_respm_slot(slot = None):
 
 def update_respm_slot(respm_array = None, reshape = False):
     if reshape:
-        respm = _np.reshape(respm_array, (len(_api_pv._pvnames_bpm_x)+len(_api_pv._pvnames_bpm_y, len(_api_pv._pvnames_ch)+len(_api_pv._pvnames_cv)+1, order='F')))
+        respm = _np.reshape(respm_array, (len(_api_pv._pvnames_bpm_x)+len(_api_pv._pvnames_bpm_y), len(_api_pv._pvnames_ch)+len(_api_pv._pvnames_cv)+1), order='F')
     else:
         respm = respm_array
     _save(_respm_path + str(_respm_sel) + _respm_filetype, respm)
