@@ -117,9 +117,9 @@ def set_respm():
     _respm_h_v_f[len(_api_pv._pvnames_bpm_x):,:len(_api_pv._pvnames_ch)] = _np.zeros(_respm_h.shape)
     _respm_h_v = _respm_h_v_f[:,:-1]
     _respm_h_f = _respm_h[:]
-    _np.c_[_respm_h_f,_respm_hv_f[:len(_api_pv._pvnames_bpm_x),-1]]
+    _respm_h_f = _np.c_[_respm_h_f,_respm_hv_f[:len(_api_pv._pvnames_bpm_x),-1]]
     _respm_v_f = _respm_v[:]
-    _np.c_[_respm_v_f,_respm_hv_f[len(_api_pv._pvnames_bpm_x):,-1]]
+    _respm_v_f = _np.c_[_respm_v_f,_respm_hv_f[len(_api_pv._pvnames_bpm_x):,-1]]
 
 
 def set_inv_respm():
