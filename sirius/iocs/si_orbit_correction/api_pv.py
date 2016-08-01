@@ -154,6 +154,7 @@ def meas_respm(ctype = ''):
     respm = _np.empty((len(pvnames_bpm), len(pvnames_c)+1))
     old_orbit = _np.array(get_orbit(plane))
     for i, pvname in enumerate(pvnames_c):
+        print(i, pvname)
         _pvs[pvname].value = kick0[i] + delta_kick/2.0
         p_orbit = _meas_new_orbit(old_orbit, plane)
         _pvs[pvname].value = kick0[i] - delta_kick/2.0
@@ -161,7 +162,6 @@ def meas_respm(ctype = ''):
         _pvs[pvname].value = kick0[i]
         old_orbit = _meas_new_orbit(n_orbit, plane)
         respm[:,i] = (p_orbit-n_orbit)/delta_kick
-        break
         if _pvs['SICO-SOFB-MODE'].value == 0: return _np.array([])
     if ctype.lower() == 'h_f' or ctype.lower() == 'v_f' or ctype.lower() == 'hv_f':
         delta_freq = 100.0

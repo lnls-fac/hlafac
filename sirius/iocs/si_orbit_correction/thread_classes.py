@@ -270,10 +270,14 @@ class UPDATEVariablesThread(threading.Thread):
                     except:
                         self._driver.setParam('SICO-SOFB-ERROR', 11)
                     self._mode = 0
-                cor_onhold = str(self._driver._threads_dic['orbit_correction']._mode).split('_')
-                if cor_onhold[0] == 'W':
-                    self._driver._threads_dic['orbit_correction']._mode = int(cor_onhold[1])
-                    self._driver.setParam('SICO-SOFB-STATUS', self._driver._threads_dic['orbit_correction']._mode)
+                corr_onhold = str(self._driver._threads_dic['orbit_correction']._mode).split('_')
+                meas_onhold = str(self._driver._threads_dic['respm_measurement']._mode).split('_')
+                if corr_onhold[0] == 'W':
+                    self._driver.setParam('SICO-SOFB-MODE', int(corr_onhold[1]))
+                    self._driver._threads_dic['orbit_correction']._mode = self._driver.getParam('SICO-SOFB-MODE')
+                elif meas_onhold[0] == 'W':
+                    self._driver.setParam('SICO-SOFB-MODE', int(meas_onhold[1]))
+                    self._driver._threads_dic['respm_measurement']._mode = self._driver.getParam('SICO-SOFB-MODE')
             else:
                 sleep(self._interval)
         else:

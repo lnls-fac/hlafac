@@ -33,15 +33,17 @@ class PCASDriver(Driver):
                 else:
                     if self._threads_dic['var_update']._mode != 0:
                         self._threads_dic['orbit_correction']._mode = 'W_'+str(value)
-                        return
                     else:
                         self._threads_dic['orbit_correction']._mode = value
             elif value >= 9 and value <= 14:
-                if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
+                if self._threads_dic['orbit_correction']._mode != 0:
                     self.setParam('SICO-SOFB-ERROR', 1)
                     return
                 else:
-                    self._threads_dic['respm_measurement']._mode = value
+                    if self._threads_dic['var_update']._mode != 0:
+                        self._threads_dic['respm_measurement']._mode = 'W_'+str(value)
+                    else:
+                        self._threads_dic['respm_measurement']._mode = value
         elif reason == 'SICO-SOFB-AVGORBIT-NUMSAMPLES':
             if value > self._threads_dic['orbit_measurement']._max_length:
                 self.setParam('SICO-SOFB-ERROR', 2)
