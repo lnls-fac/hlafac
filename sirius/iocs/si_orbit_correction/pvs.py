@@ -4,7 +4,7 @@ numCH = 120
 numCV = 160
 
 pvdb = {
-    'SICO-SOFB-MODE': {'type': 'enum', 'enums': ['Off', 'Corr-OnH', 'Corr-OnV', 'Corr-OnHOnV', 'Corr-OnHV', 'Corr-OnH_F', 'Corr-OnV_F', 'Corr-OnHOnV_F', 'Corr-OnHV_F', 'MeasRespm-OnH', 'MeasRespm-OnV', 'MeasRespm-OnHV', 'MeasRespm-OnH_F', 'MeasRespmRespm-OnV_F', 'MeasRespm-OnHV_F']},
+    'SICO-SOFB-MODE': {'type': 'enum', 'enums': ['Off', 'Corr-OnH', 'Corr-OnV', 'Corr-OnHOnV', 'Corr-OnHV', 'Corr-OnH_F', 'Corr-OnV_F', 'Corr-OnHOnV_F', 'Corr-OnHV_F', 'MeasRespm-OnH', 'MeasRespm-OnV', 'MeasRespm-OnHV', 'MeasRespm-OnH_F', 'MeasRespm-OnV_F', 'MeasRespm-OnHV_F']},
     'SICO-SOFB-AVGORBIT-X': {'type': 'float', 'count': numBPM},
     'SICO-SOFB-AVGORBIT-Y': {'type': 'float', 'count': numBPM},
     'SICO-SOFB-AVGORBIT-NUMSAMPLES': {'type': 'int', 'value': 1},
