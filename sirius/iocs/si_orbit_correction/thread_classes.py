@@ -168,7 +168,7 @@ class MEASRespmThread(threading.Thread):
                 _respm[len(_api_pv._pvnames_bpm_x):,-1] = respm[:,-1]
             elif self._mode == 14:
                 _respm = respm
-            self._driver.setParam('SICO-SOFB-RESPM', _np.transpose(_respm))
+            self._driver.setParam('SICO-SOFB-RESPM', _respm)
             self._driver._threads_dic['var_update']._mode = 1
         self._mode = 0
         self._driver.setParam('SICO-SOFB-MODE', 0)
