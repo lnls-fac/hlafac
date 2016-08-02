@@ -8,14 +8,13 @@ import api_correction as _api_correction
 
 class PCASDriver(Driver):
 
-    def  __init__(self, threads_dic, start_event, stop_event, interval, prefix):
+    def  __init__(self, threads_dic, start_event, stop_event, interval):
         super().__init__()
         self._threads_dic = threads_dic
         self._interval = interval
         self._start_event = start_event
         self._queue = queue.Queue()
         self._stop_event = stop_event
-        self._prefix = prefix
         for tn in threads_dic:
             self._threads_dic[tn]._driver = self
 
