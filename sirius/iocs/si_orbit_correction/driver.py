@@ -8,13 +8,14 @@ import api_correction as _api_correction
 
 class PCASDriver(Driver):
 
-    def  __init__(self, threads_dic, start_event, stop_event, interval):
+    def  __init__(self, threads_dic, start_event, stop_event, interval, prefix):
         super().__init__()
         self._threads_dic = threads_dic
         self._interval = interval
         self._start_event = start_event
         self._queue = queue.Queue()
         self._stop_event = stop_event
+        self._prefix = prefix
         for tn in threads_dic:
             self._threads_dic[tn]._driver = self
 
@@ -25,7 +26,8 @@ class PCASDriver(Driver):
         if reason == 'SICO-SOFB-MODE':
             if value == 0:
                 self._threads_dic['orbit_correction']._mode = value
-                self._threads_dic['respm_measurement']._mode = value
+                if self._threads_dic['respm_measurement']._mode != value: self._threads_dic['respm_measurement']._interrupt_measrespm_event.set()
+                else: self._threads_dic['respm_measurement']._mode = value
             elif value >= 1 and value <= 8:
                 if self._threads_dic['respm_measurement']._mode != 0:
                     self.setParam('SICO-SOFB-ERROR', 7)

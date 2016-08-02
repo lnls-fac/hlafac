@@ -150,6 +150,7 @@ class MEASRespmThread(threading.Thread):
         self._interval = interval
         self._stop_event = stop_event
         self._mode = 0
+        self._interrupt_measrespm_event = threading.Event()
 
     def _finalise_meas_respm(self, respm):
         if respm.shape != (0,):
@@ -168,30 +169,30 @@ class MEASRespmThread(threading.Thread):
                 _respm[len(_api_pv._pvnames_bpm_x):,-1] = respm[:,-1]
             elif self._mode == 14:
                 _respm = respm
-            self._driver.setParam('SICO-SOFB-RESPM', _respm)
-            self._driver._threads_dic['var_update']._mode = 1
+            self._driver.write('SICO-SOFB-RESPM', _respm)
+        self._interrupt_measrespm_event.clear()
         self._mode = 0
         self._driver.setParam('SICO-SOFB-MODE', 0)
 
     def _main(self):
         while not self._stop_event.is_set():
             if self._mode == 9:
-                respm = _api_pv.meas_respm('h')
+                respm = _api_pv.meas_respm('h', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             elif self._mode == 10:
-                respm = _api_pv.meas_respm('v')
+                respm = _api_pv.meas_respm('v', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             elif self._mode == 11:
-                respm = _api_pv.meas_respm('hv')
+                respm = _api_pv.meas_respm('hv', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             elif self._mode == 12:
-                respm = _api_pv.meas_respm('h_f')
+                respm = _api_pv.meas_respm('h_f', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             elif self._mode == 13:
-                respm = _api_pv.meas_respm('v_f')
+                respm = _api_pv.meas_respm('v_f', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             elif self._mode == 14:
-                respm = _api_pv.meas_respm('hv_f')
+                respm = _api_pv.meas_respm('hv_f', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             else:
                 sleep(self._interval)
@@ -230,21 +231,18 @@ class UPDATEVariablesThread(threading.Thread):
                         _api_correction.set_inv_respm()
                     except:
                         self._driver.setParam('SICO-SOFB-ERROR', 10)
-                    self._mode = 0
                 elif self._mode == 2:
                     try:
                         _api_correction.update_reforbit_slot(self._driver.getParam('SICO-SOFB-REFORBIT-X'), 'x')
                         _api_correction.set_reforbit('x')
                     except:
                         self._driver.setParam('SICO-SOFB-ERROR', 11)
-                    self._mode = 0
                 elif self._mode == 3:
                     try:
                         _api_correction.update_reforbit_slot(self._driver.getParam('SICO-SOFB-REFORBIT-Y'), 'y')
                         _api_correction.set_reforbit('y')
                     except:
                         self._driver.setParam('SICO-SOFB-ERROR', 11)
-                    self._mode = 0
                 elif self._mode == 4:
                     try:
                         _api_correction.set_respm_slot(self._driver.getParam('SICO-SOFB-RESPM-SEL'))
@@ -253,7 +251,6 @@ class UPDATEVariablesThread(threading.Thread):
                         _api_correction.set_inv_respm()
                     except:
                         self._driver.setParam('SICO-SOFB-ERROR', 10)
-                    self._mode = 0
                 elif self._mode == 5:
                     try:
                         _api_correction.set_reforbit_slot(self._driver.getParam('SICO-SOFB-REFORBIT-X-SEL'), 'x')
@@ -261,7 +258,6 @@ class UPDATEVariablesThread(threading.Thread):
                         self.setParam('SICO-SOFB-REFORBIT-X', _api_correction.get_reforbit('x'))
                     except:
                         self._driver.setParam('SICO-SOFB-ERROR', 11)
-                    self._mode = 0
                 elif self._mode == 6:
                     try:
                         _api_correction.set_reforbit_slot(self._driver.getParam('SICO-SOFB-REFORBIT-Y-SEL'), 'y')
@@ -269,15 +265,15 @@ class UPDATEVariablesThread(threading.Thread):
                         self.setParam('SICO-SOFB-REFORBIT-Y', _api_correction.get_reforbit('y'))
                     except:
                         self._driver.setParam('SICO-SOFB-ERROR', 11)
-                    self._mode = 0
+                self._mode = 0
                 corr_onhold = str(self._driver._threads_dic['orbit_correction']._mode).split('_')
                 meas_onhold = str(self._driver._threads_dic['respm_measurement']._mode).split('_')
                 if corr_onhold[0] == 'W':
-                    self._driver.setParam('SICO-SOFB-MODE', int(corr_onhold[1]))
-                    self._driver._threads_dic['orbit_correction']._mode = self._driver.getParam('SICO-SOFB-MODE')
+                    self._driver.write('SICO-SOFB-MODE', int(corr_onhold[1]))
+                    #self._driver._threads_dic['orbit_correction']._mode = self._driver.getParam('SICO-SOFB-MODE')
                 elif meas_onhold[0] == 'W':
-                    self._driver.setParam('SICO-SOFB-MODE', int(meas_onhold[1]))
-                    self._driver._threads_dic['respm_measurement']._mode = self._driver.getParam('SICO-SOFB-MODE')
+                    self._driver.write('SICO-SOFB-MODE', int(meas_onhold[1]))
+                    #self._driver._threads_dic['respm_measurement']._mode = self._driver.getParam('SICO-SOFB-MODE')
             else:
                 sleep(self._interval)
         else:
