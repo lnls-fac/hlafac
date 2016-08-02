@@ -154,7 +154,6 @@ def meas_respm(ctype = ''):
     respm = _np.empty((len(pvnames_bpm), len(pvnames_c)+1))
     old_orbit = _np.array(get_orbit(plane))
     for i, pvname in enumerate(pvnames_c):
-        print(i, pvname)
         _pvs[pvname].value = kick0[i] + delta_kick/2.0
         p_orbit = _meas_new_orbit(old_orbit, plane)
         _pvs[pvname].value = kick0[i] - delta_kick/2.0
