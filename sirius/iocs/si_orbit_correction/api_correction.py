@@ -181,7 +181,7 @@ def calc_kick(orbit = None, ctype = ''):
         reforbit = _reforbit_xy
         inv_respm = _inv_respm_h_v_f
     if reforbit is not None and inv_respm is not None:
-        kick = _np.dot(inv_respm,(reforbit-orbit))
+        kick = _np.dot(-inv_respm,(reforbit-orbit))
     return kick
 
 

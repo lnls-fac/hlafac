@@ -132,7 +132,7 @@ def _meas_new_orbit(old_orbit, plane):
 def meas_respm(ctype = '', interruption_event = None):
     sleep(6) #delay for waiting correction finalise
     #_pvs[sofb_prefix + 'SICO-SOFB-MODE'] = _epics.PV(sofb_prefix + 'SICO-SOFB-MODE')
-    delta_kick = -0.31833 #hardware units
+    delta_kick = 0.31833 #hardware units
     #delta_kick = 10e-06 #angle units
     if ctype.lower() == 'h' or ctype.lower() == 'h_f':
         pvnames_bpm = _pvnames_bpm_x[:]
