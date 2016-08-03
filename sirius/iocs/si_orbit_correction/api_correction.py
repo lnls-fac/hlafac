@@ -190,7 +190,7 @@ def _load(fname):
 
 
 def _save(fname, var):
-    _np.savetxt(fname, var, delimiter = ' ')
+    _np.savetxt(fname, var, fmt='%+.8e', delimiter = ' ')
 
 
 def _calculate_inv_respm(respm = None):
