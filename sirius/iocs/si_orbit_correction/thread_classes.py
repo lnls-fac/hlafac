@@ -114,8 +114,8 @@ class MEASOrbitThread(threading.Thread):
                 try:
                     delta_x = abs(orbit_x-_api_correction._reforbit_x)
                     delta_y = abs(orbit_y-_api_correction._reforbit_y)
-                    self._driver.setParam('SICO-SOFB-ORBIT-X-_NP.MEAN', _np.mean(delta_x))
-                    self._driver.setParam('SICO-SOFB-ORBIT-Y-_NP.MEAN', _np.mean(delta_y))
+                    self._driver.setParam('SICO-SOFB-ORBIT-X-MEAN', _np.mean(delta_x))
+                    self._driver.setParam('SICO-SOFB-ORBIT-Y-MEAN', _np.mean(delta_y))
                     self._driver.setParam('SICO-SOFB-ORBIT-X-MAX', max(delta_x))
                     self._driver.setParam('SICO-SOFB-ORBIT-Y-MAX', max(delta_y))
                     self._driver.setParam('SICO-SOFB-ORBIT-X-MIN', min(delta_x))
