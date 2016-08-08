@@ -35,16 +35,24 @@ class CODCorrectionThread(threading.Thread):
     def cod_correction(self, ctype = ''):
         if ctype.lower() == 'h' or ctype.lower() == 'h_f':
             orbit = self._driver.getParam('SICO-SOFB-AVGORBIT-X')
+            idx_c = [_api_correction._idx_ch]
         elif ctype.lower() == 'v' or ctype.lower() == 'v_f':
             orbit = self._driver.getParam('SICO-SOFB-AVGORBIT-Y')
+            idx_c = [_api_correction._idx_cv]
         elif ctype.lower() == 'hv' or ctype.lower() == 'hv_f' or ctype.lower() == 'h_v' or ctype.lower() == 'h_v_f':
             orbit = []
             orbit.extend(self._driver.getParam('SICO-SOFB-AVGORBIT-X'))
             orbit.extend(self._driver.getParam('SICO-SOFB-AVGORBIT-Y'))
-        delta_kick = _api_correction.calc_kick(orbit, ctype)
-        _api_pv.add_kick(delta_kick, ctype)
+            idx_c = [_api_correction._idx_ch, _api_correction._idx_cv]
+        delta_kick = _api_correction.calc_kick(_np.array(orbit), ctype)
+        _api_pv.add_kick(delta_kick, ctype, idx_c)
 
     def _main(self):
+        _api_correction.initialize_device_sel()
+        _api_correction.set_device_sel('all')
+        self._driver.setParam('SICO-SOFB-BPM-SEL', _api_correction.get_device_sel('bpm'))
+        self._driver.setParam('SICO-SOFB-CH-SEL', _api_correction.get_device_sel('ch'))
+        self._driver.setParam('SICO-SOFB-CV-SEL', _api_correction.get_device_sel('cv'))
         _api_correction.initialize_slot(var_type = 'all')
         _api_correction.set_reforbit('x')
         self._driver.setParam('SICO-SOFB-REFORBIT-X', _api_correction.get_reforbit('x'))
@@ -212,7 +220,7 @@ class UPDATEVariablesThread(threading.Thread):
 
         Class main attribute: mode
         Defines what variable should be updated.
-        0-Off, 1-respm, 2-reforbit_x, 3-reforbit_y, 4-respm_sel, 5-reforbit_x_sel, 6-reforbit_y_sel
+        0-Off, 1-respm, 2-reforbit_x, 3-reforbit_y, 4-respm_sel, 5-reforbit_x_sel, 6-reforbit_y_sel, 7-bpm_sel, 8-ch_sel, 9-cv_sel
         """
 
         self._name = name
@@ -265,6 +273,31 @@ class UPDATEVariablesThread(threading.Thread):
                         self.setParam('SICO-SOFB-REFORBIT-Y', _api_correction.get_reforbit('y'))
                     except:
                         self._driver.setParam('SICO-SOFB-ERROR', 11)
+                elif self._mode == 7:
+                    try:
+                        _api_correction.update_device_sel('bpm', self._driver.getParam('SICO-SOFB-BPM-SEL'))
+                        _api_correction.set_device_sel('bpm')
+                        _api_correction.set_reforbit('xy')
+                        _api_correction.set_respm()
+                        _api_correction.set_inv_respm()
+                    except:
+                        self._driver.setParam('SICO-SOFB-ERROR', 12)
+                elif self._mode == 8:
+                    try:
+                        _api_correction.update_device_sel('ch', self._driver.getParam('SICO-SOFB-CH-SEL'))
+                        _api_correction.set_device_sel('ch')
+                        _api_correction.set_respm()
+                        _api_correction.set_inv_respm()
+                    except:
+                        self._driver.setParam('SICO-SOFB-ERROR', 12)
+                elif self._mode == 9:
+                    try:
+                        _api_correction.update_device_sel('cv', self._driver.getParam('SICO-SOFB-CV-SEL'))
+                        _api_correction.set_device_sel('cv')
+                        _api_correction.set_respm()
+                        _api_correction.set_inv_respm()
+                    except:
+                        self._driver.setParam('SICO-SOFB-ERROR', 12)
                 self._mode = 0
                 corr_onhold = str(self._driver._threads_dic['orbit_correction']._mode).split('_')
                 meas_onhold = str(self._driver._threads_dic['respm_measurement']._mode).split('_')

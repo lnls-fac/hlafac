@@ -96,29 +96,43 @@ def get_kick(ctype = ''):
             pvnames_c.extend([PV_RF_FREQUENCY])
     for pvname in pvnames_c:
         kick.append(_pvs[pvname].value)
-    return kick
+    return _np.array(kick)
 
 
-def add_kick(delta_kick = None, ctype = ''):
+def add_kick(delta_kick = None, ctype = '', idx = None):
+    kick = get_kick(ctype)
     if ctype.lower() == 'h' or ctype.lower() == 'h_f':
-        pvnames_c = _pvnames_ch[:]
+        plane = 'x'
+        pvnames_c = list(_np.asarray(_pvnames_ch)[idx[0]])
+        kick0 = kick[idx[0]]
         if ctype.lower() == 'h_f':
             pvnames_c.extend([PV_RF_FREQUENCY])
+            kick0 = _np.append(kick0, kick[-1])
     elif ctype.lower() == 'v' or ctype.lower() == 'v_f':
-        pvnames_c = _pvnames_cv[:]
+        plane = 'y'
+        pvnames_c = list(_np.asarray(_pvnames_cv)[idx[0]])
+        kick0 = kick[idx[0]]
         if ctype.lower() == 'v_f':
             pvnames_c.extend([PV_RF_FREQUENCY])
+            kick0 = _np.append(kick0, kick[-1])
     elif ctype.lower() == 'hv' or ctype.lower() == 'hv_f' or ctype.lower() == 'h_v' or ctype.lower() == 'h_v_f':
+        plane = 'xy'
         pvnames_c = []
-        pvnames_c.extend(_pvnames_ch)
-        pvnames_c.extend(_pvnames_cv)
+        pvnames_c.extend(_np.asarray(_pvnames_ch)[idx[0]])
+        pvnames_c.extend(_np.asarray(_pvnames_cv)[idx[1]])
+        kickx = kick[:len(_pvnames_ch)]
+        kicky = kick[-len(_pvnames_cv):]
+        kickx0 = kickx[idx[0]]
+        kicky0 = kicky[idx[1]]
+        kick0 = _np.concatenate((kickx0, kicky0), axis=0)
         if ctype.lower() == 'hv_f' or ctype.lower() == 'h_v_f':
             pvnames_c.extend([PV_RF_FREQUENCY])
-    kick0 = get_kick(ctype)
+            kick0 = _np.append(kick0, kick[-1])
+    old_orbit = get_orbit(plane)
     for i, pvname in enumerate(pvnames_c):
         kick = kick0[i] + delta_kick[i]
         _pvs[pvname].value = kick
-    sleep(5) #delay for update the closed orbit
+    _meas_new_orbit(old_orbit, plane) #delay for update the closed orbit
 
 
 def _meas_new_orbit(old_orbit, plane):
@@ -131,7 +145,6 @@ def _meas_new_orbit(old_orbit, plane):
 
 def meas_respm(ctype = '', interruption_event = None):
     sleep(6) #delay for waiting correction finalise
-    #_pvs[sofb_prefix + 'SICO-SOFB-MODE'] = _epics.PV(sofb_prefix + 'SICO-SOFB-MODE')
     delta_kick = 0.31833 #hardware units
     #delta_kick = 10e-06 #angle units
     if ctype.lower() == 'h' or ctype.lower() == 'h_f':

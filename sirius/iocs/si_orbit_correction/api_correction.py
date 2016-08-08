@@ -11,6 +11,7 @@ _respm_filetype = '.txt'
 _respm_sel = 0
 _respm_nslots = 3
 _respm_data = None
+_respm_full = None
 
 _reforbit_x_path = './reforbit_x/'
 _reforbit_y_path = './reforbit_y/'
@@ -20,6 +21,8 @@ _reforbit_y_sel = 0
 _reforbit_nslots = 3
 _reforbit_x_data = None
 _reforbit_y_data = None
+_reforbit_x_full = None
+_reforbit_y_full = None
 
 _model = None
 _respm_hv = None
@@ -41,6 +44,15 @@ _inv_respm_h_v_f = None
 _reforbit_xy = None
 _reforbit_x = None
 _reforbit_y = None
+
+_bpm_sel = None
+_ch_sel = None
+_cv_sel = None
+_idx_bpm_x_y = None
+_idx_bpm = None
+_idx_ch = None
+_idx_cv = None
+_idx_c = None
 
 
 def initialize_slot(var_type = None, slot = None):
@@ -72,14 +84,19 @@ def initialize_slot(var_type = None, slot = None):
 
 
 def set_reforbit(plane = ''):
-    global _reforbit_xy, _reforbit_x, _reforbit_y
-    _reforbit_xy = _np.empty((len(_api_pv._pvnames_bpm_x)+len(_api_pv._pvnames_bpm_y)))
+    global _reforbit_x_full, _reforbit_y_full, _reforbit_xy, _reforbit_x, _reforbit_y
+    _reforbit_xy = _np.empty((len(_idx_bpm)))
     if plane.lower() == 'x':
-        _reforbit_x = _reforbit_x_data[:,_reforbit_x_sel]
+        _reforbit_x_full  = _reforbit_x_data[:,_reforbit_x_sel]
+        _reforbit_x = _reforbit_x_full[_idx_bpm_x_y]
         _reforbit_xy[:len(_reforbit_x)] = _reforbit_x
     elif plane.lower() == 'y':
-        _reforbit_y = _reforbit_y_data[:,_reforbit_y_sel]
+        _reforbit_y_full = _reforbit_y_data[:,_reforbit_y_sel]
+        _reforbit_y = _reforbit_y_full[_idx_bpm_x_y]
         _reforbit_xy[-len(_reforbit_y):] = _reforbit_y
+    elif plane.lower() == 'xy':
+        set_reforbit('x')
+        set_reforbit('y')
 
 
 def set_reforbit_slot(slot = None, plane = ''):
@@ -99,27 +116,27 @@ def update_reforbit_slot(reforbit = None, plane = ''):
 
 def get_reforbit(plane = ''):
     if plane.lower() == 'x':
-        reforbit = _reforbit_x
+        return _reforbit_x_full
     elif plane.lower() == 'y':
-        reforbit = _reforbit_y
-    return reforbit
+        return _reforbit_y_full
 
 
 def set_respm():
-    global _respm_h, _respm_v, _respm_hv, _respm_h_v, _respm_h_f, _respm_v_f, _respm_hv_f, _respm_h_v_f
+    global _respm_full, _respm_h, _respm_v, _respm_hv, _respm_h_v, _respm_h_f, _respm_v_f, _respm_hv_f, _respm_h_v_f
 
-    _respm_hv_f = _respm_data[:,:,_respm_sel]
+    _respm_full = _respm_data[:,:,_respm_sel]
+    _respm_hv_f = _respm_full[_idx_bpm,:][:,_idx_c]
     _respm_hv = _respm_hv_f[:,:-1]
-    _respm_h = _respm_hv[:len(_api_pv._pvnames_bpm_x),:len(_api_pv._pvnames_ch)]
-    _respm_v = _respm_hv[len(_api_pv._pvnames_bpm_x):,len(_api_pv._pvnames_ch):]
+    _respm_h = _respm_hv[:len(_idx_bpm_x_y),:len(_idx_ch)]
+    _respm_v = _respm_hv[-len(_idx_bpm_x_y):,-len(_idx_cv):]
     _respm_h_v_f = _respm_hv_f[:]
-    _respm_h_v_f[:len(_api_pv._pvnames_bpm_x),len(_api_pv._pvnames_ch):-1] = _np.zeros(_respm_v.shape)
-    _respm_h_v_f[len(_api_pv._pvnames_bpm_x):,:len(_api_pv._pvnames_ch)] = _np.zeros(_respm_h.shape)
+    _respm_h_v_f[:len(_idx_bpm_x_y),len(_idx_ch):-1] = _np.zeros((_respm_v.shape))
+    _respm_h_v_f[-len(_idx_bpm_x_y):,:len(_idx_ch)] = _np.zeros(_respm_h.shape)
     _respm_h_v = _respm_h_v_f[:,:-1]
     _respm_h_f = _respm_h[:]
-    _respm_h_f = _np.c_[_respm_h_f,_respm_hv_f[:len(_api_pv._pvnames_bpm_x),-1]]
+    _respm_h_f = _np.c_[_respm_h_f,_respm_hv_f[:len(_idx_bpm_x_y),-1]]
     _respm_v_f = _respm_v[:]
-    _respm_v_f = _np.c_[_respm_v_f,_respm_hv_f[len(_api_pv._pvnames_bpm_x):,-1]]
+    _respm_v_f = _np.c_[_respm_v_f,_respm_hv_f[-len(_idx_bpm_x_y):,-1]]
 
 
 def set_inv_respm():
@@ -150,43 +167,89 @@ def update_respm_slot(respm_array = None, reshape = False):
 
 
 def get_respm():
-    respm = _respm_hv_f
-    return respm
+    return _respm_full
 
 
-def calc_kick(orbit = None, ctype = ''):
+def initialize_device_sel():
+    global _bpm_sel, _ch_sel, _cv_sel
+    _bpm_sel = _np.ones(len(_api_pv._pvnames_bpm_x))
+    _ch_sel = _np.ones(len(_api_pv._pvnames_ch))
+    _cv_sel = _np.ones(len(_api_pv._pvnames_cv))
+
+
+def update_device_sel(device = '', device_sel = None):
+    global _bpm_sel, _ch_sel, _cv_sel
+    if device.lower() == 'bpm':
+        _bpm_sel = _np.array(device_sel)
+    elif device.lower() == 'ch':
+        _ch_sel = _np.array(device_sel)
+    elif device.lower() == 'cv':
+        _cv_sel = _np.array(device_sel)
+
+
+def set_device_sel(device = ''):
+    global _idx_bpm_x_y, _idx_bpm, _idx_ch, _idx_cv, _idx_c
+    if device.lower() == 'bpm':
+        _idx_bpm_x_y = _np.where(_bpm_sel)[0]
+        _idx_bpm = _np.where(_np.concatenate((_bpm_sel,_bpm_sel),axis=0))[0]
+    elif device.lower() == 'ch':
+        _idx_ch = _np.where(_ch_sel)[0]
+        _idx_c = _np.where(_np.concatenate((_ch_sel,_cv_sel,[1]),axis=0))[0]
+    elif device.lower() == 'cv':
+        _idx_cv = _np.where(_cv_sel)[0]
+        _idx_c = _np.where(_np.concatenate((_ch_sel,_cv_sel,[1]),axis=0))[0]
+    elif device.lower() == 'all':
+        set_device_sel('bpm')
+        set_device_sel('ch')
+        set_device_sel('cv')
+
+
+def get_device_sel(device = ''):
+    if device.lower() == 'bpm':
+        return _bpm_sel
+    elif device.lower() == 'ch':
+        return _ch_sel
+    elif device.lower() == 'cv':
+        return _cv_sel
+
+
+def calc_kick(orbit_full = None, ctype = ''):
     kick, reforbit, inv_respm = None, None, None
-    if ctype.lower() == 'h':
-        reforbit = _reforbit_x
-        inv_respm = _inv_respm_h
-    elif ctype.lower() == 'v':
-        reforbit = _reforbit_y
-        inv_respm = _inv_respm_v
-    elif ctype.lower() == 'hv':
-        reforbit = _reforbit_xy
-        inv_respm = _inv_respm_hv
-    elif ctype.lower() == 'h_v':
-        reforbit = _reforbit_xy
-        inv_respm = _inv_respm_h_v
-    elif ctype.lower() == 'h_f':
-        reforbit = _reforbit_x
-        inv_respm = _inv_respm_h_f
-    elif ctype.lower() == 'v_f':
-        reforbit = _reforbit_y
-        inv_respm = _inv_respm_v_f
-    elif ctype.lower() == 'hv_f':
-        reforbit = _reforbit_xy
-        inv_respm = _inv_respm_hv_f
-    elif ctype.lower() == 'h_v_f':
-        reforbit = _reforbit_xy
-        inv_respm = _inv_respm_h_v_f
+    if ctype.lower() == 'h' or ctype.lower() == 'v' or ctype.lower() == 'h_f' or ctype.lower() == 'v_f':
+        orbit = orbit_full[_idx_bpm_x_y]
+        if ctype.lower() == 'h':
+            reforbit = _reforbit_x
+            inv_respm = _inv_respm_h
+        elif ctype.lower() == 'v':
+            reforbit = _reforbit_y
+            inv_respm = _inv_respm_v
+        elif ctype.lower() == 'h_f':
+            reforbit = _reforbit_x
+            inv_respm = _inv_respm_h_f
+        elif ctype.lower() == 'v_f':
+            reforbit = _reforbit_y
+            inv_respm = _inv_respm_v_f
+    elif ctype.lower() == 'h_v' or ctype.lower() == 'hv' or ctype.lower() == 'h_v_f' or ctype.lower() == 'hv_f':
+        orbit = orbit_full[_idx_bpm]
+        if ctype.lower() == 'hv':
+            reforbit = _reforbit_xy
+            inv_respm = _inv_respm_hv
+        elif ctype.lower() == 'h_v':
+            reforbit = _reforbit_xy
+            inv_respm = _inv_respm_h_v
+        elif ctype.lower() == 'hv_f':
+            reforbit = _reforbit_xy
+            inv_respm = _inv_respm_hv_f
+        elif ctype.lower() == 'h_v_f':
+            reforbit = _reforbit_xy
+            inv_respm = _inv_respm_h_v_f
     if reforbit is not None and inv_respm is not None:
         kick = _np.dot(-inv_respm,(reforbit-orbit))
     return kick
 
 
 def _load(fname):
-    return _np.loadtxt(fname)
+    return _np.loadtxt(fname, delimiter=' ')
 
 
 def _save(fname, var):
