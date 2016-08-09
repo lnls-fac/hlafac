@@ -125,11 +125,9 @@ def add_kick(delta_kick = None, ctype = '', idx = None):
         kickx0 = kickx[idx[0]]
         kicky0 = kicky[idx[1]]
         kick0 = _np.concatenate((kickx0, kicky0), axis=0)
-        print(kick0[-5:])
         if ctype.lower() == 'hv_f' or ctype.lower() == 'h_v_f':
             pvnames_c.extend([PV_RF_FREQUENCY])
             kick0 = _np.append(kick0, kick0_full[-1])
-            print(kick0[-5:])
     old_orbit = get_orbit(plane)
     for i, pvname in enumerate(pvnames_c):
         kick = kick0[i] + delta_kick[i]
