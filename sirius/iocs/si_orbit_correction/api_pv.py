@@ -75,7 +75,7 @@ def get_orbit(plane = ''):
         orbit = []
         orbit.extend(_pvs[_PREFIX + 'SIDI-BPM-FAM:MONIT:X'].value)
         orbit.extend(_pvs[_PREFIX + 'SIDI-BPM-FAM:MONIT:Y'].value)
-    return orbit
+    return _np.array(orbit)
 
 
 def get_kick(ctype = ''):
@@ -137,7 +137,7 @@ def add_kick(delta_kick = None, ctype = '', idx = None):
 
 def _meas_new_orbit(old_orbit, plane):
     while True:
-        orbit = _np.array(get_orbit(plane))
+        orbit = get_orbit(plane)
         if all(orbit != old_orbit): break
         sleep(_SLEEPTIME)
     return orbit
@@ -165,7 +165,7 @@ def meas_respm(ctype = '', interruption_event = None):
         plane = 'xy'
     kick0 = get_kick(ctype)
     respm = _np.empty((len(pvnames_bpm), len(pvnames_c)+1))
-    old_orbit = _np.array(get_orbit(plane))
+    old_orbit = get_orbit(plane)
     for i, pvname in enumerate(pvnames_c):
         _pvs[pvname].value = kick0[i] + delta_kick/2.0
         p_orbit = _meas_new_orbit(old_orbit, plane)
