@@ -125,18 +125,19 @@ def set_respm():
     global _respm_full, _respm_h, _respm_v, _respm_hv, _respm_h_v, _respm_h_f, _respm_v_f, _respm_hv_f, _respm_h_v_f
 
     _respm_full = _respm_data[:,:,_respm_sel]
-    _respm_hv_f = _respm_full[_idx_bpm,:][:,_idx_c]
-    _respm_hv = _respm_hv_f[:,:-1]
-    _respm_h = _respm_hv[:len(_idx_bpm_x_y),:len(_idx_ch)]
-    _respm_v = _respm_hv[-len(_idx_bpm_x_y):,-len(_idx_cv):]
-    _respm_h_v_f = _respm_hv_f[:]
+    _respm_hv_f = _np.copy(_respm_full[_idx_bpm,:][:,_idx_c])
+    _respm_hv = _np.copy(_respm_hv_f[:,:-1])
+    _respm_h = _np.copy(_respm_hv[:len(_idx_bpm_x_y),:len(_idx_ch)])
+    _respm_v = _np.copy(_respm_hv[-len(_idx_bpm_x_y):,-len(_idx_cv):])
+    _respm_h_v_f = _np.copy(_respm_hv_f)
     _respm_h_v_f[:len(_idx_bpm_x_y),len(_idx_ch):-1] = _np.zeros((_respm_v.shape))
     _respm_h_v_f[-len(_idx_bpm_x_y):,:len(_idx_ch)] = _np.zeros(_respm_h.shape)
-    _respm_h_v = _respm_h_v_f[:,:-1]
-    _respm_h_f = _respm_h[:]
+    _respm_h_v = _np.copy(_respm_h_v_f[:,:-1])
+    _respm_h_f = _np.copy(_respm_h)
     _respm_h_f = _np.c_[_respm_h_f,_respm_hv_f[:len(_idx_bpm_x_y),-1]]
-    _respm_v_f = _respm_v[:]
+    _respm_v_f = _np.copy(_respm_v)
     _respm_v_f = _np.c_[_respm_v_f,_respm_hv_f[-len(_idx_bpm_x_y):,-1]]
+    print(_respm_hv_f[:,0])
 
 
 def set_inv_respm():
