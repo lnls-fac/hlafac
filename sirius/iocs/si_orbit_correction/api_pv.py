@@ -39,6 +39,7 @@ def _read_devicename_file(filename):
 
 
 def _create_pv_names():
+    global _devicenames_bpm, _devicenames_ch, _devicenames_cv
     _devicenames_bpm = _read_devicename_file(_sidi_bpm_devicenames_fname)
     _devicenames_ch  = _read_devicename_file(_sips_ch_devicenames_fname)
     _devicenames_cv  = _read_devicename_file(_sips_cv_devicenames_fname)

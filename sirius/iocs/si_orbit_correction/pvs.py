@@ -1,4 +1,6 @@
 
+import numpy as _np
+
 numBPM = 160
 numCH = 120
 numCV = 160
@@ -26,4 +28,13 @@ pvdb = {
     'SICO-SOFB-BPM-SEL': {'type': 'int', 'count': numBPM},
     'SICO-SOFB-CH-SEL': {'type': 'int', 'count': numCH},
     'SICO-SOFB-CV-SEL': {'type': 'int', 'count': numCV},
+    'SICO-SOFB-BPM-RMV': {'type': 'string'},
+    'SICO-SOFB-BPM-ADD': {'type': 'string'},
+    'SICO-SOFB-CH-RMV': {'type': 'string'},
+    'SICO-SOFB-CH-ADD': {'type': 'string'},
+    'SICO-SOFB-CV-RMV': {'type': 'string'},
+    'SICO-SOFB-CV-ADD': {'type': 'string'},
+    'SICO-BPM-DEVICENAMES': {'type': 'string', 'count': numBPM, 'value': _np.genfromtxt('txt/dname-bpm.txt', dtype='str')},
+    'SICO-CH-DEVICENAMES': {'type': 'string', 'count': numCH, 'value': _np.genfromtxt('txt/dname-ch.txt', dtype='str')},
+    'SICO-CV-DEVICENAMES': {'type': 'string', 'count': numCV, 'value': _np.genfromtxt('txt/cv.txt', dtype='str')},
 }

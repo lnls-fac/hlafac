@@ -213,6 +213,19 @@ def get_device_sel(device = ''):
         return _cv_sel
 
 
+def change_device_status(device = '', devicename = '', status = None):
+    global _bpm_sel, _ch_sel, _cv_sel
+    if device.lower() == 'bpm':
+        idx = _api_pv._devicenames_bpm.index(devicename)
+        _bpm_sel[idx] = status
+    elif device.lower() == 'ch':
+        idx = _api_pv._devicenames_ch.index(devicename)
+        _ch_sel[idx] = status
+    elif device.lower() == 'cv':
+        idx = _api_pv._devicenames_cv.index(devicename)
+        _cv_sel[idx] = status
+
+
 def calc_kick(orbit_full = None, ctype = ''):
     kick, reforbit, inv_respm = None, None, None
     if ctype.lower() == 'h' or ctype.lower() == 'v' or ctype.lower() == 'h_f' or ctype.lower() == 'v_f':

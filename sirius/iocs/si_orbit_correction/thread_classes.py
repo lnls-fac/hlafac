@@ -220,7 +220,7 @@ class UPDATEVariablesThread(threading.Thread):
 
         Class main attribute: mode
         Defines what variable should be updated.
-        0-Off, 1-respm, 2-reforbit_x, 3-reforbit_y, 4-respm_sel, 5-reforbit_x_sel, 6-reforbit_y_sel, 7-bpm_sel, 8-ch_sel, 9-cv_sel
+        0-Off, 1-respm, 2-reforbit_x, 3-reforbit_y, 4-respm_sel, 5-reforbit_x_sel, 6-reforbit_y_sel, 7-bpm_sel, 8-ch_sel, 9-cv_sel, 10-add_bpm, 11-add_ch, 12-add_cv, 13-rmv_bpm, 14-rmv_ch 15-rmv_cv
         """
 
         self._name = name
@@ -298,15 +298,69 @@ class UPDATEVariablesThread(threading.Thread):
                         _api_correction.set_inv_respm()
                     except:
                         self._driver.setParam('SICO-SOFB-ERROR', 12)
+                elif self._mode == 10:
+                    try:
+                        _api_correction.change_device_status('bpm', self._driver.getParam('SICO-SOFB-BPM-ADD'), 1)
+                        _api_correction.set_device_sel('bpm')
+                        self._driver.setParam('SICO-SOFB-BPM-SEL', _api_correction.get_device_sel('bpm'))
+                        _api_correction.set_reforbit('xy')
+                        _api_correction.set_respm()
+                        _api_correction.set_inv_respm()
+                    except:
+                        self._driver.setParam('SICO-SOFB-ERROR', 12)
+                elif self._mode == 11:
+                    try:
+                        _api_correction.change_device_status('ch', self._driver.getParam('SICO-SOFB-CH-ADD'), 1)
+                        _api_correction.set_device_sel('ch')
+                        self._driver.setParam('SICO-SOFB-CH-SEL', _api_correction.get_device_sel('ch'))
+                        _api_correction.set_respm()
+                        _api_correction.set_inv_respm()
+                    except:
+                        self._driver.setParam('SICO-SOFB-ERROR', 12)
+                elif self._mode == 12:
+                    try:
+                        _api_correction.change_device_status('cv', self._driver.getParam('SICO-SOFB-CV-ADD'), 1)
+                        _api_correction.set_device_sel('cv')
+                        self._driver.setParam('SICO-SOFB-CV-SEL', _api_correction.get_device_sel('cv'))
+                        _api_correction.set_respm()
+                        _api_correction.set_inv_respm()
+                    except:
+                        self._driver.setParam('SICO-SOFB-ERROR', 12)
+                elif self._mode == 13:
+                    try:
+                        _api_correction.change_device_status('bpm', self._driver.getParam('SICO-SOFB-BPM-RMV'), 0)
+                        _api_correction.set_device_sel('bpm')
+                        self._driver.setParam('SICO-SOFB-BPM-SEL', _api_correction.get_device_sel('bpm'))
+                        _api_correction.set_reforbit('xy')
+                        _api_correction.set_respm()
+                        _api_correction.set_inv_respm()
+                    except:
+                        self._driver.setParam('SICO-SOFB-ERROR', 12)
+                elif self._mode == 14:
+                    try:
+                        _api_correction.change_device_status('ch', self._driver.getParam('SICO-SOFB-CH-RMV'), 0)
+                        _api_correction.set_device_sel('ch')
+                        self._driver.setParam('SICO-SOFB-CH-SEL', _api_correction.get_device_sel('ch'))
+                        _api_correction.set_respm()
+                        _api_correction.set_inv_respm()
+                    except:
+                        self._driver.setParam('SICO-SOFB-ERROR', 12)
+                elif self._mode == 15:
+                    try:
+                        _api_correction.change_device_status('cv', self._driver.getParam('SICO-SOFB-CV-RMV'), 0)
+                        _api_correction.set_device_sel('cv')
+                        self._driver.setParam('SICO-SOFB-CV-SEL', _api_correction.get_device_sel('cv'))
+                        _api_correction.set_respm()
+                        _api_correction.set_inv_respm()
+                    except:
+                        self._driver.setParam('SICO-SOFB-ERROR', 12)
                 self._mode = 0
                 corr_onhold = str(self._driver._threads_dic['orbit_correction']._mode).split('_')
                 meas_onhold = str(self._driver._threads_dic['respm_measurement']._mode).split('_')
                 if corr_onhold[0] == 'W':
                     self._driver.write('SICO-SOFB-MODE', int(corr_onhold[1]))
-                    #self._driver._threads_dic['orbit_correction']._mode = self._driver.getParam('SICO-SOFB-MODE')
                 elif meas_onhold[0] == 'W':
                     self._driver.write('SICO-SOFB-MODE', int(meas_onhold[1]))
-                    #self._driver._threads_dic['respm_measurement']._mode = self._driver.getParam('SICO-SOFB-MODE')
             else:
                 sleep(self._interval)
         else:

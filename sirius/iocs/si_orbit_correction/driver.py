@@ -105,4 +105,40 @@ class PCASDriver(Driver):
                 return
             else:
                 self._threads_dic['var_update']._mode = 9
+        elif reason == 'SICO-SOFB-BPM-ADD':
+            if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
+                self.setParam('SICO-SOFB-ERROR', 12)
+                return
+            else:
+                self._threads_dic['var_update']._mode = 10
+        elif reason == 'SICO-SOFB-CH-ADD':
+            if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
+                self.setParam('SICO-SOFB-ERROR', 12)
+                return
+            else:
+                self._threads_dic['var_update']._mode = 11
+        elif reason == 'SICO-SOFB-CV-ADD':
+            if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
+                self.setParam('SICO-SOFB-ERROR', 12)
+                return
+            else:
+                self._threads_dic['var_update']._mode = 12
+        elif reason == 'SICO-SOFB-BPM-RMV':
+            if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
+                self.setParam('SICO-SOFB-ERROR', 12)
+                return
+            else:
+                self._threads_dic['var_update']._mode = 13
+        elif reason == 'SICO-SOFB-CH-RMV':
+            if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
+                self.setParam('SICO-SOFB-ERROR', 12)
+                return
+            else:
+                self._threads_dic['var_update']._mode = 14
+        elif reason == 'SICO-SOFB-CV-RMV':
+            if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
+                self.setParam('SICO-SOFB-ERROR', 12)
+                return
+            else:
+                self._threads_dic['var_update']._mode = 15
         return super().write(reason, value)
