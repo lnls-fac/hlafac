@@ -88,11 +88,11 @@ def set_reforbit(plane = ''):
     _reforbit_xy = _np.empty((len(_idx_bpm)))
     if plane.lower() == 'x':
         _reforbit_x_full  = _reforbit_x_data[:,_reforbit_x_sel]
-        _reforbit_x = _reforbit_x_full[_idx_bpm_x_y]
+        _reforbit_x = _np.copy(_reforbit_x_full[_idx_bpm_x_y])
         _reforbit_xy[:len(_reforbit_x)] = _reforbit_x
     elif plane.lower() == 'y':
         _reforbit_y_full = _reforbit_y_data[:,_reforbit_y_sel]
-        _reforbit_y = _reforbit_y_full[_idx_bpm_x_y]
+        _reforbit_y = _np.copy(_reforbit_y_full[_idx_bpm_x_y])
         _reforbit_xy[-len(_reforbit_y):] = _reforbit_y
     elif plane.lower() == 'xy':
         set_reforbit('x')
