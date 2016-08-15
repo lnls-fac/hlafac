@@ -213,6 +213,15 @@ def get_device_sel(device = ''):
         return _cv_sel
 
 
+def get_device_idx(device = ''):
+    if device.lower() == 'bpm':
+        return _idx_bpm_x_y
+    elif device.lower() == 'ch':
+        return _idx_ch
+    elif device.lower() == 'cv':
+        return _idx_cv
+
+
 def change_device_status(device = '', devicename = '', status = None):
     global _bpm_sel, _ch_sel, _cv_sel
     if device.lower() == 'bpm':
