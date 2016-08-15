@@ -123,10 +123,13 @@ def add_kick(delta_kick = None, ctype = '', idx = None):
     if ctype.lower() == 'h_f' or ctype.lower() == 'v_f' or ctype.lower() == 'hv_f' or ctype.lower() == 'h_v_f':
         pvnames_c.extend([PV_RF_FREQUENCY])
         kick0 = _np.append(kick0, kick0_full[-1])
-    kick = kick0 + delta_kick
+        kick = kick0 + delta_kick
+        if any(_np.where(abs(kick[:-1])>10, True, False)): return 'failed'
+    else:
+        kick = kick0 + delta_kick
+        if any(_np.where(abs(kick)>10, True, False)): return 'failed'
     old_orbit = get_orbit(plane)
     for i, pvname in enumerate(pvnames_c):
-        if pvname != PV_RF_FREQUENCY and (kick[i] > 10 or kick[i] < -10): return 'failed'
         _pvs[pvname].value = kick[i]
     _meas_new_orbit(old_orbit, plane) #delay for update the closed orbit
 
@@ -142,7 +145,7 @@ def _meas_new_orbit(old_orbit, plane):
 def meas_respm(ctype = '', interruption_event = None):
     sleep(6) #delay for waiting correction finalise
     delta_kick = 0.31833 #hardware units
-    #delta_kick = 10e-06 #angle units
+    #delta_kick = 10e-06 #physics units
     if ctype.lower() == 'h' or ctype.lower() == 'h_f':
         pvnames_bpm = _pvnames_bpm_x[:]
         pvnames_c = _pvnames_ch[:]

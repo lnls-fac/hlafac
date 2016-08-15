@@ -45,7 +45,11 @@ class CODCorrectionThread(threading.Thread):
             orbit.extend(self._driver.getParam('SICO-SOFB-AVGORBIT-Y'))
             idx_c = [_api_correction.get_device_idx('ch'), _api_correction.get_device_idx('cv')]
         delta_kick = _api_correction.calc_kick(_np.array(orbit), ctype)
-        _api_pv.add_kick(delta_kick, ctype, idx_c)
+        status = _api_pv.add_kick(delta_kick, ctype, idx_c)
+        if str(status).lower() == 'failed':
+            self._driver.setParam('SICO-SOFB-ERROR', 13)
+            self._mode = 0
+            self._driver.setParam('SICO-SOFB-MODE', 0)
 
 
     def _main(self):
