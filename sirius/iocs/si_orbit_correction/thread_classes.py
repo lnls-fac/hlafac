@@ -47,6 +47,7 @@ class CODCorrectionThread(threading.Thread):
         delta_kick = _api_correction.calc_kick(_np.array(orbit), ctype)
         _api_pv.add_kick(delta_kick, ctype, idx_c)
 
+
     def _main(self):
         _api_correction.initialize_device_sel()
         _api_correction.set_device_sel('all')
@@ -120,8 +121,8 @@ class MEASOrbitThread(threading.Thread):
                 self._driver.setParam('SICO-SOFB-AVGORBIT-X', orbit_x)
                 self._driver.setParam('SICO-SOFB-AVGORBIT-Y', orbit_y)
                 try:
-                    delta_x = abs(orbit_x-_api_correction._reforbit_x)
-                    delta_y = abs(orbit_y-_api_correction._reforbit_y)
+                    delta_x = abs(orbit_x-_api_correction.get_reforbit('x'))
+                    delta_y = abs(orbit_y-_api_correction.get_reforbit('y'))
                     self._driver.setParam('SICO-SOFB-ORBIT-X-MEAN', _np.mean(delta_x))
                     self._driver.setParam('SICO-SOFB-ORBIT-Y-MEAN', _np.mean(delta_y))
                     self._driver.setParam('SICO-SOFB-ORBIT-X-MAX', max(delta_x))
