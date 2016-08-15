@@ -106,16 +106,10 @@ def add_kick(delta_kick = None, ctype = '', idx = None):
         plane = 'x'
         pvnames_c = list(_np.asarray(_pvnames_ch)[idx[0]])
         kick0 = kick0_full[idx[0]]
-        if ctype.lower() == 'h_f':
-            pvnames_c.extend([PV_RF_FREQUENCY])
-            kick0 = _np.append(kick0, kick0_full[-1])
     elif ctype.lower() == 'v' or ctype.lower() == 'v_f':
         plane = 'y'
         pvnames_c = list(_np.asarray(_pvnames_cv)[idx[0]])
         kick0 = kick0_full[idx[0]]
-        if ctype.lower() == 'v_f':
-            pvnames_c.extend([PV_RF_FREQUENCY])
-            kick0 = _np.append(kick0, kick0_full[-1])
     elif ctype.lower() == 'hv' or ctype.lower() == 'hv_f' or ctype.lower() == 'h_v' or ctype.lower() == 'h_v_f':
         plane = 'xy'
         pvnames_c = []
@@ -126,13 +120,14 @@ def add_kick(delta_kick = None, ctype = '', idx = None):
         kickx0 = kickx[idx[0]]
         kicky0 = kicky[idx[1]]
         kick0 = _np.concatenate((kickx0, kicky0), axis=0)
-        if ctype.lower() == 'hv_f' or ctype.lower() == 'h_v_f':
-            pvnames_c.extend([PV_RF_FREQUENCY])
-            kick0 = _np.append(kick0, kick0_full[-1])
+    if ctype.lower() == 'h_f' or ctype.lower() == 'v_f' or ctype.lower() == 'hv_f' or ctype.lower() == 'h_v_f':
+        pvnames_c.extend([PV_RF_FREQUENCY])
+        kick0 = _np.append(kick0, kick0_full[-1])
+    kick = kick0 + delta_kick
     old_orbit = get_orbit(plane)
     for i, pvname in enumerate(pvnames_c):
-        kick = kick0[i] + delta_kick[i]
-        _pvs[pvname].value = kick
+        if pvname != PV_RF_FREQUENCY and (kick[i] > 10 or kick[i] < -10): return 'failed'
+        _pvs[pvname].value = kick[i]
     _meas_new_orbit(old_orbit, plane) #delay for update the closed orbit
 
 
