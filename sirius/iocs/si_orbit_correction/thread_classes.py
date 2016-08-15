@@ -35,15 +35,15 @@ class CODCorrectionThread(threading.Thread):
     def cod_correction(self, ctype = ''):
         if ctype.lower() == 'h' or ctype.lower() == 'h_f':
             orbit = self._driver.getParam('SICO-SOFB-AVGORBIT-X')
-            idx_c = [_api_correction._idx_ch]
+            idx_c = [_api_correction.get_device_idx('ch')]
         elif ctype.lower() == 'v' or ctype.lower() == 'v_f':
             orbit = self._driver.getParam('SICO-SOFB-AVGORBIT-Y')
-            idx_c = [_api_correction._idx_cv]
+            idx_c = [_api_correction.get_device_idx('cv')]
         elif ctype.lower() == 'hv' or ctype.lower() == 'hv_f' or ctype.lower() == 'h_v' or ctype.lower() == 'h_v_f':
             orbit = []
             orbit.extend(self._driver.getParam('SICO-SOFB-AVGORBIT-X'))
             orbit.extend(self._driver.getParam('SICO-SOFB-AVGORBIT-Y'))
-            idx_c = [_api_correction._idx_ch, _api_correction._idx_cv]
+            idx_c = [_api_correction.get_device_idx('ch'), _api_correction.get_device_idx('cv')]
         delta_kick = _api_correction.calc_kick(_np.array(orbit), ctype)
         _api_pv.add_kick(delta_kick, ctype, idx_c)
 
