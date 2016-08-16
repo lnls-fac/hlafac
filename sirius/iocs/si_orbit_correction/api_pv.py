@@ -100,7 +100,7 @@ def get_kick(ctype = ''):
     return _np.array(kick)
 
 
-def add_kick(delta_kick = None, ctype = '', idx = None):
+def add_kick(delta_kick = None, ctype = '', idx = None, weight = 1):
     kick0_full = get_kick(ctype)
     if ctype.lower() == 'h' or ctype.lower() == 'h_f':
         plane = 'x'
@@ -123,10 +123,10 @@ def add_kick(delta_kick = None, ctype = '', idx = None):
     if ctype.lower() == 'h_f' or ctype.lower() == 'v_f' or ctype.lower() == 'hv_f' or ctype.lower() == 'h_v_f':
         pvnames_c.extend([PV_RF_FREQUENCY])
         kick0 = _np.append(kick0, kick0_full[-1])
-        kick = kick0 + delta_kick
+        kick = kick0 + weight*delta_kick
         if any(_np.where(abs(kick[:-1])>10, True, False)): return 'failed'
     else:
-        kick = kick0 + delta_kick
+        kick = kick0 + weight*delta_kick
         if any(_np.where(abs(kick)>10, True, False)): return 'failed'
     old_orbit = get_orbit(plane)
     for i, pvname in enumerate(pvnames_c):

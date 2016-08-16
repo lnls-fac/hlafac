@@ -10,7 +10,7 @@ pvdb = {
     'SICO-SOFB-AVGORBIT-X': {'type': 'float', 'count': numBPM},
     'SICO-SOFB-AVGORBIT-Y': {'type': 'float', 'count': numBPM},
     'SICO-SOFB-AVGORBIT-NUMSAMPLES': {'type': 'int', 'value': 1},
-    'SICO-SOFB-ERROR': {'type': 'enum', 'enums': ['None', 'MeasRespmError', 'SetAvgOrbitNumSamplesError', 'ReadOrbitError', 'SetRespmError', 'SetRefOrbitError', 'CalcEstatDataError', 'CorrOrbitError', 'SetRespmSlotError', 'SetRefOrbitSlotError', 'UpdateRespmError', 'UpdateRefOrbitError', 'DeviceSelError', 'KickThresholdError']}, #0-13
+    'SICO-SOFB-ERROR': {'type': 'enum', 'enums': ['None', 'MeasRespmError', 'SetAvgOrbitNumSamplesError', 'ReadOrbitError', 'SetRespmError', 'SetRefOrbitError', 'CalcEstatDataError', 'CorrOrbitError', 'SetRespmSlotError', 'SetRefOrbitSlotError', 'UpdateRespmError', 'UpdateRefOrbitError', 'DeviceSelError', 'KickThresholdError', 'WeightOutRangeError']}, #0-14
     'SICO-SOFB-RESPM-SEL': {'type': 'enum', 'enums': ['user_shift', 'slot1', 'slot2']},
     'SICO-SOFB-RESPM': {'type': 'float', 'count': (numBPM*2)*(numCH+numCV+1)},
     'SICO-SOFB-REFORBIT-X-SEL': {'type': 'enum', 'enums': ['null', 'slot1', 'slot2']},
@@ -37,4 +37,5 @@ pvdb = {
     'SICO-BPM-DEVICENAMES': {'type': 'string', 'count': numBPM, 'value': _np.genfromtxt('txt/dname-bpm.txt', dtype='str')},
     'SICO-CH-DEVICENAMES': {'type': 'string', 'count': numCH, 'value': _np.genfromtxt('txt/dname-ch.txt', dtype='str')},
     'SICO-CV-DEVICENAMES': {'type': 'string', 'count': numCV, 'value': _np.genfromtxt('txt/cv.txt', dtype='str')},
+    'SICO-SOFB-WEIGHT': {'type': 'float', 'value': 1},
 }
