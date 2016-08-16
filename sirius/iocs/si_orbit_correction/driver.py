@@ -2,8 +2,6 @@
 import queue
 from pcaspy import Driver
 import epics
-from time import sleep
-import api_correction as _api_correction
 
 
 class PCASDriver(Driver):

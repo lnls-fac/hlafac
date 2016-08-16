@@ -4,7 +4,6 @@ import lnls as _lnls
 import epics as _epics
 import numpy as _np
 from time import sleep
-from datetime import datetime
 
 
 _PREFIX = 'VA-'

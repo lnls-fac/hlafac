@@ -1,7 +1,5 @@
 import numpy as _np
-from scipy import io as _io
 import epics as _epics
-import sirius as _sirius
 import api_pv as _api_pv
 from time import sleep
 
