@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 import os as _os
 import lnls as _lnls
 import pyaccel as _pyaccel
