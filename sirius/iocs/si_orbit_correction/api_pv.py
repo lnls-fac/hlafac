@@ -1,9 +1,8 @@
 
-import os as _os
-import lnls as _lnls
 import epics as _epics
 import numpy as _np
 from time import sleep
+import api_status as _api_status
 
 
 _PREFIX = 'VA-'
@@ -13,48 +12,24 @@ _SLEEPTIME = 0.1
 PV_RF_FREQUENCY = _PREFIX + 'SIRF-FREQUENCY' #virtual accelerator PV
 #PV_RF_FREQUENCY = 'DIG-RSSMX100A-0:GENERAL:Freq' #real RF generator PV
 
-_sidi_bpm_devicenames_fname = _os.path.join(_lnls.folder_root,
-'siriusdb', 'recordnames_flatlists', 'dname-bpm.txt')
-_sips_ch_devicenames_fname  = _os.path.join(_lnls.folder_root,
-'siriusdb', 'recordnames_flatlists', 'dname-ch.txt')
-_sips_cv_devicenames_fname  = _os.path.join(_lnls.folder_root,
-'siriusdb', 'recordnames_flatlists', 'cv.txt')
-
 global _pvs
 _pvs = {}
 
 
-def _read_devicename_file(filename):
-    with open(filename, 'r') as fp:
-        content = fp.read()
-    content = content.splitlines()
-    devicenames = []
-    for line in content:
-        line = line.strip()
-        if not line or line[0] == '#': continue
-        words = line.split()
-        devicenames.append(words[0])
-    return devicenames
-
-
 def _create_pv_names():
-    global _devicenames_bpm, _devicenames_ch, _devicenames_cv
-    _devicenames_bpm = _read_devicename_file(_sidi_bpm_devicenames_fname)
-    _devicenames_ch  = _read_devicename_file(_sips_ch_devicenames_fname)
-    _devicenames_cv  = _read_devicename_file(_sips_cv_devicenames_fname)
     pvnames_bpm_x = []
     pvnames_bpm_y = []
     pvnames_ch = []
     pvnames_cv = []
-    for i, device in enumerate(_devicenames_bpm):
+    for i, device in enumerate(_api_status.devicenames_bpm):
         pvnames_bpm_x.append(_PREFIX + 'SIDI-' + device + ':MONIT:X')
         pvnames_bpm_y.append(_PREFIX + 'SIDI-' + device + ':MONIT:Y')
         _pvs[pvnames_bpm_x[i]] = _epics.PV(pvnames_bpm_x[i])
         _pvs[pvnames_bpm_y[i]] = _epics.PV(pvnames_bpm_y[i])
-    for i, device in enumerate(_devicenames_ch):
+    for i, device in enumerate(_api_status.devicenames_ch):
         pvnames_ch.append(_PREFIX + 'SIPS-' + device + _SUFIX)
         _pvs[pvnames_ch[i]] = _epics.PV(pvnames_ch[i])
-    for i, device in enumerate(_devicenames_cv):
+    for i, device in enumerate(_api_status.devicenames_cv):
         pvnames_cv.append(_PREFIX + 'SIPS-' + device + _SUFIX)
         _pvs[pvnames_cv[i]] = _epics.PV(pvnames_cv[i])
     _pvs[_PREFIX + 'SIDI-BPM-FAM:MONIT:X'] = _epics.PV(_PREFIX + 'SIDI-BPM-FAM:MONIT:X')
@@ -99,25 +74,25 @@ def get_kick(ctype = ''):
     return _np.array(kick)
 
 
-def add_kick(delta_kick = None, ctype = '', idx = None, weight = 1):
+def add_kick(delta_kick = None, ctype = '', weight = 1):
     kick0_full = get_kick(ctype)
     if ctype.lower() == 'h' or ctype.lower() == 'h_f':
         plane = 'x'
-        pvnames_c = list(_np.asarray(_pvnames_ch)[idx[0]])
-        kick0 = kick0_full[idx[0]]
+        pvnames_c = list(_np.asarray(_pvnames_ch)[_api_status.get_device_idx('ch')])
+        kick0 = kick0_full[_api_status.get_device_idx('ch')]
     elif ctype.lower() == 'v' or ctype.lower() == 'v_f':
         plane = 'y'
-        pvnames_c = list(_np.asarray(_pvnames_cv)[idx[0]])
-        kick0 = kick0_full[idx[0]]
+        pvnames_c = list(_np.asarray(_pvnames_cv)[_api_status.get_device_idx('cv')])
+        kick0 = kick0_full[_api_status.get_device_idx('cv')]
     elif ctype.lower() == 'hv' or ctype.lower() == 'hv_f' or ctype.lower() == 'h_v' or ctype.lower() == 'h_v_f':
         plane = 'xy'
         pvnames_c = []
-        pvnames_c.extend(_np.asarray(_pvnames_ch)[idx[0]])
-        pvnames_c.extend(_np.asarray(_pvnames_cv)[idx[1]])
+        pvnames_c.extend(_np.asarray(_pvnames_ch)[_api_status.get_device_idx('ch')])
+        pvnames_c.extend(_np.asarray(_pvnames_cv)[_api_status.get_device_idx('cv')])
         kickx = kick0_full[:len(_pvnames_ch)]
         kicky = kick0_full[len(_pvnames_ch):]
-        kickx0 = kickx[idx[0]]
-        kicky0 = kicky[idx[1]]
+        kickx0 = kickx[_api_status.get_device_idx('ch')]
+        kicky0 = kicky[_api_status.get_device_idx('cv')]
         kick0 = _np.concatenate((kickx0, kicky0), axis=0)
     if ctype.lower() == 'h_f' or ctype.lower() == 'v_f' or ctype.lower() == 'hv_f' or ctype.lower() == 'h_v_f':
         pvnames_c.extend([PV_RF_FREQUENCY])
