@@ -7,9 +7,6 @@ import api_correction as _api_correction
 from time import sleep
 from collections import deque
 import numpy as _np
-from pcaspy import Driver
-from epics import caput
-from re import findall
 
 
 class CODCorrectionThread(threading.Thread):
