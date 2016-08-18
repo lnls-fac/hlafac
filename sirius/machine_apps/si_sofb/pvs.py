@@ -2,13 +2,14 @@
 import numpy as _np
 import api_status as _api_status
 
+#enums are limited to 25 characters
 
 pvdb = {
     'SICO-SOFB-MODE': {'type': 'enum', 'enums': ['Off', 'Corr-OnH', 'Corr-OnV', 'Corr-OnHOnV', 'Corr-OnHV', 'Corr-OnH_F', 'Corr-OnV_F', 'Corr-OnHOnV_F', 'Corr-OnHV_F', 'MeasRespm-OnH', 'MeasRespm-OnV', 'MeasRespm-OnHV', 'MeasRespm-OnH_F', 'MeasRespm-OnV_F', 'MeasRespm-OnHV_F']},
     'SICO-SOFB-AVGORBIT-X': {'type': 'float', 'count': _api_status.nBPM},
     'SICO-SOFB-AVGORBIT-Y': {'type': 'float', 'count': _api_status.nBPM},
     'SICO-SOFB-AVGORBIT-NUMSAMPLES': {'type': 'int', 'value': 1},
-    'SICO-SOFB-ERROR': {'type': 'enum', 'enums': ['None', 'MeasRespmError', 'SetAvgOrbitNumSamplesError', 'ReadOrbitError', 'SetRespmError', 'SetRefOrbitError', 'CalcEstatDataError', 'CorrOrbitError', 'SetRespmSlotError', 'SetRefOrbitSlotError', 'UpdateRespmError', 'UpdateRefOrbitError', 'DeviceSelError', 'KickThresholdError', 'WeightOutRangeError']}, #0-14
+    'SICO-SOFB-ERROR': {'type': 'enum', 'enums': ['None', 'MeasRespmError', 'SetNumSamplesError', 'ReadOrbitError', 'SetRespmError', 'SetRefOrbitError', 'CalcEstatDataError', 'CorrOrbitError', 'SetRespmSlotError', 'SetRefOrbitSlotError', 'UpdateRespmError', 'UpdateRefOrbitError', 'DeviceSelError', 'KickThresholdError', 'WeightOutRangeError']}, #0-14
     'SICO-SOFB-RESPM-SEL': {'type': 'enum', 'enums': ['user_shift', 'slot1', 'slot2']},
     'SICO-SOFB-RESPM': {'type': 'float', 'count': (_api_status.nBPM*2)*(_api_status.nCH+_api_status.nCV+1)},
     'SICO-SOFB-REFORBIT-X-SEL': {'type': 'enum', 'enums': ['null', 'slot1', 'slot2']},
