@@ -32,8 +32,8 @@ pvdb = {
     'SICO-SOFB-CH-ADD': {'type': 'string'},
     'SICO-SOFB-CV-RMV': {'type': 'string'},
     'SICO-SOFB-CV-ADD': {'type': 'string'},
-    'SICO-BPM-DEVICENAMES': {'type': 'string', 'count': _api_status.nBPM, 'value': _np.genfromtxt('txt/dname-bpm.txt', dtype='str')},
-    'SICO-CH-DEVICENAMES': {'type': 'string', 'count': _api_status.nCH, 'value': _np.genfromtxt('txt/dname-ch.txt', dtype='str')},
-    'SICO-CV-DEVICENAMES': {'type': 'string', 'count': _api_status.nCV, 'value': _np.genfromtxt('txt/cv.txt', dtype='str')},
+    'SICO-BPM-DEVICENAMES': {'type': 'string', 'count': _api_status.nBPM, 'value': _api_status.devicenames_bpm},
+    'SICO-CH-DEVICENAMES': {'type': 'string', 'count': _api_status.nCH, 'value': _api_status.devicenames_ch},
+    'SICO-CV-DEVICENAMES': {'type': 'string', 'count': _api_status.nCV, 'value': _api_status.devicenames_cv},
     'SICO-SOFB-WEIGHT': {'type': 'float', 'value': 1},
 }
