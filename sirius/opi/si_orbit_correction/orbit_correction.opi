@@ -669,7 +669,7 @@ $(trace_0_y_pv_value)</tooltip>
       <wuid>67e30957:15318865f63:-67a6</wuid>
       <transparent>true</transparent>
       <auto_size>true</auto_size>
-      <text>Estatistical Data</text>
+      <text>Statistical Data</text>
       <scripts />
       <height>23</height>
       <border_width>1</border_width>
@@ -688,7 +688,7 @@ $(trace_0_y_pv_value)</tooltip>
       <background_color>
         <color red="240" green="240" blue="240" />
       </background_color>
-      <width>163</width>
+      <width>150</width>
       <x>6</x>
       <name>Title</name>
       <y>6</y>
