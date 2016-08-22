@@ -13,7 +13,7 @@ try:
     
     y = DataUtil.createDoubleArray(len(orbit))
     for i in range(len(orbit)):
-        y[i] = 1e09*orbit[i] - 0*ref_orbit[i]
+        y[i] = orbit[i] - ref_orbit[i]
     
     y_pv.setValue(y)
     
