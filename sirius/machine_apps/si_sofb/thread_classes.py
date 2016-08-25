@@ -136,6 +136,7 @@ class MEASOrbitThread(threading.Thread):
                     self._driver.setParam('SICO-SOFB-ERROR', 6)
             except:
                 self._driver.setParam('SICO-SOFB-ERROR', 3)
+            self._driver.updatePVs()
         else:
             log('exit', 'orbit measurement thread')
 
