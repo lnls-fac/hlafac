@@ -33,14 +33,19 @@ class CODCorrectionThread(threading.Thread):
     def cod_correction(self, ctype = ''):
         if ctype.lower() == 'h' or ctype.lower() == 'h_f':
             orbit = self._driver.getParam('SICO-SOFB-AVGORBIT-X')
+            weight = [self._driver.getParam('SICO-SOFB-WEIGHT-H')/100]
         elif ctype.lower() == 'v' or ctype.lower() == 'v_f':
             orbit = self._driver.getParam('SICO-SOFB-AVGORBIT-Y')
+            weight = [self._driver.getParam('SICO-SOFB-WEIGHT-V')/100]
         elif ctype.lower() == 'hv' or ctype.lower() == 'hv_f' or ctype.lower() == 'h_v' or ctype.lower() == 'h_v_f':
             orbit = []
             orbit.extend(self._driver.getParam('SICO-SOFB-AVGORBIT-X'))
             orbit.extend(self._driver.getParam('SICO-SOFB-AVGORBIT-Y'))
+            weight = []
+            weight.append(self._driver.getParam('SICO-SOFB-WEIGHT-H')/100)
+            weight.append(self._driver.getParam('SICO-SOFB-WEIGHT-V')/100)
         delta_kick = _api_correction.calc_kick(_np.array(orbit), ctype)
-        status = _api_pv.add_kick(delta_kick, ctype, self._driver.getParam('SICO-SOFB-WEIGHT'))
+        status = _api_pv.add_kick(delta_kick, ctype, weight)
         if str(status).lower() == 'failed':
             self._driver.setParam('SICO-SOFB-ERROR', 13)
             self._mode = 0

@@ -36,5 +36,6 @@ pvdb = {
     'SICO-BPM-DEVICENAMES': {'type': 'string', 'count': _api_status.nBPM, 'value': _api_status.devicenames_bpm},
     'SICO-CH-DEVICENAMES': {'type': 'string', 'count': _api_status.nCH, 'value': _api_status.devicenames_ch},
     'SICO-CV-DEVICENAMES': {'type': 'string', 'count': _api_status.nCV, 'value': _api_status.devicenames_cv},
-    'SICO-SOFB-WEIGHT': {'type': 'float', 'value': 1},
+    'SICO-SOFB-WEIGHT-H': {'type': 'float', 'value': 100, 'unit': '%', 'prec': 0},
+    'SICO-SOFB-WEIGHT-V': {'type': 'float', 'value': 100, 'unit': '%', 'prec': 0},
 }

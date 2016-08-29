@@ -140,7 +140,7 @@ class PCASDriver(Driver):
             else:
                 self._threads_dic['var_update']._mode = 15
         elif reason == 'SICO-SOFB-WEIGHT':
-            if not 0 <= value <= 1:
+            if not 0 <= value <= 100:
                 self.setParam('SICO-SOFB-ERROR', 14)
                 return
         return super().write(reason, value)

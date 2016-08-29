@@ -74,33 +74,40 @@ def get_kick(ctype = ''):
     return _np.array(kick)
 
 
-def add_kick(delta_kick = None, ctype = '', weight = 1):
+def add_kick(delta_kick = None, ctype = '', weight = [1]):
     kick0_full = get_kick(ctype)
     if ctype.lower() == 'h' or ctype.lower() == 'h_f':
         plane = 'x'
         pvnames_c = list(_np.asarray(_pvnames_ch)[_api_status.get_device_idx('ch')])
         kick0 = kick0_full[_api_status.get_device_idx('ch')]
+        weighted_kick = weight[0]*delta_kick[:len(_api_status.get_device_idx('ch'))]
     elif ctype.lower() == 'v' or ctype.lower() == 'v_f':
         plane = 'y'
         pvnames_c = list(_np.asarray(_pvnames_cv)[_api_status.get_device_idx('cv')])
         kick0 = kick0_full[_api_status.get_device_idx('cv')]
+        weighted_kick = weight[0]*delta_kick[:len(_api_status.get_device_idx('cv'))]
     elif ctype.lower() == 'hv' or ctype.lower() == 'hv_f' or ctype.lower() == 'h_v' or ctype.lower() == 'h_v_f':
         plane = 'xy'
         pvnames_c = []
         pvnames_c.extend(_np.asarray(_pvnames_ch)[_api_status.get_device_idx('ch')])
         pvnames_c.extend(_np.asarray(_pvnames_cv)[_api_status.get_device_idx('cv')])
-        kickx = kick0_full[:len(_pvnames_ch)]
-        kicky = kick0_full[len(_pvnames_ch):]
-        kickx0 = kickx[_api_status.get_device_idx('ch')]
-        kicky0 = kicky[_api_status.get_device_idx('cv')]
-        kick0 = _np.concatenate((kickx0, kicky0), axis=0)
+        kickh_full = kick0_full[:len(_pvnames_ch)]
+        kickv_full = kick0_full[len(_pvnames_ch):]
+        kickh0 = kickh_full[_api_status.get_device_idx('ch')]
+        kickv0 = kickv_full[_api_status.get_device_idx('cv')]
+        kick0 = _np.concatenate((kickh0, kickv0), axis=0)
+        weighted_kickh = weight[0]*delta_kick[:len(_api_status.get_device_idx('ch'))]
+        weighted_kickv = weight[1]*delta_kick[len(_api_status.get_device_idx('ch')):(len(_api_status.get_device_idx('ch')) + len(_api_status.get_device_idx('cv')))]
+        weighted_kick = _np.concatenate((weighted_kickh, weighted_kickv))
+        print(weight[0], weight[1])
     if ctype.lower() == 'h_f' or ctype.lower() == 'v_f' or ctype.lower() == 'hv_f' or ctype.lower() == 'h_v_f':
         pvnames_c.extend([PV_RF_FREQUENCY])
         kick0 = _np.append(kick0, kick0_full[-1])
-        kick = kick0 + weight*delta_kick
+        weighted_kick = _np.append(weighted_kick, delta_kick[-1])
+        kick = kick0 + weighted_kick
         if any(_np.where(abs(kick[:-1])>10, True, False)): return 'failed'
     else:
-        kick = kick0 + weight*delta_kick
+        kick = kick0 + weighted_kick
         if any(_np.where(abs(kick)>10, True, False)): return 'failed'
     old_orbit = get_orbit(plane)
     for i, pvname in enumerate(pvnames_c):
