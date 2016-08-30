@@ -99,7 +99,6 @@ def add_kick(delta_kick = None, ctype = '', weight = [1]):
         weighted_kickh = weight[0]*delta_kick[:len(_api_status.get_device_idx('ch'))]
         weighted_kickv = weight[1]*delta_kick[len(_api_status.get_device_idx('ch')):(len(_api_status.get_device_idx('ch')) + len(_api_status.get_device_idx('cv')))]
         weighted_kick = _np.concatenate((weighted_kickh, weighted_kickv))
-        print(weight[0], weight[1])
     if ctype.lower() == 'h_f' or ctype.lower() == 'v_f' or ctype.lower() == 'hv_f' or ctype.lower() == 'h_v_f':
         pvnames_c.extend([PV_RF_FREQUENCY])
         kick0 = _np.append(kick0, kick0_full[-1])
