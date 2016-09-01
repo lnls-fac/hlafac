@@ -27,6 +27,10 @@ min_y_pv = "SICO-SOFB-ORBIT-Y-MIN"
 # SOFB
 sofb_weight_h_pv = "SICO-SOFB-WEIGHT-H"
 sofb_weight_v_pv = "SICO-SOFB-WEIGHT-V"
+sofb_mode_pv = "SICO-SOFB-MODE"
+sofb_mode_plane_pv = "SICO-SOFB-MODE-PLANE"
+sofb_mode_rffreq_pv = "SICO-SOFB-MODE-RFFREQ"
+sofb_error_pv = "SICO-SOFB-ERROR"
 
 # Local PVs
 
@@ -47,7 +51,12 @@ deviation_register_locpv = "loc://deviation_register(0)"
 sofb_corr_h_locpv = "loc://sofb_corr_h(0)"
 sofb_corr_v_locpv = "loc://sofb_corr_v(0)"
 sofb_corr_coupling_locpv = "loc://sofb_coupling(0)"
-sofb_corr_freq_locpv = "loc://sofb_corr_freq(0)"
+sofb_corr_rffreq_locpv = "loc://sofb_corr_freq(0)"
+
+# FOFB
+fofb_corr_h_locpv = "loc://fofb_corr_h(0)"
+fofb_corr_v_locpv = "loc://fofb_corr_v(0)"
+fofb_corr_coupling_locpv = "loc://fofb_coupling(0)"
 
 
 ## Control Panel
@@ -78,13 +87,12 @@ control_panel_macros.put("min_y", min_y_pv)
 control_panel_macros.put("num_samples", num_samples_pv)
 control_panel_macros.put("sofb_weight_h", sofb_weight_h_pv)
 control_panel_macros.put("sofb_weight_v", sofb_weight_v_pv)
-control_panel_macros.put("sofb_corr_h", sofb_corr_h_locpv)
-control_panel_macros.put("sofb_corr_v", sofb_corr_v_locpv)
-control_panel_macros.put("sofb_corr_coupling", sofb_corr_coupling_locpv)
-control_panel_macros.put("sofb_corr_freq", sofb_corr_freq_locpv)
+control_panel_macros.put("sofb_mode", sofb_mode_pv)
+control_panel_macros.put("sofb_mode_plane", sofb_mode_plane_pv)
+control_panel_macros.put("sofb_mode_rffreq", sofb_mode_rffreq_pv)
+control_panel_macros.put("sofb_error", sofb_error_pv)
 control_panel.setPropertyValue("macros", control_panel_macros)
 
 # Reload OPI
 control_panel.setPropertyValue("opi_file", "")
 control_panel.setPropertyValue("opi_file", "control_panel.opi")
-
