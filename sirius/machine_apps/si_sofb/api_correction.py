@@ -50,8 +50,8 @@ def set_respm():
     _respm_h = _np.copy(_respm_hv[:len(_api_status.get_device_idx('bpm_x')),:len(_api_status.get_device_idx('ch'))])
     _respm_v = _np.copy(_respm_hv[-len(_api_status.get_device_idx('bpm_y')):,-len(_api_status.get_device_idx('cv')):])
     _respm_h_v_f = _np.copy(_respm_hv_f)
-    _respm_h_v_f[:len(_api_status.get_device_idx('bpm_x')),len(_api_status.get_device_idx('ch')):-1] = _np.zeros((_respm_v.shape))
-    _respm_h_v_f[-len(_api_status.get_device_idx('bpm_y')):,:len(_api_status.get_device_idx('ch'))] = _np.zeros(_respm_h.shape)
+    _respm_h_v_f[:len(_api_status.get_device_idx('bpm_x')),len(_api_status.get_device_idx('ch')):-1] = 0
+    _respm_h_v_f[-len(_api_status.get_device_idx('bpm_y')):,:len(_api_status.get_device_idx('ch'))] = 0
     _respm_h_v = _np.copy(_respm_h_v_f[:,:-1])
     _respm_h_f = _np.copy(_respm_h)
     _respm_h_f = _np.c_[_respm_h_f,_respm_hv_f[:len(_api_status.get_device_idx('bpm_x')),-1]]
