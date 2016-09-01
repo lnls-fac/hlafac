@@ -142,6 +142,15 @@ def meas_respm(ctype = '', interruption_event = None):
         pvnames_c.extend(_pvnames_ch)
         pvnames_c.extend(_pvnames_cv)
         plane = 'xy'
+    elif ctype.lower() == 'h_v' or ctype.lower() == 'h_v_f':
+        if ctype.lower() == 'h_v':
+            respm = meas_respm('hv', interruption_event)
+            respm[:_api_status.nBPM, _api_status.nCH:] = 0
+        elif ctype.lower() == 'h_v_f':
+            respm = meas_respm('hv_f', interruption_event)
+            respm[:_api_status.nBPM, _api_status.nCH:-1] = 0
+        respm[_api_status.nBPM:, :_api_status.nCH] = 0
+        return respm
     kick0 = get_kick(ctype)
     respm = _np.empty((len(pvnames_bpm), len(pvnames_c)+1))
     old_orbit = get_orbit(plane)

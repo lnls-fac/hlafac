@@ -158,7 +158,7 @@ class MEASRespmThread(threading.Thread):
 
         Class main attribute: mode
         Defines what type of respm should be measured.
-        0-Off, 9-H, 10-V, 11-HV, 12-H_F, 13-V_F, 14-HV_F
+        0-Off, 1-H, 2-V, 3-HV, 4-H_F, 5-V_F, 6-HV_F
         """
 
         self._name = name
@@ -171,19 +171,19 @@ class MEASRespmThread(threading.Thread):
     def _finalise_meas_respm(self, respm):
         if respm.shape != (0,):
             _respm = _np.zeros((_api_status.nBPM*2, _api_status.nCH+_api_status.nCV+1))
-            if self._mode == 9:
+            if self._mode == 1:
                 _respm[:_api_status.nBPM,:_api_status.nCH] = respm
-            elif self._mode == 10:
+            elif self._mode == 2:
                 _respm[_api_status.nBPM:,_api_status.nCH:-1] = respm
-            elif self._mode == 11:
+            elif self._mode == 4:
                 _respm[:,:-1] = respm
-            elif self._mode == 12:
+            elif self._mode == 5:
                 _respm[:_api_status.nBPM,:_api_status.nCH] = respm[:,:-1]
                 _respm[:_api_status.nBPM,-1] = respm[:,-1]
-            elif self._mode == 13:
+            elif self._mode == 6:
                 _respm[_api_status.nBPM:,_api_status.nCH:-1] = respm[:,:-1]
                 _respm[_api_status.nBPM:,-1] = respm[:,-1]
-            elif self._mode == 14:
+            elif self._mode == 8:
                 _respm = respm
             self._driver.write('SICO-SOFB-RESPM', _respm)
         self._interrupt_measrespm_event.clear()
@@ -192,22 +192,26 @@ class MEASRespmThread(threading.Thread):
 
     def _main(self):
         while not self._stop_event.is_set():
-            if self._mode == 9:
+            if self._mode == 1:
                 respm = _api_pv.meas_respm('h', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
-            elif self._mode == 10:
+            elif self._mode == 2:
                 respm = _api_pv.meas_respm('v', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
-            elif self._mode == 11:
+            elif self._mode == 3:
+                pass
+            elif self._mode == 4:
                 respm = _api_pv.meas_respm('hv', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
-            elif self._mode == 12:
+            elif self._mode == 5:
                 respm = _api_pv.meas_respm('h_f', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
-            elif self._mode == 13:
+            elif self._mode == 6:
                 respm = _api_pv.meas_respm('v_f', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
-            elif self._mode == 14:
+            elif self._mode == 7:
+                pass
+            elif self._mode == 8:
                 respm = _api_pv.meas_respm('hv_f', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             else:

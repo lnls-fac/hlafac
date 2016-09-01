@@ -5,7 +5,9 @@ import api_status as _api_status
 #enums are limited to 25 characters
 
 pvdb = {
-    'SICO-SOFB-MODE': {'type': 'enum', 'enums': ['Off', 'Corr-OnH', 'Corr-OnV', 'Corr-OnHOnV', 'Corr-OnHV', 'Corr-OnH_F', 'Corr-OnV_F', 'Corr-OnHOnV_F', 'Corr-OnHV_F', 'MeasRespm-OnH', 'MeasRespm-OnV', 'MeasRespm-OnHV', 'MeasRespm-OnH_F', 'MeasRespm-OnV_F', 'MeasRespm-OnHV_F']},
+    'SICO-SOFB-MODE': {'type': 'enum', 'enums': ['Off', 'Orbit Correction', 'Matrix Measurement']},
+    'SICO-SOFB-MODE-PLANE': {'type': 'enum', 'enums': ['H', 'V', 'HV', 'HV+K']},
+    'SICO-SOFB-MODE-RFFREQ': {'type': 'enum', 'enums': ['Off', 'On']},
     'SICO-SOFB-AVGORBIT-X': {'type': 'float', 'count': _api_status.nBPM},
     'SICO-SOFB-AVGORBIT-Y': {'type': 'float', 'count': _api_status.nBPM},
     'SICO-SOFB-AVGORBIT-NUMSAMPLES': {'type': 'int', 'value': 1},
