@@ -175,7 +175,7 @@ class MEASRespmThread(threading.Thread):
                 _respm[:_api_status.nBPM,:_api_status.nCH] = respm
             elif self._mode == 2:
                 _respm[_api_status.nBPM:,_api_status.nCH:-1] = respm
-            elif self._mode == 4:
+            elif self._mode == 3 or self._mode == 4:
                 _respm[:,:-1] = respm
             elif self._mode == 5:
                 _respm[:_api_status.nBPM,:_api_status.nCH] = respm[:,:-1]
@@ -183,7 +183,7 @@ class MEASRespmThread(threading.Thread):
             elif self._mode == 6:
                 _respm[_api_status.nBPM:,_api_status.nCH:-1] = respm[:,:-1]
                 _respm[_api_status.nBPM:,-1] = respm[:,-1]
-            elif self._mode == 8:
+            elif self._mode == 7 or self._mode == 8:
                 _respm = respm
             self._driver.write('SICO-SOFB-RESPM', _respm)
         self._interrupt_measrespm_event.clear()
@@ -199,7 +199,8 @@ class MEASRespmThread(threading.Thread):
                 respm = _api_pv.meas_respm('v', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             elif self._mode == 3:
-                pass
+                respm = _api_pv.meas_respm('h_v', self._interrupt_measrespm_event)
+                self._finalise_meas_respm(respm)
             elif self._mode == 4:
                 respm = _api_pv.meas_respm('hv', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
@@ -210,7 +211,8 @@ class MEASRespmThread(threading.Thread):
                 respm = _api_pv.meas_respm('v_f', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             elif self._mode == 7:
-                pass
+                respm = _api_pv.meas_respm('h_v_f', self._interrupt_measrespm_event)
+                self._finalise_meas_respm(respm)
             elif self._mode == 8:
                 respm = _api_pv.meas_respm('hv_f', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
