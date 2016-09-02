@@ -149,4 +149,7 @@ class PCASDriver(Driver):
             if not 0 <= value <= 100:
                 self.setParam('SICO-SOFB-ERROR', 14)
                 return
-        return super().write(reason, value)
+        self.setParam(reason, value)
+        self.pvDB[reason].flag = False # avoid double camonitor update
+        return True
+        #return super().write(reason, value)
