@@ -152,4 +152,3 @@ class PCASDriver(Driver):
         self.setParam(reason, value)
         self.pvDB[reason].flag = False # avoid double camonitor update
         return True
-        #return super().write(reason, value)
