@@ -47,7 +47,7 @@ class PCASDriver(Driver):
                         self._threads_dic['respm_measurement']._mode = meas_mode
         elif reason == 'SICO-SOFB-MODE-PLANE' or reason == 'SICO-SOFB-MODE-RFFREQ':
             if self.getParam('SICO-SOFB-MODE') != 0:
-                self.setParam('SICO-SOFB-ERROR', 7)
+                self.setParam('SICO-SOFB-ERROR', 15)
                 return
         elif reason == 'SICO-SOFB-AVGORBIT-NUMSAMPLES':
             if not 1 <= value <= self._threads_dic['orbit_measurement']._max_length:
