@@ -6,8 +6,12 @@
   <show_grid>true</show_grid>
   <auto_zoom_to_fit_all>false</auto_zoom_to_fit_all>
   <scripts>
-    <path pathString="setmacros.py" checkConnect="true" sfe="false" seoe="false">
+    <path pathString="set_macros.py" checkConnect="true" sfe="false" seoe="false">
       <pv trig="true">=1</pv>
+    </path>
+    <path pathString="change_window_name.py" checkConnect="true" sfe="false" seoe="false">
+      <pv trig="true">=1</pv>
+      <pv trig="false">sim://const("Orbit Correction")</pv>
     </path>
   </scripts>
   <height>1500</height>
@@ -43,7 +47,7 @@
     <enabled>true</enabled>
     <wuid>64b0547:1515ec0235a:-78de</wuid>
     <transparent>false</transparent>
-    <lock_children>false</lock_children>
+    <lock_children>true</lock_children>
     <scripts />
     <height>100</height>
     <border_width>3</border_width>

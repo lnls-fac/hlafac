@@ -30,6 +30,7 @@ sofb_weight_v_pv = "SICO-SOFB-WEIGHT-V"
 sofb_mode_pv = "SICO-SOFB-MODE"
 sofb_mode_plane_pv = "SICO-SOFB-MODE-PLANE"
 sofb_mode_rffreq_pv = "SICO-SOFB-MODE-RFFREQ"
+sofb_mancorr_pv = "SICO-SOFB-MANCORR"
 sofb_error_pv = "SICO-SOFB-ERROR"
 
 # Local PVs
@@ -46,6 +47,7 @@ delta_orbit_y_locpv = "loc://delta_orbit_y(0)"
 register_locpv = "loc://register(0)"
 display_mode_locpv = "loc://display_mode(0)"
 deviation_register_locpv = "loc://deviation_register(0)"
+update_orbit_locpv = "loc://update_orbit(0)"
 
 # SOFB
 sofb_corr_h_locpv = "loc://sofb_corr_h(0)"
@@ -66,16 +68,21 @@ control_panel = display.getWidget("Control Panel")
 
 # Set Macros
 control_panel_macros = DataUtil.createMacrosInput(True)
-control_panel_macros.put("ref_orbit_x", ref_orbit_x_locpv)
-control_panel_macros.put("orbit_x", orbit_x_locpv)
+control_panel_macros.put("ref_orbit_x_ioc", ref_orbit_x_pv)
+control_panel_macros.put("orbit_x_ioc", orbit_x_pv)
+control_panel_macros.put("ref_orbit_y_ioc", ref_orbit_y_pv)
+control_panel_macros.put("orbit_y_ioc", orbit_y_pv)
+control_panel_macros.put("ref_orbit_x_graph", ref_orbit_x_locpv)
+control_panel_macros.put("orbit_x_graph", orbit_x_locpv)
 control_panel_macros.put("delta_orbit_x", delta_orbit_x_locpv)
-control_panel_macros.put("ref_orbit_y", ref_orbit_y_locpv)
-control_panel_macros.put("orbit_y", orbit_y_locpv)
+control_panel_macros.put("ref_orbit_y_graph", ref_orbit_y_locpv)
+control_panel_macros.put("orbit_y_graph", orbit_y_locpv)
 control_panel_macros.put("delta_orbit_y", delta_orbit_y_locpv)
 control_panel_macros.put("bpm_pos", bpm_pos_pv)
 control_panel_macros.put("register", register_locpv)
 control_panel_macros.put("display_mode", display_mode_locpv)
 control_panel_macros.put("deviation_register", deviation_register_locpv)
+control_panel_macros.put("update_orbit", update_orbit_locpv)
 control_panel_macros.put("rms_x", rms_x_pv)
 control_panel_macros.put("mean_x", mean_x_pv)
 control_panel_macros.put("max_x", max_x_pv)
@@ -90,6 +97,7 @@ control_panel_macros.put("sofb_weight_v", sofb_weight_v_pv)
 control_panel_macros.put("sofb_mode", sofb_mode_pv)
 control_panel_macros.put("sofb_mode_plane", sofb_mode_plane_pv)
 control_panel_macros.put("sofb_mode_rffreq", sofb_mode_rffreq_pv)
+control_panel_macros.put("sofb_mancorr", sofb_mancorr_pv)
 control_panel_macros.put("sofb_error", sofb_error_pv)
 control_panel.setPropertyValue("macros", control_panel_macros)
 
