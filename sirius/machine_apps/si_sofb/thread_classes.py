@@ -29,6 +29,7 @@ class CODCorrectionThread(threading.Thread):
         self._interval = interval
         self._stop_event = stop_event
         self._mode = 0
+        self._autocorr = True
 
     def cod_correction(self, ctype = ''):
         if ctype.lower() == 'h' or ctype.lower() == 'h_f':
@@ -50,6 +51,8 @@ class CODCorrectionThread(threading.Thread):
             self._driver.setParam('SICO-SOFB-ERROR', 13)
             self._mode = 0
             self._driver.setParam('SICO-SOFB-MODE', 0)
+        if not self._autocorr:
+            self._mode = 0
 
 
     def _main(self):

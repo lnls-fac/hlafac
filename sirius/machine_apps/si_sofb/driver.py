@@ -35,6 +35,7 @@ class PCASDriver(Driver):
                         self._threads_dic['orbit_correction']._mode = 'W_'+str(corr_mode)
                     else:
                         self._threads_dic['orbit_correction']._mode = corr_mode
+                    self._threads_dic['orbit_correction']._autocorr = True
             elif value == 2:
                 if self._threads_dic['orbit_correction']._mode != 0:
                     self.setParam('SICO-SOFB-ERROR', 1)
@@ -149,6 +150,18 @@ class PCASDriver(Driver):
             if not 0 <= value <= 100 or self.getParam('SICO-SOFB-MODE') != 0:
                 self.setParam('SICO-SOFB-ERROR', 14)
                 return
+        elif reason == 'SICO-SOFB-MANCORR':
+            if value == 1:
+                if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['respm_measurement']._mode != 0:
+                    self.setParam('SICO-SOFB-ERROR', 16)
+                    return
+                else:
+                    corr_mode = (self.getParam('SICO-SOFB-MODE-RFFREQ')*4) + self.getParam('SICO-SOFB-MODE-PLANE') + 1
+                    if self._threads_dic['var_update']._mode != 0:
+                        self._threads_dic['orbit_correction']._mode = 'W_'+str(corr_mode)
+                    else:
+                        self._threads_dic['orbit_correction']._mode = corr_mode
+                    self._threads_dic['orbit_correction']._autocorr = False
         self.setParam(reason, value)
         self.pvDB[reason].flag = False # avoid double camonitor update
         return True
