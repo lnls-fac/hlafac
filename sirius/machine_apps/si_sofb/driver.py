@@ -145,8 +145,8 @@ class PCASDriver(Driver):
                 return
             else:
                 self._threads_dic['var_update']._mode = 15
-        elif reason == 'SICO-SOFB-WEIGHT':
-            if not 0 <= value <= 100:
+        elif reason == 'SICO-SOFB-WEIGHT-H' or reason == 'SICO-SOFB-WEIGHT-V':
+            if not 0 <= value <= 100 or self.getParam('SICO-SOFB-MODE') != 0:
                 self.setParam('SICO-SOFB-ERROR', 14)
                 return
         self.setParam(reason, value)
