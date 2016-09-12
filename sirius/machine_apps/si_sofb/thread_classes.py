@@ -293,7 +293,7 @@ class UPDATEVariablesThread(threading.Thread):
                         self.setParam('SICO-SOFB-REFORBIT-Y', _api_correction.get_reforbit('y'))
                     except:
                         self._driver.setParam('SICO-SOFB-ERROR', 11)
-                elif self._mode == 7: #AQUI
+                elif self._mode == 7:
                     try:
                         _api_status.set_device_sel('bpm', self._driver.getParam('SICO-SOFB-BPM-SEL'))
                         _api_status.set_device_idx('bpm')
