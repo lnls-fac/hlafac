@@ -36,7 +36,7 @@ elif error_type == 7:
         error.setPropertyValue("text","Automatic correction request could not be processed.")
 	error_cause_1.setPropertyValue("text","Matrix measurement is running.")
 elif error_type == 8:
-        error.setPropertyValue("text","Responde matrix register could not be set")
+        error.setPropertyValue("text","Response matrix register could not be set")
 	error_cause_1.setPropertyValue("text","Automatic correction is running.")
         error_cause_2.setPropertyValue("text", "Variables are being update.")
 elif error_type == 9:
