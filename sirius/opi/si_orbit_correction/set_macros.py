@@ -7,8 +7,10 @@ from org.csstudio.opibuilder.scriptUtil import PVUtil, DataUtil, ConsoleUtil
 # Beam Orbit
 ref_orbit_x_pv = "SICO-SOFB-REFORBIT-X"
 orbit_x_pv = "SICO-SOFB-AVGORBIT-X"
+ref_orbit_x_sel_pv = "SICO-SOFB-REFORBIT-X-SEL"
 ref_orbit_y_pv = "SICO-SOFB-REFORBIT-Y"
 orbit_y_pv = "SICO-SOFB-AVGORBIT-Y"
+ref_orbit_y_sel_pv = "SICO-SOFB-REFORBIT-Y-SEL"
 bpm_pos_pv = "VA-SIFK-BPM-POS"
 
 # Orbits
@@ -70,8 +72,10 @@ control_panel = display.getWidget("Control Panel")
 control_panel_macros = DataUtil.createMacrosInput(True)
 control_panel_macros.put("ref_orbit_x_ioc", ref_orbit_x_pv)
 control_panel_macros.put("orbit_x_ioc", orbit_x_pv)
+control_panel_macros.put("ref_orbit_x_ioc_sel", ref_orbit_x_sel_pv)
 control_panel_macros.put("ref_orbit_y_ioc", ref_orbit_y_pv)
 control_panel_macros.put("orbit_y_ioc", orbit_y_pv)
+control_panel_macros.put("ref_orbit_y_ioc_sel", ref_orbit_y_sel_pv)
 control_panel_macros.put("ref_orbit_x_graph", ref_orbit_x_locpv)
 control_panel_macros.put("orbit_x_graph", orbit_x_locpv)
 control_panel_macros.put("delta_orbit_x", delta_orbit_x_locpv)
