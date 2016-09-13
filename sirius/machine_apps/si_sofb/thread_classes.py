@@ -52,7 +52,7 @@ class CODCorrectionThread(threading.Thread):
             self._mode = 0
             self._driver.setParam('SICO-SOFB-MODE', 0)
         if not self._autocorr:
-            self._mode = 0
+            mode = 0
 
 
     def _main(self):
@@ -285,7 +285,7 @@ class UPDATEVariablesThread(threading.Thread):
                         _api_status.set_reforbit_slot(self._driver.getParam('SICO-SOFB-REFORBIT-X-SEL'), 'x')
                         _api_status.set_reforbit('x')
                         _api_correction.set_reforbit()
-                        self.setParam('SICO-SOFB-REFORBIT-X', _api_correction.get_reforbit('x'))
+                        self._driver.setParam('SICO-SOFB-REFORBIT-X', _api_correction.get_reforbit('x'))
                     except:
                         self._driver.setParam('SICO-SOFB-ERROR', 11)
                 elif self._mode == 6:
@@ -293,7 +293,7 @@ class UPDATEVariablesThread(threading.Thread):
                         _api_status.set_reforbit_slot(self._driver.getParam('SICO-SOFB-REFORBIT-Y-SEL'), 'y')
                         _api_status.set_reforbit('y')
                         _api_correction.set_reforbit()
-                        self.setParam('SICO-SOFB-REFORBIT-Y', _api_correction.get_reforbit('y'))
+                        self._driver.setParam('SICO-SOFB-REFORBIT-Y', _api_correction.get_reforbit('y'))
                     except:
                         self._driver.setParam('SICO-SOFB-ERROR', 11)
                 elif self._mode == 7:
