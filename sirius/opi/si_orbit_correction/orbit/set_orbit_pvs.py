@@ -30,7 +30,6 @@ try:
                                 orbit_x_data = open(orbit_pathname+"reforbit_x/"+orbit_filename).readlines()
                                 orbit_y_data = open(orbit_pathname+"reforbit_y/"+orbit_filename).readlines()
                         else:
-                                ConsoleUtil.writeString("here")
                                 orbit_file = widget.getWidget("Text Reg. " + str(register[-1])).getPropertyValue("label")
                                 orbit_xy_data = open(orbit_file).readlines()
                                 orbit_x_data, orbit_y_data = orbit_xy_data[:len(orbit_xy_data)//2], orbit_xy_data[len(orbit_xy_data)//2:]
