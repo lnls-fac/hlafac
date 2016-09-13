@@ -46,9 +46,11 @@ elif error_type == 9:
 elif error_type == 10:
         error.setPropertyValue("text","Response matrix could not be update.")
 	error_cause_1.setPropertyValue("text","Matrix with incorrect dimension.")
+        error_cause_2.setPropertyValue("text", "Variables are being update.")
 elif error_type == 11:
         error.setPropertyValue("text","Referecence orbit could not be update.")
 	error_cause_1.setPropertyValue("text","Orbit with incorrect dimension.")
+        error_cause_2.setPropertyValue("text", "Variables are being update.")
 elif error_type == 12:
         error.setPropertyValue("text","Device selection could not be processed.")
 	error_cause_1.setPropertyValue("text","Device does not exist.")
@@ -66,3 +68,7 @@ elif error_type == 15:
 elif error_type == 16:
 	error.setPropertyValue("text","Manual correction request could not be processed.")
 	error_cause_1.setPropertyValue("text","SOFB must be off.")
+elif error_type == 17:
+        error.setPropertyValue("text","Referecence orbit could not be update.")
+	error_cause_1.setPropertyValue("text","Locked register.")
+        error_cause_2.setPropertyValue("text", "Variables are being update.")
