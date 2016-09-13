@@ -23,7 +23,6 @@ try:
     orbit_xy_data = open(file, "w")
     for data in orbit_xy:
         orbit_xy_data.write("%s\n" % data)
-
-        orbit_xy_data.close()
+    orbit_xy_data.close()
 except:
     pass
