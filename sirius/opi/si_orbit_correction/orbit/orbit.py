@@ -1,6 +1,5 @@
 from org.csstudio.opibuilder.scriptUtil import PVUtil, DataUtil
 import math
-import statistics
 
 ref_orbit_pv = pvArray[0]
 y_pv = pvArray[1]
@@ -23,7 +22,8 @@ try:
         y_pv.setValue(y)
         
         #Statistical Data
-        rms_pv.setValue(math.sqrt(statistics.sqrt(math.pow(y,2))))
+        rms_pv.setValue(math.sqrt(sum([math.pow(item,2) for item in y])/float(len(y))))
+        mean_pv.setValue(sum(y)/float(len(y)))
         max_pv.setValue(max(y))
         min_pv.setValue(min(y))
 
