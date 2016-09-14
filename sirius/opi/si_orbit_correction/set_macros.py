@@ -16,16 +16,6 @@ bpm_pos_pv = "VA-SIFK-BPM-POS"
 # Orbits
 num_samples_pv = "SICO-SOFB-AVGORBIT-NUMSAMPLES"
 
-# Statistical Data
-rms_x_pv = "SICO-SOFB-ORBIT-X-RMS"
-mean_x_pv = "SICO-SOFB-ORBIT-X-MEAN"
-max_x_pv = "SICO-SOFB-ORBIT-X-MAX"
-min_x_pv = "SICO-SOFB-ORBIT-X-MIN"
-rms_y_pv = "SICO-SOFB-ORBIT-Y-RMS"
-mean_y_pv = "SICO-SOFB-ORBIT-Y-MEAN"
-max_y_pv = "SICO-SOFB-ORBIT-Y-MAX"
-min_y_pv = "SICO-SOFB-ORBIT-Y-MIN"
-
 # SOFB
 sofb_weight_h_pv = "SICO-SOFB-WEIGHT-H"
 sofb_weight_v_pv = "SICO-SOFB-WEIGHT-V"
@@ -44,6 +34,14 @@ delta_orbit_x_locpv = "loc://delta_orbit_x(0)"
 ref_orbit_y_locpv = "loc://ref_orbit_y(0)"
 orbit_y_locpv = "loc://orbit_y(0)"
 delta_orbit_y_locpv = "loc://delta_orbit_y(0)"
+rms_x_locpv = "loc://rms_x(0)"
+mean_x_locpv = "loc://mean_x(0)"
+max_x_locpv = "loc://max_x(0)"
+min_x_locpv = "loc://min_x(0)"
+rms_y_locpv = "loc://rms_y(0)"
+mean_y_locpv = "loc://mean_y(0)"
+max_y_locpv = "loc://max_y(0)"
+min_y_locpv = "loc://min_y(0)"
 
 # Orbits
 register_locpv = "loc://register(0)"
@@ -87,14 +85,14 @@ control_panel_macros.put("register", register_locpv)
 control_panel_macros.put("display_mode", display_mode_locpv)
 control_panel_macros.put("deviation_register", deviation_register_locpv)
 control_panel_macros.put("update_orbit", update_orbit_locpv)
-control_panel_macros.put("rms_x", rms_x_pv)
-control_panel_macros.put("mean_x", mean_x_pv)
-control_panel_macros.put("max_x", max_x_pv)
-control_panel_macros.put("min_x", min_x_pv)
-control_panel_macros.put("rms_y", rms_y_pv)
-control_panel_macros.put("mean_y", mean_y_pv)
-control_panel_macros.put("max_y", max_y_pv)
-control_panel_macros.put("min_y", min_y_pv)
+control_panel_macros.put("rms_x", rms_x_locpv)
+control_panel_macros.put("mean_x", mean_x_locpv)
+control_panel_macros.put("max_x", max_x_locpv)
+control_panel_macros.put("min_x", min_x_locpv)
+control_panel_macros.put("rms_y", rms_y_locpv)
+control_panel_macros.put("mean_y", mean_y_locpv)
+control_panel_macros.put("max_y", max_y_locpv)
+control_panel_macros.put("min_y", min_y_locpv)
 control_panel_macros.put("num_samples", num_samples_pv)
 control_panel_macros.put("sofb_weight_h", sofb_weight_h_pv)
 control_panel_macros.put("sofb_weight_v", sofb_weight_v_pv)
