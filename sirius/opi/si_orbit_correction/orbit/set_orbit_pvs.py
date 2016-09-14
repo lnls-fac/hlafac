@@ -37,9 +37,9 @@ try:
                                 orbit_x[i] = float(orbit_x_data[i])
                         for i in range(len(orbit_y_data)):
                                 orbit_y[i] = float(orbit_y_data[i])
-                PVUtil.writePV(orbit_x_pv, orbit_x)
-                PVUtil.writePV(orbit_y_pv, orbit_y)
-                trigger = 2
+                		PVUtil.writePV(orbit_x_pv, orbit_x)
+                		PVUtil.writePV(orbit_y_pv, orbit_y)
+                		trigger = 2
                 graph_orbit_x.setPropertyValue("pv_name", orbit_x_pv)
                 graph_orbit_y.setPropertyValue("pv_name", orbit_y_pv)
         else:
