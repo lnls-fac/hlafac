@@ -27,7 +27,7 @@ class PCASDriver(Driver):
                 else: self._threads_dic['respm_measurement']._mode = 0
             elif value == 1:
                 if self._threads_dic['respm_measurement']._mode != 0:
-                    self.setParam('SICO-SOFB-ERROR', 7)
+                    self.setParam('SICO-SOFB-ERROR', 6)
                     return
                 else:
                     corr_mode = (self.getParam('SICO-SOFB-MODE-RFFREQ')*4) + self.getParam('SICO-SOFB-MODE-PLANE') + 1
@@ -48,7 +48,7 @@ class PCASDriver(Driver):
                         self._threads_dic['respm_measurement']._mode = meas_mode
         elif reason == 'SICO-SOFB-MODE-PLANE' or reason == 'SICO-SOFB-MODE-RFFREQ':
             if self.getParam('SICO-SOFB-MODE') != 0:
-                self.setParam('SICO-SOFB-ERROR', 15)
+                self.setParam('SICO-SOFB-ERROR', 14)
                 return
         elif reason == 'SICO-SOFB-AVGORBIT-NUMSAMPLES':
             if not 1 <= value <= self._threads_dic['orbit_measurement']._max_length:
@@ -58,19 +58,19 @@ class PCASDriver(Driver):
                 self._threads_dic['orbit_measurement']._n_samples = value
         elif reason == 'SICO-SOFB-RESPM-SEL':
             if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
-                self.setParam('SICO-SOFB-ERROR', 8)
+                self.setParam('SICO-SOFB-ERROR', 7)
                 return
             else:
                 self._threads_dic['var_update']._mode = 4
         elif reason == 'SICO-SOFB-REFORBIT-X-SEL':
             if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
-                self.setParam('SICO-SOFB-ERROR', 9)
+                self.setParam('SICO-SOFB-ERROR', 8)
                 return
             else:
                 self._threads_dic['var_update']._mode = 5
         elif reason == 'SICO-SOFB-REFORBIT-Y-SEL':
             if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
-                self.setParam('SICO-SOFB-ERROR', 9)
+                self.setParam('SICO-SOFB-ERROR', 8)
                 return
             else:
                 self._threads_dic['var_update']._mode = 6
@@ -82,7 +82,7 @@ class PCASDriver(Driver):
                 self._threads_dic['var_update']._mode = 1
         elif reason == 'SICO-SOFB-REFORBIT-X':
             if self.getParam('SICO-SOFB-REFORBIT-X-SEL') == 0 or self.getParam('SICO-SOFB-REFORBIT-X-SEL') == 1:
-                self.setParam('SICO-SOFB-ERROR', 17)
+                self.setParam('SICO-SOFB-ERROR', 16)
                 return
             else:
                 if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
@@ -92,7 +92,7 @@ class PCASDriver(Driver):
                     self._threads_dic['var_update']._mode = 2
         elif reason == 'SICO-SOFB-REFORBIT-Y':
             if self.getParam('SICO-SOFB-REFORBIT-Y-SEL') == 0 or self.getParam('SICO-SOFB-REFORBIT-Y-SEL') == 1:
-                self.setParam('SICO-SOFB-ERROR', 17)
+                self.setParam('SICO-SOFB-ERROR', 16)
                 return
             else:
                 if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
@@ -102,66 +102,66 @@ class PCASDriver(Driver):
                     self._threads_dic['var_update']._mode = 3
         elif reason == 'SICO-SOFB-BPM-SEL':
             if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
-                self.setParam('SICO-SOFB-ERROR', 12)
+                self.setParam('SICO-SOFB-ERROR', 11)
                 return
             else:
                 self._threads_dic['var_update']._mode = 7
         elif reason == 'SICO-SOFB-CH-SEL':
             if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
-                self.setParam('SICO-SOFB-ERROR', 12)
+                self.setParam('SICO-SOFB-ERROR', 11)
                 return
             else:
                 self._threads_dic['var_update']._mode = 8
         elif reason == 'SICO-SOFB-CV-SEL':
             if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
-                self.setParam('SICO-SOFB-ERROR', 12)
+                self.setParam('SICO-SOFB-ERROR', 11)
                 return
             else:
                 self._threads_dic['var_update']._mode = 9
         elif reason == 'SICO-SOFB-BPM-ADD':
             if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
-                self.setParam('SICO-SOFB-ERROR', 12)
+                self.setParam('SICO-SOFB-ERROR', 11)
                 return
             else:
                 self._threads_dic['var_update']._mode = 10
         elif reason == 'SICO-SOFB-CH-ADD':
             if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
-                self.setParam('SICO-SOFB-ERROR', 12)
+                self.setParam('SICO-SOFB-ERROR', 11)
                 return
             else:
                 self._threads_dic['var_update']._mode = 11
         elif reason == 'SICO-SOFB-CV-ADD':
             if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
-                self.setParam('SICO-SOFB-ERROR', 12)
+                self.setParam('SICO-SOFB-ERROR', 11)
                 return
             else:
                 self._threads_dic['var_update']._mode = 12
         elif reason == 'SICO-SOFB-BPM-RMV':
             if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
-                self.setParam('SICO-SOFB-ERROR', 12)
+                self.setParam('SICO-SOFB-ERROR', 11)
                 return
             else:
                 self._threads_dic['var_update']._mode = 13
         elif reason == 'SICO-SOFB-CH-RMV':
             if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
-                self.setParam('SICO-SOFB-ERROR', 12)
+                self.setParam('SICO-SOFB-ERROR', 11)
                 return
             else:
                 self._threads_dic['var_update']._mode = 14
         elif reason == 'SICO-SOFB-CV-RMV':
             if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['var_update']._mode != 0:
-                self.setParam('SICO-SOFB-ERROR', 12)
+                self.setParam('SICO-SOFB-ERROR', 11)
                 return
             else:
                 self._threads_dic['var_update']._mode = 15
         elif reason == 'SICO-SOFB-WEIGHT-H' or reason == 'SICO-SOFB-WEIGHT-V':
             if not 0 <= value <= 100 or self.getParam('SICO-SOFB-MODE') != 0:
-                self.setParam('SICO-SOFB-ERROR', 14)
+                self.setParam('SICO-SOFB-ERROR', 13)
                 return
         elif reason == 'SICO-SOFB-MANCORR':
             if value == 1:
                 if self._threads_dic['orbit_correction']._mode != 0 or self._threads_dic['respm_measurement']._mode != 0:
-                    self.setParam('SICO-SOFB-ERROR', 16)
+                    self.setParam('SICO-SOFB-ERROR', 15)
                     return
                 else:
                     corr_mode = (self.getParam('SICO-SOFB-MODE-RFFREQ')*4) + self.getParam('SICO-SOFB-MODE-PLANE') + 1
