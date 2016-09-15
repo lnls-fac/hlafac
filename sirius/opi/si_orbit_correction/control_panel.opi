@@ -230,10 +230,6 @@ $(trace_0_y_pv_value)</tooltip>
             <pv trig="true">$(ref_orbit_x_graph)</pv>
             <pv trig="true">$(delta_orbit_x)</pv>
             <pv trig="true">$(bpm_pos)</pv>
-            <pv trig="true">$(rms_x)</pv>
-            <pv trig="true">$(mean_x)</pv>
-            <pv trig="true">$(max_x)</pv>
-            <pv trig="true">$(min_x)</pv>
             <pv trig="true">$(update_orbit)</pv>
           </path>
         </scripts>
@@ -426,7 +422,15 @@ $(trace_0_y_pv_value)</tooltip>
         <wuid>-775ebc2:15728bcc2ae:-7e97</wuid>
         <transparent>false</transparent>
         <lock_children>false</lock_children>
-        <scripts />
+        <scripts>
+          <path pathString="orbit/statistical_data.py" checkConnect="true" sfe="false" seoe="false">
+            <pv trig="true">$(delta_orbit_y)</pv>
+            <pv trig="true">$(rms_y)</pv>
+            <pv trig="true">$(mean_y)</pv>
+            <pv trig="true">$(max_y)</pv>
+            <pv trig="true">$(min_y)</pv>
+          </path>
+        </scripts>
         <height>25</height>
         <border_width>1</border_width>
         <scale_options>
@@ -447,7 +451,7 @@ $(trace_0_y_pv_value)</tooltip>
         </background_color>
         <width>480</width>
         <x>560</x>
-        <name>Statistical Data Plane X</name>
+        <name>Statistical Data Plane Y</name>
         <y>240</y>
         <foreground_color>
           <color red="192" green="192" blue="192" />
@@ -691,7 +695,7 @@ $(pv_value)</tooltip>
 $(pv_value)</tooltip>
           <horizontal_alignment>0</horizontal_alignment>
           <rules />
-          <enabled>true</enabled>
+          <enabled>false</enabled>
           <wuid>-775ebc2:15728bcc2ae:-7d41</wuid>
           <transparent>true</transparent>
           <pv_value />
@@ -783,7 +787,7 @@ $(pv_value)</tooltip>
 $(pv_value)</tooltip>
           <horizontal_alignment>0</horizontal_alignment>
           <rules />
-          <enabled>true</enabled>
+          <enabled>false</enabled>
           <wuid>-775ebc2:15728bcc2ae:-7d29</wuid>
           <transparent>true</transparent>
           <pv_value />
@@ -835,7 +839,15 @@ $(pv_value)</tooltip>
         <wuid>-775ebc2:15728bcc2ae:-7b20</wuid>
         <transparent>false</transparent>
         <lock_children>false</lock_children>
-        <scripts />
+        <scripts>
+          <path pathString="orbit/statistical_data.py" checkConnect="true" sfe="true" seoe="false">
+            <pv trig="true">$(delta_orbit_x)</pv>
+            <pv trig="false">$(rms_x)</pv>
+            <pv trig="false">$(mean_x)</pv>
+            <pv trig="false">$(max_x)</pv>
+            <pv trig="false">$(min_x)</pv>
+          </path>
+        </scripts>
         <height>25</height>
         <border_width>1</border_width>
         <scale_options>
@@ -856,7 +868,7 @@ $(pv_value)</tooltip>
         </background_color>
         <width>480</width>
         <x>560</x>
-        <name>Statistical Data Plane Y</name>
+        <name>Statistical Data Plane X</name>
         <y>23</y>
         <foreground_color>
           <color red="192" green="192" blue="192" />
