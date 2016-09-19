@@ -104,5 +104,4 @@ control_panel_macros.put("sofb_error", sofb_error_pv)
 control_panel.setPropertyValue("macros", control_panel_macros)
 
 # Reload OPI
-control_panel.setPropertyValue("opi_file", "")
 control_panel.setPropertyValue("opi_file", "control_panel.opi")
