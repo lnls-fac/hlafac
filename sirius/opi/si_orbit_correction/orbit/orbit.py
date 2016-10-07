@@ -12,15 +12,10 @@ try:
         orbit = PVUtil.getDoubleArray(orbit_pv)
 
         y = DataUtil.createDoubleArray(len(orbit))
-        #square = DataUtil.createDoubleArray(len(orbit))
         for i in range(len(orbit)):
                 y[i] = orbit[i] - ref_orbit[i]
-	#			square[i] = pow(y[i],2)
         y_pv.setValue(y)
-        #rms = math.sqrt(sum(square)/len(y))
-        #mean = sum(y)/len(y)
-        #max = max(y)
-        #min = min(y)
+
 
         # Set y axis limits
         abs_y = [math.fabs(i) for i in y]
