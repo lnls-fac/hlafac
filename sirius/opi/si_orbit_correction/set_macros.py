@@ -5,25 +5,25 @@ from org.csstudio.opibuilder.scriptUtil import PVUtil, DataUtil, ConsoleUtil
 # External PVs
 
 # Beam Orbit
-ref_orbit_x_pv = "SICO-SOFB-REFORBIT-X"
-orbit_x_pv = "SICO-SOFB-AVGORBIT-X"
-ref_orbit_x_sel_pv = "SICO-SOFB-REFORBIT-X-SEL"
-ref_orbit_y_pv = "SICO-SOFB-REFORBIT-Y"
-orbit_y_pv = "SICO-SOFB-AVGORBIT-Y"
-ref_orbit_y_sel_pv = "SICO-SOFB-REFORBIT-Y-SEL"
+ref_orbit_x_pv = "SI-GLOB:AP-SOFB.RefOrbX"
+orbit_x_pv = "SI-GLOB:AP-SOFB.AvgMeasOrbX"
+ref_orbit_x_sel_pv = "SI-GLOB:AP-SOFB.RefOrbXSlot"
+ref_orbit_y_pv = "SI-GLOB:AP-SOFB.RefOrbY"
+orbit_y_pv = "SI-GLOB:AP-SOFB.AvgMeasOrbY"
+ref_orbit_y_sel_pv = "SI-GLOB:AP-SOFB.RefOrbYSlot"
 bpm_pos_pv = "VA-SIFK-BPM-POS"
 
 # Orbits
-num_samples_pv = "SICO-SOFB-AVGORBIT-NUMSAMPLES"
+num_samples_pv = "SI-GLOB:AP-SOFB.NrSpl"
 
 # SOFB
-sofb_weight_h_pv = "SICO-SOFB-WEIGHT-H"
-sofb_weight_v_pv = "SICO-SOFB-WEIGHT-V"
-sofb_mode_pv = "SICO-SOFB-MODE"
-sofb_mode_plane_pv = "SICO-SOFB-MODE-PLANE"
-sofb_mode_rffreq_pv = "SICO-SOFB-MODE-RFFREQ"
-sofb_mancorr_pv = "SICO-SOFB-MANCORR"
-sofb_error_pv = "SICO-SOFB-ERROR"
+sofb_weight_h_pv = "SI-GLOB:AP-SOFB.StrthCH"
+sofb_weight_v_pv = "SI-GLOB:AP-SOFB.StrthCV"
+sofb_mode_pv = "SI-GLOB:AP-SOFB.OpMode"
+sofb_mode_plane_pv = "SI-GLOB:AP-SOFB.RespMatType"
+sofb_mode_rffreq_pv = "SI-GLOB:AP-SOFB.RFreqEnbl"
+sofb_mancorr_pv = "SI-GLOB:AP-SOFB.ManCorrTrig"
+sofb_error_pv = "SI-GLOB:AP-SOFB.Err"
 
 # Local PVs
 
