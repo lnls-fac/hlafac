@@ -52,7 +52,7 @@ class CODCorrectionThread(threading.Thread):
             self._mode = 0
             self._driver.setParam('SI-GLOB:AP-SOFB.OpMode', 0)
         if not self._autocorr:
-            mode = 0
+            self._mode = 0
 
 
     def _main(self):

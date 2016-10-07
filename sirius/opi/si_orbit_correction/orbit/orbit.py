@@ -1,15 +1,10 @@
-from org.csstudio.opibuilder.scriptUtil import PVUtil, DataUtil
+from org.csstudio.opibuilder.scriptUtil import PVUtil, DataUtil, ConsoleUtil
 import math
-import statistics
 
 ref_orbit_pv = pvArray[0]
 y_pv = pvArray[1]
 bpm_pos_pv = pvArray[2]
 orbit_pv = widget.getPV()
-rms_pv = pvArray[3]
-mean_pv = pvArray[4]
-max_pv = pvArray[5]
-min_pv = pvArray[6]
 
 try:
         bpm_pos = PVUtil.getDoubleArray(bpm_pos_pv)
@@ -19,13 +14,8 @@ try:
         y = DataUtil.createDoubleArray(len(orbit))
         for i in range(len(orbit)):
                 y[i] = orbit[i] - ref_orbit[i]
-
         y_pv.setValue(y)
-        
-        #Statistical Data
-        rms_pv.setValue(math.sqrt(statistics.sqrt(math.pow(y,2))))
-        max_pv.setValue(max(y))
-        min_pv.setValue(min(y))
+
 
         # Set y axis limits
         abs_y = [math.fabs(i) for i in y]

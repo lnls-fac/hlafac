@@ -121,7 +121,7 @@
         <alarm_pulsing>false</alarm_pulsing>
         <tooltip>$(trace_0_y_pv)
 $(trace_0_y_pv_value)</tooltip>
-        <trace_0_concatenate_data>true</trace_0_concatenate_data>
+        <trace_0_concatenate_data>false</trace_0_concatenate_data>
         <trace_0_trace_type>0</trace_0_trace_type>
         <border_width>1</border_width>
         <border_style>0</border_style>
@@ -168,7 +168,7 @@ $(trace_0_y_pv_value)</tooltip>
         <axis_0_time_format>0</axis_0_time_format>
         <trace_count>1</trace_count>
         <axis_1_show_grid>true</axis_1_show_grid>
-        <axis_1_dash_grid_line>false</axis_1_dash_grid_line>
+        <axis_1_dash_grid_line>true</axis_1_dash_grid_line>
         <show_toolbar>false</show_toolbar>
         <axis_0_visible>true</axis_0_visible>
         <axis_0_show_grid>true</axis_0_show_grid>
@@ -230,10 +230,6 @@ $(trace_0_y_pv_value)</tooltip>
             <pv trig="true">$(ref_orbit_x_graph)</pv>
             <pv trig="true">$(delta_orbit_x)</pv>
             <pv trig="true">$(bpm_pos)</pv>
-            <pv trig="true">$(rms_x)</pv>
-            <pv trig="true">$(mean_x)</pv>
-            <pv trig="true">$(max_x)</pv>
-            <pv trig="true">$(min_x)</pv>
             <pv trig="true">$(update_orbit)</pv>
           </path>
         </scripts>
@@ -426,7 +422,15 @@ $(trace_0_y_pv_value)</tooltip>
         <wuid>-775ebc2:15728bcc2ae:-7e97</wuid>
         <transparent>false</transparent>
         <lock_children>false</lock_children>
-        <scripts />
+        <scripts>
+          <path pathString="orbit/statistical_data.py" checkConnect="true" sfe="false" seoe="false">
+            <pv trig="true">$(delta_orbit_y)</pv>
+            <pv trig="true">$(rms_y)</pv>
+            <pv trig="true">$(mean_y)</pv>
+            <pv trig="true">$(max_y)</pv>
+            <pv trig="true">$(min_y)</pv>
+          </path>
+        </scripts>
         <height>25</height>
         <border_width>1</border_width>
         <scale_options>
@@ -445,9 +449,9 @@ $(trace_0_y_pv_value)</tooltip>
         <background_color>
           <color red="240" green="240" blue="240" />
         </background_color>
-        <width>480</width>
-        <x>560</x>
-        <name>Statistical Data Plane X</name>
+        <width>420</width>
+        <x>620</x>
+        <name>Statistical Data Plane Y</name>
         <y>240</y>
         <foreground_color>
           <color red="192" green="192" blue="192" />
@@ -502,7 +506,7 @@ $(trace_0_y_pv_value)</tooltip>
           <border_style>0</border_style>
           <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
           <alarm_pulsing>false</alarm_pulsing>
-          <precision>4</precision>
+          <precision>0</precision>
           <tooltip>$(pv_name)
 $(pv_value)</tooltip>
           <horizontal_alignment>0</horizontal_alignment>
@@ -538,7 +542,7 @@ $(pv_value)</tooltip>
           <background_color>
             <color red="255" green="255" blue="255" />
           </background_color>
-          <width>80</width>
+          <width>60</width>
           <x>40</x>
           <name>RMS</name>
           <y>0</y>
@@ -579,7 +583,7 @@ $(pv_value)</tooltip>
             <color red="255" green="255" blue="255" />
           </background_color>
           <width>40</width>
-          <x>120</x>
+          <x>100</x>
           <name>Mean Label</name>
           <y>0</y>
           <foreground_color>
@@ -594,7 +598,7 @@ $(pv_value)</tooltip>
           <border_style>0</border_style>
           <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
           <alarm_pulsing>false</alarm_pulsing>
-          <precision>4</precision>
+          <precision>0</precision>
           <tooltip>$(pv_name)
 $(pv_value)</tooltip>
           <horizontal_alignment>0</horizontal_alignment>
@@ -630,8 +634,8 @@ $(pv_value)</tooltip>
           <background_color>
             <color red="255" green="255" blue="255" />
           </background_color>
-          <width>80</width>
-          <x>160</x>
+          <width>60</width>
+          <x>140</x>
           <name>Mean</name>
           <y>0</y>
           <foreground_color>
@@ -671,7 +675,7 @@ $(pv_value)</tooltip>
             <color red="255" green="255" blue="255" />
           </background_color>
           <width>40</width>
-          <x>240</x>
+          <x>200</x>
           <name>Max Label</name>
           <y>0</y>
           <foreground_color>
@@ -686,12 +690,12 @@ $(pv_value)</tooltip>
           <border_style>0</border_style>
           <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
           <alarm_pulsing>false</alarm_pulsing>
-          <precision>4</precision>
+          <precision>0</precision>
           <tooltip>$(pv_name)
 $(pv_value)</tooltip>
           <horizontal_alignment>0</horizontal_alignment>
           <rules />
-          <enabled>true</enabled>
+          <enabled>false</enabled>
           <wuid>-775ebc2:15728bcc2ae:-7d41</wuid>
           <transparent>true</transparent>
           <pv_value />
@@ -722,8 +726,8 @@ $(pv_value)</tooltip>
           <background_color>
             <color red="255" green="255" blue="255" />
           </background_color>
-          <width>80</width>
-          <x>280</x>
+          <width>60</width>
+          <x>240</x>
           <name>Max</name>
           <y>0</y>
           <foreground_color>
@@ -763,7 +767,7 @@ $(pv_value)</tooltip>
             <color red="255" green="255" blue="255" />
           </background_color>
           <width>40</width>
-          <x>360</x>
+          <x>300</x>
           <name>Min Label</name>
           <y>0</y>
           <foreground_color>
@@ -778,12 +782,12 @@ $(pv_value)</tooltip>
           <border_style>0</border_style>
           <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
           <alarm_pulsing>false</alarm_pulsing>
-          <precision>4</precision>
+          <precision>0</precision>
           <tooltip>$(pv_name)
 $(pv_value)</tooltip>
           <horizontal_alignment>0</horizontal_alignment>
           <rules />
-          <enabled>true</enabled>
+          <enabled>false</enabled>
           <wuid>-775ebc2:15728bcc2ae:-7d29</wuid>
           <transparent>true</transparent>
           <pv_value />
@@ -814,8 +818,8 @@ $(pv_value)</tooltip>
           <background_color>
             <color red="255" green="255" blue="255" />
           </background_color>
-          <width>80</width>
-          <x>400</x>
+          <width>60</width>
+          <x>340</x>
           <name>Min</name>
           <y>0</y>
           <foreground_color>
@@ -835,7 +839,15 @@ $(pv_value)</tooltip>
         <wuid>-775ebc2:15728bcc2ae:-7b20</wuid>
         <transparent>false</transparent>
         <lock_children>false</lock_children>
-        <scripts />
+        <scripts>
+          <path pathString="orbit/statistical_data.py" checkConnect="true" sfe="true" seoe="false">
+            <pv trig="true">$(delta_orbit_x)</pv>
+            <pv trig="false">$(rms_x)</pv>
+            <pv trig="false">$(mean_x)</pv>
+            <pv trig="false">$(max_x)</pv>
+            <pv trig="false">$(min_x)</pv>
+          </path>
+        </scripts>
         <height>25</height>
         <border_width>1</border_width>
         <scale_options>
@@ -854,9 +866,9 @@ $(pv_value)</tooltip>
         <background_color>
           <color red="240" green="240" blue="240" />
         </background_color>
-        <width>480</width>
-        <x>560</x>
-        <name>Statistical Data Plane Y</name>
+        <width>420</width>
+        <x>620</x>
+        <name>Statistical Data Plane X</name>
         <y>23</y>
         <foreground_color>
           <color red="192" green="192" blue="192" />
@@ -911,7 +923,7 @@ $(pv_value)</tooltip>
           <border_style>0</border_style>
           <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
           <alarm_pulsing>false</alarm_pulsing>
-          <precision>4</precision>
+          <precision>0</precision>
           <tooltip>$(pv_name)
 $(pv_value)</tooltip>
           <horizontal_alignment>0</horizontal_alignment>
@@ -947,7 +959,7 @@ $(pv_value)</tooltip>
           <background_color>
             <color red="255" green="255" blue="255" />
           </background_color>
-          <width>80</width>
+          <width>60</width>
           <x>40</x>
           <name>RMS</name>
           <y>0</y>
@@ -988,7 +1000,7 @@ $(pv_value)</tooltip>
             <color red="255" green="255" blue="255" />
           </background_color>
           <width>40</width>
-          <x>120</x>
+          <x>100</x>
           <name>Mean Label</name>
           <y>0</y>
           <foreground_color>
@@ -1003,7 +1015,7 @@ $(pv_value)</tooltip>
           <border_style>0</border_style>
           <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
           <alarm_pulsing>false</alarm_pulsing>
-          <precision>4</precision>
+          <precision>0</precision>
           <tooltip>$(pv_name)
 $(pv_value)</tooltip>
           <horizontal_alignment>0</horizontal_alignment>
@@ -1039,8 +1051,8 @@ $(pv_value)</tooltip>
           <background_color>
             <color red="255" green="255" blue="255" />
           </background_color>
-          <width>80</width>
-          <x>160</x>
+          <width>60</width>
+          <x>140</x>
           <name>Mean</name>
           <y>0</y>
           <foreground_color>
@@ -1080,7 +1092,7 @@ $(pv_value)</tooltip>
             <color red="255" green="255" blue="255" />
           </background_color>
           <width>40</width>
-          <x>240</x>
+          <x>200</x>
           <name>Max Label</name>
           <y>0</y>
           <foreground_color>
@@ -1095,7 +1107,7 @@ $(pv_value)</tooltip>
           <border_style>0</border_style>
           <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
           <alarm_pulsing>false</alarm_pulsing>
-          <precision>4</precision>
+          <precision>0</precision>
           <tooltip>$(pv_name)
 $(pv_value)</tooltip>
           <horizontal_alignment>0</horizontal_alignment>
@@ -1131,8 +1143,8 @@ $(pv_value)</tooltip>
           <background_color>
             <color red="255" green="255" blue="255" />
           </background_color>
-          <width>80</width>
-          <x>280</x>
+          <width>60</width>
+          <x>240</x>
           <name>Max</name>
           <y>0</y>
           <foreground_color>
@@ -1172,7 +1184,7 @@ $(pv_value)</tooltip>
             <color red="255" green="255" blue="255" />
           </background_color>
           <width>40</width>
-          <x>360</x>
+          <x>300</x>
           <name>Min Label</name>
           <y>0</y>
           <foreground_color>
@@ -1187,7 +1199,7 @@ $(pv_value)</tooltip>
           <border_style>0</border_style>
           <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
           <alarm_pulsing>false</alarm_pulsing>
-          <precision>4</precision>
+          <precision>0</precision>
           <tooltip>$(pv_name)
 $(pv_value)</tooltip>
           <horizontal_alignment>0</horizontal_alignment>
@@ -1223,8 +1235,8 @@ $(pv_value)</tooltip>
           <background_color>
             <color red="255" green="255" blue="255" />
           </background_color>
-          <width>80</width>
-          <x>400</x>
+          <width>60</width>
+          <x>340</x>
           <name>Min</name>
           <y>0</y>
           <foreground_color>
@@ -2668,7 +2680,16 @@ $(pv_value)</tooltip>
         <foreground_color>
           <color red="0" green="0" blue="0" />
         </foreground_color>
-        <actions hook="false" hook_all="false" />
+        <actions hook="false" hook_all="false">
+          <action type="OPEN_DISPLAY">
+            <path>SOFB.opi</path>
+            <macros>
+              <include_parent_macros>true</include_parent_macros>
+            </macros>
+            <replace>2</replace>
+            <description></description>
+          </action>
+        </actions>
         <font>
           <opifont.name fontName="Ubuntu" height="11" style="0">Default</opifont.name>
         </font>

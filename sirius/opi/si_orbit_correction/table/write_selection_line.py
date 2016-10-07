@@ -1,11 +1,11 @@
 from org.csstudio.opibuilder.scriptUtil import PVUtil, WidgetUtil, DataUtil
 import os as _os
 
-bpm_fname = _os.path.join('.','fac_files',
+bpm_fname = _os.path.join('/', 'home','fac_files',
 'siriusdb', 'recordnames_flatlists', 'dname-bpm.txt')
-ch_fname  = _os.path.join('.','fac_files',
+ch_fname  = _os.path.join('/', 'home','fac_files',
 'siriusdb', 'recordnames_flatlists', 'dname-ch.txt')
-cv_fname  = _os.path.join('.','fac_files',
+cv_fname  = _os.path.join('/', 'home','fac_files',
 'siriusdb', 'recordnames_flatlists', 'dname-cv.txt')
 
 def _read_devicename_file(filename):
