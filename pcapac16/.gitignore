@@ -1,0 +1,14 @@
+*DS_Store*
+*.gz
+*.snm
+*.bbl
+*.blg
+*.nav
+*.toc
+*.out
+*.aux
+*.log
+*~
+*.pyc
+sirius/opi/BOY*
+sirius/opi/.metadata

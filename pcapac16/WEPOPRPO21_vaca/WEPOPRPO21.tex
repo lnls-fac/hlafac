@@ -1,0 +1,117 @@
+\documentclass[a4paper,
+               %boxit,
+               %titlepage,   % separate title page
+               %refpage      % separate references
+              ]{jacow}
+
+\include{initializations}
+
+\begin{document}
+
+\title{Development of a Virtual Accelerator for Sirius}
+\author{X. R. Resende\thanks{ximenes.resende@lnls.br}, A. H. C. Mukai, L. N. P. Vilela, I. Stevani \\ Brazilian Synchrotron Light Laboratory (LNLS), Campinas, Brazil}
+\maketitle
+
+\begin{abstract}
+A virtual accelerator is being developed for Sirius, the new 4th generation synchrotron light source being built
+in Campinas, Brazil[?]. The virtual accelerator is an on-line beam simulator which will be integrated in to EPICS control system.
+It consists on a command line interface (CLI) channel access (CA) server using an in-house developed tracking code library written
+in C++ for efficiency purpose. The purpose of such server is to facilitate early development and testing of high level applications
+for the control system.
+\end{abstract}
+
+\section{INTRODUCTION}
+Sirius will use EPICS as its control system. Most of the development of the high level applications (HLA) will take place
+next year and will be conducted by the accelerator physics group. In the meanwhile, a few client applications have already been
+implemented to allow analysis of the choices in software development frameworks[?] that were made.
+
+To be able to test and integrate the above mentioned HLAs in the control system (CS), it was decided that a virtual accelerator
+(VA) with channel access server layer (CAS) for EPICS should be developed, implemented and made available as soon as possible.
+The idea is that having a VA allows for early development of control system software, be it for input-output controllers (IOCs) or
+in HLAs.
+
+The VA implements functionalities that can provide simulated process variables (PVs) on the CS that have not been made available
+yet, thus creating a mockup CS environment in which early software development is possible.
+This test environment with VA also has the potential to speed up project development by partially parallelizing the work on
+interconnected applications.
+
+
+\section{VIRTUAL ACCELERATOR}
+From the onset it was decided that the virtual accelerator would be composed of two parts: the first, a back-end machine
+application implementing a simulated virtual accelerator with a channel access server layer (VACA) and the second, a set of
+virtual IOCs which is the front-end that other CS applications are supposed to interact with.
+
+Accelerator properties such as beam current, position and injection losses, power supply and RF subsystem setpoints,
+and so on, are simulated nominally in VACA. The virtual IOCS, on the other hand, encapsulate all PVs that represent the
+interface between the VA and the rest of the CS. It also adds simulated fluctuations to accelerator properties and implements
+device-depent parameters, such as excitation curves of the magnets or BPM calibration parameters.
+
+The advantage of this approach is that virtual IOCs can be gradually replaced by their corresponding real IOCs when these become
+ready, without having to rewrite any core simulation code since it is all implemented in VACA.
+\section{CONCLUSION}
+The development of Sirius' HLAs started this year. Three development frameworks were chosen and then tested on three important machine systems: SOFB, lifetime calculation and top-up injection. Results were promising and the plan is to continue improving these systems -- adding missing functionalities, for example -- and start the development of new HLAs such as LINAC gun and timing system controls, which are also fundamental to machine commissioning.
+
+Also, has been decided that the control system could benefit from applications in development under the DISCS collaboration effort. Its device naming and configuration modules are currently being tested and used in the HLA development framework. Other DISCS modules will soon be tested as well.
+
+\section{ACKNOWLEGMENTS}
+
+The authors would like to thank L. Russo from the Diagnostics group for fruitful discussions on EPICS and for his help in configuring all services modules from DISCS which we have been testing.
+
+
+\begin{thebibliography}{99}
+
+	\bibitem{css}
+		Control System Studio, \url{http://controlsystemstudio.org/}
+
+	\bibitem{pyqt}
+		PyQt, \url{https://wiki.python.org/moin/PyQt}
+
+	\bibitem{mml}
+		 G. Portmann, J. Corbett and A. Terebilo,
+		 "An accelerator control middle layer using MATLAB",
+		 in \emph{Proc. PAC'05},
+		 Knoxville, United States, May 2005,
+		 paper FPAT077, pp. 4009-4011.
+
+	\bibitem{labca}
+		T. Straumann,
+		"labCA -- An EPICS Channel Access Interface for scilab and matlab",
+		May 2008,
+		\url{https://www.slac.stanford.edu/grp/ssrl/spear/epics/extensions/labca/manual/}
+
+	\bibitem{sirius_status}
+		A. R. D. Rodrigues \emph{et al.},
+		“Sirius status report”,
+		in \emph{Proc. IPAC'16},
+		Busan, Korea, May 2016,
+		paper WEPOW001, pp. 2811-2814.
+
+	\bibitem{vaca}
+		L. N. P. Vilela, A. H. C. Mukai, X. R. Resende and I. Stevani,
+		“Development of a virtual accelerator for Sirius”,
+		presented at the PCaPAC'16,
+		Campinas, Brazil, Oct. 2016,
+		paper WEPOPRPO21, this conference.
+
+	\bibitem{pcaspy}
+		PCASpy Documentation, \url{http://pcaspy.readthedocs.io/en/latest/}
+
+	\bibitem{discs_article}
+		V. Vuppala \emph{et al.},
+		"Distributed Information Services for Control Systems",
+		in \emph{Proc. ICALEPCS'2013},
+		San Francisco, United States, March 2014,
+		paper WECOBA02, pp. 1000-1003
+
+	\bibitem{discs_openepics}
+		DISCS, \url{http://openepics.sourceforge.net/about-discs/}
+
+	\bibitem{lifetime}
+	 	A. J. Burns \emph{et. al},
+	 	"Real time monitoring of LEP beam currents and lifetimes",
+	 	in \emph{Proc. EPAC'94},
+	 	London, England, pp. 1716-1718.
+
+\end{thebibliography}
+
+\end{document}
