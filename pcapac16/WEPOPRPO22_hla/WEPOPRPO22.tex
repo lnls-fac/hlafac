@@ -20,14 +20,14 @@
 
 % CHECK FOR XeTeX/LuaTeX BEFORE DEFINING AN INPUT ENCODING
 % --------------------------------------------------------
-%   utf8  is default for XeTeX/LuaTeX 
+%   utf8  is default for XeTeX/LuaTeX
 %   utf8  in LaTeX only realises a small portion of codes
 %
 \ifboolexpr{bool{xetex} or bool{luatex}} % test for XeTeX/LuaTeX
  {}                                      % input encoding is utf8 by default
  {\usepackage[utf8]{inputenc}}           % switch to utf8
 
-\usepackage[USenglish]{babel}			 
+\usepackage[USenglish]{babel}
 
 \usepackage[final]{pdfpages}
 \usepackage{multirow}
@@ -66,7 +66,7 @@
 \title{High Level Applications for Sirius}
 
 \author{I. Stevani\thanks{isabella.stevani@lnls.br}, N. Milas, X. R. Resende, L. N. P. Vilela\\ Brazilian Synchrotron Light Laboratory (LNLS), Campinas, Brazil}
-	
+
 \maketitle
 
 %
@@ -110,8 +110,8 @@ Some prototypes were built on these platforms listed before to help the develope
 \input{lifetime.tex}
 \FloatBarrier
 
-\input{topup.tex}
-\FloatBarrier
+%\input{topup.tex}
+%\FloatBarrier
 
 
 \section{CONCLUSION}
@@ -128,17 +128,17 @@ The authors would like to thank L. M. Russo from the Diagnostics group for fruit
 
 	\bibitem{css}
 		Control System Studio, \url{http://controlsystemstudio.org/}
-		
+
 	\bibitem{pyqt}
 		PyQt, \url{https://wiki.python.org/moin/PyQt}
-		
+
 	\bibitem{mml}
 		 G. Portmann, J. Corbett and A. Terebilo,
 		 "An accelerator control middle layer using MATLAB",
 		 in \emph{Proc. PAC'05},
 		 Knoxville, United States, May 2005,
 		 paper FPAT077, pp. 4009-4011.
-		 
+
 	\bibitem{labca}
 		T. Straumann,
 		"labCA -- An EPICS Channel Access Interface for scilab and matlab",
@@ -146,39 +146,38 @@ The authors would like to thank L. M. Russo from the Diagnostics group for fruit
 		\url{https://www.slac.stanford.edu/grp/ssrl/spear/epics/extensions/labca/manual/}
 
 	\bibitem{sirius_status}
-		A. R. D. Rodrigues \emph{et al.}, 
-		“Sirius status report”, 
-		in \emph{Proc. IPAC'16}, 
-		Busan, Korea, May 2016, 
+		A. R. D. Rodrigues \emph{et al.},
+		“Sirius status report”,
+		in \emph{Proc. IPAC'16},
+		Busan, Korea, May 2016,
 		paper WEPOW001, pp. 2811-2814.
-		
+
 	\bibitem{vaca}
-		L. N. P. Vilela, A. H. C. Mukai, X. R. Resende and I. Stevani, 
-		“Development of a virtual accelerator for Sirius”, 
-		presented at the PCaPAC'16, 
-		Campinas, Brazil, Oct. 2016, 
+		L. N. P. Vilela, A. H. C. Mukai, X. R. Resende and I. Stevani,
+		“Development of a virtual accelerator for Sirius”,
+		presented at the PCaPAC'16,
+		Campinas, Brazil, Oct. 2016,
 		paper WEPOPRPO21, this conference.
-		
+
 	\bibitem{pcaspy}
 		PCASpy Documentation, \url{http://pcaspy.readthedocs.io/en/latest/}
-		
+
 	\bibitem{discs_article}
 		V. Vuppala \emph{et al.},
 		"Distributed Information Services for Control Systems",
 		in \emph{Proc. ICALEPCS'2013},
 		San Francisco, United States, March 2014,
 		paper WECOBA02, pp. 1000-1003
-	
+
 	\bibitem{discs_openepics}
 		DISCS, \url{http://openepics.sourceforge.net/about-discs/}
-		
+
 	\bibitem{lifetime}
 	 	A. J. Burns \emph{et. al},
 	 	"Real time monitoring of LEP beam currents and lifetimes",
 	 	in \emph{Proc. EPAC'94},
 	 	London, England, pp. 1716-1718.
-		
+
 \end{thebibliography}
 
 \end{document}
-	

@@ -13,104 +13,147 @@
 \maketitle
 
 \begin{abstract}
-A virtual accelerator is being developed for Sirius, the new 4th generation synchrotron light source being built
-in Campinas, Brazil[?]. The virtual accelerator is an on-line beam simulator which will be integrated in to EPICS control system.
-It consists on a command line interface (CLI) channel access (CA) server using an in-house developed tracking code library written
-in C++ for efficiency purpose. The purpose of such server is to facilitate early development and testing of high level applications
-for the control system.
+A virtual accelerator is being developed for Sirius, the new 4th generation synchrotron light source being built in Campinas, Brazil\cite{sirius_status}.
+The virtual accelerator is an on-line beam simulator which is integrated into EPICS control system.
+It consists on a command line interface server with a channel access (CA) layer and with an in-house developed tracking code library written in C++ for efficiency purpose.
+The purpose of such server is to facilitate early development and testing of high level applications for the control system.
 \end{abstract}
 
 \section{INTRODUCTION}
-Sirius will use EPICS as its control system. Most of the development of the high level applications (HLA) will take place
-next year and will be conducted by the accelerator physics group. In the meanwhile, a few client applications have already been
-implemented to allow analysis of the choices in software development frameworks[?] that were made.
+Sirius, the new storage ring at the Brazilian Synchrotron Light Laboratory (LNLS), will use EPICS as its control system.
+Most of the development of the high level applications (HLAs) will take place next year and will be conducted by the accelerator physics group.
+In the meanwhile, a few client applications have already been implemented to allow analysis of the choices in software development frameworks\cite{sirius_hla} that were made.
 
-To be able to test and integrate the above mentioned HLAs in the control system (CS), it was decided that a virtual accelerator
-(VA) with channel access server layer (CAS) for EPICS should be developed, implemented and made available as soon as possible.
-The idea is that having a VA allows for early development of control system software, be it for input-output controllers (IOCs) or
-in HLAs.
+To be able to test and integrate the above-mentioned HLAs in the control system (CS), it was decided that a virtual accelerator (VA) with channel access server layer (CAS) for EPICS should be developed, implemented and made available as soon as possible.
+The idea is that having a VA allows for early development of control system software, be it for input-output controllers (IOCs) or HLAs.
 
-The VA implements functionalities that can provide simulated process variables (PVs) on the CS that have not been made available
-yet, thus creating a mockup CS environment in which early software development is possible.
-This test environment with VA also has the potential to speed up project development by partially parallelizing the work on
-interconnected applications.
+The VA implements functionalities that can provide simulated process variables (PVs) on the CS that have not been made available yet, thus creating a mock-up CS environment in which early software development is possible.
+This test environment with VA also has the potential to speed up project development by partially parallelizing implementations of applications that consume data from each other.
 
+Commissioning training is also possible using HLAs in the control system provided with the virtual accelerator.
 
 \section{VIRTUAL ACCELERATOR}
 From the onset it was decided that the virtual accelerator would be composed of two parts: the first, a back-end machine
 application implementing a simulated virtual accelerator with a channel access server layer (VACA) and the second, a set of
-virtual IOCs which is the front-end that other CS applications are supposed to interact with.
+virtual IOCs (vIOCS) which is the front-end that other CS applications are supposed to interact with.
 
 Accelerator properties such as beam current, position and injection losses, power supply and RF subsystem setpoints,
 and so on, are simulated nominally in VACA. The virtual IOCS, on the other hand, encapsulate all PVs that represent the
 interface between the VA and the rest of the CS. It also adds simulated fluctuations to accelerator properties and implements
 device-depent parameters, such as excitation curves of the magnets or BPM calibration parameters.
 
-The advantage of this approach is that virtual IOCs can be gradually replaced by their corresponding real IOCs when these become
-ready, without having to rewrite any core simulation code since it is all implemented in VACA.
-\section{CONCLUSION}
-The development of Sirius' HLAs started this year. Three development frameworks were chosen and then tested on three important machine systems: SOFB, lifetime calculation and top-up injection. Results were promising and the plan is to continue improving these systems -- adding missing functionalities, for example -- and start the development of new HLAs such as LINAC gun and timing system controls, which are also fundamental to machine commissioning.
+The advantage of this approach is that virtual IOCs can be gradually replaced by their corresponding real IOCs when they become
+available, and without having to rewrite simulation code since it is implemented separately in VACA.
 
-Also, has been decided that the control system could benefit from applications in development under the DISCS collaboration effort. Its device naming and configuration modules are currently being tested and used in the HLA development framework. Other DISCS modules will soon be tested as well.
+\begin{figure}[!htb]
+%   \vspace*{-.5\baselineskip}
+   \centering
+   \includegraphics*[width=230pt]{WEPOPRPO21f1}
+   \caption{Screen printout of a command line terminal showing a running instance of VACA with the display of its banner and useful information.}
+   \label{fig:screen_print}
+%   \vspace*{-\baselineskip}
+\end{figure}
 
-\section{ACKNOWLEGMENTS}
+\section{VACA}
 
-The authors would like to thank L. Russo from the Diagnostics group for fruitful discussions on EPICS and for his help in configuring all services modules from DISCS which we have been testing.
+The virtual accelerator with channel access is written in Python3.
+The choice of a high level programming language allows for rapid development of the intricate functionalities the virtual accelerator has to provide.
+Python language works as a binding layer between the two main core modules: a CA server and a tracking code for simulations.
+The python package PCasPy\cite{pcaspy} is used as the CA server module.
+PVs implemented in VACA have a prefix "VA-" indicating that they represent virtual process variables.
+For the simulation module, a library called trackcpp\cite{trackcpp}, that has been developed at LNLS by the accelerator physics group, was reused.
+It is a C++ library of beam dynamics calculations and tracking routines closely based on, and tested against, Tracy\cite{tracy} and Matlab AT\cite{at} passmethods.
+This library is converted to a python package using Swig3.0\cite{swig}, thus conveying fast and optimized routines that can be called within Python.
 
+Figure \ref{fig:screen_print} is a screen print of a command line terminal showing a running instance of VACA with its banner
+and useful information printout.
+It shows the number of virtual PVs implemented for each subsystem, labeled here SI,BO,LI,TB,TS.
+It also displays the current model version for each subsystem, as well as messages indicating that initial calculations are finished,
+such as those needed to simulate injection efficiency, for example.
+At last in the display, a message indicating that VACA is ready to respond to virtual PV queries.
+
+
+\section{vIOCS}
+
+The other part of the virtual accelerator is the set of virtual IOCs that respond to PVs with actual names in the control system.
+So far a few vIOCS have been implemented:
+\begin{itemize}
+\item \verb|si_bpm|,\verb|bo_bpm|,\verb|ts_bpm|,\verb|tb_bpm|: they serve BPM positions that are read from VACA, adding emulated measurement fluctuations.
+\item \verb|si_current|, \verb|bo_current|: they provide simulated beam currents with fluctuations. Touschek, elastic and inelastic simulated lifetimes are affected by variations of associated parameters such as RF gap voltage and reduced acceptance due to closed orbit variations.
+\item \verb|si_ps|,\verb|bo_ps|,\verb|ts_ps|,\verb|tb_ps|: provide read/write access to PVs that correspond to power supplies with associated magnet excitation curves.
+\item \verb|si_rf|,\verb|bo_rf|: implement radio frequency process variables.
+\item \verb|si_tune|: emulation of the tune measurement IOC.
+\item \verb|si_beamsize, bo_beamsize|: emulation of beam size measurement IOC.
+\end{itemize}
+These VIOCS are written using database records distributed with EPICS base.
+
+\section{CONCLUSIONS}
+
+The virtual accelerator described here has been an invaluable asset for the development of high level applications, as described in Ref.\cite{sirius_hla}.
+The core of the HLA development is planned to take place in 2017, mainly the accelerator physics group staff. This development will certainly benefit from having a VA system available.
+At this point, simulation of basic beam processes are implemented.
+For example, VACA now properly simulates processes such as: parameter-dependent current decays, closed-orbit control with dipolar correctors, beam optics variations with quadrupoles,
+injection that depends on the magnet configurations.
+In the future more functionalities and modifications should be added to VA:
+\begin{itemize}
+\item Details of the pulsed signals during injection and ejection processes need be considered.
+\item Approximate coupling expressions for beam size estimates should be substituted by Ohmi's envelop formalism\cite{ohmi} in trackcpp,
+\item A cleaner separation between VACA and vIOCS is in order. At this points a few excitation curves are implemented in VACA since it has not been decied yet where they will finally be located in the CS. They can either be moved to the IOCs, in case they should be moved to the vIOCS for the VA, or moved to some configuration database service.
+\item Considerations on moving from EPICS database records PCASPy for vIOCS developments. This may simplify the process of writing and deploying applications.
+\item Recently a few DISCS\cite{discs} services have been adopted. In particular, the use of its naming service allowed for a standardization of how to name devices and PVs. A major revision of PV names has taken place recently. VA should be modified to contemplate the new PV name standard.
+\end{itemize}
 
 \begin{thebibliography}{99}
 
-	\bibitem{css}
-		Control System Studio, \url{http://controlsystemstudio.org/}
+\bibitem{sirius_status}
+A. R. D. Rodrigues \emph{et al.},
+“Sirius Status Report”,
+in \emph{Proc. IPAC'16},
+Busan, Korea, May 2016,
+paper WEPOW001, pp. 2811-2814.
 
-	\bibitem{pyqt}
-		PyQt, \url{https://wiki.python.org/moin/PyQt}
+\bibitem{sirius_hla}
+I. Stevani, N. Milas, X. R. Resende, L. N. P. Vilela,
+“High Level Applications for Sirius”,
+presented at the PCaPAC'16,
+Campinas, Brazil, Oct. 2016,
+paper WEPOPRPO22, this conference.
 
-	\bibitem{mml}
-		 G. Portmann, J. Corbett and A. Terebilo,
-		 "An accelerator control middle layer using MATLAB",
-		 in \emph{Proc. PAC'05},
-		 Knoxville, United States, May 2005,
-		 paper FPAT077, pp. 4009-4011.
+\bibitem{pcaspy}
+PCASpy - EPICS Portable Channel Access Server python package.
+Documentation at \url{http://pcaspy.readthedocs.io/en/latest/}
 
-	\bibitem{labca}
-		T. Straumann,
-		"labCA -- An EPICS Channel Access Interface for scilab and matlab",
-		May 2008,
-		\url{https://www.slac.stanford.edu/grp/ssrl/spear/epics/extensions/labca/manual/}
+\bibitem{trackcpp}
+LNLS Accelerator Physics Group,
+Tracking library available at \url{https://github.com/lnls-fac/trackcpp}
 
-	\bibitem{sirius_status}
-		A. R. D. Rodrigues \emph{et al.},
-		“Sirius status report”,
-		in \emph{Proc. IPAC'16},
-		Busan, Korea, May 2016,
-		paper WEPOW001, pp. 2811-2814.
+\bibitem{tracy}
+H. Nishimura,
+"TRACY, A Tool for Accelerator Design and Analysis",
+EPAC'88,
+in Rome, Italy, June 1988
+Proceedings, pp. 803-805.
 
-	\bibitem{vaca}
-		L. N. P. Vilela, A. H. C. Mukai, X. R. Resende and I. Stevani,
-		“Development of a virtual accelerator for Sirius”,
-		presented at the PCaPAC'16,
-		Campinas, Brazil, Oct. 2016,
-		paper WEPOPRPO21, this conference.
+\bibitem{at}
+A. Terebilo,
+"Accelerator Toolbox for MATLAB",
+SLAC-PUB-8732, May 2001.
 
-	\bibitem{pcaspy}
-		PCASpy Documentation, \url{http://pcaspy.readthedocs.io/en/latest/}
+\bibitem{swig}
+SWIG - Simplified Wrapper and Interface Generator
+official site at \url{http://www.swig.org/}
 
-	\bibitem{discs_article}
-		V. Vuppala \emph{et al.},
-		"Distributed Information Services for Control Systems",
-		in \emph{Proc. ICALEPCS'2013},
-		San Francisco, United States, March 2014,
-		paper WECOBA02, pp. 1000-1003
+\bibitem{ohmi}
+K. Ohmi, K. Hirata, K. Oide,
+"From the beam-envelope matrix to synchrotron-radiation integrals"
+Phys. Rev. E 49, 751 (1994).
 
-	\bibitem{discs_openepics}
-		DISCS, \url{http://openepics.sourceforge.net/about-discs/}
-
-	\bibitem{lifetime}
-	 	A. J. Burns \emph{et. al},
-	 	"Real time monitoring of LEP beam currents and lifetimes",
-	 	in \emph{Proc. EPAC'94},
-	 	London, England, pp. 1716-1718.
+\bibitem{discs}
+  V. Vuppala \emph{et al.},
+  "Distributed Information Services for Control Systems",
+  in \emph{Proc. ICALEPCS'2013},
+  San Francisco, United States, March 2014,
+  paper WECOBA02, pp. 1000-1003
 
 \end{thebibliography}
 
