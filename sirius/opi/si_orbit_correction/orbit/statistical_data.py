@@ -14,9 +14,9 @@ try:
         max_val = max(y)
         min_val = min(y)
 
-        widget.getWidget("RMS").setPropertyValue("text", round(rms_val,4))
-        widget.getWidget("Mean").setPropertyValue("text", round(mean_val,4))
-        widget.getWidget("Max").setPropertyValue("text", round(max_val,4))
-        widget.getWidget("Min").setPropertyValue("text", round(min_val,4))
+        widget.getWidget("RMS").setPropertyValue("text", int(rms_val))
+        widget.getWidget("Mean").setPropertyValue("text", int(mean_val))
+        widget.getWidget("Max").setPropertyValue("text", int(max_val))
+        widget.getWidget("Min").setPropertyValue("text", int(min_val))
 except:
         pass
