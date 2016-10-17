@@ -33,7 +33,7 @@
 		\begin{myblock}{\textit{Abstract}}
 		A virtual accelerator is being developed for Sirius, the new 4th generation synchrotron light source being built in Campinas, Brazil.
 		The virtual accelerator is an on-line beam simulator which is integrated into EPICS control system.
-		It consists on a command line interface server with a channel access (CA) layer and with an in-house developed tracking code library written in C++ for efficiency purpose.
+		It consists of a command line interface server with a channel access (CA) layer and with an in-house developed tracking code library written in C++ for efficiency gain.
 		The purpose of such server is to facilitate early development and testing of high level applications for the control system.
 		\end{myblock}
 	}\end{minipage}
@@ -63,16 +63,17 @@
 	\end{column}
 	\begin{column}{.55\textwidth}
 		\begin{beamercolorbox}[center]{postercolumn}
-			\begin{minipage}{.98\textwidth} % tweaks the width, makes a new \textwidth
+			\begin{minipage}{.98\textwidth} % tweaks  the width, makes a new \textwidth
 				\parbox[t][\columnheight]{\textwidth}{ % must be some better way to set the the height, width and textwidth simultaneously
 					\begin{myblock}{Virtual IOCs}
 					\begin{itemize}
-					\item \textbf{si\_bpm,bo\_bpm,ts\_bpm,tb\_bpm}: they serve BPM positions that are read from VACA, adding emulated measurement fluctuations.
-					\item \textbf{si\_current,bo\_current}: they provide simulated beam currents with fluctuations. Touschek, elastic and inelastic simulated lifetimes are affected by variations of associated parameters such as RF gap voltage and reduced acceptance due to closed orbit variations.
-					\item \textbf{si\_ps,bo\_ps,ts\_ps,tb\_ps}: provide read/write access to PVs that correspond to power supplies with associated magnet excitation curves.
-					\item \textbf{si\_rf,bo\_rf}: implement radio frequency process variables.
+					\item \textbf{si\_bpm, bo\_bpm, ts\_bpm, tb\_bpm}: they serve BPM positions that are read from VACA, adding emulated measurement fluctuations.
+					\item \textbf{si\_current, bo\_current}: they provide simulated beam currents with fluctuations. Touschek, elastic and inelastic simulated lifetimes are affected by variations of associated parameters such as RF gap voltage and reduced acceptance due to closed orbit variations.
+					\item \textbf{si\_ps, bo\_ps, ts\_ps, tb\_ps}: provide read/write access to PVs that correspond to power supplies with associated magnet excitation curves.
+					\item \textbf{si\_rf, bo\_rf}: implement radio frequency process variables.
 					\item \textbf{si\_tune}: emulation of the tune measurement IOC.
 					\item \textbf{si\_beamsize, bo\_beamsize}: emulation of beam size measurement IOC.
+					\item \textbf{si_lifetime}: emulation of lifetime calculation IOC.
 					\end{itemize}
 						\vspace{0.5cm}
 					\end{myblock}\vfill
