@@ -29,7 +29,7 @@ To be able to test and integrate the above-mentioned HLAs in the control system 
 The idea is that having a VA allows for early development of control system software, be it for input-output controllers (IOCs) or HLAs.
 
 The VA implements functionalities that can provide si\-mu\-la\-ted process variables (PVs) on the CS that have not been made available yet, thus creating a mock-up CS environment in which early software development is possible.
-This test environment with VA also has the potential to speed up project development by partially parallelizing implementations of applications that consume data from each other.
+This test environment with VA also has the potential to speed up project development by partially parallelising implementations of applications that consume data from each other.
 
 Commissioning training is also possible using HLAs in the control system provided with the virtual accelerator.
 
@@ -42,7 +42,7 @@ front-end virtual IOCs (vIOCS) with which other CS applications are supposed to 
 Accelerator properties such as beam current and position, injection losses, power supply and RF subsystem setpoints,
 and so on, are simulated nominally in VACA. 
 The virtual IOCS, on the other hand, encapsulate all PVs that represent the interface between the VA and the rest of the CS. 
-They also add simulated fluctuations to accelerator properties and implement device-depent parameters, such as excitation curves of the magnets or BPM calibration parameters.
+They also add simulated fluctuations to accelerator properties and implement device-dependent parameters, such as excitation curves of the magnets or BPM calibration parameters.
 
 The advantage of this approach is that virtual IOCs can be gradually replaced by their corresponding real IOCs when they become
 available, and without having to modify core simulation code, since it is implemented separately in VACA.
@@ -65,7 +65,7 @@ The Python package PCASPy\cite{pcaspy} is used to write the CA server module.
 PVs implemented in VACA have a prefix "VA-" indicating that they represent virtual process variables.
 For the simulation module, a library called trackcpp\cite{trackcpp}, that has been developed at LNLS by the accelerator physics group staff, was reused.
 It is a C++ library of beam dynamics calculations and tracking routines closely based on, and tested against, Tracy\cite{tracy} and Matlab AT\cite{at} passmethods.
-This library is converted to a python package using Swig3.0\cite{swig}, thus conveying fast and optimized routines that can be conveniently called within Python.
+This library is converted to a python package using Swig3.0\cite{swig}, thus conveying fast and optimised routines that can be conveniently called within Python.
 
 Figure \ref{fig:screen_print} is a screen print of a command line terminal showing a running instance of VACA with its banner
 and useful information printout.
@@ -86,7 +86,7 @@ So far a few vIOCS have been implemented:
 \item \verb|si_rf|,\verb|bo_rf|: implement radio frequency process variables.
 \item \verb|si_tune|: emulation of the tune measurement IOC.
 \item \verb|si_beamsize, bo_beamsize|: emulation of beam size measurement IOC.
-\item \verb|si_lifetime|: emulation of lifetime calculatio IOC.
+\item \verb|si_lifetime|: emulation of lifetime calculation IOC.
 \end{itemize}
 Most of these vIOCS are written using database records that are distributed with EPICS base.
 \verb|si_lifetime|, on the other hand, is implemented with PCASPy.
@@ -96,14 +96,14 @@ Most of these vIOCS are written using database records that are distributed with
 The virtual accelerator described here has been an invaluable asset for the development of high level applications, as described in Ref.\cite{sirius_hla}.
 The core of the HLA development is planned to take place in 2017, mainly by the accelerator physics group staff. This development will certainly benefit from having a VA system available.
 At this point simulation of basic beam processes are implemented.
-VACA now properly simulates processes such as: parameter-dependent current decays, closed-orbit control with dipolar correctors, beam optics variations with quadrupoles, injection and ejection that depend on magnet and timming configurations.
-In the future more functionalities and modifications should be added to VA, such as
+VACA now properly simulates processes such as: parameter-dependent current decays, closed-orbit control with dipolar correctors, beam optics variations with quadrupoles, injection and ejection that depend on magnet and timing configurations.
+In the future more functionalities and modifications should be added to VA, such as:
 \begin{itemize}
 \item Timing details of the pulsed signals during injection and ejection processes need be considered.
 \item Approximate coupling expressions now used for beam size estimates should be replaced with more rigorous Ohmi's beam envelop formalism\cite{ohmi} in trackcpp,
-\item A cleaner separation between VACA and vIOCS is in order. At this points a few excitation curves are implemented in VACA since it has not been decied yet where they will finally be located in the CS. They can either be stored in the corresponding power supply IOCs -- in which case they should be moved to the vIOCS for the VA, or stored in some configuration database service.
+\item A cleaner separation between VACA and vIOCS is in order. At this points a few excitation curves are implemented in VACA since it has not been decided yet where they will finally be located in the CS. They can either be stored in the corresponding power supply IOCs -- in which case they should be moved to the vIOCS for the VA, or stored in some configuration database service.
 \item Considerations on moving from EPICS database records PCASPy for vIOCS developments. This may simplify the process of writing and deploying applications.
-\item Recently a few DISCS\cite{discs} services have been adopted. In particular, the use of its naming service module allowed for a standardization of how devices and PVs are named. As a consequence, a major revision of PV names has taken place recently. VA should be updated to contemplate the new PV naming standard.
+\item Recently a few DISCS\cite{discs} services have been adopted. In particular, the use of its naming service module allowed for a standardisation of how devices and PVs are named. As a consequence, a major revision of PV names has taken place recently. VA should be updated to contemplate the new PV naming standard.
 \end{itemize}
 
 \begin{thebibliography}{99}
