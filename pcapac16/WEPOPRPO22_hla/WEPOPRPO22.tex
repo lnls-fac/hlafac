@@ -84,16 +84,16 @@ To achieve this goal, the Accelerator Physics Group started developing these app
 \section{APPLICATIONS FRAMEWORK}
 Figure \ref{fig:f1} shows a schematic view of the application framework Sirius will use for HLA development. On a lower level, services are categorized in two groups: IOCs and machine applications. Both of them are Channel Access servers, the first providing control access to machine hardware while the second providing machine services. Machine applications developed so far were written in Python using PCASpy~\cite{pcaspy}. Virtual IOCs were implemented using EPICS Database on top of VACA in order to provide simulated fluctuations for machine parameters. EPICS V4 is another option for implementing machine applications that will be studied and discussed next year.
 
-On top of Figure \ref{fig:f1} are the HLAs. For basic process variable monitoring and settings with graphical user interface capabilities, CS-Studio was chosen due to its simplicity and fast learning curve. Most of the control system interface is expected to be implemented with CS-Studio. For software that requires elaborate logic, algorithms will either be implemented in the IOC level with simple driving GUI clients or using other options, such as PyQt or MML.
+On top of Fig. \ref{fig:f1} are the HLAs. For basic process variable monitoring and settings with graphical user interface capabilities, CS-Studio was chosen due to its simplicity and fast learning curve. Most of the control system interface is expected to be implemented with CS-Studio. For software that requires elaborate logic, algorithms will either be implemented in the IOC level with simple driving GUI clients or using other options, such as PyQt or MML.
 
 The control system can benefit from various support applications for storing and organizing system's parameters, IOC software, device and PV name lists, and so on. The plan is to use a few of the applications in development under the DISCS collaboration effort~\cite{discs_article,discs_openepics}. The device naming and configuration modules of DISCS are currently being tested and used in the HLA development framework. Other DISCS modules, such as its logbook, IOC  and machine save/restore services, will soon be tested as well.
 
 \begin{figure}[!htb]
 %   \vspace*{-.5\baselineskip}
-   \centering
-   \includegraphics*[width=230pt]{WEPOPRPO22f1}
-   \caption{Applications framework schematic.}
-   \label{fig:f1}
+  \centering
+  \includegraphics*[width=230pt]{WEPOPRPO22f1}
+  \caption{Applications framework schematic.}
+  \label{fig:f1}
 %   \vspace*{-\baselineskip}
 \end{figure}
 
@@ -126,60 +126,58 @@ The authors would like to thank L. M. Russo from the Diagnostics group for fruit
 
 \begin{thebibliography}{99}
 
-	\bibitem{css}
-		Control System Studio, \url{http://controlsystemstudio.org/}
+\bibitem{css}
+Control System Studio, \url{http://controlsystemstudio.org/}
 
-	\bibitem{pyqt}
-		PyQt, \url{https://wiki.python.org/moin/PyQt}
+\bibitem{pyqt}
+PyQt, \url{https://wiki.python.org/moin/PyQt}
 
-	\bibitem{mml}
-		 G. Portmann, J. Corbett and A. Terebilo,
-		 "An accelerator control middle layer using MATLAB",
-		 in \emph{Proc. PAC'05},
-		 Knoxville, United States, May 2005,
-		 paper FPAT077, pp. 4009-4011.
+\bibitem{mml}
+G. Portmann, J. Corbett and A. Terebilo,
+"An accelerator control middle layer using MATLAB",
+in \emph{Proc. PAC'05},
+Knoxville, United States, May 2005,
+paper FPAT077, pp. 4009-4011.
 
-	\bibitem{labca}
-		T. Straumann,
-		"labCA -- An EPICS Channel Access Interface for scilab and matlab",
-		May 2008,
-		\url{https://www.slac.stanford.edu/grp/ssrl/spear/epics/extensions/labca/manual/}
+\bibitem{labca}
+T. Straumann, "labCA -- An EPICS Channel Access Interface for scilab and matlab",
+May 2008, \url{https://www.slac.stanford.edu/grp/ssrl/spear/epics/extensions/labca/manual/}
 
-	\bibitem{sirius_status}
-		A. R. D. Rodrigues \emph{et al.},
-		“Sirius status report”,
-		in \emph{Proc. IPAC'16},
-		Busan, Korea, May 2016,
-		paper WEPOW001, pp. 2811-2814.
+\bibitem{sirius_status}
+A. R. D. Rodrigues \emph{et al.},
+“Sirius status report”,
+in \emph{Proc. IPAC'16},
+Busan, Korea, May 2016,
+paper WEPOW001, pp. 2811-2814.
 
-	\bibitem{vaca}
-		L. N. P. Vilela, A. H. C. Mukai, X. R. Resende and I. Stevani,
-		“Development of a virtual accelerator for Sirius”,
-		presented at the PCaPAC'16,
-		Campinas, Brazil, Oct. 2016,
-		paper WEPOPRPO21, this conference.
+\bibitem{vaca}
+X. R. Resende, A. H. C. Mukai, L. N. P. Vilela and I. Stevani,
+“Development of a virtual accelerator for Sirius”,
+presented at the PCaPAC'16,
+Campinas, Brazil, Oct. 2016,
+paper WEPOPRPO21, this conference.
 
-	\bibitem{pcaspy}
-		PCASpy Documentation, \url{http://pcaspy.readthedocs.io/en/latest/}
+\bibitem{pcaspy}
+PCASpy Documentation, \url{http://pcaspy.readthedocs.io/en/latest/}
 
-	\bibitem{discs_article}
-		V. Vuppala \emph{et al.},
-		"Distributed Information Services for Control Systems",
-		in \emph{Proc. ICALEPCS'2013},
-		San Francisco, United States, March 2014,
-		paper WECOBA02, pp. 1000-1003
+\bibitem{discs_article}
+V. Vuppala \emph{et al.},
+"Distributed Information Services for Control Systems",
+in \emph{Proc. ICALEPCS'2013},
+San Francisco, United States, March 2014,
+paper WECOBA02, pp. 1000-1003
 
-	\bibitem{discs_openepics}
-		DISCS, \url{http://openepics.sourceforge.net/about-discs/}
+\bibitem{discs_openepics}
+DISCS, \url{http://openepics.sourceforge.net/about-discs/}
 
-	\bibitem{lifetime}
-	 	A. J. Burns \emph{et. al},
-	 	"Real time monitoring of LEP beam currents and lifetimes",
-	 	in \emph{Proc. EPAC'94},
-	 	London, England, pp. 1716-1718.
-	 	
-	 \bibitem{pyepics}
-		PyEpics, \url{http://cars9.uchicago.edu/software/python/pyepics3/}
+\bibitem{lifetime}
+A. J. Burns \emph{et. al},
+"Real time monitoring of LEP beam currents and lifetimes",
+in \emph{Proc. EPAC'94},
+London, England, pp. 1716-1718.
+
+\bibitem{pyepics}
+PyEpics,  \url{http://cars9.uchicago.edu/software/python/pyepics3/}
 
 \end{thebibliography}
 
