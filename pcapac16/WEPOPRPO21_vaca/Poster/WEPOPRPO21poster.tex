@@ -22,8 +22,11 @@
 \newlength{\abstractheight}
 \setlength{\abstractheight}{15cm}
 
+\newlength{\vaheight}
+\setlength{\vaheight}{10cm}
+
 \newlength{\columnheight}
-\setlength{\columnheight}{95cm}
+\setlength{\columnheight}{75cm}
 
 \begin{document}
 \begin{frame}
@@ -37,56 +40,87 @@
 		The purpose of such server is to facilitate early development and testing of high level applications for the control system.
 		\end{myblock}
 	}\end{minipage}
+	\begin{minipage}{\textwidth}
+		\parbox[t][\vaheight]{\textwidth}{
+		\begin{myblock}{\textit{Virtual accelerator}}
+		On-line beam simulator composed of two parts: a back-end machine
+		application implementing a simulated virtual accelerator with a channel access server layer (VACA) and a set of
+		front-end virtual IOCs (vIOCS) with which other control system applications interact.
+		\end{myblock}
+	}\end{minipage}	
 \end{beamercolorbox}
 \begin{columns}
-	\begin{column}{0.45\textwidth}
+	\begin{column}{0.55\textwidth}
 		\begin{beamercolorbox}[center]{postercolumn}
 			\begin{minipage}{.98\textwidth}  % tweaks the width, makes a new \textwidth
 				\parbox[t][\columnheight]{\textwidth}{ % must be some better way to set the height, width and textwidth simultaneously
+					\vspace{1cm}
 					\begin{myblock}{VACA - Virtual Accelerator with Channel Access}
+						\textbf{Implemented functionalities}
 						\begin{itemize}
-							\item VACA is written in Python3.
-							\item High level programming language allows for rapid development
-							\item Python language works as a binding layer between the two main core modules: a CA server and a tracking code for simulations.
-							The python package PCasPy is used as the CA server module.
-							\item PVs implemented in VACA have a prefix "VA-" indicating that they represent virtual process variables.
-							\item Use of trackcpp: developed at LNLS by the accelerator physics group.
-							\item Trackcpp is converted to Python package with Swig3.0
+							\item Parameter-dependent current decays
+							\item Closed-orbit control with dipolar correctors
+							\item Beam optics variations with quadrupoles
+							\item Injection and ejection that depend on magnet and timing configurations.
+						\end{itemize}
+						\vspace{0.5cm}
+						
+						\textbf{Python programming language}
+						\begin{itemize}
+							\item Allows for rapid development
+							\item Binding layer between the CA server and a tracking code for simulations.
+							\item The python package PCasPy is used as the CA server module.
+							\item Trackcpp is a C++ library of beam dynamics and tracking routines developed at LNLS by the accelerator physics group. Trackcpp is converted to Python package with Swig3.0						
 						\end{itemize}
 						\begin{figure}
 							\centering
-							\includegraphics[width=1.0\textwidth]{../WEPOPRPO21f1.png}
-							\caption{Screen printout of a command line terminal showing a running instance of VACA with the display of its banner and useful information.}
+							\includegraphics[width=0.855\textwidth]{../WEPOPRPO21f1.png}
+							\caption{Screen printout of a command line terminal showing a running instance of VACA.}% with the display of its banner and useful information.}
 						\end{figure}
 					\end{myblock}
+					\vspace{0.5cm}
 		}\end{minipage}\end{beamercolorbox}
 	\end{column}
-	\begin{column}{.55\textwidth}
+	\begin{column}{.45\textwidth}
 		\begin{beamercolorbox}[center]{postercolumn}
 			\begin{minipage}{.98\textwidth} % tweaks  the width, makes a new \textwidth
 				\parbox[t][\columnheight]{\textwidth}{ % must be some better way to set the the height, width and textwidth simultaneously
+				\vspace{1cm}
 					\begin{myblock}{Virtual IOCs}
 					\begin{itemize}
 					\item \textbf{si\_bpm, bo\_bpm, ts\_bpm, tb\_bpm}: they serve BPM positions that are read from VACA, adding emulated measurement fluctuations.
-					\item \textbf{si\_current, bo\_current}: they provide simulated beam currents with fluctuations. Touschek, elastic and inelastic simulated lifetimes are affected by variations of associated parameters such as RF gap voltage and reduced acceptance due to closed orbit variations.
+					\item \textbf{si\_current, bo\_current}: they provide simulated beam currents with fluctuations. %Touschek, elastic and inelastic simulated lifetimes are affected by variations of associated parameters such as RF gap voltage and reduced acceptance due to closed orbit variations.
 					\item \textbf{si\_ps, bo\_ps, ts\_ps, tb\_ps}: provide read/write access to PVs that correspond to power supplies with associated magnet excitation curves.
 					\item \textbf{si\_rf, bo\_rf}: implement radio frequency process variables.
 					\item \textbf{si\_tune}: emulation of the tune measurement IOC.
 					\item \textbf{si\_beamsize, bo\_beamsize}: emulation of beam size measurement IOC.
-					\item \textbf{si_lifetime}: emulation of lifetime calculation IOC.
+					\item \textbf{si\_lifetime}: emulation of lifetime calculation IOC.
+					\vspace{1cm}
 					\end{itemize}
-						\vspace{0.5cm}
-					\end{myblock}\vfill
+					
+					\end{myblock}
+					\vspace{2cm}
 					\begin{myblock}{Conclusions}
+					
 					\begin{itemize}
-					\item Details of the pulsed signals during injection and ejection processes need be considered.
-					\item Approximate coupling expressions for beam size estimates should be substituted by Ohmi's envelop formalism\cite{ohmi} in trackcpp,
-					\item A cleaner separation between VACA and vIOCS is in order. At this points a few excitation curves are implemented in VACA since it has not been decied yet where they will finally be located in the CS. They can either be moved to the IOCs, in case they should be moved to the vIOCS for the VA, or moved to some configuration database service.
-					\item Considerations on moving from EPICS database records PCASPy for vIOCS developments. This may simplify the process of writing and deploying applications.
-					\item Recently a few DISCS\cite{discs} services have been adopted. In particular, the use of its naming service allowed for a standardization of how to name devices and PVs. A major revision of PV names has taken place recently. VA should be modified to contemplate the new PV name standard.
+					\item Facilitates the development of high level applications
+					\item Enables commissioning training
+					\item Can be use to serve model data during Sirius operations
 					\end{itemize}
-						\vspace{0.5cm}
-					\end{myblock}\vfill
+					
+					\vspace{2cm}
+					\textbf{Future improvements}
+					\begin{itemize}
+					\item Details of the pulsed signals during injection and ejection processes need be considered. 
+					\item Approximate coupling expressions for beam size estimates should be substituted by Ohmi's envelop formalism in trackcpp.
+					%\item A cleaner separation between VACA and vIOCS is in order. 
+					\item Considerations on moving from EPICS database to PCASPy for vIOCS developments. 
+					\item A major revision of PV names has taken place recently and VA should be updated to contemplate the new PV naming standard.
+					
+					\end{itemize}
+					\vspace{1cm}
+					\end{myblock}
+					\vspace{0.5cm}
 		}\end{minipage}\end{beamercolorbox}
 	\end{column}
 \end{columns}
