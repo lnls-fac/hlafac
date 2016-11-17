@@ -25,7 +25,7 @@ pvdb = {
     'SI-GLOB:AP-SOFB.RmvBPM': {'type': 'string'},
     'SI-GLOB:AP-SOFB.AddBPM': {'type': 'string'},
     'SI-GLOB:AP-SOFB.RmvCH': {'type': 'string'},
-    'SI-GLOB:AP-SOFB.Add': {'type': 'string'},
+    'SI-GLOB:AP-SOFB.AddCH': {'type': 'string'},
     'SI-GLOB:AP-SOFB.RmvCV': {'type': 'string'},
     'SI-GLOB:AP-SOFB.AddCV': {'type': 'string'},
     'SICO-BPM-DEVICENAMES': {'type': 'string', 'count': _api_status.nBPM, 'value': _api_status.devicenames_bpm},
