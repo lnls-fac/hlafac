@@ -1,9 +1,9 @@
 
 from utils import log
 import threading
-import api_status as _api_status
-import api_pv as _api_pv
-import api_correction as _api_correction
+import bib_status as _bib_status
+import bib_pv as _bib_pv
+import bib_correction as _bib_correction
 from time import sleep
 from collections import deque
 import numpy as _np
@@ -45,8 +45,8 @@ class CODCorrectionThread(threading.Thread):
             weight = []
             weight.append(self._driver.getParam('SI-GLOB:AP-SOFB.StrthCH')/100)
             weight.append(self._driver.getParam('SI-GLOB:AP-SOFB.StrthCV')/100)
-        delta_kick = _api_correction.calc_kick(_np.array(orbit), ctype)
-        status = _api_pv.add_kick(delta_kick, ctype, weight)
+        delta_kick = _bib_correction.calc_kick(_np.array(orbit), ctype)
+        status = _bib_pv.add_kick(delta_kick, ctype, weight)
         if str(status).lower() == 'failed':
             self._driver.setParam('SI-GLOB:AP-SOFB.Err', 12)
             self._mode = 0
@@ -56,21 +56,21 @@ class CODCorrectionThread(threading.Thread):
 
 
     def _main(self):
-        _api_status.initialize_device_sel()
-        _api_status.set_device_idx('all')
-        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListBPM', _api_status.get_device_sel('bpm'))
-        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListCH', _api_status.get_device_sel('ch'))
-        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListCV', _api_status.get_device_sel('cv'))
-        _api_status.initialize_slot(var_type = 'all')
-        _api_status.set_reforbit('x')
-        self._driver.setParam('SI-GLOB:AP-SOFB.RefOrbX', _api_status.get_reforbit('x'))
-        _api_status.set_reforbit('y')
-        self._driver.setParam('SI-GLOB:AP-SOFB.RefOrbY', _api_status.get_reforbit('y'))
-        _api_status.set_respm()
-        self._driver.setParam('SI-GLOB:AP-SOFB.RespMat', _api_status.get_respm())
-        _api_correction.set_reforbit()
-        _api_correction.set_respm()
-        _api_correction.set_inv_respm()
+        _bib_status.initialize_device_sel()
+        _bib_status.set_device_idx('all')
+        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListBPM', _bib_status.get_device_sel('bpm'))
+        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListCH', _bib_status.get_device_sel('ch'))
+        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListCV', _bib_status.get_device_sel('cv'))
+        _bib_status.initialize_slot(var_type = 'all')
+        _bib_status.set_reforbit('x')
+        self._driver.setParam('SI-GLOB:AP-SOFB.RefOrbX', _bib_status.get_reforbit('x'))
+        _bib_status.set_reforbit('y')
+        self._driver.setParam('SI-GLOB:AP-SOFB.RefOrbY', _bib_status.get_reforbit('y'))
+        _bib_status.set_respm()
+        self._driver.setParam('SI-GLOB:AP-SOFB.RespMat', _bib_status.get_respm())
+        _bib_correction.set_reforbit()
+        _bib_correction.set_respm()
+        _bib_correction.set_inv_respm()
         while not self._stop_event.is_set():
             if self._mode == 1:
                 self.cod_correction('h')
@@ -122,11 +122,11 @@ class MEASOrbitThread(threading.Thread):
     def _main(self):
         while not self._stop_event.is_set():
             try:
-                orbit = _api_pv.get_orbit('xy')
+                orbit = _bib_pv.get_orbit('xy')
                 self._orbit_buffer.append(orbit)
                 avg_orbit = self.average_orbit()
-                orbit_x = avg_orbit[:_api_status.nBPM]
-                orbit_y = avg_orbit[_api_status.nBPM:]
+                orbit_x = avg_orbit[:_bib_status.nBPM]
+                orbit_y = avg_orbit[_bib_status.nBPM:]
                 self._driver.setParam('SI-GLOB:AP-SOFB.AvgMeasOrbX', orbit_x)
                 self._driver.setParam('SI-GLOB:AP-SOFB.AvgMeasOrbY', orbit_y)
             except:
@@ -160,19 +160,19 @@ class MEASRespmThread(threading.Thread):
 
     def _finalise_meas_respm(self, respm):
         if respm.shape != (0,):
-            _respm = _np.zeros((_api_status.nBPM*2, _api_status.nCH+_api_status.nCV+1))
+            _respm = _np.zeros((_bib_status.nBPM*2, _bib_status.nCH+_bib_status.nCV+1))
             if self._mode == 1:
-                _respm[:_api_status.nBPM,:_api_status.nCH] = respm
+                _respm[:_bib_status.nBPM,:_bib_status.nCH] = respm
             elif self._mode == 2:
-                _respm[_api_status.nBPM:,_api_status.nCH:-1] = respm
+                _respm[_bib_status.nBPM:,_bib_status.nCH:-1] = respm
             elif self._mode == 3 or self._mode == 4:
                 _respm[:,:-1] = respm
             elif self._mode == 5:
-                _respm[:_api_status.nBPM,:_api_status.nCH] = respm[:,:-1]
-                _respm[:_api_status.nBPM,-1] = respm[:,-1]
+                _respm[:_bib_status.nBPM,:_bib_status.nCH] = respm[:,:-1]
+                _respm[:_bib_status.nBPM,-1] = respm[:,-1]
             elif self._mode == 6:
-                _respm[_api_status.nBPM:,_api_status.nCH:-1] = respm[:,:-1]
-                _respm[_api_status.nBPM:,-1] = respm[:,-1]
+                _respm[_bib_status.nBPM:,_bib_status.nCH:-1] = respm[:,:-1]
+                _respm[_bib_status.nBPM:,-1] = respm[:,-1]
             elif self._mode == 7 or self._mode == 8:
                 _respm = respm
             self._driver.write('SI-GLOB:AP-SOFB.RespMat', _respm)
@@ -183,28 +183,28 @@ class MEASRespmThread(threading.Thread):
     def _main(self):
         while not self._stop_event.is_set():
             if self._mode == 1:
-                respm = _api_pv.meas_respm('h', self._interrupt_measrespm_event)
+                respm = _bib_pv.meas_respm('h', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             elif self._mode == 2:
-                respm = _api_pv.meas_respm('v', self._interrupt_measrespm_event)
+                respm = _bib_pv.meas_respm('v', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             elif self._mode == 3:
-                respm = _api_pv.meas_respm('h_v', self._interrupt_measrespm_event)
+                respm = _bib_pv.meas_respm('h_v', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             elif self._mode == 4:
-                respm = _api_pv.meas_respm('hv', self._interrupt_measrespm_event)
+                respm = _bib_pv.meas_respm('hv', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             elif self._mode == 5:
-                respm = _api_pv.meas_respm('h_f', self._interrupt_measrespm_event)
+                respm = _bib_pv.meas_respm('h_f', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             elif self._mode == 6:
-                respm = _api_pv.meas_respm('v_f', self._interrupt_measrespm_event)
+                respm = _bib_pv.meas_respm('v_f', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             elif self._mode == 7:
-                respm = _api_pv.meas_respm('h_v_f', self._interrupt_measrespm_event)
+                respm = _bib_pv.meas_respm('h_v_f', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             elif self._mode == 8:
-                respm = _api_pv.meas_respm('hv_f', self._interrupt_measrespm_event)
+                respm = _bib_pv.meas_respm('hv_f', self._interrupt_measrespm_event)
                 self._finalise_meas_respm(respm)
             else:
                 sleep(self._interval)
@@ -238,130 +238,130 @@ class UPDATEVariablesThread(threading.Thread):
             if self._mode != 0:
                 if self._mode == 1:
                     try:
-                        _api_status.update_respm_slot(self._driver.getParam('SI-GLOB:AP-SOFB.RespMat'), reshape = True)
-                        _api_status.set_respm()
-                        _api_correction.set_respm()
-                        _api_correction.set_inv_respm()
+                        _bib_status.update_respm_slot(self._driver.getParam('SI-GLOB:AP-SOFB.RespMat'), reshape = True)
+                        _bib_status.set_respm()
+                        _bib_correction.set_respm()
+                        _bib_correction.set_inv_respm()
                     except:
                         self._driver.setParam('SI-GLOB:AP-SOFB.Err', 9)
                 elif self._mode == 2:
                     try:
-                        _api_status.update_reforbit_slot(self._driver.getParam('SI-GLOB:AP-SOFB.RefOrbX'), 'x')
-                        _api_status.set_reforbit('x')
-                        _api_correction.set_reforbit()
+                        _bib_status.update_reforbit_slot(self._driver.getParam('SI-GLOB:AP-SOFB.RefOrbX'), 'x')
+                        _bib_status.set_reforbit('x')
+                        _bib_correction.set_reforbit()
                     except:
                         self._driver.setParam('SI-GLOB:AP-SOFB.Err', 10)
                 elif self._mode == 3:
                     try:
-                        _api_status.update_reforbit_slot(self._driver.getParam('SI-GLOB:AP-SOFB.RefOrbY'), 'y')
-                        _api_status.set_reforbit('y')
-                        _api_correction.set_reforbit()
+                        _bib_status.update_reforbit_slot(self._driver.getParam('SI-GLOB:AP-SOFB.RefOrbY'), 'y')
+                        _bib_status.set_reforbit('y')
+                        _bib_correction.set_reforbit()
                     except:
                         self._driver.setParam('SI-GLOB:AP-SOFB.Err', 10)
                 elif self._mode == 4:
                     try:
-                        _api_status.set_respm_slot(self._driver.getParam('SI-GLOB:AP-SOFB.RespMatSlot'))
-                        _api_status.set_respm()
-                        _api_correction.set_respm()
-                        self._driver.setParam('SI-GLOB:AP-SOFB.RespMat', _api_correction.get_respm())
-                        _api_correction.set_inv_respm()
+                        _bib_status.set_respm_slot(self._driver.getParam('SI-GLOB:AP-SOFB.RespMatSlot'))
+                        _bib_status.set_respm()
+                        _bib_correction.set_respm()
+                        self._driver.setParam('SI-GLOB:AP-SOFB.RespMat', _bib_correction.get_respm())
+                        _bib_correction.set_inv_respm()
                     except:
                         self._driver.setParam('SI-GLOB:AP-SOFB.Err', 9)
                 elif self._mode == 5:
                     try:
-                        _api_status.set_reforbit_slot(self._driver.getParam('SI-GLOB:AP-SOFB.RefOrbXSlot'), 'x')
-                        _api_status.set_reforbit('x')
-                        _api_correction.set_reforbit()
-                        self._driver.setParam('SI-GLOB:AP-SOFB.RefOrbX', _api_correction.get_reforbit('x'))
+                        _bib_status.set_reforbit_slot(self._driver.getParam('SI-GLOB:AP-SOFB.RefOrbXSlot'), 'x')
+                        _bib_status.set_reforbit('x')
+                        _bib_correction.set_reforbit()
+                        self._driver.setParam('SI-GLOB:AP-SOFB.RefOrbX', _bib_correction.get_reforbit('x'))
                     except:
                         self._driver.setParam('SI-GLOB:AP-SOFB.Err', 10)
                 elif self._mode == 6:
                     try:
-                        _api_status.set_reforbit_slot(self._driver.getParam('SI-GLOB:AP-SOFB.RefOrbYSlot'), 'y')
-                        _api_status.set_reforbit('y')
-                        _api_correction.set_reforbit()
-                        self._driver.setParam('SI-GLOB:AP-SOFB.RefOrbY', _api_correction.get_reforbit('y'))
+                        _bib_status.set_reforbit_slot(self._driver.getParam('SI-GLOB:AP-SOFB.RefOrbYSlot'), 'y')
+                        _bib_status.set_reforbit('y')
+                        _bib_correction.set_reforbit()
+                        self._driver.setParam('SI-GLOB:AP-SOFB.RefOrbY', _bib_correction.get_reforbit('y'))
                     except:
                         self._driver.setParam('SI-GLOB:AP-SOFB.Err', 10)
                 elif self._mode == 7:
                     try:
-                        _api_status.set_device_sel('bpm', self._driver.getParam('SI-GLOB:AP-SOFB.EnblListBPM'))
-                        _api_status.set_device_idx('bpm')
-                        _api_correction.set_reforbit()
-                        _api_correction.set_respm()
-                        _api_correction.set_inv_respm()
+                        _bib_status.set_device_sel('bpm', self._driver.getParam('SI-GLOB:AP-SOFB.EnblListBPM'))
+                        _bib_status.set_device_idx('bpm')
+                        _bib_correction.set_reforbit()
+                        _bib_correction.set_respm()
+                        _bib_correction.set_inv_respm()
                     except:
                         self._driver.setParam('SI-GLOB:AP-SOFB.Err', 11)
                 elif self._mode == 8:
                     try:
-                        _api_status.set_device_sel('ch', self._driver.getParam('SI-GLOB:AP-SOFB.EnblListCH'))
-                        _api_status.set_device_idx('ch')
-                        _api_correction.set_respm()
-                        _api_correction.set_inv_respm()
+                        _bib_status.set_device_sel('ch', self._driver.getParam('SI-GLOB:AP-SOFB.EnblListCH'))
+                        _bib_status.set_device_idx('ch')
+                        _bib_correction.set_respm()
+                        _bib_correction.set_inv_respm()
                     except:
                         self._driver.setParam('SI-GLOB:AP-SOFB.Err', 11)
                 elif self._mode == 9:
                     try:
-                        _api_status.set_device_sel('cv', self._driver.getParam('SI-GLOB:AP-SOFB.EnblListCV'))
-                        _api_status.set_device_idx('cv')
-                        _api_correction.set_respm()
-                        _api_correction.set_inv_respm()
+                        _bib_status.set_device_sel('cv', self._driver.getParam('SI-GLOB:AP-SOFB.EnblListCV'))
+                        _bib_status.set_device_idx('cv')
+                        _bib_correction.set_respm()
+                        _bib_correction.set_inv_respm()
                     except:
                         self._driver.setParam('SI-GLOB:AP-SOFB.Err', 11)
                 elif self._mode == 10:
                     try:
-                        _api_status.change_device_status('bpm', self._driver.getParam('SI-GLOB:AP-SOFB.AddBPM'), 1)
-                        _api_status.set_device_idx('bpm')
-                        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListBPM', _api_status.get_device_sel('bpm'))
-                        _api_correction.set_reforbit()
-                        _api_correction.set_respm()
-                        _api_correction.set_inv_respm()
+                        _bib_status.change_device_status('bpm', self._driver.getParam('SI-GLOB:AP-SOFB.AddBPM'), 1)
+                        _bib_status.set_device_idx('bpm')
+                        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListBPM', _bib_status.get_device_sel('bpm'))
+                        _bib_correction.set_reforbit()
+                        _bib_correction.set_respm()
+                        _bib_correction.set_inv_respm()
                     except:
                         self._driver.setParam('SI-GLOB:AP-SOFB.Err', 11)
                 elif self._mode == 11:
                     try:
-                        _api_status.change_device_status('ch', self._driver.getParam('SI-GLOB:AP-SOFB.AddCH'), 1)
-                        _api_status.set_device_idx('ch')
-                        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListCH', _api_status.get_device_sel('ch'))
-                        _api_correction.set_respm()
-                        _api_correction.set_inv_respm()
+                        _bib_status.change_device_status('ch', self._driver.getParam('SI-GLOB:AP-SOFB.AddCH'), 1)
+                        _bib_status.set_device_idx('ch')
+                        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListCH', _bib_status.get_device_sel('ch'))
+                        _bib_correction.set_respm()
+                        _bib_correction.set_inv_respm()
                     except:
                         self._driver.setParam('SI-GLOB:AP-SOFB.Err', 11)
                 elif self._mode == 12:
                     try:
-                        _api_status.change_device_status('cv', self._driver.getParam('SI-GLOB:AP-SOFB.AddCV'), 1)
-                        _api_status.set_device_idx('cv')
-                        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListCV', _api_status.get_device_sel('cv'))
-                        _api_correction.set_respm()
-                        _api_correction.set_inv_respm()
+                        _bib_status.change_device_status('cv', self._driver.getParam('SI-GLOB:AP-SOFB.AddCV'), 1)
+                        _bib_status.set_device_idx('cv')
+                        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListCV', _bib_status.get_device_sel('cv'))
+                        _bib_correction.set_respm()
+                        _bib_correction.set_inv_respm()
                     except:
                         self._driver.setParam('SI-GLOB:AP-SOFB.Err', 11)
                 elif self._mode == 13:
                     try:
-                        _api_status.change_device_status('bpm', self._driver.getParam('SI-GLOB:AP-SOFB.RmvBPM'), 0)
-                        _api_status.set_device_idx('bpm')
-                        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListBPM', _api_status.get_device_sel('bpm'))
-                        _api_correction.set_reforbit()
-                        _api_correction.set_respm()
-                        _api_correction.set_inv_respm()
+                        _bib_status.change_device_status('bpm', self._driver.getParam('SI-GLOB:AP-SOFB.RmvBPM'), 0)
+                        _bib_status.set_device_idx('bpm')
+                        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListBPM', _bib_status.get_device_sel('bpm'))
+                        _bib_correction.set_reforbit()
+                        _bib_correction.set_respm()
+                        _bib_correction.set_inv_respm()
                     except:
                         self._driver.setParam('SI-GLOB:AP-SOFB.Err', 11)
                 elif self._mode == 14:
                     try:
-                        _api_status.change_device_status('ch', self._driver.getParam('SI-GLOB:AP-SOFB.RmvCH'), 0)
-                        _api_status.set_device_idx('ch')
-                        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListCH', _api_status.get_device_sel('ch'))
-                        _api_correction.set_respm()
-                        _api_correction.set_inv_respm()
+                        _bib_status.change_device_status('ch', self._driver.getParam('SI-GLOB:AP-SOFB.RmvCH'), 0)
+                        _bib_status.set_device_idx('ch')
+                        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListCH', _bib_status.get_device_sel('ch'))
+                        _bib_correction.set_respm()
+                        _bib_correction.set_inv_respm()
                     except:
                         self._driver.setParam('SI-GLOB:AP-SOFB.Err', 11)
                 elif self._mode == 15:
                     try:
-                        _api_status.change_device_status('cv', self._driver.getParam('SI-GLOB:AP-SOFB.RmvCV'), 0)
-                        _api_status.set_device_idx('cv')
-                        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListCV', _api_status.get_device_sel('cv'))
-                        _api_correction.set_respm()
-                        _api_correction.set_inv_respm()
+                        _bib_status.change_device_status('cv', self._driver.getParam('SI-GLOB:AP-SOFB.RmvCV'), 0)
+                        _bib_status.set_device_idx('cv')
+                        self._driver.setParam('SI-GLOB:AP-SOFB.EnblListCV', _bib_status.get_device_sel('cv'))
+                        _bib_correction.set_respm()
+                        _bib_correction.set_inv_respm()
                     except:
                         self._driver.setParam('SI-GLOB:AP-SOFB.Err', 11)
                 self._mode = 0
