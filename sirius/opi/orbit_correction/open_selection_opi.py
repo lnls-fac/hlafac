@@ -3,8 +3,8 @@ from org.csstudio.opibuilder.scriptUtil import PVUtil, WidgetUtil
 if widget.getVar('FirstTime') == None:
     widget.setVar('FirstTime', True)
 else:
-    feature_type = PVUtil.getString(pvs[0])
-    #opi_name = "%s.opi"%feature_type
+    selection_type = PVUtil.getString(pvs[0])
+    #opi_name = "%s.opi"%selection_type
     opi_name = "selection.opi"
     widget.removeAllChildren()
     linkingContainer = WidgetUtil.createWidgetModel("org.csstudio.opibuilder.widgets.linkingContainer")

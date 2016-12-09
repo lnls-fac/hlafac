@@ -25,6 +25,17 @@ sofb_mode_rffreq_pv = "SI-GLOB:AP-SOFB.RFreqEnbl"
 sofb_mancorr_pv = "SI-GLOB:AP-SOFB.ManCorrTrig"
 sofb_error_pv = "SI-GLOB:AP-SOFB.Err"
 
+# Features
+add_bpm_pv = "SI-GLOB:AP-SOFB.AddBPM"
+rmv_bpm_pv = "SI-GLOB:AP-SOFB.RmvBPM"
+add_ch_pv = "SI-GLOB:AP-SOFB.AddCH"
+rmv_ch_pv = "SI-GLOB:AP-SOFB.RmvCH"
+add_cv_pv = "SI-GLOB:AP-SOFB.AddCV"
+rmv_cv_pv = "SI-GLOB:AP-SOFB.RmvCV"
+enbl_list_bpm_pv = "SI-GLOB:AP-SOFB.EnblListBPM"
+enbl_list_ch_pv = "SI-GLOB:AP-SOFB.EnblListCH"
+enbl_list_cv_pv = "SI-GLOB:AP-SOFB.EnblListCV"
+
 # Local PVs
 
 # Beam Orbit
@@ -60,6 +71,9 @@ fofb_corr_h_locpv = "loc://fofb_corr_h(0)"
 fofb_corr_v_locpv = "loc://fofb_corr_v(0)"
 fofb_corr_coupling_locpv = "loc://fofb_coupling(0)"
 
+# Features
+feature_type_locpv = "loc://feature_type(0)"
+
 
 ## Control Panel
 
@@ -93,6 +107,7 @@ control_panel_macros.put("rms_y", rms_y_locpv)
 control_panel_macros.put("mean_y", mean_y_locpv)
 control_panel_macros.put("max_y", max_y_locpv)
 control_panel_macros.put("min_y", min_y_locpv)
+control_panel_macros.put("feature_type", feature_type_locpv)
 control_panel_macros.put("num_samples", num_samples_pv)
 control_panel_macros.put("sofb_weight_h", sofb_weight_h_pv)
 control_panel_macros.put("sofb_weight_v", sofb_weight_v_pv)
@@ -101,6 +116,15 @@ control_panel_macros.put("sofb_mode_plane", sofb_mode_plane_pv)
 control_panel_macros.put("sofb_mode_rffreq", sofb_mode_rffreq_pv)
 control_panel_macros.put("sofb_mancorr", sofb_mancorr_pv)
 control_panel_macros.put("sofb_error", sofb_error_pv)
+control_panel_macros.put("add_bpm", add_bpm_pv)
+control_panel_macros.put("add_ch", add_ch_pv)
+control_panel_macros.put("add_cv", add_cv_pv)
+control_panel_macros.put("rmv_bpm", rmv_bpm_pv)
+control_panel_macros.put("rmv_ch", rmv_ch_pv)
+control_panel_macros.put("rmv_cv", rmv_cv_pv)
+control_panel_macros.put("enbl_list_bpm", enbl_list_bpm_pv)
+control_panel_macros.put("enbl_list_ch", enbl_list_ch_pv)
+control_panel_macros.put("enbl_list_cv", enbl_list_cv_pv)
 control_panel.setPropertyValue("macros", control_panel_macros)
 
 # Reload OPI

@@ -1,12 +1,12 @@
-from org.csstudio.opibuilder.scriptUtil import PVUtil, WidgetUtil, DataUtil, ConsoleUtil
+from org.csstudio.opibuilder.scriptUtil import PVUtil, WidgetUtil, DataUtil
 import os as _os
 
-bpm_fname = _os.path.join('/', 'home','fac_files',
+bpm_fname = _os.path.join('.','fac_files',
 'siriusdb', 'recordnames_flatlists', 'dname-bpm.txt')
-ch_fname  = _os.path.join('/', 'home','fac_files',
+ch_fname  = _os.path.join('.','fac_files',
 'siriusdb', 'recordnames_flatlists', 'dname-ch.txt')
-cv_fname  = _os.path.join('/', 'home','fac_files',
-'siriusdb', 'recordnames_flatlists', 'cv.txt')
+cv_fname  = _os.path.join('.','fac_files',
+'siriusdb', 'recordnames_flatlists', 'dname-cv.txt')
 
 def _read_devicename_file(filename):
     with open(filename, 'r') as fp:
@@ -21,12 +21,12 @@ def _read_devicename_file(filename):
     return devicenames
 
 
-def _get_device_list(feature_type):
-    if feature_type == 'bpm_selection':
+def _get_device_list(device_type):
+    if device_type == 'bpm':
         devices = _read_devicename_file(bpm_fname)
-    elif feature_type == 'ch_selection':
+    elif device_type == 'ch':
         devices = _read_devicename_file(ch_fname)
-    elif feature_type == 'cv_selection':
+    elif device_type == 'cv':
         devices = _read_devicename_file(cv_fname)
     else:
         devices = None
@@ -47,38 +47,33 @@ def _add_line(table, line_opi, device):
             button = container.getChildren()[0]
             led = container.getChildren()[1]
 
-    corrector = device.upper()
-    readback = prefix + device.upper() + rb_sufix
+    setpoint = prefix + device.upper() + sufix
+    readback = prefix + device.upper() + '-RB'
 
-    button.setPropertyValue("name", corrector)
+    button.setPropertyValue("pv_name", setpoint)
     led.setPropertyValue("pv_name", readback)
 
-    #macro_inputs = DataUtil.createMacrosInput(True)
-    #macro_inputs.put("device", device)
-    #macro_inputs.put("power_supply_sp", setpoint)
-    #macro_inputs.put("power_supply_rb", readback)
-    #linkingContainer.setPropertyValue("macros", macro_inputs)
+    macro_inputs = DataUtil.createMacrosInput(True)
+    macro_inputs.put("device", device)
+    macro_inputs.put("power_supply_sp", setpoint)
+    macro_inputs.put("power_supply_rb", readback)
+    linkingContainer.setPropertyValue("macros", macro_inputs)
 
-feature_type = PVUtil.getString(pvs[0]).lower()
-devices = _get_device_list(feature_type)
-if feature_type == 'bpm_selection':
-    prefix = ''
-    set_sufix = ''
-    rb_sufix = ''
+device_type = PVUtil.getString(pvs[0]).lower()
+devices = _get_device_list(device_type)
+if device_type == 'bpm':
+    prefix = 'SIDI-'
+    sufix = ''
     column_len = 8
-    line_opi = "selection_table_line_bpm.opi"
-elif feature_type == 'ch_selection':
-    prefix = ''
-    set_sufix = ''
-    rb_sufix = ''
+elif device_type == 'ch':
+    prefix = 'SIPS-'
+    sufix = '-SP'
     column_len = 6
-    line_opi = "selection_table_line_ch.opi"
-elif feature_type == 'cv_selection':
-    prefix = ''
-    set_sufix = ''
-    rb_sufix = ''
+elif device_type == 'cv':
+    prefix = 'SIPS-'
+    sufix = '-SP'
     column_len = 8
-    line_opi = "selection_table_line_cv.opi"
+line_opi = "selection_table_line.opi"
 
 table_container = display.getWidget("table_container")
 selection_container = table_container.getWidget("selection_container")

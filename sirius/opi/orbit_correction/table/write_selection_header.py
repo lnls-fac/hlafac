@@ -7,19 +7,19 @@ def add_header(table, header_opi):
     linkingContainer.setPropertyValue("border_style", 0)
     table.addChildToBottom(linkingContainer)
 
-feature_type = PVUtil.getString(pvs[0]).lower()
-if feature_type == 'bpm_selection':
+device_type = PVUtil.getString(pvs[0]).lower()
+if device_type == 'bpm':
     left_header_opi = "table/selection_table_bpm.opi"
-elif feature_type == 'ch_selection':
+elif device_type == 'ch':
     left_header_opi = "table/selection_table_ch.opi"
-elif feature_type == 'cv_selection':
+elif device_type == 'cv':
     left_header_opi = "table/selection_table_cv.opi"
 up_header_opi = "table/selection_table_up_header.opi"
 low_header_opi = "table/selection_table_low_header.opi"
 
 table_container = display.getWidget("table_container")
 
-if feature_type is None:
+if device_type is None:
     table_container.setPropertyValue("visible", False)
 
 else:

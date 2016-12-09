@@ -50,7 +50,7 @@ elif error_type == 10:
 elif error_type == 11:
         error.setPropertyValue("text","Device selection could not be processed.")
 	error_cause_1.setPropertyValue("text","Device does not exist.")
-        error_cause_2.setPropertyValue("text","Selection array with incorrect dimension.")
+        error_cause_2.setPropertyValue("text","SOFB must be off.")
 elif error_type == 12:
         error.setPropertyValue("text","Correction kick is out of range.")
 	error_cause_1.setPropertyValue("text","BPM removed from correction loop.")
