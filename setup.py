@@ -32,6 +32,8 @@ setup(
         'siriushlafac': ['VERSION', '*/*.py'],
     },
     include_package_data=True,
-    scripts=[],
+    scripts=[
+        'sirius-hla-si-ap-trajfit.py',
+        ],
     zip_safe=False,
     )
