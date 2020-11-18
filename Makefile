@@ -1,6 +1,3 @@
-DESIGNER_PLUGIN_FILE = designer_plugin.py
-INSTALL_DESIGNER_DIR ?= /usr/local/share/Qt/designer
-
 DISTPATH=$(shell python-sirius -c "import site; print(site.getsitepackages())" | cut -f2 -d"'")
 PACKAGE=siriushlafac
 ISINST=$(shell sudo pip-sirius show $(PACKAGE) | wc -l )
