@@ -22,7 +22,7 @@ ifneq (,$(wildcard $(EGGLINK)))
 endif
 ifneq ($(ISINST),0)
 	sudo -H pip-sirius uninstall -y $(PACKAGE)
-	sudo sed -i '/pyqt-apps/d' $(DISTPATH)/easy-install.pth
+	sed -i '/$(PACKAGE)/d' $(DISTPATH)/easy-install.pth
 else
 	echo 'already uninstalled $(PACKAGE)'
 endif
