@@ -3,7 +3,7 @@ INSTALL - SIRIUSHLAFAC
 
 This package can be installed using setuptools (>=16.0). There is no automatic
 dependency checking, so read the list below and ensure necessary dependencies
-are available. Developed and tested with Python 3 (3.4).
+are available. Developed and tested with Python 3 (3.6).
 
 
 REQUIREMENTS
