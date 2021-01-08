@@ -39,8 +39,11 @@ class SIFitTrajWindow(QMainWindow):
 
         self.setupui()
         self.setObjectName('SIApp')
-        self.setWindowIcon(
-            qta.icon('fa5s.hammer', color=util.get_appropriate_color('SI')))
+        color = util.get_appropriate_color('SI')
+        icon = qta.icon('mdi.calculator-variant', 'mdi.chart-line', options=[
+            dict(scale_factor=0.4, color=color, offset=(0.1, -0.3)),
+            dict(scale_factor=1, color=color, offset=(0, 0.0))])
+        self.setWindowIcon(icon)
 
     def setupui(self):
         """."""
