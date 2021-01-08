@@ -14,7 +14,6 @@ import qtawesome as qta
 
 from siriuspy.sofb.csdev import SOFBFactory
 from siriushla import util
-from siriushla.widgets import SiriusMainWindow
 from siriushla.widgets import MatplotlibWidget
 
 from apsuite.commissioning_scripts.inj_traj_fitting import SIFitInjTraj
