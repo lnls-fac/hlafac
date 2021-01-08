@@ -101,10 +101,10 @@ class SIFitTrajWindow(QMainWindow):
         self.line_fity = self.axes_y.plot(
             bpmpos, zer, '-o', label='Fitting', linewidth=1)[0]
         self.axes_x.set_title(
-            r"x = {:.3f}mm x' = {:.3f}mrad  $\delta$ = {:.2f}%".format(
-                0.0, 0.0, 0.0))
+            r"$x_0$ = {:.3f}mm   $x_0'$ = {:.3f}mrad".format(0.0, 0.0) +
+            r"   $\delta$ = {:.2f}%".format(0.0))
         self.axes_y.set_title(
-            r"y = {:.3f}mm y' = {:.3f}mrad".format(0.0, 0.0))
+            r"$y_0$ = {:.3f}mm   $y_0'$ = {:.3f}mrad".format(0.0, 0.0))
         self.axes_y.legend(
             loc='upper center', bbox_to_anchor=(0.5, -0.05), fontsize='small',
             ncol=2)
@@ -118,13 +118,13 @@ class SIFitTrajWindow(QMainWindow):
 
     def get_tune_fit_widget(self, parent):
         """."""
-        wid = QGroupBox('Tune Adjustment', parent)
+        wid = QGroupBox('Model Tune Adjustment', parent)
         wid.setLayout(QGridLayout())
 
         self.wid_nux = QDoubleSpinBox(wid)
         self.wid_nuy = QDoubleSpinBox(wid)
         self.lab_tune = QLabel(wid)
-        pusb = QPushButton('Adjust Tune', wid)
+        pusb = QPushButton('Adjust Model Tune', wid)
         pusb.clicked.connect(self._adjust_tune)
 
         self.wid_nux.setValue(49.09)
@@ -134,8 +134,8 @@ class SIFitTrajWindow(QMainWindow):
         self.wid_nux.setDecimals(4)
         self.wid_nuy.setDecimals(4)
 
-        wid.layout().addWidget(QLabel('nux', wid), 1, 0)
-        wid.layout().addWidget(QLabel('nuy', wid), 2, 0)
+        wid.layout().addWidget(QLabel('\u03bd<sub>y</sub>', wid), 1, 0)
+        wid.layout().addWidget(QLabel('\u03bd<sub>y</sub>', wid), 2, 0)
         wid.layout().addWidget(self.wid_nux, 1, 1)
         wid.layout().addWidget(self.wid_nuy, 2, 1)
         wid.layout().addWidget(pusb, 3, 0, 1, 2)
@@ -179,23 +179,29 @@ class SIFitTrajWindow(QMainWindow):
         self.wid_yl0 = QLabel('0.000', wid)
         self.wid_en0 = QLabel('0.000', wid)
         self.wid_res = QLabel('0.000', wid)
-        wid.layout().addWidget(QLabel('x0 [mm]', wid), 1, 0)
-        wid.layout().addWidget(QLabel('xl0 [mm]', wid), 2, 0)
-        wid.layout().addWidget(QLabel('y0 [mm]', wid), 3, 0)
-        wid.layout().addWidget(QLabel('yl0 [mm]', wid), 4, 0)
-        wid.layout().addWidget(QLabel('en0 [%]', wid), 5, 0)
-        wid.layout().addWidget(QLabel('residue [um]', wid), 6, 0)
+        self.wid_unreliable = QLabel('Warning: Unreliable Fitting!', wid)
+        self.wid_unreliable.setStyleSheet('color:red; font-weight:bold;')
+        self.wid_unreliable.setVisible(False)
+        self.wid_unre_reason = QLabel('', wid)
+        self.wid_unre_reason.setStyleSheet('color:red;')
+        self.wid_unre_reason.setVisible(False)
+        wid.layout().addWidget(QLabel('x<sub>0</sub> [mm]', wid), 1, 0)
+        wid.layout().addWidget(QLabel("x'<sub>0</sub> [mm]", wid), 2, 0)
+        wid.layout().addWidget(QLabel('y<sub>0</sub> [mm]', wid), 3, 0)
+        wid.layout().addWidget(QLabel("y'<sub>0</sub> [mm]", wid), 4, 0)
+        wid.layout().addWidget(QLabel('\u03b4<sub>0</sub> [%]', wid), 5, 0)
+        wid.layout().addWidget(QLabel('\u03c7 [\u03bcm]', wid), 6, 0)
         wid.layout().addWidget(self.wid_x0, 1, 1)
         wid.layout().addWidget(self.wid_xl0, 2, 1)
         wid.layout().addWidget(self.wid_y0, 3, 1)
         wid.layout().addWidget(self.wid_yl0, 4, 1)
         wid.layout().addWidget(self.wid_en0, 5, 1)
         wid.layout().addWidget(self.wid_res, 6, 1)
+        wid.layout().addWidget(self.wid_unreliable, 7, 0, 1, 2)
+        wid.layout().addWidget(self.wid_unre_reason, 8, 0, 1, 2)
         return wid
 
     def _adjust_tune(self):
-        self.lab_tune.setText('Adjusting tunes...')
-
         tunex_goal = float(self.wid_nux.value())
         tuney_goal = float(self.wid_nuy.value())
 
@@ -209,13 +215,11 @@ class SIFitTrajWindow(QMainWindow):
         self.lab_tune.setText('Done!')
 
     def _do_fitting(self):
-        self.lab_fitting.setText('Getting Orbit from SOFB...')
-        trjx, trjy, trjs = self.fit_traj.get_traj_from_sofb()
-        # trjx, trjy, trjs = self.fit_traj.simulate_sofb(
-        #     -8.2e-3, 0.1e-3, y0=0.4e-3, yl0=0, delta=0.002,
-        #     errx=0.5e-3, erry=0.3e-3)
+        # trjx, trjy, trjs = self.fit_traj.get_traj_from_sofb()
+        trjx, trjy, trjs = self.fit_traj.simulate_sofb(
+            -8.2e-3, 0.1e-3, y0=0.4e-3, yl0=0, delta=0.002,
+            errx=0.5e-3, erry=0.3e-3)
 
-        self.lab_fitting.setText('Fitting...')
         tol = float(self.wid_tol.text()) * 1e-6
         max_iter = self.wid_nr_iter.value()
         self.fit_traj.params.count_rel_thres = float(self.wid_thres.text())/100
@@ -231,10 +235,10 @@ class SIFitTrajWindow(QMainWindow):
         self.wid_en0.setText(f'{de*1e2:.3f}')
         self.wid_res.setText(f'{chi*1e6:.1f}')
         self.axes_x.set_title(
-            r"x = {:.3f}mm x' = {:.3f}mrad  $\delta$ = {:.2f}%".format(
-                x*1e3, xl*1e3, de*100))
+            r"$x_0$ = {:.3f}mm   $x_0'$ = {:.3f}mrad".format(x*1e3, xl*1e3) +
+            r"   $\delta$ = {:.2f}%".format(de*100))
         self.axes_y.set_title(
-            r"y = {:.3f}mm y' = {:.3f}mrad".format(y*1e3, yl*1e3))
+            r"$y_0$ = {:.3f}mm   $y_0'$ = {:.3f}mrad".format(y*1e3, yl*1e3))
 
         self.lab_fitting.setText('Calculating Trajectory...')
 
@@ -261,3 +265,8 @@ class SIFitTrajWindow(QMainWindow):
         self.fig.canvas.draw()
 
         self.lab_fitting.setText('Done!')
+
+        unre_fit = self.fit_traj.unreliable_fitting()
+        self.wid_unreliable.setVisible(bool(unre_fit))
+        self.wid_unre_reason.setVisible(bool(unre_fit))
+        self.wid_unre_reason.setText(unre_fit)
