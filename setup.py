@@ -18,8 +18,8 @@ setup(
     version=__version__,
     author='lnls-fac',
     description='FAC Client Applications for Sirius',
-    url='https://github.com/lnls-fac/hla',
-    download_url='https://github.com/lnls-fac/hla',
+    url='https://github.com/lnls-fac/hlafac',
+    download_url='https://github.com/lnls-fac/hlafac',
     license='GNU GPLv3',
     classifiers=[
         'Intended Audience :: Science/Research',
