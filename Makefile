@@ -8,8 +8,6 @@ TMPFOLDER=/tmp/install-$(PACKAGE)
 install: clean uninstall
 	sudo ./setup.py install --single-version-externally-managed --compile --force --record /dev/null
 
-install-all: install install-designer
-
 develop: clean uninstall
 	sudo -H pip-sirius install --no-deps -e ./
 
