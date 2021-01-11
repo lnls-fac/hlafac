@@ -8,15 +8,16 @@ from matplotlib import rcParams
 from qtpy.QtCore import Qt
 from qtpy.QtGui import QDoubleValidator
 from qtpy.QtWidgets import QWidget, QPushButton, QGridLayout, QSpinBox, \
-    QDoubleSpinBox, QLabel, QGroupBox, QMainWindow, QLineEdit
+    QDoubleSpinBox, QLabel, QGroupBox, QLineEdit
 
 import qtawesome as qta
 
 from siriuspy.sofb.csdev import SOFBFactory
 from siriushla import util
-from siriushla.widgets import MatplotlibWidget
+from siriushla.widgets import MatplotlibWidget, SiriusMainWindow
 
-from apsuite.commissioning_scripts.inj_traj_fitting import SIFitInjTraj
+from apsuite.commissioning_scripts.inj_traj_fitting import SIFitInjTraj, \
+    BOFitInjTraj
 from apsuite.optics_analysis import TuneCorr
 
 rcParams.update({
@@ -24,21 +25,25 @@ rcParams.update({
     'grid.alpha': 0.5})
 
 
-class SIFitTrajWindow(QMainWindow):
+class ASFitTrajWindow(SiriusMainWindow):
     """."""
 
-    def __init__(self, parent=None):
+    def __init__(self, acc='SI', parent=None):
         """."""
         super().__init__(parent=parent)
-        self._csorb = SOFBFactory.create('SI')
-        self.fit_traj = SIFitInjTraj()
+        acc = acc.upper()
+        self._csorb = SOFBFactory.create(acc)
+        if acc == 'SI':
+            self.fit_traj = SIFitInjTraj()
+        else:
+            self.fit_traj = BOFitInjTraj()
         self.tunecorr = TuneCorr(
-            self.fit_traj.model, 'SI', method='Proportional',
+            self.fit_traj.model, acc, method='Proportional',
             grouping='TwoKnobs')
 
         self.setupui()
-        self.setObjectName('SIApp')
-        color = util.get_appropriate_color('SI')
+        self.setObjectName(acc+'App')
+        color = util.get_appropriate_color(acc)
         icon = qta.icon('mdi.calculator-variant', 'mdi.chart-line', options=[
             dict(scale_factor=0.4, color=color, offset=(0.1, -0.3)),
             dict(scale_factor=1, color=color, offset=(0, 0.0))])
@@ -47,7 +52,7 @@ class SIFitTrajWindow(QMainWindow):
     def setupui(self):
         """."""
         self.setWindowModality(Qt.WindowModal)
-        self.setWindowTitle("SI - Trajectory Fitting")
+        self.setWindowTitle(self._csorb.acc+" - Trajectory Fitting")
         self.setDocumentMode(False)
         self.setDockNestingEnabled(True)
 
@@ -59,8 +64,8 @@ class SIFitTrajWindow(QMainWindow):
         wid.setLayout(QGridLayout())
 
         wid.layout().addWidget(
-            QLabel('<h1> SI - Fit Trajectory </h1>', wid), 0, 0, 1, 2,
-            alignment=Qt.AlignCenter)
+            QLabel(f'<h1> {self._csorb.acc} - Fit Trajectory </h1>', wid),
+            0, 0, 1, 2, alignment=Qt.AlignCenter)
 
         fig_wid = self.make_figure(wid)
         wid.layout().addWidget(fig_wid, 1, 0, 5, 1)
@@ -127,8 +132,12 @@ class SIFitTrajWindow(QMainWindow):
         pusb = QPushButton('Adjust Model Tune', wid)
         pusb.clicked.connect(self._adjust_tune)
 
-        self.wid_nux.setValue(49.09)
-        self.wid_nuy.setValue(14.15)
+        if self._csorb.acc == 'SI':
+            self.wid_nux.setValue(49.09)
+            self.wid_nuy.setValue(14.15)
+        else:
+            self.wid_nux.setValue(19.204)
+            self.wid_nuy.setValue(7.314)
         self.wid_nux.setSingleStep(0.001)
         self.wid_nuy.setSingleStep(0.001)
         self.wid_nux.setDecimals(4)

@@ -33,6 +33,7 @@ setup(
     },
     include_package_data=True,
     scripts=[
+        'scripts/sirius-hla-bo-ap-trajfit.py',
         'scripts/sirius-hla-si-ap-trajfit.py',
         ],
     zip_safe=False,

@@ -7,5 +7,5 @@ del _os
 
 
 _all_ = [
-    'si_ap_trajfit',
+    'as_ap_trajfit',
     ]

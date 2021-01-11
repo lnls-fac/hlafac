@@ -1,6 +1,6 @@
 #!/usr/bin/env python-sirius
 
-"""SI Injection Trajectory Fitting Application."""
+"""BO Injection Trajectory Fitting Application."""
 
 import sys
 import argparse as _argparse
@@ -15,5 +15,5 @@ parser = _argparse.ArgumentParser(
 args = parser.parse_args()
 
 app = SiriusApplication()
-app.open_window(ASFitTrajWindow, acc='SI', parent=None)
+app.open_window(ASFitTrajWindow, acc='BO', parent=None)
 sys.exit(app.exec_())
