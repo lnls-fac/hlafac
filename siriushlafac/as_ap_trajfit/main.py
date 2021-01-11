@@ -143,7 +143,7 @@ class ASFitTrajWindow(SiriusMainWindow):
         self.wid_nux.setDecimals(4)
         self.wid_nuy.setDecimals(4)
 
-        wid.layout().addWidget(QLabel('\u03bd<sub>y</sub>', wid), 1, 0)
+        wid.layout().addWidget(QLabel('\u03bd<sub>x</sub>', wid), 1, 0)
         wid.layout().addWidget(QLabel('\u03bd<sub>y</sub>', wid), 2, 0)
         wid.layout().addWidget(self.wid_nux, 1, 1)
         wid.layout().addWidget(self.wid_nuy, 2, 1)
