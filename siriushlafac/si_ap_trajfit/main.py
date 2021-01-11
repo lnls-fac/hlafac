@@ -215,10 +215,10 @@ class SIFitTrajWindow(QMainWindow):
         self.lab_tune.setText('Done!')
 
     def _do_fitting(self):
-        # trjx, trjy, trjs = self.fit_traj.get_traj_from_sofb()
-        trjx, trjy, trjs = self.fit_traj.simulate_sofb(
-            -8.2e-3, 0.1e-3, y0=0.4e-3, yl0=0, delta=0.002,
-            errx=0.5e-3, erry=0.3e-3)
+        trjx, trjy, trjs = self.fit_traj.get_traj_from_sofb()
+        # trjx, trjy, trjs = self.fit_traj.simulate_sofb(
+        #     -8.2e-3, 0.1e-3, y0=0.4e-3, yl0=0, delta=0.002,
+        #     errx=0.5e-3, erry=0.3e-3)
 
         tol = float(self.wid_tol.text()) * 1e-6
         max_iter = self.wid_nr_iter.value()
