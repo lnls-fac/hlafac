@@ -35,6 +35,7 @@ setup(
     scripts=[
         'scripts/sirius-hla-bo-ap-trajfit.py',
         'scripts/sirius-hla-si-ap-trajfit.py',
+        'scripts/sirius-hla-si-ap-coupmeas.py',
         ],
     zip_safe=False,
     )
