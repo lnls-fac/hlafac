@@ -56,7 +56,7 @@ class SICoupMeasWindow(SiriusMainWindow):
     def setupui(self):
         """."""
         self.setWindowModality(Qt.WindowModal)
-        self.setWindowTitle("SI - tune Measurement")
+        self.setWindowTitle("SI - Coupling Measurement")
         self.setDocumentMode(False)
         self.setDockNestingEnabled(True)
 
