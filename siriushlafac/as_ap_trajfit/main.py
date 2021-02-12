@@ -48,6 +48,7 @@ class ASFitTrajWindow(SiriusMainWindow):
             dict(scale_factor=0.4, color=color, offset=(0.1, -0.3)),
             dict(scale_factor=1, color=color, offset=(0, 0.0))])
         self.setWindowIcon(icon)
+        self.resize(1000, 700)
 
     def setupui(self):
         """."""

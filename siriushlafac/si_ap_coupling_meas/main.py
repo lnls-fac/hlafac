@@ -52,6 +52,7 @@ class SICoupMeasWindow(SiriusMainWindow):
             dict(scale_factor=0.5, color=color, offset=(0.2, -0.3)),
             dict(scale_factor=1, color=color, offset=(0, 0.0))])
         self.setWindowIcon(icon)
+        self.resize(1100, 700)
 
     def setupui(self):
         """."""
