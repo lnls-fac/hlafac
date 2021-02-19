@@ -254,13 +254,13 @@ class ASFitTrajWindow(SiriusMainWindow):
 
         trjx_fit, trjy_fit = self.fit_traj.calc_traj(*vecs[-1], size=trjx.size)
         bpmpos = self.fit_traj.twiss.spos[self.fit_traj.bpm_idx]
-        bpmpos = bpmpos[:trjx.size]
+        bpmpos_trun = bpmpos[:trjx.size]
 
-        self.line_measx.set_xdata(bpmpos)
-        self.line_measy.set_xdata(bpmpos)
+        self.line_measx.set_xdata(bpmpos_trun)
+        self.line_measy.set_xdata(bpmpos_trun)
         self.line_meass.set_xdata(bpmpos)
-        self.line_fitx.set_xdata(bpmpos)
-        self.line_fity.set_xdata(bpmpos)
+        self.line_fitx.set_xdata(bpmpos_trun)
+        self.line_fity.set_xdata(bpmpos_trun)
         self.line_measx.set_ydata(trjx*1e3)
         self.line_measy.set_ydata(trjy*1e3)
         self.line_meass.set_ydata(trjs)
