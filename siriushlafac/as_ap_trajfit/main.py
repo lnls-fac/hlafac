@@ -16,7 +16,7 @@ from siriuspy.sofb.csdev import SOFBFactory
 from siriushla import util
 from siriushla.widgets import MatplotlibWidget, SiriusMainWindow
 
-from apsuite.commissioning_scripts.inj_traj_fitting import SIFitInjTraj, \
+from apsuite.commisslib.inj_traj_fitting import SIFitInjTraj, \
     BOFitInjTraj
 from apsuite.optics_analysis import TuneCorr
 

@@ -23,7 +23,7 @@ from siriushla import util
 from siriushla.widgets import MatplotlibWidget, SiriusMainWindow, \
     SiriusLogDisplay
 
-from apsuite.commissioning_scripts.meas_coupling_tune import MeasCoupling
+from apsuite.commisslib.meas_coupling_tune import MeasCoupling
 
 rcParams.update({
     'font.size': 12, 'axes.grid': True, 'grid.linestyle': '--',
