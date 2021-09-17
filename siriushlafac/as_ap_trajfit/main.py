@@ -1,5 +1,7 @@
 """Main module of the Application Interface."""
 
+from time import sleep as _sleep
+
 import numpy as np
 import matplotlib.pyplot as mplt
 import matplotlib.gridspec as mgs
@@ -8,7 +10,7 @@ from matplotlib import rcParams
 from qtpy.QtCore import Qt
 from qtpy.QtGui import QDoubleValidator
 from qtpy.QtWidgets import QWidget, QPushButton, QGridLayout, QSpinBox, \
-    QDoubleSpinBox, QLabel, QGroupBox, QLineEdit
+    QDoubleSpinBox, QLabel, QGroupBox, QLineEdit, QCheckBox
 
 import qtawesome as qta
 
@@ -41,6 +43,11 @@ class ASFitTrajWindow(SiriusMainWindow):
             self.fit_traj.model, acc, method='Proportional',
             grouping='TwoKnobs')
 
+        self._auto_update = False
+        sofb = self.fit_traj.devices['sofb']
+        orbx = sofb.pv_object('MTurnIdxOrbX-Mon')
+        orbx.add_callback(self._do_auto_update)
+
         self.setupui()
         self.setObjectName(acc+'App')
         color = util.get_appropriate_color(acc)
@@ -49,6 +56,14 @@ class ASFitTrajWindow(SiriusMainWindow):
             dict(scale_factor=1, color=color, offset=(0, 0.0))])
         self.setWindowIcon(icon)
         self.resize(1000, 700)
+
+    def set_auto_update(self, value):
+        """Define whether to update automatically with PV update.
+
+        Args:
+            value (bool): desired state.
+        """
+        self._auto_update = bool(value)
 
     def setupui(self):
         """."""
@@ -162,7 +177,9 @@ class ASFitTrajWindow(SiriusMainWindow):
         self.wid_thres = QLineEdit('10.0', wid)
         self.lab_fitting = QLabel(wid)
         pusb = QPushButton('Fit Trajectory', wid)
+        chbox = QCheckBox('Automatic', wid)
         pusb.clicked.connect(self._do_fitting)
+        chbox.toggled.connect(self.set_auto_update)
 
         self.wid_nr_iter.setValue(10)
         self.wid_tol.setValidator(QDoubleValidator())
@@ -174,7 +191,8 @@ class ASFitTrajWindow(SiriusMainWindow):
         wid.layout().addWidget(self.wid_nr_iter, 1, 1)
         wid.layout().addWidget(self.wid_tol, 2, 1)
         wid.layout().addWidget(self.wid_thres, 3, 1)
-        wid.layout().addWidget(pusb, 4, 0, 1, 2)
+        wid.layout().addWidget(pusb, 4, 0)
+        wid.layout().addWidget(chbox, 4, 1)
         wid.layout().addWidget(self.lab_fitting, 5, 0, 1, 2)
         return wid
 
@@ -223,6 +241,13 @@ class ASFitTrajWindow(SiriusMainWindow):
             jacobian_matrix=tunemat)
 
         self.lab_tune.setText('Done!')
+
+    def _do_auto_update(self, *args, **kwargs):
+        _ = args, kwargs
+        if not self._auto_update:
+            return
+        _sleep(0.1)
+        self._do_fitting()
 
     def _do_fitting(self):
         trjx, trjy, trjs = self.fit_traj.get_traj_from_sofb()
