@@ -13,7 +13,7 @@ from qtpy.QtCore import Qt
 from qtpy.QtGui import QDoubleValidator
 from qtpy.QtWidgets import QWidget, QPushButton, QGridLayout, QSpinBox, \
     QLabel, QGroupBox, QLineEdit, QComboBox, QHBoxLayout, QFileDialog, \
-    QVBoxLayout, QMessageBox
+    QVBoxLayout
 
 import qtawesome as qta
 
