@@ -128,19 +128,30 @@ class SICoupMeasWindow(SiriusMainWindow):
 
         self.wid_quadfam = QComboBox(wid)
         self.wid_quadfam.addItems(self.meas_coup.params.QUADS)
+        self.wid_quadfam.setCurrentText(self.meas_coup.params.quadfam_name)
+        self.wid_quadfam.currentTextChanged.connect(self._update_quadcurr_wid)
+
         self.wid_nr_points = QSpinBox(wid)
-        self.wid_time_wait = QLineEdit('5', wid)
-        self.wid_neg_percent = QLineEdit('0.1', wid)
-        self.wid_pos_percent = QLineEdit('0.1', wid)
+        self.wid_nr_points.setValue(self.meas_coup.params.nr_points)
+
+        self.wid_time_wait = QLineEdit(wid)
+        self.wid_time_wait.setText(str(self.meas_coup.params.time_wait))
+        self.wid_time_wait.setValidator(QDoubleValidator())
+
+        self.wid_neg_percent = QLineEdit(wid)
+        self.wid_neg_percent.setText(
+            str(self.meas_coup.params.neg_percent*100))
+        self.wid_neg_percent.setValidator(QDoubleValidator())
+
+        self.wid_pos_percent = QLineEdit(wid)
+        self.wid_pos_percent.setText(
+            str(self.meas_coup.params.pos_percent*100))
+        self.wid_pos_percent.setValidator(QDoubleValidator())
+
         pusb_start = QPushButton(qta.icon('mdi.play'), 'Start', wid)
         pusb_start.clicked.connect(self.start_meas)
         pusb_stop = QPushButton(qta.icon('mdi.stop'), 'Stop', wid)
         pusb_stop.clicked.connect(self.meas_coup.stop)
-
-        self.wid_nr_points.setValue(self.meas_coup.params.nr_points)
-        self.wid_time_wait.setValidator(QDoubleValidator())
-        self.wid_neg_percent.setValidator(QDoubleValidator())
-        self.wid_pos_percent.setValidator(QDoubleValidator())
 
         wid.layout().addWidget(QLabel('Quadrupole Family Name', wid), 1, 1)
         wid.layout().addWidget(QLabel('# of Points', wid), 2, 1)
@@ -166,7 +177,9 @@ class SICoupMeasWindow(SiriusMainWindow):
     def get_analysis_control_widget(self, parent):
         wid = QGroupBox('Analysis Control', parent)
         wid.setLayout(QGridLayout())
-        self.wid_coupling_resolution = QLineEdit('0.02', wid)
+        self.wid_coupling_resolution = QLineEdit(wid)
+        self.wid_coupling_resolution.setText(
+            str(self.meas_coup.params.coupling_resolution*100))
         self.wid_coupling_resolution.setValidator(QDoubleValidator())
         self.wid_coupling_resolution.setStyleSheet('max-width:5em;')
 
