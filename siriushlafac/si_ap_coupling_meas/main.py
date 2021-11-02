@@ -19,9 +19,12 @@ import qtawesome as qta
 
 # from pydm.widgets.logdisplay import PyDMLogDisplay
 
+from siriuspy.envars import VACA_PREFIX
+from siriuspy.namesys import SiriusPVName
+
 from siriushla import util
 from siriushla.widgets import MatplotlibWidget, SiriusMainWindow, \
-    SiriusLogDisplay
+    SiriusLogDisplay, SiriusSpinbox, SiriusLabel
 
 from apsuite.commisslib.meas_coupling_tune import MeasCoupling
 
@@ -131,6 +134,15 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.wid_quadfam.setCurrentText(self.meas_coup.params.quadfam_name)
         self.wid_quadfam.currentTextChanged.connect(self._update_quadcurr_wid)
 
+        self._currpvname = SiriusPVName(
+            'SI-Fam:PS-'+self.meas_coup.params.quadfam_name+':Current-SP')
+        self._currpvname = self._currpvname.substitute(prefix=VACA_PREFIX)
+        self.wid_quadcurr_sp = SiriusSpinbox(self, self._currpvname)
+        self.wid_quadcurr_sp.showStepExponent = False
+        self.wid_quadcurr_mn = SiriusLabel(
+            self, self._currpvname.substitute(propty_suffix='Mon'))
+        self.wid_quadcurr_mn.showUnits = True
+
         self.wid_nr_points = QSpinBox(wid)
         self.wid_nr_points.setValue(self.meas_coup.params.nr_points)
 
@@ -154,22 +166,25 @@ class SICoupMeasWindow(SiriusMainWindow):
         pusb_stop.clicked.connect(self.meas_coup.stop)
 
         wid.layout().addWidget(QLabel('Quadrupole Family Name', wid), 1, 1)
-        wid.layout().addWidget(QLabel('# of Points', wid), 2, 1)
-        wid.layout().addWidget(QLabel('Time to wait [s]', wid), 3, 1)
-        wid.layout().addWidget(QLabel('Current Lower Limit [%]', wid), 4, 1)
-        wid.layout().addWidget(QLabel('Current Upper Limit [%]', wid), 5, 1)
+        wid.layout().addWidget(QLabel('Quadrupole Current [A]', wid), 2, 1)
+        wid.layout().addWidget(QLabel('# of Points', wid), 4, 1)
+        wid.layout().addWidget(QLabel('Time to wait [s]', wid), 5, 1)
+        wid.layout().addWidget(QLabel('Current Lower Limit [%]', wid), 6, 1)
+        wid.layout().addWidget(QLabel('Current Upper Limit [%]', wid), 7, 1)
         wid.layout().addWidget(self.wid_quadfam, 1, 2)
-        wid.layout().addWidget(self.wid_nr_points, 2, 2)
-        wid.layout().addWidget(self.wid_time_wait, 3, 2)
-        wid.layout().addWidget(self.wid_neg_percent, 4, 2)
-        wid.layout().addWidget(self.wid_pos_percent, 5, 2)
+        wid.layout().addWidget(self.wid_quadcurr_sp, 2, 2)
+        wid.layout().addWidget(self.wid_quadcurr_mn, 3, 2)
+        wid.layout().addWidget(self.wid_nr_points, 4, 2)
+        wid.layout().addWidget(self.wid_time_wait, 5, 2)
+        wid.layout().addWidget(self.wid_neg_percent, 6, 2)
+        wid.layout().addWidget(self.wid_pos_percent, 7, 2)
         lay = QHBoxLayout()
         lay.addStretch()
         lay.addWidget(pusb_start)
         lay.addStretch()
         lay.addWidget(pusb_stop)
         lay.addStretch()
-        wid.layout().addLayout(lay, 7, 1, 1, 2)
+        wid.layout().addLayout(lay, 9, 1, 1, 2)
         wid.layout().setColumnStretch(0, 2)
         wid.layout().setColumnStretch(3, 2)
         return wid
@@ -356,3 +371,9 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.axes.relim()
         self.axes.autoscale_view()
         self.fig.canvas.draw()
+
+    def _update_quadcurr_wid(self, text):
+        self._currpvname = self._currpvname.substitute(dev=text)
+        self.wid_quadcurr_sp.channel = self._currpvname
+        self.wid_quadcurr_mn.channel = self._currpvname.substitute(
+            propty_suffix='Mon')
