@@ -1,26 +1,24 @@
-DISTPATH=$(shell python-sirius -c "import site; print(site.getsitepackages())" | cut -f2 -d"'")
 PACKAGE=siriushlafac
-ISINST=$(shell sudo pip-sirius show $(PACKAGE) | wc -l )
-EGGLINK=$(DISTPATH)/$(PACKAGE).egg-link
-TMPFOLDER=/tmp/install-$(PACKAGE)
-
+PREFIX=
+PIP=pip
+ifeq ($(CONDA_PREFIX),)
+	PREFIX=sudo -H
+	PIP=pip-sirius
+endif
 
 install: clean uninstall
-	sudo ./setup.py install --single-version-externally-managed --compile --force --record /dev/null
-
-develop: clean uninstall
-	sudo -H pip-sirius install --no-deps -e ./
+	$(PREFIX) $(PIP) install --no-deps --compile ./
 
 uninstall:
-ifneq (,$(wildcard $(EGGLINK)))
-	sudo rm -r $(EGGLINK)
-endif
-ifneq ($(ISINST),0)
-	sudo -H pip-sirius uninstall -y $(PACKAGE)
-	sed -i '/$(PACKAGE)/d' $(DISTPATH)/easy-install.pth
-else
-	echo 'already uninstalled $(PACKAGE)'
-endif
+	$(PREFIX) $(PIP) uninstall -y $(PACKAGE)
+
+develop-install: clean develop-uninstall
+	$(PIP) install --no-deps -e ./
+
+# known issue: It will fail to uninstall scripts
+#  if they were installed in develop mode
+develop-uninstall:
+	$(PIP) uninstall -y $(PACKAGE)
 
 clean:
 	git clean -fdX
