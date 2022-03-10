@@ -6,19 +6,17 @@ ifeq ($(CONDA_PREFIX),)
 	PIP=pip-sirius
 endif
 
-install: clean uninstall
+install: uninstall
 	$(PREFIX) $(PIP) install --no-deps --compile ./
+	$(PREFIX) git clean -fdX
 
 uninstall:
 	$(PREFIX) $(PIP) uninstall -y $(PACKAGE)
 
-develop-install: clean develop-uninstall
+develop-install: develop-uninstall
 	$(PIP) install --no-deps -e ./
 
 # known issue: It will fail to uninstall scripts
 #  if they were installed in develop mode
 develop-uninstall:
 	$(PIP) uninstall -y $(PACKAGE)
-
-clean:
-	git clean -fdX
