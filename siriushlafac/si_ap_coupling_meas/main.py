@@ -21,7 +21,6 @@ import qtawesome as qta
 
 from siriuspy.envars import VACA_PREFIX
 from siriuspy.namesys import SiriusPVName
-
 from siriushla import util
 from siriushla.widgets import MatplotlibWidget, SiriusMainWindow, \
     SiriusLogDisplay, SiriusSpinbox, SiriusLabel
@@ -39,7 +38,7 @@ class SICoupMeasWindow(SiriusMainWindow):
     EXT_FLT = f'Pickle Files (*.{EXT:s})'
     DEFAULT_DIR = _pathlib.Path.home().as_posix()
     DEFAULT_DIR += _os.path.sep + _os.path.join(
-        'mounts', 'screens-iocs', 'data_by_day')
+        'shared', 'screens-iocs', 'data_by_day')
     print(DEFAULT_DIR)
 
     def __init__(self, parent=None):
@@ -84,8 +83,6 @@ class SICoupMeasWindow(SiriusMainWindow):
         wid.layout().addWidget(ctrls, 1, 0)
         wid.layout().addWidget(anal, 2, 0)
         wid.layout().addWidget(status, 3, 0)
-        # wid.layout().addWidget(fig_wid, 1, 1, 3, 1)
-        # wid.layout().addWidget(saveload, 3, 0)
         lay = QVBoxLayout()
         lay.addWidget(saveload)
         lay.addWidget(fig_wid)
