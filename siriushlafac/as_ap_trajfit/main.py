@@ -46,6 +46,7 @@ class ASFitTrajWindow(SiriusMainWindow):
         self._auto_update = False
         sofb = self.fit_traj.devices['sofb']
         orbx = sofb.pv_object('MTurnIdxOrbX-Mon')
+        orbx.auto_monitor = True
         orbx.add_callback(self._do_auto_update)
 
         self.setupui()
