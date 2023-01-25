@@ -147,15 +147,15 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.wid_time_wait.setText(str(self.meas_coup.params.time_wait))
         self.wid_time_wait.setValidator(QDoubleValidator())
 
-        self.wid_neg_percent = QLineEdit(wid)
-        self.wid_neg_percent.setText(
-            str(self.meas_coup.params.neg_percent*100))
-        self.wid_neg_percent.setValidator(QDoubleValidator())
+        self.wid_lower_percent = QLineEdit(wid)
+        self.wid_lower_percent.setText(
+            str(self.meas_coup.params.lower_percent*100))
+        self.wid_lower_percent.setValidator(QDoubleValidator())
 
-        self.wid_pos_percent = QLineEdit(wid)
-        self.wid_pos_percent.setText(
-            str(self.meas_coup.params.pos_percent*100))
-        self.wid_pos_percent.setValidator(QDoubleValidator())
+        self.wid_upper_percent = QLineEdit(wid)
+        self.wid_upper_percent.setText(
+            str(self.meas_coup.params.upper_percent*100))
+        self.wid_upper_percent.setValidator(QDoubleValidator())
 
         pusb_start = QPushButton(qta.icon('mdi.play'), 'Start', wid)
         pusb_start.clicked.connect(self.start_meas)
@@ -173,8 +173,8 @@ class SICoupMeasWindow(SiriusMainWindow):
         wid.layout().addWidget(self.wid_quadcurr_mn, 3, 2)
         wid.layout().addWidget(self.wid_nr_points, 4, 2)
         wid.layout().addWidget(self.wid_time_wait, 5, 2)
-        wid.layout().addWidget(self.wid_neg_percent, 6, 2)
-        wid.layout().addWidget(self.wid_pos_percent, 7, 2)
+        wid.layout().addWidget(self.wid_lower_percent, 6, 2)
+        wid.layout().addWidget(self.wid_upper_percent, 7, 2)
         lay = QHBoxLayout()
         lay.addStretch()
         lay.addWidget(pusb_start)
@@ -187,6 +187,7 @@ class SICoupMeasWindow(SiriusMainWindow):
         return wid
 
     def get_analysis_control_widget(self, parent):
+        """."""
         wid = QGroupBox('Analysis Control', parent)
         wid.setLayout(QGridLayout())
         self.wid_coupling_resolution = QLineEdit(wid)
@@ -278,10 +279,11 @@ class SICoupMeasWindow(SiriusMainWindow):
                 self.meas_coup.params.quadfam_name))
         self.wid_nr_points.setValue(self.meas_coup.params.nr_points)
         self.wid_time_wait.setText(str(self.meas_coup.params.time_wait))
-        self.wid_neg_percent.setText(
-            str(self.meas_coup.params.neg_percent*100))
-        self.wid_pos_percent.setText(
-            str(self.meas_coup.params.pos_percent*100))
+        self._get_old_params()
+        self.wid_lower_percent.setText(
+            str(self.meas_coup.params.lower_percent*100))
+        self.wid_upper_percent.setText(
+            str(self.meas_coup.params.upper_percent*100))
         self.wid_coupling_resolution.setText(
             str(self.meas_coup.params.coupling_resolution*100))
 
@@ -312,10 +314,10 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.meas_coup.params.quadfam_name = self.wid_quadfam.currentText()
         self.meas_coup.params.nr_points = int(self.wid_nr_points.value())
         self.meas_coup.params.time_wait = float(self.wid_time_wait.text())
-        self.meas_coup.params.neg_percent = float(
-            self.wid_neg_percent.text()) / 100
-        self.meas_coup.params.pos_percent = float(
-            self.wid_pos_percent.text()) / 100
+        self.meas_coup.params.lower_percent = float(
+            self.wid_lower_percent.text()) / 100
+        self.meas_coup.params.upper_percent = float(
+            self.wid_upper_percent.text()) / 100
 
         self.loaded_label.setText('')
 
@@ -374,3 +376,15 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.wid_quadcurr_sp.channel = self._currpvname
         self.wid_quadcurr_mn.channel = self._currpvname.substitute(
             propty_suffix='Mon')
+
+    def _get_old_params(self):
+        try:
+            low = getattr(self.meas_coup.params, 'neg_percent')
+            self.meas_coup.params.lower_percent = low
+        except AttributeError:
+            pass
+        try:
+            upp = getattr(self.meas_coup.params, 'pos_percent')
+            self.meas_coup.params.upper_percent = upp
+        except AttributeError:
+            pass
