@@ -279,7 +279,6 @@ class SICoupMeasWindow(SiriusMainWindow):
                 self.meas_coup.params.quadfam_name))
         self.wid_nr_points.setValue(self.meas_coup.params.nr_points)
         self.wid_time_wait.setText(str(self.meas_coup.params.time_wait))
-        self._get_old_params()
         self.wid_lower_percent.setText(
             str(self.meas_coup.params.lower_percent*100))
         self.wid_upper_percent.setText(
@@ -376,15 +375,3 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.wid_quadcurr_sp.channel = self._currpvname
         self.wid_quadcurr_mn.channel = self._currpvname.substitute(
             propty_suffix='Mon')
-
-    def _get_old_params(self):
-        try:
-            low = getattr(self.meas_coup.params, 'neg_percent')
-            self.meas_coup.params.lower_percent = low
-        except AttributeError:
-            pass
-        try:
-            upp = getattr(self.meas_coup.params, 'pos_percent')
-            self.meas_coup.params.upper_percent = upp
-        except AttributeError:
-            pass
