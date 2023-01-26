@@ -4,15 +4,13 @@ import logging as _log
 from threading import Thread
 import pathlib as _pathlib
 
-import numpy as np
 import matplotlib.pyplot as mplt
 import matplotlib.gridspec as mgs
 from matplotlib import rcParams
 
 from qtpy.QtCore import Qt
-from qtpy.QtGui import QDoubleValidator
 from qtpy.QtWidgets import QWidget, QPushButton, QGridLayout, QSpinBox, \
-    QLabel, QGroupBox, QLineEdit, QComboBox, QHBoxLayout, QFileDialog, \
+    QLabel, QGroupBox, QDoubleSpinBox, QComboBox, QHBoxLayout, QFileDialog, \
     QVBoxLayout
 
 import qtawesome as qta
@@ -34,6 +32,7 @@ rcParams.update({
 
 class SICoupMeasWindow(SiriusMainWindow):
     """."""
+
     EXT = 'pickle'
     EXT_FLT = f'Pickle Files (*.{EXT:s})'
     DEFAULT_DIR = _pathlib.Path.home().as_posix()
@@ -75,19 +74,21 @@ class SICoupMeasWindow(SiriusMainWindow):
             0, 0, 1, 2, alignment=Qt.AlignCenter)
 
         ctrls = self.get_param_control_widget(wid)
-        anal = self.get_analysis_control_widget(wid)
         status = self.get_measurement_status_widget(wid)
+        anly = self.get_analysis_control_widget(wid)
+        apply = self.get_adjust_coupling_widget(wid)
         fig_wid = self.make_figure(wid)
         saveload = self.get_saveload_widget(wid)
 
         wid.layout().addWidget(ctrls, 1, 0)
-        wid.layout().addWidget(anal, 2, 0)
-        wid.layout().addWidget(status, 3, 0)
+        wid.layout().addWidget(status, 2, 0)
+        wid.layout().addWidget(anly, 3, 0)
+        wid.layout().addWidget(apply, 4, 0)
         lay = QVBoxLayout()
         lay.addWidget(saveload)
         lay.addWidget(fig_wid)
-        wid.layout().addLayout(lay, 1, 1, 3, 1)
-        wid.layout().setRowStretch(3, 10)
+        wid.layout().addLayout(lay, 1, 1, 4, 1)
+        wid.layout().setRowStretch(2, 10)
         return wid
 
     def make_figure(self, parent):
@@ -97,7 +98,7 @@ class SICoupMeasWindow(SiriusMainWindow):
 
         gs = mgs.GridSpec(1, 1)
         gs.update(
-            left=0.125, right=0.97, bottom=0.13, top=0.9,
+            left=0.145, right=0.95, bottom=0.13, top=0.9,
             hspace=0.5, wspace=0.35)
         self.axes = self.fig.add_subplot(gs[0, 0])
 
@@ -143,57 +144,86 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.wid_nr_points = QSpinBox(wid)
         self.wid_nr_points.setValue(self.meas_coup.params.nr_points)
 
-        self.wid_time_wait = QLineEdit(wid)
-        self.wid_time_wait.setText(str(self.meas_coup.params.time_wait))
-        self.wid_time_wait.setValidator(QDoubleValidator())
+        self.wid_time_wait = QDoubleSpinBox(wid)
+        self.wid_time_wait.setValue(self.meas_coup.params.time_wait)
+        self.wid_time_wait.setMinimum(0)
+        self.wid_time_wait.setMaximum(20)
+        self.wid_time_wait.setDecimals(1)
+        self.wid_time_wait.setSingleStep(0.1)
 
-        self.wid_lower_percent = QLineEdit(wid)
-        self.wid_lower_percent.setText(
-            str(self.meas_coup.params.lower_percent*100))
-        self.wid_lower_percent.setValidator(QDoubleValidator())
+        self.wid_lower_percent = QDoubleSpinBox(wid)
+        self.wid_lower_percent.setValue(
+            self.meas_coup.params.lower_percent*100)
+        self.wid_lower_percent.setMinimum(-3.0)
+        self.wid_lower_percent.setMaximum(+3.0)
+        self.wid_lower_percent.setDecimals(2)
+        self.wid_lower_percent.setSingleStep(0.01)
 
-        self.wid_upper_percent = QLineEdit(wid)
-        self.wid_upper_percent.setText(
-            str(self.meas_coup.params.upper_percent*100))
-        self.wid_upper_percent.setValidator(QDoubleValidator())
+        self.wid_upper_percent = QDoubleSpinBox(wid)
+        self.wid_upper_percent.setValue(
+            self.meas_coup.params.upper_percent*100)
+        self.wid_upper_percent.setMinimum(-3.0)
+        self.wid_upper_percent.setMaximum(+3.0)
+        self.wid_upper_percent.setDecimals(2)
+        self.wid_upper_percent.setSingleStep(0.01)
 
         pusb_start = QPushButton(qta.icon('mdi.play'), 'Start', wid)
         pusb_start.clicked.connect(self.start_meas)
         pusb_stop = QPushButton(qta.icon('mdi.stop'), 'Stop', wid)
         pusb_stop.clicked.connect(self.meas_coup.stop)
 
-        wid.layout().addWidget(QLabel('Quadrupole Family Name', wid), 1, 1)
-        wid.layout().addWidget(QLabel('Quadrupole Current [A]', wid), 2, 1)
-        wid.layout().addWidget(QLabel('# of Points', wid), 4, 1)
-        wid.layout().addWidget(QLabel('Time to wait [s]', wid), 5, 1)
-        wid.layout().addWidget(QLabel('Current Lower Limit [%]', wid), 6, 1)
-        wid.layout().addWidget(QLabel('Current Upper Limit [%]', wid), 7, 1)
+        wid.layout().addWidget(
+            QLabel('Quad. Fam. Name', wid), 1, 1, alignment=Qt.AlignRight)
+        wid.layout().addWidget(
+            QLabel('Quad. Current [A]', wid), 1, 4, alignment=Qt.AlignRight)
+        wid.layout().addWidget(
+            QLabel('Nr. of Points', wid), 3, 1, alignment=Qt.AlignRight)
+        wid.layout().addWidget(
+            QLabel('Wait time [s]', wid), 3, 4, alignment=Qt.AlignRight)
+        wid.layout().addWidget(
+            QLabel('Curr. Lower Lim. [%]', wid), 4, 1, alignment=Qt.AlignRight)
+        wid.layout().addWidget(
+            QLabel('Curr. Upper Lim. [%]', wid), 4, 4, alignment=Qt.AlignRight)
         wid.layout().addWidget(self.wid_quadfam, 1, 2)
-        wid.layout().addWidget(self.wid_quadcurr_sp, 2, 2)
-        wid.layout().addWidget(self.wid_quadcurr_mn, 3, 2)
-        wid.layout().addWidget(self.wid_nr_points, 4, 2)
-        wid.layout().addWidget(self.wid_time_wait, 5, 2)
-        wid.layout().addWidget(self.wid_lower_percent, 6, 2)
-        wid.layout().addWidget(self.wid_upper_percent, 7, 2)
+        wid.layout().addWidget(self.wid_quadcurr_sp, 1, 5)
+        wid.layout().addWidget(self.wid_quadcurr_mn, 2, 5)
+        wid.layout().addWidget(self.wid_nr_points, 3, 2)
+        wid.layout().addWidget(self.wid_time_wait, 3, 5)
+        wid.layout().addWidget(self.wid_lower_percent, 4, 2)
+        wid.layout().addWidget(self.wid_upper_percent, 4, 5)
         lay = QHBoxLayout()
         lay.addStretch()
         lay.addWidget(pusb_start)
         lay.addStretch()
         lay.addWidget(pusb_stop)
         lay.addStretch()
-        wid.layout().addLayout(lay, 9, 1, 1, 2)
+        wid.layout().addLayout(lay, 9, 1, 1, 5)
+        wid.layout().setColumnMinimumWidth(3, 4)
         wid.layout().setColumnStretch(0, 2)
         wid.layout().setColumnStretch(3, 2)
+        wid.layout().setColumnStretch(5, 2)
+        return wid
+
+    def get_measurement_status_widget(self, parent):
+        """."""
+        wid = QGroupBox('Measurement Status', parent)
+        wid.setLayout(QGridLayout())
+
+        self.log_label = SiriusLogDisplay(wid, level=_log.INFO)
+        self.log_label.logFormat = '%(message)s'
+        wid.layout().addWidget(self.log_label, 0, 0)
         return wid
 
     def get_analysis_control_widget(self, parent):
         """."""
         wid = QGroupBox('Analysis Control', parent)
         wid.setLayout(QGridLayout())
-        self.wid_coupling_resolution = QLineEdit(wid)
-        self.wid_coupling_resolution.setText(
-            str(self.meas_coup.params.coupling_resolution*100))
-        self.wid_coupling_resolution.setValidator(QDoubleValidator())
+        self.wid_coupling_resolution = QDoubleSpinBox(wid)
+        self.wid_coupling_resolution.setValue(
+            self.meas_coup.params.coupling_resolution*100)
+        self.wid_coupling_resolution.setMinimum(0.0)
+        self.wid_coupling_resolution.setDecimals(2)
+        self.wid_coupling_resolution.setSingleStep(0.01)
         self.wid_coupling_resolution.setStyleSheet('max-width:5em;')
 
         pusb_proc = QPushButton(qta.icon('mdi.chart-line'), 'Process', wid)
@@ -205,14 +235,32 @@ class SICoupMeasWindow(SiriusMainWindow):
         wid.layout().setColumnStretch(2, 5)
         return wid
 
-    def get_measurement_status_widget(self, parent):
+    def get_adjust_coupling_widget(self, parent):
         """."""
-        wid = QGroupBox('Measurement Status', parent)
+        wid = QGroupBox('Apply Achromatic ΔKsL', parent)
         wid.setLayout(QGridLayout())
+        self.wid_apply_factor = QDoubleSpinBox(wid)
+        self.wid_apply_factor.setValue(self.meas_coup.apply_factor)
+        self.wid_apply_factor.setMinimum(-10.0)
+        self.wid_apply_factor.setMaximum(10.0)
+        self.wid_apply_factor.setDecimals(1)
+        self.wid_apply_factor.setSingleStep(0.1)
+        self.wid_apply_factor.setStyleSheet('max-width:5em;')
 
-        self.log_label = SiriusLogDisplay(wid, level=_log.INFO)
-        self.log_label.logFormat = '%(message)s'
-        wid.layout().addWidget(self.log_label, 0, 0)
+        pusb_updt = QPushButton(qta.icon('fa.refresh'), 'Update Ref.', wid)
+        pusb_updt.clicked.connect(self._update_reference)
+
+        pusb_proc = QPushButton(qta.icon('ei.arrow-down'), 'Apply', wid)
+        pusb_proc.clicked.connect(self._apply_skews)
+
+        wid_factor_label = QLabel('Factor', wid)
+        tooltip = 'The relation between Factor and ΔCoupling is roughly 1:1'
+        wid_factor_label.setToolTip(tooltip)
+        wid.layout().addWidget(wid_factor_label, 0, 0)
+        wid.layout().addWidget(self.wid_apply_factor, 0, 1)
+        wid.layout().addWidget(pusb_updt, 0, 3)
+        wid.layout().addWidget(pusb_proc, 0, 4)
+        wid.layout().setColumnStretch(2, 5)
         return wid
 
     def get_saveload_widget(self, parent):
@@ -278,28 +326,15 @@ class SICoupMeasWindow(SiriusMainWindow):
             self.meas_coup.params.QUADS.index(
                 self.meas_coup.params.quadfam_name))
         self.wid_nr_points.setValue(self.meas_coup.params.nr_points)
-        self.wid_time_wait.setText(str(self.meas_coup.params.time_wait))
-        self.wid_lower_percent.setText(
-            str(self.meas_coup.params.lower_percent*100))
-        self.wid_upper_percent.setText(
-            str(self.meas_coup.params.upper_percent*100))
-        self.wid_coupling_resolution.setText(
-            str(self.meas_coup.params.coupling_resolution*100))
+        self.wid_time_wait.setValue(self.meas_coup.params.time_wait)
+        self.wid_lower_percent.setValue(
+            self.meas_coup.params.lower_percent*100)
+        self.wid_upper_percent.setValue(
+            self.meas_coup.params.upper_percent*100)
+        self.wid_coupling_resolution.setValue(
+            self.meas_coup.params.coupling_resolution*100)
 
         self._plot_results()
-
-    def _adjust_tune(self):
-        tunex_goal = float(self.wid_nux.value())
-        tuney_goal = float(self.wid_nuy.value())
-
-        self.tunecorr.get_tunes(self.fit_traj.model)
-        tunemat = self.tunecorr.calc_jacobian_matrix()
-        self.tunecorr.correct_parameters(
-            model=self.fit_traj.model,
-            goal_parameters=np.array([tunex_goal, tuney_goal]),
-            jacobian_matrix=tunemat)
-
-        self.lab_tune.setText('Done!')
 
     def start_meas(self):
         """."""
@@ -334,7 +369,7 @@ class SICoupMeasWindow(SiriusMainWindow):
 
     def _plot_results(self):
         self.meas_coup.params.coupling_resolution = float(
-            self.wid_coupling_resolution.text()) / 100
+            self.wid_coupling_resolution.value()) / 100
         self._process_data()
         anl = self.meas_coup.analysis
         if 'qcurr' not in anl:
@@ -369,6 +404,14 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.axes.relim()
         self.axes.autoscale_view()
         self.fig.canvas.draw()
+
+    def _apply_skews(self):
+        self.meas_coup.apply_factor = float(
+            self.wid_apply_factor.value())
+        self.meas_coup.apply_achromatic_delta_ksl()
+
+    def _update_reference(self):
+        self.meas_coup.initial_strengths = None
 
     def _update_quadcurr_wid(self, text):
         self._currpvname = self._currpvname.substitute(dev=text)
