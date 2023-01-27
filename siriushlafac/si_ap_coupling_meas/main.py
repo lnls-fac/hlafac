@@ -255,7 +255,7 @@ class SICoupMeasWindow(SiriusMainWindow):
         pusb_proc = QPushButton(qta.icon('ei.arrow-down'), 'Apply', wid)
         pusb_proc.clicked.connect(self._apply_skews)
 
-        wid_factor_label = QLabel('Factor', wid)
+        wid_factor_label = QLabel('Factor (1:1 to Coupling)', wid)
         tooltip = 'The relation between Factor and ΔCoupling is roughly 1:1'
         wid_factor_label.setToolTip(tooltip)
         wid.layout().addWidget(wid_factor_label, 0, 0)
