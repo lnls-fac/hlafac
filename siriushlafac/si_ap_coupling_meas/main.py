@@ -172,36 +172,38 @@ class SICoupMeasWindow(SiriusMainWindow):
         pusb_stop = QPushButton(qta.icon('mdi.stop'), 'Stop', wid)
         pusb_stop.clicked.connect(self.meas_coup.stop)
 
-        wid.layout().addWidget(
-            QLabel('Quad. Fam. Name', wid), 1, 1, alignment=Qt.AlignRight)
-        wid.layout().addWidget(
-            QLabel('Quad. Current [A]', wid), 1, 4, alignment=Qt.AlignRight)
-        wid.layout().addWidget(
-            QLabel('Nr. of Points', wid), 3, 1, alignment=Qt.AlignRight)
-        wid.layout().addWidget(
-            QLabel('Wait time [s]', wid), 3, 4, alignment=Qt.AlignRight)
-        wid.layout().addWidget(
-            QLabel('Curr. Lower Lim. [%]', wid), 4, 1, alignment=Qt.AlignRight)
-        wid.layout().addWidget(
-            QLabel('Curr. Upper Lim. [%]', wid), 4, 4, alignment=Qt.AlignRight)
+        lab_name = QLabel('Fam. Name', wid)
+        lab_curr = QLabel('', wid)
+        lab_curr.setPixmap(qta.icon('ei.arrow-right').pixmap(16, 16))
+        lab_nrpt = QLabel('Nr. of Points', wid)
+        lab_wait = QLabel('Wait time [s]', wid)
+        lab_lowe = QLabel('Lower Lim. [%]', wid)
+        lab_uppe = QLabel('Upper Lim. [%]', wid)
+
+        wid.layout().addWidget(lab_name, 1, 1, alignment=Qt.AlignRight)
         wid.layout().addWidget(self.wid_quadfam, 1, 2)
-        wid.layout().addWidget(self.wid_quadcurr_sp, 1, 5)
-        wid.layout().addWidget(self.wid_quadcurr_mn, 2, 5)
+        lay = QHBoxLayout()
+        lay.addWidget(lab_curr)
+        lay.addWidget(self.wid_quadcurr_sp)
+        wid.layout().addLayout(lay, 1, 3)
+        wid.layout().addWidget(self.wid_quadcurr_mn, 1, 4)
+        wid.layout().addWidget(lab_lowe, 2, 1, alignment=Qt.AlignRight)
+        wid.layout().addWidget(self.wid_lower_percent, 2, 2)
+        wid.layout().addWidget(lab_uppe, 2, 3, alignment=Qt.AlignRight)
+        wid.layout().addWidget(self.wid_upper_percent, 2, 4)
+        wid.layout().addWidget(lab_nrpt, 3, 1, alignment=Qt.AlignRight)
         wid.layout().addWidget(self.wid_nr_points, 3, 2)
-        wid.layout().addWidget(self.wid_time_wait, 3, 5)
-        wid.layout().addWidget(self.wid_lower_percent, 4, 2)
-        wid.layout().addWidget(self.wid_upper_percent, 4, 5)
+        wid.layout().addWidget(lab_wait, 3, 3, alignment=Qt.AlignRight)
+        wid.layout().addWidget(self.wid_time_wait, 3, 4)
         lay = QHBoxLayout()
         lay.addStretch()
         lay.addWidget(pusb_start)
         lay.addStretch()
         lay.addWidget(pusb_stop)
         lay.addStretch()
-        wid.layout().addLayout(lay, 9, 1, 1, 5)
-        wid.layout().setColumnMinimumWidth(3, 4)
+        wid.layout().addLayout(lay, 4, 1, 1, 4)
         wid.layout().setColumnStretch(0, 2)
-        wid.layout().setColumnStretch(3, 2)
-        wid.layout().setColumnStretch(5, 2)
+        wid.layout().setColumnStretch(6, 2)
         return wid
 
     def get_measurement_status_widget(self, parent):
