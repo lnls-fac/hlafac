@@ -73,11 +73,11 @@ class SICoupMeasWindow(SiriusMainWindow):
             QLabel(f'<h1>SI - Coupling Measurement </h1>', wid),
             0, 0, 1, 2, alignment=Qt.AlignCenter)
 
+        fig_wid = self.make_figure(wid)
         ctrls = self.get_param_control_widget(wid)
         status = self.get_measurement_status_widget(wid)
         anly = self.get_analysis_control_widget(wid)
         apply = self.get_adjust_coupling_widget(wid)
-        fig_wid = self.make_figure(wid)
         saveload = self.get_saveload_widget(wid)
 
         wid.layout().addWidget(ctrls, 1, 0)
@@ -109,16 +109,19 @@ class SICoupMeasWindow(SiriusMainWindow):
             fontsize='x-large')
 
         # plot meas data
-        self.line_tune1 = self.axes.plot(
-            [], [], 'o', color='C0', label=r'$\nu_1$')[0]
-        self.line_tune2 = self.axes.plot(
-            [], [], 'o', color='C1', label=r'$\nu_2$')[0]
+        self.line_tune1 = self.axes.plot([], [], 'o', color='C0')[0]
+        self.line_tune2 = self.axes.plot([], [], 'o', color='C1')[0]
 
         # plot fitting
-        self.line_fit1 = self.axes.plot(
-            [], [], color='tab:gray', label='fitting')[0]
-        self.line_fit2 = self.axes.plot(
-            [], [], color='tab:gray')[0]
+        self.line_fit1 = self.axes.plot([], [], color='tab:gray')[0]
+        self.line_fit2 = self.axes.plot([], [], color='tab:gray')[0]
+
+        self.line_exptune1 = self.axes.plot(
+            [], [], 'o--', color='C0', alpha=0.75)[0]
+        self.line_exptune2 = self.axes.plot(
+            [], [], 'o--', color='C1', alpha=0.75)[0]
+        self.line_exptune1.set_label(r'expected $\nu_1$')
+        self.line_exptune2.set_label(r'expected $\nu_2$')
         self.axes.legend(loc='best')
         return fig_widget
 
@@ -152,6 +155,8 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.wid_time_wait.setSingleStep(0.1)
 
         self.wid_lower_percent = QDoubleSpinBox(wid)
+        self.wid_lower_percent.valueChanged.connect(
+            self._calc_expected_dtunes)
         self.wid_lower_percent.setValue(
             self.meas_coup.params.lower_percent*100)
         self.wid_lower_percent.setMinimum(-3.0)
@@ -160,6 +165,8 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.wid_lower_percent.setSingleStep(0.01)
 
         self.wid_upper_percent = QDoubleSpinBox(wid)
+        self.wid_upper_percent.valueChanged.connect(
+            self._calc_expected_dtunes)
         self.wid_upper_percent.setValue(
             self.meas_coup.params.upper_percent*100)
         self.wid_upper_percent.setMinimum(-3.0)
@@ -336,7 +343,6 @@ class SICoupMeasWindow(SiriusMainWindow):
             self.meas_coup.params.upper_percent*100)
         self.wid_coupling_resolution.setValue(
             self.meas_coup.params.coupling_resolution*100)
-
         self._plot_results()
 
     def start_meas(self):
@@ -347,14 +353,13 @@ class SICoupMeasWindow(SiriusMainWindow):
         Thread(target=self._do_meas, daemon=True).start()
 
     def _do_meas(self):
-
         self.meas_coup.params.quadfam_name = self.wid_quadfam.currentText()
         self.meas_coup.params.nr_points = int(self.wid_nr_points.value())
-        self.meas_coup.params.time_wait = float(self.wid_time_wait.text())
+        self.meas_coup.params.time_wait = float(self.wid_time_wait.value())
         self.meas_coup.params.lower_percent = float(
-            self.wid_lower_percent.text()) / 100
+            self.wid_lower_percent.value()) / 100
         self.meas_coup.params.upper_percent = float(
-            self.wid_upper_percent.text()) / 100
+            self.wid_upper_percent.value()) / 100
 
         self.loaded_label.setText('')
 
@@ -371,6 +376,11 @@ class SICoupMeasWindow(SiriusMainWindow):
             _log.error(str(err))
 
     def _plot_results(self):
+        self.line_exptune1.set_visible(False)
+        self.line_exptune2.set_visible(False)
+        self.line_exptune1.set_label('_nolegend_')
+        self.line_exptune2.set_label('_nolegend_')
+
         self.meas_coup.params.coupling_resolution = float(
             self.wid_coupling_resolution.value()) / 100
         self._process_data()
@@ -400,11 +410,15 @@ class SICoupMeasWindow(SiriusMainWindow):
         else:
             self.line_fit1.set_xdata([])
             self.line_fit2.set_xdata([])
-            self.line_fit1.set_ydata([])
-            self.line_fit2.set_ydata([])
+            self.line_tune1.set_ydata([])
+            self.line_tune2.set_ydata([])
             self.axes.set_title('Transverse Linear Coupling: (Nan ± Nan) %')
 
-        self.axes.relim()
+        self.line_tune1.set_label(r'$\nu_1$')
+        self.line_tune2.set_label(r'$\nu_2$')
+        self.line_fit1.set_label('fitting')
+        self.axes.legend(loc='best')
+        self.axes.relim(visible_only=True)
         self.axes.autoscale_view()
         self.fig.canvas.draw()
 
@@ -421,3 +435,53 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.wid_quadcurr_sp.channel = self._currpvname
         self.wid_quadcurr_mn.channel = self._currpvname.substitute(
             propty_suffix='Mon')
+
+    def _calc_expected_dtunes(self):
+        try:
+            dcurr_low = float(self.wid_lower_percent.value())/100
+            dcurr_upp = float(self.wid_upper_percent.value())/100
+            quad_fam = str(self.wid_quadfam.currentText())
+            rel_dnux, rel_dnuy = self.meas_coup.REL_DELTATUNE_QUADFAM[quad_fam]
+            self.dnux_low = rel_dnux * dcurr_low
+            self.dnuy_low = rel_dnuy * dcurr_low
+            self.dnux_upp = rel_dnux * dcurr_upp
+            self.dnuy_upp = rel_dnuy * dcurr_upp
+        except AttributeError:
+            self.dnux_low = 0
+            self.dnuy_low = 0
+            self.dnux_upp = 0
+            self.dnuy_upp = 0
+        self._plot_expected()
+
+    def _plot_expected(self):
+
+        if len(self.line_fit1.get_xdata()) > 0:
+            self.line_tune1.set_label(r'$\nu_1$')
+            self.line_tune2.set_label(r'$\nu_2$')
+            self.line_fit1.set_label('fitting')
+
+        curr0 = 110.8012
+        # curr0 = float(self.wid_quadcurr_sp.value())
+        dcurr_low = float(self.wid_lower_percent.value())/100
+        dcurr_upp = float(self.wid_upper_percent.value())/100
+        xaxis = [curr0*(1+dcurr_low), curr0*(1+dcurr_upp)]
+        nux0 = 0.096
+        nuy0 = 0.123
+        # tune_dev = self.meas_coup.devices['tune']
+        # nux0, nuy0 = tune_dev.tunex, tune_dev.tuney
+        self.line_exptune1.set_xdata(xaxis)
+        self.line_exptune1.set_ydata(
+            [nuy0 + self.dnuy_low, nuy0 + self.dnuy_upp])
+        self.line_exptune2.set_xdata(xaxis)
+        self.line_exptune2.set_ydata(
+            [nux0 + self.dnux_low, nux0 + self.dnux_upp])
+
+        self.line_exptune1.set_visible(True)
+        self.line_exptune2.set_visible(True)
+        self.line_exptune1.set_label(r'expected $\nu_1$')
+        self.line_exptune2.set_label(r'expected $\nu_2$')
+
+        self.axes.legend(loc='best')
+        self.axes.relim(visible_only=True)
+        self.axes.autoscale_view()
+        self.fig.canvas.draw()
