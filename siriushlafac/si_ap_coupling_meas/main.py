@@ -460,15 +460,12 @@ class SICoupMeasWindow(SiriusMainWindow):
             self.line_tune2.set_label(r'$\nu_2$')
             self.line_fit1.set_label('fitting')
 
-        curr0 = 110.8012
-        # curr0 = float(self.wid_quadcurr_sp.value())
+        curr0 = float(self.wid_quadcurr_sp.value())
         dcurr_low = float(self.wid_lower_percent.value())/100
         dcurr_upp = float(self.wid_upper_percent.value())/100
         xaxis = [curr0*(1+dcurr_low), curr0*(1+dcurr_upp)]
-        nux0 = 0.096
-        nuy0 = 0.123
-        # tune_dev = self.meas_coup.devices['tune']
-        # nux0, nuy0 = tune_dev.tunex, tune_dev.tuney
+        tune_dev = self.meas_coup.devices['tune']
+        nux0, nuy0 = tune_dev.tunex, tune_dev.tuney
         self.line_exptune1.set_xdata(xaxis)
         self.line_exptune1.set_ydata(
             [nuy0 + self.dnuy_low, nuy0 + self.dnuy_upp])
