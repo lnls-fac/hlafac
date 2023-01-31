@@ -441,16 +441,15 @@ class SICoupMeasWindow(SiriusMainWindow):
             dcurr_low = float(self.wid_lower_percent.value())/100
             dcurr_upp = float(self.wid_upper_percent.value())/100
             quad_fam = str(self.wid_quadfam.currentText())
-            rel_dnux, rel_dnuy = self.meas_coup.REL_DELTATUNE_QUADFAM[quad_fam]
-            self.dnux_low = rel_dnux * dcurr_low
-            self.dnuy_low = rel_dnuy * dcurr_low
-            self.dnux_upp = rel_dnux * dcurr_upp
-            self.dnuy_upp = rel_dnuy * dcurr_upp
+            dnu_low = MeasCoupling.calc_expected_delta_tunes(
+                dcurr_low, quad_fam)
+            dnu_upp = MeasCoupling.calc_expected_delta_tunes(
+                dcurr_upp, quad_fam)
+            self.dnux_low, self.dnuy_low = dnu_low
+            self.dnux_upp, self.dnuy_upp = dnu_upp
         except AttributeError:
-            self.dnux_low = 0
-            self.dnuy_low = 0
-            self.dnux_upp = 0
-            self.dnuy_upp = 0
+            self.dnux_low, self.dnuy_low = 0, 0
+            self.dnux_upp, self.dnuy_upp = 0, 0
         self._plot_expected()
 
     def _plot_expected(self):
