@@ -459,7 +459,7 @@ class SICoupMeasWindow(SiriusMainWindow):
             self.line_tune2.set_label(r'$\nu_2$')
             self.line_fit1.set_label('fitting')
 
-        curr0 = float(self.wid_quadcurr_sp.value())
+        curr0 = float(self.wid_quadcurr_sp.value() or 0.0)
         dcurr_low = float(self.wid_lower_percent.value())/100
         dcurr_upp = float(self.wid_upper_percent.value())/100
         xaxis = [curr0*(1+dcurr_low), curr0*(1+dcurr_upp)]
