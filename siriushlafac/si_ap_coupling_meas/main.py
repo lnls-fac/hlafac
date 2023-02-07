@@ -143,6 +143,7 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.wid_quadcurr_mn = SiriusLabel(
             self, self._currpvname.substitute(propty_suffix='Mon'))
         self.wid_quadcurr_mn.showUnits = True
+        self.wid_quadcurr_mn.setStyleSheet('QLabel{min-width:7em;}')
 
         self.wid_nr_points = QSpinBox(wid)
         self.wid_nr_points.setValue(self.meas_coup.params.nr_points)
@@ -155,8 +156,6 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.wid_time_wait.setSingleStep(0.1)
 
         self.wid_lower_percent = QDoubleSpinBox(wid)
-        self.wid_lower_percent.valueChanged.connect(
-            self._calc_expected_dtunes)
         self.wid_lower_percent.setValue(
             self.meas_coup.params.lower_percent*100)
         self.wid_lower_percent.setMinimum(-3.0)
@@ -165,8 +164,6 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.wid_lower_percent.setSingleStep(0.01)
 
         self.wid_upper_percent = QDoubleSpinBox(wid)
-        self.wid_upper_percent.valueChanged.connect(
-            self._calc_expected_dtunes)
         self.wid_upper_percent.setValue(
             self.meas_coup.params.upper_percent*100)
         self.wid_upper_percent.setMinimum(-3.0)
@@ -186,6 +183,12 @@ class SICoupMeasWindow(SiriusMainWindow):
         lab_wait = QLabel('Wait time [s]', wid)
         lab_lowe = QLabel('Lower Lim. [%]', wid)
         lab_uppe = QLabel('Upper Lim. [%]', wid)
+
+        self._calc_expected_dtunes()
+        self.wid_lower_percent.valueChanged.connect(
+            self._calc_expected_dtunes)
+        self.wid_upper_percent.valueChanged.connect(
+            self._calc_expected_dtunes)
 
         wid.layout().addWidget(lab_name, 1, 1, alignment=Qt.AlignRight)
         wid.layout().addWidget(self.wid_quadfam, 1, 2)
@@ -233,7 +236,8 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.wid_coupling_resolution.setMinimum(0.0)
         self.wid_coupling_resolution.setDecimals(2)
         self.wid_coupling_resolution.setSingleStep(0.01)
-        self.wid_coupling_resolution.setStyleSheet('max-width:5em;')
+        self.wid_coupling_resolution.setStyleSheet(
+            'QDoubleSpinBox{max-width:5em;}')
 
         pusb_proc = QPushButton(qta.icon('mdi.chart-line'), 'Process', wid)
         pusb_proc.clicked.connect(self._plot_results)
@@ -459,7 +463,7 @@ class SICoupMeasWindow(SiriusMainWindow):
             self.line_tune2.set_label(r'$\nu_2$')
             self.line_fit1.set_label('fitting')
 
-        curr0 = float(self.wid_quadcurr_sp.value() or 0.0)
+        curr0 = float(self.wid_quadcurr_sp.lineEdit().text())
         dcurr_low = float(self.wid_lower_percent.value())/100
         dcurr_upp = float(self.wid_upper_percent.value())/100
         xaxis = [curr0*(1+dcurr_low), curr0*(1+dcurr_upp)]
