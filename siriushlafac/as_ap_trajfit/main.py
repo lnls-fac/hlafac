@@ -2,6 +2,7 @@
 
 from time import sleep as _sleep
 
+from epics.ca import CAThread as _CAThread
 import numpy as np
 import matplotlib.pyplot as mplt
 import matplotlib.gridspec as mgs
@@ -247,10 +248,13 @@ class ASFitTrajWindow(SiriusMainWindow):
         _ = args, kwargs
         if not self._auto_update:
             return
-        _sleep(0.1)
-        self._do_fitting()
+        _CAThread(
+            target=self._do_fitting, kwargs=dict(wait_before=0.2),
+            daemon=True).start()
 
-    def _do_fitting(self):
+    def _do_fitting(self, wait_before=0.0):
+        _sleep(wait_before)
+
         trjx, trjy, trjs = self.fit_traj.get_traj_from_sofb()
         # trjx, trjy, trjs = self.fit_traj.simulate_sofb(
         #     -8.2e-3, 0.1e-3, y0=0.4e-3, yl0=0, delta=0.002,
