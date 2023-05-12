@@ -427,12 +427,11 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.fig.canvas.draw()
 
     def _apply_skews(self):
-        self.meas_coup.apply_factor = float(
-            self.wid_apply_factor.value())
-        self.meas_coup.apply_achromatic_delta_ksl()
+        factor = float(self.wid_apply_factor.value())
+        self.meas_coup.apply_achromatic_delta_ksl(factor)
 
     def _update_reference(self):
-        self.meas_coup.initial_strengths = None
+        self.meas_coup.get_initial_strengths()
 
     def _update_quadcurr_wid(self, text):
         self._currpvname = self._currpvname.substitute(dev=text)
