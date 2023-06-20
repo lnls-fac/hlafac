@@ -431,7 +431,8 @@ class SICoupMeasWindow(SiriusMainWindow):
         self.meas_coup.apply_achromatic_delta_ksl(factor)
 
     def _update_reference(self):
-        self.meas_coup.get_initial_strengths()
+        stren0 = self.meas_coup.get_initial_strengths()
+        self.meas_coup.initial_strengths = stren0
 
     def _update_quadcurr_wid(self, text):
         self._currpvname = self._currpvname.substitute(dev=text)
