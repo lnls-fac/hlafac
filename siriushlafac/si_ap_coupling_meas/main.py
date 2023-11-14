@@ -94,7 +94,7 @@ class SICoupMeasWindow(SiriusMainWindow):
     def make_figure(self, parent):
         """."""
         self.fig = mplt.figure(figsize=(7, 14))
-        fig_widget = MatplotlibWidget(self.fig, parent=parent)
+        fig_widget = MatplotlibWidget(figure=self.fig, parent=parent)
 
         gs = mgs.GridSpec(1, 1)
         gs.update(

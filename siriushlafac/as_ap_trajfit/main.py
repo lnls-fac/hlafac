@@ -104,7 +104,7 @@ class ASFitTrajWindow(SiriusMainWindow):
     def make_figure(self, parent):
         """."""
         self.fig = mplt.figure(figsize=(7, 14))
-        fig_widget = MatplotlibWidget(self.fig, parent=parent)
+        fig_widget = MatplotlibWidget(figure=self.fig, parent=parent)
 
         gs = mgs.GridSpec(3, 1)
         gs.update(left=0.15, right=0.98, top=0.94, bottom=0.1, hspace=0.35)
