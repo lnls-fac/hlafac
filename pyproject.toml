@@ -8,8 +8,7 @@ authors = [{ name = "lnls-fac" } ]
 maintainers = [
   {name = "Ana Oliveira", email = "ana.clara@lnls.br"},
   {name = "Ximenes Resende", email = "xresende@gmail.com"},
-  {name = "Fernando H. de Sá", email = "fernandohds564@gmail.com"},
-  {name = "Murilo Barbosa Alves", email= "murilo.alves@lnls.br"}
+  {name = "Fernando H. de Sá", email = "fernandohds564@gmail.com"}
 ]
 description = "FAC Client Applications for Sirius"
 readme = "README.md"
