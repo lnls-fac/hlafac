@@ -29,7 +29,7 @@ license-files= [ "LICENSE", ]
 Homepage = "https://github.com/lnls-fac/hlafac"
 Download = "https://github.com/lnls-fac/hlafac"
 Repository = "https://github.com/lnls-fac/hlafac"
-"Bug Tracker" = "https://github.com/lnls-fac/hlafac/issues"
+Issues = "https://github.com/lnls-fac/hlafac/issues"
 
 # --- Setuptools specific configurations ---
 [tool.setuptools]
