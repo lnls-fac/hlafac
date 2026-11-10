@@ -39,7 +39,8 @@ include-package-data = true
 script-files = [
     "scripts/sirius-hla-bo-ap-trajfit.py",
     "scripts/sirius-hla-si-ap-trajfit.py",
-    "scripts/sirius-hla-si-ap-coupmeas.py"
+    "scripts/sirius-hla-si-ap-coupmeas.py",
+    "scripts/sirius-hla-si-ap-bumps.py"
 ]
 
 [tool.setuptools.dynamic]
